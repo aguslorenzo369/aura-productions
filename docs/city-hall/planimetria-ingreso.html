@@ -133,6 +133,8 @@ svg text{fill:currentColor}
 .dot-a{fill:var(--surface); stroke:var(--accent-ink); stroke-width:2}
 .glyph{font-size:11px; font-weight:600; text-anchor:middle}
 .dim{stroke:var(--ink-3); stroke-width:1; fill:none}
+.flow-v{stroke:var(--vip); fill:none; stroke-width:2}
+.wall{fill:var(--sunken); stroke:var(--line-strong); stroke-width:1}
 </style>
 
 <div class="wrap">
@@ -144,7 +146,8 @@ svg text{fill:currentColor}
   <dl class="facts">
     <div class="fact"><dt>Filtros</dt><dd>3<small>Rampa · Explanada · Puerta</small></dd></div>
     <div class="fact"><dt>Carriles en F1</dt><dd>3<small>4 personas por carril</small></dd></div>
-    <div class="fact"><dt>Dotación estimada</dt><dd>33<small>Sin puerta de sala ni seguridad</small></dd></div>
+    <div class="fact"><dt>VIP + Platinum</dt><dd>600<small>Se envasan en la galería</small></dd></div>
+    <div class="fact"><dt>Dotación estimada</dt><dd>36<small>Sin puerta de sala ni seguridad</small></dd></div>
     <div class="fact"><dt>Ritmo objetivo</dt><dd>1.100<small>Personas/hora en F1</small></dd></div>
   </dl>
 </header>
@@ -224,16 +227,18 @@ svg text{fill:currentColor}
       <text class="tiny" x="772" y="94" text-anchor="middle">FILA DE ESPERA</text>
       <line class="dim" x1="716" y1="148" x2="828" y2="148" stroke-dasharray="5 4"/>
       <text class="sub f-a" x="772" y="126" text-anchor="middle">general</text>
-      <text class="sub f-v" x="772" y="176" text-anchor="middle">vip + platinum</text>
+      <text class="sub f-v" x="772" y="170" text-anchor="middle">galería · fila en S</text>
+      <text class="tiny f-v" x="772" y="186" text-anchor="middle">600 PAX</text>
       <text class="tiny" x="772" y="222" text-anchor="middle">2 ORIENTADORES</text>
 
       <!-- puerta -->
       <line class="flow" x1="828" y1="100" x2="850" y2="100" marker-end="url(#arw)"/>
       <line class="flow" x1="828" y1="188" x2="850" y2="188" marker-end="url(#arw)"/>
       <rect class="box" x="854" y="60" width="130" height="176" rx="3"/>
-      <text class="lbl" x="919" y="126" text-anchor="middle">PUERTA</text>
-      <text class="lbl" x="919" y="142" text-anchor="middle">DE SALA</text>
-      <text class="tiny" x="919" y="162" text-anchor="middle">CONTROL FINAL</text>
+      <text class="lbl" x="919" y="112" text-anchor="middle">PUERTA</text>
+      <text class="lbl" x="919" y="128" text-anchor="middle">DE SALA</text>
+      <text class="tiny f-a" x="919" y="150" text-anchor="middle">GRAL · CONTROL FINAL</text>
+      <text class="tiny f-v" x="919" y="166" text-anchor="middle">VIP · PATIO INTERNO</text>
 
       <!-- derivacion incidencias general -->
       <polyline class="divert" points="245,240 245,336" marker-end="url(#arwr)"/>
@@ -364,7 +369,7 @@ svg text{fill:currentColor}
           </div>
           <div class="card v">
             <h3><span class="pill vip">VIP + Platinum</span></h3>
-            <p>Lado enfrentado, también vallado y con cartelería propia. Tres personas: dos al control y una en el portón. Volumen menor pero tolerancia a la espera mucho más baja.</p>
+            <p>Lado enfrentado, también vallado y con cartelería propia. Tres personas: dos al control y una en el portón. Son <strong>600 personas</strong>: no es el flujo chico, y su tolerancia a la espera es mucho más baja que la de General.</p>
           </div>
         </div>
         <div class="callout rule">
@@ -382,9 +387,82 @@ svg text{fill:currentColor}
     <article class="stop">
       <div class="stop__marker"><span class="num">04</span></div>
       <div>
-        <h2>Pulmón y puerta de sala</h2>
-        <p>Zona de espera de pie entre el Filtro 2 y la puerta. Las dos filas siguen separadas hasta la puerta: si se mezclan acá, el conflicto explota justo cuando se abre la sala.</p>
+        <h2>Pulmón de General</h2>
+        <p>Zona de espera de pie entre el Filtro 2 y la puerta. Las dos filas siguen separadas hasta el final: si se mezclan acá, el conflicto explota justo cuando se abre la sala.</p>
         <p>Dos orientadores mantienen la fila armada y el pasillo de emergencia libre. La capacidad del pulmón define el ritmo de apertura del portón del Filtro 2: cuando se llena, el portón cierra y la presión se sostiene atrás, nunca contra la puerta.</p>
+      </div>
+    </article>
+
+    <article class="stop">
+      <div class="stop__marker"><span class="num">05</span></div>
+      <div>
+        <h2>Fila envasada de VIP · Galería</h2>
+        <p>Las 600 personas de VIP + Platinum no entran de una al patio interno. Se envasan en la galería cubierta que corre pegada a la fachada, con una valla central que parte el corredor en dos carriles: el público hace el recorrido completo de ida, gira en el fondo y vuelve por el otro lado hasta las <strong>puertas centrales</strong>, que son el filtro previo al patio interno de la sala.</p>
+
+        <figure>
+          <div class="scroll">
+          <svg viewBox="0 0 900 300" role="img" aria-label="Fila envasada de VIP en la galería: una valla central parte el corredor en dos carriles. El público entra por el carril de ida, gira en el fondo, vuelve por el carril de vuelta y accede por las puertas centrales al patio interno. La valla central tiene pasos de emergencia.">
+            <defs>
+              <marker id="arw3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-v"/></marker>
+            </defs>
+
+            <text class="tiny" x="435" y="18" text-anchor="middle">PATIO INTERNO DE LA SALA</text>
+            <rect class="box-2" x="380" y="40" width="110" height="16" rx="2"/>
+            <text class="lbl f-v" x="435" y="34" text-anchor="middle">PUERTAS CENTRALES</text>
+
+            <line class="dim" x1="30" y1="56" x2="380" y2="56"/>
+            <line class="dim" x1="490" y1="56" x2="870" y2="56"/>
+            <text class="tiny" x="34" y="72">FACHADA VIDRIADA</text>
+
+            <rect class="wall" x="30" y="250" width="840" height="14"/>
+            <text class="tiny" x="34" y="280">MURO · GALERÍA CUBIERTA</text>
+
+            <line class="flow" x1="70" y1="155" x2="300" y2="155" stroke-width="4"/>
+            <line class="flow" x1="345" y1="155" x2="565" y2="155" stroke-width="4"/>
+            <line class="flow" x1="610" y1="155" x2="800" y2="155" stroke-width="4"/>
+            <text class="tiny f-r" x="322" y="150" text-anchor="middle">PASO</text>
+            <text class="tiny f-r" x="322" y="172" text-anchor="middle">EMERG.</text>
+            <text class="tiny f-r" x="587" y="150" text-anchor="middle">PASO</text>
+            <text class="tiny f-r" x="587" y="172" text-anchor="middle">EMERG.</text>
+            <text class="tiny" x="70" y="140">VALLA CENTRAL</text>
+
+            <polyline class="flow-v" points="30,205 760,205" marker-end="url(#arw3)"/>
+            <polyline class="flow-v" points="740,205 820,205 820,100 760,100" marker-end="url(#arw3)"/>
+            <polyline class="flow-v" points="770,100 450,100 450,66" marker-end="url(#arw3)"/>
+            <text class="lbl f-v" x="150" y="228">CARRIL DE IDA</text>
+            <text class="sub" x="150" y="243">se llena desde el fondo</text>
+            <text class="lbl f-v" x="560" y="90" text-anchor="end">CARRIL DE VUELTA</text>
+            <text class="tiny" x="34" y="196">DESDE FILTRO 2 · VIP</text>
+          </svg>
+          </div>
+          <figcaption>La S de la galería. Sirve para dos cosas a la vez: ordena el ingreso y actúa como contenedor, para que las 600 personas no queden todas dentro del primer sector. La valla central se corta cada ±15 m con pasos de emergencia, que además permiten sacar un caso sin romper la fila.</figcaption>
+        </figure>
+
+        <h3>Cuánta gente entra en la galería</h3>
+        <p>Con una densidad de diseño de <strong>2,5 personas por m²</strong> (fila de pie, ordenada, sin compresión), 600 personas necesitan <strong>240 m² de superficie útil</strong>. La valla central y los pasos se comen alrededor de un 20%, así que hay que dimensionar sobre 300 m² de galería.</p>
+        <div class="tablebox">
+          <table>
+            <thead><tr><th>Ancho útil de galería</th><th>Largo necesario para 600</th><th>Con S de 2 carriles</th></tr></thead>
+            <tbody>
+              <tr><td>2,5 m</td><td class="n">96 m</td><td class="n">48 m de galería</td></tr>
+              <tr><td>3,0 m</td><td class="n">80 m</td><td class="n">40 m de galería</td></tr>
+              <tr><td>3,5 m</td><td class="n">69 m</td><td class="n">34 m de galería</td></tr>
+              <tr><td>4,0 m</td><td class="n">60 m</td><td class="n">30 m de galería</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Si la galería es más corta que eso, el sobrante de la fila queda aguas arriba, en el Filtro 2, y el portón de VIP pasa a regular el goteo. Es manejable, pero hay que decidirlo antes y no descubrirlo el sábado.</p>
+
+        <div class="callout rule">
+          <span class="k">Recomendación operativa</span>
+          <p><strong>Abrir VIP 30 a 45 minutos antes que General.</strong> Es el público que llega temprano por los beneficios, y adelantarlo descomprime la galería justo cuando el Filtro 1 entra en pico con General.</p>
+        </div>
+
+        <div class="callout">
+          <span class="k">Seguridad de la galería</span>
+          <p>Es un corredor cubierto, largo y angosto, con público envasado: <strong>pasos de emergencia cada ±15 m</strong> en la valla central, con vallas removibles y staff que sepa cuál abre. Acceso libre al matafuego y al nicho de incendio que están sobre el pasillo.</p>
+          <p>Las puertas centrales son de vidrio: van con las <strong>dos hojas trabadas en abierto</strong> antes de que llegue la fila. Una hoja suelta con 600 personas empujando es un vidrio roto.</p>
+        </div>
       </div>
     </article>
 
@@ -431,12 +509,14 @@ svg text{fill:currentColor}
         <tr><td>Portón de valla</td><td class="n">1</td></tr>
         <tr><td rowspan="2">Filtro 2 · VIP + Platinum</td><td>Control de precinto</td><td class="n">2</td></tr>
         <tr><td>Portón de valla</td><td class="n">1</td></tr>
-        <tr><td>Pulmón</td><td>Orientadores de fila</td><td class="n">2</td></tr>
+        <tr><td>Pulmón General</td><td>Orientadores de fila</td><td class="n">2</td></tr>
+        <tr><td rowspan="2">Galería VIP</td><td>Orientadores de la S</td><td class="n">2</td></tr>
+        <tr><td>Puertas centrales al patio interno</td><td class="n">1</td></tr>
         <tr><td rowspan="2">Incidencias General</td><td>Operadores (2 por gazebo)</td><td class="n">4</td></tr>
         <tr><td>Coordinador de incidencias</td><td class="n">1</td></tr>
         <tr><td>Incidencias VIP</td><td>Operadores interior</td><td class="n">2</td></tr>
       </tbody>
-      <tfoot><tr><td>Total</td><td>Acreditación y ordenamiento</td><td class="n">33</td></tr></tfoot>
+      <tfoot><tr><td>Total</td><td>Acreditación y ordenamiento</td><td class="n">36</td></tr></tfoot>
     </table>
   </div>
 </section>
@@ -453,6 +533,8 @@ svg text{fill:currentColor}
         <li>Vallado de la fila propia de las mesas de incidencias</li>
         <li>Cinta antideslizante o alfombra sobre el tramo de rampa</li>
         <li>Conos y cintas para el pasillo de emergencia del pulmón</li>
+        <li>Valla central de la galería VIP con pasos removibles cada ±15 m</li>
+        <li>Trabas o cuñas para dejar fijas las dos hojas de las puertas centrales</li>
       </ul>
     </div>
     <div>
@@ -490,6 +572,8 @@ svg text{fill:currentColor}
         <tr><td><span class="pill risk">Alto</span> Ancho insuficiente en la rampa</td><td>Filtro 1</td><td>Medir el ancho útil. Si no llega a 3,5 m, correr el filtro al tramo plano.</td></tr>
         <tr><td><span class="pill risk">Alto</span> Piso mojado en pendiente</td><td>Rampa de acceso</td><td>Antideslizante, duplas paradas en plano, plan de lluvia definido.</td></tr>
         <tr><td><span class="pill risk">Medio</span> Canto rodado suelto</td><td>Mesas de incidencias General</td><td>Tarima o planchas y lastre en gazebos. Camino firme desde el carril.</td></tr>
+        <tr><td><span class="pill risk">Alto</span> 600 personas envasadas en corredor cubierto</td><td>Galería VIP</td><td>Pasos de emergencia cada ±15 m, matafuegos y nicho de incendio despejados, staff con el mapa de vallas removibles.</td></tr>
+        <tr><td><span class="pill risk">Alto</span> Puertas de vidrio bajo presión de fila</td><td>Puertas centrales</td><td>Dos hojas trabadas en abierto antes de que llegue el público.</td></tr>
         <tr><td><span class="pill risk">Medio</span> Pasillo interior angosto</td><td>Mesa VIP</td><td>Confirmar ancho libre de evacuación con el venue.</td></tr>
         <tr><td><span class="pill risk">Medio</span> Falta de luz al atardecer</td><td>Todo el circuito</td><td>Luz puntual por puesto; sin luz no hay escaneo.</td></tr>
         <tr><td><span class="pill risk">Medio</span> Contraflujo VIP</td><td>Salida del Filtro 1</td><td>Bifurcación con paletas y precinto por color.</td></tr>
@@ -510,7 +594,8 @@ svg text{fill:currentColor}
         <tr><td class="n">A &minus; 2:00</td><td>Briefing de staff: flujo, colores de precinto, regla de derivación, canal de handies.</td></tr>
         <tr><td class="n">A &minus; 1:30</td><td>Staff en posición. Prueba en seco con 10 casos, incluido un QR fallado de punta a punta.</td></tr>
         <tr><td class="n">A &minus; 1:00</td><td>Se habilita la cola exterior canalizada. Mesas de incidencias operativas.</td></tr>
-        <tr><td class="n">A</td><td>Apertura del Filtro 1. Conteo por carril cada 15 minutos.</td></tr>
+        <tr><td class="n">A &minus; 0:45</td><td>Apertura anticipada de VIP + Platinum. La galería se llena desde el fondo.</td></tr>
+        <tr><td class="n">A</td><td>Apertura de General en el Filtro 1. Conteo por carril cada 15 minutos.</td></tr>
         <tr><td class="n">A + 0:45</td><td>Pico esperado. Coordinador libera o reasigna duplas según el conteo.</td></tr>
         <tr><td class="n">A + 2:30</td><td>Repliegue a un carril activo y refuerzo en incidencias para rezagados.</td></tr>
       </tbody>
@@ -524,13 +609,16 @@ svg text{fill:currentColor}
   <h2>Lo que falta para cerrar el plano a escala</h2>
   <ul class="open">
     <li>Ancho útil de la rampa y de la explanada, aunque sea medido en pasos. Es el dato que confirma o tira abajo los tres carriles.</li>
-    <li>Aforo del sábado y ratio General vs. VIP + Platinum sobre el total.</li>
+    <li>Aforo del sábado. VIP + Platinum ya está en 600; falta el número de General.</li>
+    <li>Largo y ancho útil de la galería VIP: define si las 600 personas entran en la S o si hay que retener parte en el Filtro 2.</li>
+    <li>¿Los 600 son VIP y Platinum juntos, o son dos filas que también hay que separar entre sí?</li>
     <li>Horario de apertura de puertas y horario de show, para anclar el cronograma.</li>
     <li>En el Filtro 2, ¿control visual del precinto o re-escaneo? Cambia la dotación de 7 a 12 personas.</li>
     <li>¿El precinto es único o por categoría y color? De eso depende la bifurcación.</li>
     <li>¿El precinto sirve los dos días o se renueva el domingo?</li>
     <li>Capacidad del pulmón entre el Filtro 2 y la puerta de sala, de pie.</li>
-    <li>¿Hay puertas de sala diferenciadas para General y VIP, o una sola con carriles?</li>
+    <li>Ancho de las puertas centrales y capacidad del patio interno: es el filtro que sigue a la galería.</li>
+    <li>¿Hay puerta de sala diferenciada para General, o comparte el patio interno con VIP?</li>
     <li>Plan de lluvia: cobertura sobre los puestos y sobre la fila exterior.</li>
   </ul>
 </section>

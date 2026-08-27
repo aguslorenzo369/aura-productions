@@ -67,3 +67,16 @@ Consideraciones de esos dos puntos:
   Piso irregular → tarima/planchas o alfombra para la zona de atención (accesibilidad).
 - Energía e iluminación propias para escáner/notebook/impresora de pulseras.
 - El pasillo interior VIP es probable vía de evacuación → mantener ancho libre.
+
+## INGRESO VIP — GALERÍA Y PUERTAS CENTRALES (fotos 6, 7 y 8)
+- Volumen confirmado: **600 personas VIP + Platinum**.
+- Ingreso por las **puertas centrales de la cara externa**, que dan al **patio interno**
+  de la sala. Ese patio es el filtro previo al ingreso a sala propiamente dicho.
+- Galería cubierta: techo traslúcido, muro de bloques de un lado y fachada vidriada
+  del otro. Se ven matafuego/nicho de incendio sobre el pasillo y el módulo amarillo.
+- Fila **envasada en S**: valla central que parte el corredor en dos carriles.
+  La gente hace todo el recorrido de ida, rodea la valla en el fondo y vuelve por el
+  otro carril hasta las puertas centrales. Objetivo: que las 600 no queden dentro del
+  primer sector.
+- Pendiente crítico: **largo y ancho útil de la galería**. 600 pax a 2,5 p/m² = 240 m²
+  útiles (300 m² brutos con la valla). Si no da, parte de la fila se retiene en F2.
