@@ -1,0 +1,890 @@
+<title>Checklist de Requerimientos Técnicos CMC 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   Checklist de Requerimientos Técnicos · CMC 2026
+   Acento fucsia = lo que falta definir.
+   ============================================================ */
+
+:root{
+  --bg:#f8f6f7;
+  --surface:#ffffff;
+  --surface-2:#f2eef1;
+  --ink:#17131a;
+  --ink-2:#565060;
+  --ink-3:#8b8393;
+  --line:#e2dbe2;
+  --line-strong:#cec4d0;
+
+  --acc:#c2185b;
+  --acc-soft:rgba(194,24,91,.09);
+  --acc-line:rgba(194,24,91,.32);
+
+  --ok:#2e6f4e;
+  --ok-soft:rgba(46,111,78,.10);
+  --warn:#946200;
+  --warn-soft:rgba(148,98,0,.11);
+
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+
+  --maxw:1080px;
+  --prose:66ch;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e0c10;
+    --surface:#161219;
+    --surface-2:#1d1822;
+    --ink:#ece7ee;
+    --ink-2:#a79fae;
+    --ink-3:#7b7384;
+    --line:#2a2431;
+    --line-strong:#3b3344;
+
+    --acc:#f2609a;
+    --acc-soft:rgba(242,96,154,.12);
+    --acc-line:rgba(242,96,154,.38);
+
+    --ok:#6bbd8f;
+    --ok-soft:rgba(107,189,143,.13);
+    --warn:#dfa63b;
+    --warn-soft:rgba(223,166,59,.13);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e0c10;
+  --surface:#161219;
+  --surface-2:#1d1822;
+  --ink:#ece7ee;
+  --ink-2:#a79fae;
+  --ink-3:#7b7384;
+  --line:#2a2431;
+  --line-strong:#3b3344;
+
+  --acc:#f2609a;
+  --acc-soft:rgba(242,96,154,.12);
+  --acc-line:rgba(242,96,154,.38);
+
+  --ok:#6bbd8f;
+  --ok-soft:rgba(107,189,143,.13);
+  --warn:#dfa63b;
+  --warn-soft:rgba(223,166,59,.13);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  padding:0 24px 120px;
+}
+.wrap{max-width:var(--maxw);margin:0 auto}
+p{margin:0 0 1em}
+a{color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:3px}
+
+/* ---------- Header ---------- */
+header{padding:76px 0 0}
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  margin:0 0 22px;
+}
+h1{
+  font-family:var(--disp);font-weight:700;
+  font-size:clamp(2.3rem,5.2vw,3.5rem);
+  letter-spacing:-.035em;line-height:1.02;
+  margin:0 0 20px;text-wrap:balance;max-width:16ch;
+}
+.lede{font-size:1.11rem;color:var(--ink-2);max-width:var(--prose);margin:0 0 32px}
+
+.meta{
+  display:flex;flex-wrap:wrap;gap:0 28px;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;
+  color:var(--ink-3);text-transform:uppercase;
+  padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.meta b{color:var(--ink-2);font-weight:500}
+
+/* ---------- Tally ---------- */
+.tally{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+  margin:40px 0 8px;
+}
+.tally > div{background:var(--surface);padding:20px 20px 18px}
+.tally .n{
+  font-family:var(--disp);font-weight:700;font-size:2rem;
+  letter-spacing:-.03em;line-height:1;display:block;
+  font-variant-numeric:tabular-nums;
+}
+.tally .k{
+  display:block;margin-top:9px;font-family:var(--mono);
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+}
+.tally .t-ok .n{color:var(--ok)}
+.tally .t-warn .n{color:var(--warn)}
+.tally .t-gap .n{color:var(--acc)}
+
+/* ---------- Controls ---------- */
+.controls{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  margin:22px 0 0;
+}
+.btn{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2);
+  background:var(--surface);border:1px solid var(--line-strong);
+  padding:9px 15px;cursor:pointer;border-radius:2px;
+  transition:border-color .18s,color .18s,background .18s;
+}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.btn[aria-pressed="true"]{
+  background:var(--acc-soft);border-color:var(--acc-line);color:var(--acc);
+}
+.hint{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);letter-spacing:.03em}
+
+/* ---------- Sections ---------- */
+section{margin-top:84px}
+.sec-head{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:12px;border-bottom:2px solid var(--ink);
+  margin-bottom:26px;
+}
+h2{
+  font-family:var(--disp);font-weight:700;
+  font-size:clamp(1.35rem,2.6vw,1.85rem);
+  letter-spacing:-.025em;line-height:1.1;margin:0;text-wrap:balance;
+}
+.sec-count{
+  font-family:var(--mono);font-size:.72rem;color:var(--ink-3);
+  letter-spacing:.08em;white-space:nowrap;margin-left:auto;
+}
+.sec-note{color:var(--ink-2);max-width:var(--prose);margin:0 0 26px;font-size:.97rem}
+
+h3{
+  font-family:var(--disp);font-weight:600;font-size:1.02rem;
+  letter-spacing:-.012em;margin:38px 0 14px;
+}
+h3:first-of-type{margin-top:0}
+
+/* ---------- Reglas ---------- */
+.reglas{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+}
+.regla{background:var(--surface);padding:22px 22px 24px}
+.regla .rn{
+  font-family:var(--mono);font-size:.7rem;color:var(--acc);
+  letter-spacing:.1em;display:block;margin-bottom:10px;
+}
+.regla b{
+  font-family:var(--disp);font-weight:600;font-size:1rem;
+  letter-spacing:-.012em;display:block;margin-bottom:7px;line-height:1.28;
+}
+.regla span{font-size:.9rem;color:var(--ink-2);line-height:1.52}
+
+/* ---------- Checklist ---------- */
+.list{border-top:1px solid var(--line)}
+.item{
+  display:grid;
+  grid-template-columns:26px 1fr 128px;
+  gap:0 16px;
+  padding:15px 0 15px 14px;
+  border-bottom:1px solid var(--line);
+  border-left:3px solid transparent;
+  align-items:start;
+}
+.item.s-ok{border-left-color:var(--ok)}
+.item.s-warn{border-left-color:var(--warn)}
+.item.s-gap{border-left-color:var(--acc);background:var(--acc-soft)}
+
+.item input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;
+  width:17px;height:17px;margin:4px 0 0;
+  border:1.5px solid var(--line-strong);border-radius:2px;
+  background:var(--surface);cursor:pointer;position:relative;flex:none;
+  transition:border-color .15s,background .15s;
+}
+.item input[type=checkbox]:hover{border-color:var(--ink-3)}
+.item input[type=checkbox]:checked{background:var(--ink);border-color:var(--ink)}
+.item input[type=checkbox]:checked::after{
+  content:"";position:absolute;left:5px;top:1.5px;
+  width:4px;height:9px;border:solid var(--surface);
+  border-width:0 1.8px 1.8px 0;transform:rotate(42deg);
+}
+.item input[type=checkbox]:checked ~ .txt{opacity:.42}
+.item input[type=checkbox]:checked ~ .txt b{text-decoration:line-through}
+
+.txt b{
+  display:block;font-family:var(--disp);font-weight:600;
+  font-size:.96rem;letter-spacing:-.008em;line-height:1.35;margin-bottom:4px;
+}
+.txt span{display:block;font-size:.9rem;color:var(--ink-2);line-height:1.5}
+.txt .src{
+  display:block;margin-top:6px;font-family:var(--mono);
+  font-size:.68rem;letter-spacing:.05em;color:var(--ink-3);text-transform:uppercase;
+}
+code,.num{font-family:var(--mono);font-size:.87em;font-variant-numeric:tabular-nums}
+code{background:var(--surface-2);padding:1px 5px;border-radius:2px}
+
+.st{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;
+  text-transform:uppercase;padding:4px 9px;border-radius:2px;
+  white-space:nowrap;justify-self:start;margin-top:3px;border:1px solid;
+}
+.st-ok{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.st-warn{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+.st-gap{color:var(--acc);border-color:var(--acc);background:var(--acc-soft);font-weight:600}
+
+/* ---------- Brechas ---------- */
+.gap{
+  border:1px solid var(--line);border-left:3px solid var(--acc);
+  background:var(--surface);padding:22px 24px;margin-bottom:14px;
+}
+.gap-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:10px}
+.gid{
+  font-family:var(--mono);font-size:.72rem;font-weight:600;
+  color:var(--acc);letter-spacing:.08em;
+}
+.gap-head b{
+  font-family:var(--disp);font-weight:600;font-size:1.04rem;
+  letter-spacing:-.015em;line-height:1.25;flex:1 1 240px;
+}
+.tag{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);
+  border:1px solid var(--line-strong);padding:3px 8px;border-radius:2px;
+}
+.tag.block{color:var(--acc);border-color:var(--acc-line);background:var(--acc-soft)}
+.gap p{font-size:.94rem;color:var(--ink-2);margin:0 0 10px;max-width:var(--prose)}
+.gap p:last-child{margin-bottom:0}
+.gap .ask{
+  font-size:.92rem;color:var(--ink);border-top:1px dashed var(--line-strong);
+  padding-top:11px;margin-top:13px;
+}
+.gap .ask b{font-family:var(--disp);font-weight:600}
+
+/* ---------- Tabla ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.9rem}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{
+  font-family:var(--mono);font-weight:500;font-size:.68rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  background:var(--surface-2);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td.h{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink-2)}
+td strong{font-family:var(--disp);font-weight:600}
+tr.grp td{
+  background:var(--surface-2);font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:8px 15px;
+}
+
+/* ---------- Nota ---------- */
+.note{
+  border:1px solid var(--line);border-left:3px solid var(--ink-3);
+  background:var(--surface);padding:18px 22px;margin:24px 0;
+  font-size:.94rem;color:var(--ink-2);max-width:var(--prose);
+}
+.note b{color:var(--ink);font-family:var(--disp);font-weight:600}
+.note.crit{border-left-color:var(--acc)}
+
+footer{
+  margin-top:96px;padding-top:26px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-3);
+  display:flex;flex-wrap:wrap;gap:6px 26px;
+}
+
+body.only-gaps .item:not(.s-gap){display:none}
+body.only-gaps .reglas,
+body.only-gaps .tw,
+body.only-gaps .cron-sec{display:none}
+
+@media (max-width:640px){
+  body{padding:0 18px 90px}
+  header{padding-top:52px}
+  .item{grid-template-columns:24px 1fr;gap:0 13px}
+  .st{grid-column:2;margin-top:9px}
+  .meta{gap:4px 20px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+@media print{
+  body{padding:0;background:#fff;color:#000;font-size:10.5pt}
+  .controls,footer{display:none}
+  section{margin-top:34px;break-inside:auto}
+  .item,.gap,.regla{break-inside:avoid}
+  .sec-head{break-after:avoid}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Cumbre de los Millonarios Conscientes · Gira 2026</p>
+  <h1>Checklist de requerimientos técnicos</h1>
+  <p class="lede">
+    Todo lo que la producción de CMC 2026 viene exigiendo en técnica, iluminación y visuales,
+    consolidado en un solo documento presentable — y, al final, el desglose de lo que
+    todavía no está definido y hay que cerrar antes de seguir contratando.
+  </p>
+  <div class="meta">
+    <span><b>14 sedes</b> · LatAm y España</span>
+    <span><b>2 días</b> por sede</span>
+    <span>hasta <b>5.500</b> asistentes</span>
+    <span>jul – nov <b>2026</b></span>
+    <span>v<b>1.0</b> · agosto 2026</span>
+  </div>
+
+  <div class="tally">
+    <div class="t-ok"><span class="n">52</span><span class="k">Definidos</span></div>
+    <div class="t-warn"><span class="n">9</span><span class="k">A confirmar por sede</span></div>
+    <div class="t-gap"><span class="n">18</span><span class="k">Sin definir</span></div>
+    <div><span class="n">16</span><span class="k">Brechas abiertas</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="filter" type="button" aria-pressed="false">Ver sólo lo que falta</button>
+    <button class="btn" id="print" type="button">Guardar como PDF</button>
+    <button class="btn" id="reset" type="button">Reiniciar tildes</button>
+    <span class="hint">Las tildes se guardan en este navegador</span>
+  </div>
+</header>
+
+<!-- ============ REGLAS ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Las 8 reglas que cruzan todo</h2>
+    <span class="sec-count">Aplican siempre · las 3 áreas</span>
+  </div>
+  <p class="sec-note">
+    No dependen del bloque del timeline ni de la sede. Si un proveedor sólo se acuerda de una página
+    de todo el dossier, es ésta. Cada una nace de una falla concreta que ya ocurrió.
+  </p>
+
+  <div class="reglas">
+    <div class="regla"><span class="rn">R1</span><b>Todo video entra con blackout total</b><span>Se apagan todas las luces de sala y de escenario. La pantalla es la única fuente de luz. Sin excepción.</span></div>
+    <div class="regla"><span class="rn">R2</span><b>Los cues siguen la música</b><span>Luces, visuales y sonido se sincronizan con la música, nunca con la voz del presentador.</span></div>
+    <div class="regla"><span class="rn">R3</span><b>Cobertura al 100% del público</b><span>Primera fila, centro y fondo escuchan igual. Se mide en 9 puntos antes de abrir puertas.</span></div>
+    <div class="regla"><span class="rn">R4</span><b>Energía independiente por área</b><span>Sonido, iluminación y LED en líneas separadas, tablero propio, tierra en estrella y UPS en los equipos críticos.</span></div>
+    <div class="regla"><span class="rn">R5</span><b>Pisacables en el 100% de los cruces</b><span>Goma en toda zona de circulación y cables íntegros. Manteles, alfombras sueltas y cinta no son protección.</span></div>
+    <div class="regla"><span class="rn">R6</span><b>Consola profesional en la mesa técnica</b><span>Cada área opera desde consola con acceso al master, en la mesa técnica. Nunca desde una computadora suelta ni desde una ubicación apartada.</span></div>
+    <div class="regla"><span class="rn">R7</span><b>Nadie encandilado</b><span>Truss a 7,50 m mínimo, frontales a 45° ± 5° y filtro difusor en todos los perfiles. Se prueba con una persona en la posición real del speaker.</span></div>
+    <div class="regla"><span class="rn">R8</span><b>El proveedor prueba antes de que lleguemos</b><span>100% del equipamiento instalado y testeado internamente. La validación con CMC dura 30 minutos como máximo: es validación, no prueba desde cero.</span></div>
+  </div>
+</section>
+
+<!-- ============ SONIDO ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Sonido</h2>
+    <span class="sec-count">Rider v2.0 · 24 canales</span>
+  </div>
+  <p class="sec-note">
+    El <span class="num">80%</span> del evento es voz hablada; el resto tiene que pegar en el pecho.
+    El sistema se dimensiona por tier de aforo, pero la cobertura y el headroom no se negocian nunca.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="s1"><label class="txt" for="s1"><b>PA volado, nunca apoyado en el piso</b><span>Line array por lado según tier: 12–16 cajas (Grande), 10–12 (Medio), 6–10 (Base). Si la sala no permite colgar, el proveedor lo informa por escrito antes de firmar.</span><span class="src">Rider de sonido · 02</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s2"><label class="txt" for="s2"><b>Subs en arreglo cardioide</b><span>8–12 en dos arreglos (Grande), 6–8 (Medio), 4–6 (Base). Para no ensuciar el escenario ni la mesa técnica.</span><span class="src">Rider de sonido · 02</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="s3"><label class="txt" for="s3"><b>Front fill y anillos de delay</b><span>Front fill 2–4 según tier. Los anillos de delay dependen de la profundidad real de cada sala: <span class="num">≈30 m</span> y <span class="num">≈48 m</span> en La Rural.</span><span class="src">Rider de sonido · 02</span></label><span class="st st-warn">Por sede</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s4"><label class="txt" for="s4"><b>Niveles: 105 dB(A) Leq de show</b><span>Picos manejables a <span class="num">110 dB(A)</span>, headroom <span class="num">≥ 6 dB</span>, STI <span class="num">≥ 0,55</span>. Voz hablada <span class="num">78–84 dB(A)</span> en el punto más lejano.</span><span class="src">Rider de sonido · 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s5"><label class="txt" for="s5"><b>Cobertura medida en P1–P9</b><span>Variación máxima <span class="num">±3 dB(A)</span> en banda de voz (250 Hz – 4 kHz) y <span class="num">±6 dB</span> en banda ancha. Sonómetro clase 2, ponderación A, respuesta slow, a 1,60 m del piso. Planilla firmada antes de abrir puertas.</span><span class="src">Rider de sonido · 01 y 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s6"><label class="txt" for="s6"><b>3 diademas en uso + 1 de respaldo</b><span>UHF profesional color piel (DPA 6066/4066, Countryman E6, Sennheiser HSP 4, Shure TwinPlex TH53), fijadas con micropore. La de respaldo va montada, encendida y muteada. Baterías nuevas cada jornada.</span><span class="src">Rider de sonido · 05</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s7"><label class="txt" for="s7"><b>Mínimo 2 handheld inalámbricos</b><span>Shure Beta 58A, KSM9 o SM58 sobre cuerpo inalámbrico. Ideal 4 en tier Grande. Un asistente de sonido con micrófonos cargados en zona de público durante las dinámicas.</span><span class="src">Rider de sonido · 05</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="s8"><label class="txt" for="s8"><b>Plan de radiofrecuencia con escaneo en sitio</b><span>Coordinación de frecuencias antes de la prueba, distribuidor de antena activo, antenas direccionales con línea de vista, frecuencias dentro de la banda legal del país. Planilla entregada a la Mesa de Control.</span><span class="src">Rider de sonido · 05</span></label><span class="st st-warn">Por sede</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s9"><label class="txt" for="s9"><b>Walk test del pasillo central sin cortes</b><span>El opening arranca con el speaker caminando el pasillo en oscuridad total. Ese recorrido completo tiene que estar cubierto por RF sin un solo drop.</span><span class="src">Rider de sonido · 05</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s10"><label class="txt" for="s10"><b>Input list de 24 canales</b><span>4 diademas · 4 handheld · DJ Pioneer (09–10) · MacBook de pistas y SFX (11–12) · reproducción de respaldo (13–14) · media server (15–16) · ambiente de sala (17–18) · talkback (19) · traducción (20) · 21–24 libres y patcheados.</span><span class="src">Rider de sonido · 06</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s11"><label class="txt" for="s11"><b>13 salidas: PA, subs, fills, delays, monitores, booth, grabación</b><span>Grabación L/R como mezcla limpia sin efectos de sala, más una segunda salida independiente de streaming/respaldo.</span><span class="src">Rider de sonido · 06</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s12"><label class="txt" for="s12"><b>Consola digital ≥32 entradas y 16 buses</b><span>Avid VENUE S6L, DiGiCo SD/Quantum, Yamaha CL/QL, A&amp;H dLive o SQ, Midas M32/PRO, Soundcraft Vi. Escenas guardadas por bloque del timeline y operador dedicado.</span><span class="src">Rider de sonido · 08</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s13"><label class="txt" for="s13"><b>2 monitores de piso en tarima</b><span>Mezcla de micrófono del conferencista + pistas. Presentes para el speaker, sin invadir las primeras filas, fuera del eje de cámara del circuito cerrado.</span><span class="src">Rider de sonido · 07</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="s14"><label class="txt" for="s14"><b>Tolerancia cero al zumbido de tierra</b><span>Se escucha en silencio con ganancia de show en las cuatro esquinas. Si zumba, se corrige o se reemplaza la caja: no se justifica.</span><span class="src">Rider de sonido · 04 · Informe Panamá</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="s15"><label class="txt" for="s15"><b>Sistema de intercom para la mesa de control</b><span>El show corre por cues disparados entre mesa técnica, escenario, seguidores, cabina DJ y backstage. Hoy sólo existe el canal 19 de talkback: no hay requerimiento escrito de intercom ni de walkies, ni cantidad de estaciones ni canales.</span><span class="src">No figura en ningún rider</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ ILUMINACIÓN ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Iluminación</h2>
+    <span class="sec-count">Rider v2.0 · 6 escenas</span>
+  </div>
+  <p class="sec-note">
+    Seis escenas fijas, seis reglas permanentes y un plot con alturas que son requisito de aceptación,
+    no sugerencia. El encandilamiento de los conferencistas es la condición crítica.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="l1"><label class="txt" for="l1"><b>Las 6 escenas programadas y guardadas</b><span>1 Ambiente · 2 Opening · 3 Meditación · 4 Conferencista · 5 Fiesta · 6 Barras de Hierro. Se disparan una por una delante de producción CMC, con los tiempos de fade reales.</span><span class="src">Rider de iluminación · 04 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l2"><label class="txt" for="l2"><b>Truss a 7,50 m mínimo, medido con cinta</b><span>De piso terminado a cara inferior de truss, delante del responsable del proveedor. Si la sala no lo permite, se informa por escrito antes de firmar con la altura real y la solución propuesta.</span><span class="src">Rider de iluminación · 03 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l3"><label class="txt" for="l3"><b>Prueba de encandilamiento con persona en escena</b><span>En las tres marcas de escena, con alguien parado en la posición real del speaker. Frontales a 45° ± 5°, filtro difusor en todos los perfiles y LEKOs, barndoors donde el haz pueda derramar al ojo.</span><span class="src">Rider de iluminación · 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l4"><label class="txt" for="l4"><b>Consola DMX programable con operador propio</b><span>grandMA, Chamsys, Avolites o ETC Eos. En la mesa técnica, con acceso al master. 4 universos en tier Grande, 2 en Medio y Base, con nodos Art-Net o sACN.</span><span class="src">Rider de iluminación · 06 y 07</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l5"><label class="txt" for="l5"><b>Luminarias por tier — conteo físico contra lo cotizado</b><span>Grande: 12 spot · 16 wash · 12 beam · 24 PAR LED · 4 perfiles · 4 blinders · 2 strobes · 8 barras de pixeles. Cada aparato se enciende y se mueve uno por uno.</span><span class="src">Rider de iluminación · 06 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l6"><label class="txt" for="l6"><b>2 seguidores con operador</b><span>Imprescindibles para el opening y las entradas de speaker. El recorrido del pasillo central se ensaya en oscuridad.</span><span class="src">Rider de iluminación · 06 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="l7"><label class="txt" for="l7"><b>Hazer autorizado y detección de humo coordinada</b><span>Neblina fina, fluido a base de agua con ficha de seguridad. Coordinación escrita con el venue para inhibir o reconfigurar la detección, autorización del responsable de seguridad y aviso a bomberos o brigada.</span><span class="src">Rider de iluminación · 08</span></label><span class="st st-warn">Por sede</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l8"><label class="txt" for="l8"><b>Rigging seguro y certificado</b><span>Cable de seguridad en cada luminaria y accesorio colgado, motores de 1 t con certificación vigente, sin cargas fuera de cálculo. Luz máxima de truss <span class="num">22 m</span>.</span><span class="src">Rider de iluminación · 06 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l9"><label class="txt" for="l9"><b>Cableado DMX apantallado, nunca cable de micrófono</b><span>DMX 512 de 3 o 5 pines, terminador en el último aparato de cada rama, splitters ópticos y no derivaciones en Y, red Art-Net o sACN en switch dedicado separado del WiFi del evento.</span><span class="src">Rider de iluminación · 07</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l10"><label class="txt" for="l10"><b>Backup del show file al cierre de cada jornada</b><span>Entregado a la Mesa de Control. Consola sobre UPS y wing o consola de respaldo en tier Grande.</span><span class="src">Rider de iluminación · 07</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="l11"><label class="txt" for="l11"><b>Ninguna luminaria pierde intensidad ni se corrige a mano</b><span>Tampoco se reacomoda iluminación el día del evento sin volver a validar.</span><span class="src">Rider de iluminación · 11 · Informe Panamá</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="l12"><label class="txt" for="l12"><b>Barras de Hierro: intensidad, movimiento y refuerzo del fucsia</b><span>El color es no negociable, pero falta definir con dirección y técnica la intensidad, si lleva movimiento o queda fijo, y si se refuerza con haz durante el reingreso. Con la condición de seguridad de que el piso quede visible durante el armado de las islas.</span><span class="src">Rider de iluminación · 04 · marcado &laquo;a definir&raquo;</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="l13"><label class="txt" for="l13"><b>Láser aéreo — no está en la lista de equipo</b><span>La Mesa de Control lo pide en tres etapas del show (entrada en el drop, continuo sobre la línea de cabezas, apertura total) con bloqueo físico por encima de la altura de cabeza. No figura en el rider de iluminación ni en ninguna cotización.</span><span class="src">Mesa de Control · sin rider</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ VISUALES ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Visuales y pantallas</h2>
+    <span class="sec-count">Rider v1.0 · 3 pantallas</span>
+  </div>
+  <p class="sec-note">
+    Tres pantallas con resoluciones exactas de trabajo, redundancia obligatoria y una condición que
+    sólo se descubre al editar si no se prueba: el refresco del LED contra la cámara.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="v1"><label class="txt" for="v1"><b>Resoluciones de trabajo</b><span>Central <span class="num">2688 × 1152</span> (21:9) como master de generación · laterales <span class="num">384 × 1152</span> (1:3) · cabina DJ <span class="num">1536 × 384</span> (4:1). Variantes: <span class="num">768 × 384</span> y <span class="num">1008 × 336</span>.</span><span class="src">Rider de visuales · 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="v2"><label class="txt" for="v2"><b>Medidas físicas de pantalla</b><span>Central 12,00 × 5,00 m en tier Grande y 7,00 × 3,00 m en Base · laterales ≈2,00 × 6,00 m · cabina DJ ≈4,00 × 1,00 m. Cada sede confirma la medida real.</span><span class="src">Rider de visuales · 02</span></label><span class="st st-warn">Por sede</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="v3"><label class="txt" for="v3"><b>Mapeo real confirmado por escrito antes de la prueba</b><span>Un pixel de diferencia obliga a rehacer el recorte de todo el contenido. Se entrega a la Mesa de Control el jueves a las 20:00.</span><span class="src">Rider de visuales · 03 y 09</span></label><span class="st st-warn">Por sede</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v4"><label class="txt" for="v4"><b>Panel: pitch, brillo y refresco</b><span>Pixel pitch máximo <span class="num">P3.9</span> interior, ideal <span class="num">P2.6</span> en la central. Brillo mínimo <span class="num">1.200 nits</span>. Refresco mínimo <span class="num">3.840 Hz</span>, obligatorio para que el circuito cerrado no capture bandas.</span><span class="src">Rider de visuales · 02</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v5"><label class="txt" for="v5"><b>Prueba de cámara contra LED el viernes 12:00</b><span>Grabación de prueba contra las tres pantallas, sin bandas de refresco visibles. Es el error más caro del circuito cerrado porque sólo se descubre al editar.</span><span class="src">Rider de visuales · 02 y 09</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v6"><label class="txt" for="v6"><b>Procesador Novastar o Brompton, con fuente redundante</b><span>Mapeo independiente por pantalla, tarjetas receptoras redundantes en la central, alimentación en línea separada de audio e iluminación, procesador y media server sobre UPS.</span><span class="src">Rider de visuales · 02</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v7"><label class="txt" for="v7"><b>Redundancia de reproducción probada en caliente</b><span>Segundo equipo con el mismo contenido cargado. Se simula la caída del principal y el respaldo toma el show en menos de <span class="num">10 segundos</span>. Copia del contenido en dos soportes físicos distintos.</span><span class="src">Rider de visuales · 04 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v8"><label class="txt" for="v8"><b>Resolume Arena o Millumin, PlaybackPro o QLab</b><span>Máquina dedicada exclusivamente a video, placa de salida profesional con salidas independientes por pantalla, monitor de preview separado del programa, ubicada en la mesa técnica.</span><span class="src">Rider de visuales · 05</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v9"><label class="txt" for="v9"><b>2 teleprompters espejados con operador</b><span>Uno a cada lado de la tarima, en ángulo hacia la posición del speaker, fuera del eje de cámara. Durante los videos van a negro total, no en pausa ni en logo.</span><span class="src">Rider de visuales · 06</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v10"><label class="txt" for="v10"><b>Blackout total verificado, sin luz parásita</b><span>Se identifica y se tapa en el montaje del viernes todo lo que no se pueda apagar: pilotos de equipos, carteles no reglamentarios, pantallas del venue, monitores de prompter, puertas laterales abiertas.</span><span class="src">Rider de visuales · 01 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v11"><label class="txt" for="v11"><b>Contenido entregado 7 días antes del montaje</b><span>Naming <code>CMC2026_[SEDE]_[BLOQUE]_[RESOLUCIÓN]</code>, loops sin costura, carpeta compartida del kit de descargas más copia en SSD entregada en sitio.</span><span class="src">Rider de visuales · 08</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v12"><label class="txt" for="v12"><b>El logo CMC va siempre como capa estática compuesta</b><span>Centrado verticalmente, no se re-escala, no se recorta y no se altera el color. Ninguna pieza sale a pantalla sin aprobación de la dirección audiovisual.</span><span class="src">Rider de visuales · 08 · Mesa de Control</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="v13"><label class="txt" for="v13"><b>Restricción de marca: nada de iconografía religiosa</b><span>Sin ángeles, figuras de túnica, multitudes arrodilladas, vendadas o en formación ritual. Condición no negociable: si una imagen genera la duda, se descarta.</span><span class="src">Briefing de visuales · Mesa de Control</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="v14"><label class="txt" for="v14"><b>Códec de entrega: el briefing y el rider se contradicen</b><span>El briefing que le mandamos al artista de contenido dice ProRes o HAP y prohíbe H.264. El rider de visuales acepta H.264 a alto bitrate (CRF 12-13) o HAP. Hasta resolverlo estamos pidiendo dos cosas distintas por dos canales distintos.</span><span class="src">Briefing vs. Rider de visuales · 08</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="v15"><label class="txt" for="v15"><b>Frame rate del contenido</b><span>El briefing pide 24 fps, el rider habla de frame rate constante informando si difiere de 30 fps, y el circuito cerrado graba a 30 fps. Hay que fijar uno.</span><span class="src">Briefing vs. Rider de visuales</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="v16"><label class="txt" for="v16"><b>Proveedor de contenido visual del show</b><span>El briefing está publicado y define el esquema de contratación (una pieza paga de prueba y después el paquete), pero todavía no hay artista contratado ni fecha de entrega comprometida contra el plazo de 7 días previos a cada montaje.</span><span class="src">Briefing de contenido visual</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ EFECTOS ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Efectos especiales</h2>
+    <span class="sec-count">Sin rider · área descubierta</span>
+  </div>
+  <p class="sec-note">
+    La Mesa de Control del show pide CO2, chispa fría, láser y humo denso con condiciones de seguridad
+    explícitas. Ninguno de esos efectos existe en un rider, en una lista de equipo ni en una cotización.
+    Es el bloque más expuesto del checklist.
+  </p>
+
+  <div class="list">
+    <div class="item s-gap"><input type="checkbox" id="f1"><label class="txt" for="f1"><b>CO2 — 2 disparos en la etapa 2 y 1 en la etapa 4</b><span>Ráfagas cortas en el primer y el último impacto, y una simultánea con la chispa fría en el pico. Sin proveedor, sin cantidad de cañones, sin consumo de gas ni recarga por sede.</span><span class="src">Mesa de Control · sin rider</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="f2"><label class="txt" for="f2"><b>Chispa fría — 3 a 4 segundos en el pico del show</b><span>Requiere distancia mínima al público, autorización del venue y coordinación con los detectores de humo. Ninguna de las tres cosas está gestionada para ninguna sede.</span><span class="src">Mesa de Control · sin rider</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="f3"><label class="txt" for="f3"><b>Láser con bloqueo físico sobre la línea de cabezas</b><span>La Mesa de Control lo especifica como tope mecánico, no por software, y nunca escaneando al público. Falta el equipo, el operador y la habilitación por país.</span><span class="src">Mesa de Control · sin rider</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="f4"><label class="txt" for="f4"><b>Humo denso en la llegada del speaker al escenario</b><span>Es la única excepción al hazer de neblina fina. Está escrito en la escena 2 del rider de iluminación, pero la máquina de humo denso no figura en la lista de equipo.</span><span class="src">Rider de iluminación · 04 y 08</span></label><span class="st st-warn">A cerrar</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="f5"><label class="txt" for="f5"><b>Rider de efectos especiales como documento</b><span>Hoy tenemos rider de sonido, de iluminación y de visuales. Los efectos viven sólo dentro del guion del show, que no es un documento contractual y no se manda a los proveedores.</span><span class="src">No existe</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ ENERGÍA Y SEGURIDAD ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Energía, cableado y seguridad</h2>
+    <span class="sec-count">Causa raíz de Panamá</span>
+  </div>
+  <p class="sec-note">
+    Cinco cortes de sonido en un evento, zumbido de tierra en dos cajas y cables sin protección en zona
+    de circulación. Todo eso fue eléctrico. Este bloque no es negociable.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="e1"><label class="txt" for="e1"><b>Acometida dedicada y exclusiva por área</b><span>Sonido, iluminación y pantallas LED en líneas distintas, con tablero propio, térmica y diferencial por línea, rotulado.</span><span class="src">Rider de sonido · 04</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="e2"><label class="txt" for="e2"><b>Tierra técnica en estrella, resistencia ≤ 5 ohm</b><span>Punto único de tierra técnica para todo el sistema.</span><span class="src">Rider de sonido · 04</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="e3"><label class="txt" for="e3"><b>UPS mínimo 1.500 VA en equipos críticos</b><span>Consola FOH y stagebox, sistema inalámbrico y distribuidor de antena, cabina DJ completa, media server de visuales y grabador de circuito cerrado. El equipo del DJ viaja con la gira: si se rompe, no hay reemplazo.</span><span class="src">Rider de sonido · 04</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="e4"><label class="txt" for="e4"><b>Grupo electrógeno de respaldo</b><span>Requerido si el venue no garantiza estabilidad de tensión. Hay que resolverlo sede por sede, no como cláusula genérica.</span><span class="src">Rider de sonido · 04</span></label><span class="st st-warn">Por sede</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="e5"><label class="txt" for="e5"><b>Cableado etiquetado, íntegro y separado</b><span>Etiquetado en ambos extremos, separación física entre líneas de audio y de fuerza con cruces a 90°, señal en canaleta o alfombra técnica en zonas de público. Cable de repuesto por cada tirada crítica de video.</span><span class="src">Riders de sonido y visuales</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="e6"><label class="txt" for="e6"><b>Cálculo de consumo y amperaje por área</b><span>Pedimos líneas independientes pero no decimos cuántos kVA necesita cada una. Es la primera pregunta que hace un proveedor serio y hoy no la podemos contestar por escrito.</span><span class="src">No figura en ningún rider</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="e7"><label class="txt" for="e7"><b>Plan de seguridad y emergencia</b><span>Sabemos que hay paramédicos en sala para Barras de Hierro y que las salidas de emergencia van despejadas y señalizadas, pero no hay documento que fije paramédicos, extintores, brigada, seguros y responsabilidad civil, ni plan de evacuación por sede.</span><span class="src">Mencionado suelto · sin documento</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ REGISTRO ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Circuito cerrado y registro</h2>
+    <span class="sec-count">El activo que queda después</span>
+  </div>
+  <p class="sec-note">
+    El material grabado es el activo principal que el evento deja después del evento. Mismo estándar en
+    las 14 sedes, y con consecuencia comercial si la entrega llega inutilizable.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="r1"><label class="txt" for="r1"><b>Mínimo 2 cámaras con camarógrafos asignados</b><span>Plano general y plano cerrado, mixer de video con corte entre cámaras.</span><span class="src">Riders de sonido y visuales · 07 y 10</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="r2"><label class="txt" for="r2"><b>4K · 30 fps recomendado, mínimo 1080p · 30 fps</b><span>Cualquier limitación se avisa antes al director audiovisual.</span><span class="src">Rider de visuales · 07</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="r3"><label class="txt" for="r3"><b>Audio integrado en el archivo, desde la salida limpia de consola</b><span>Nunca desde el micrófono de cámara. Pista de audio adicional como backup siempre que sea posible.</span><span class="src">Rider de visuales · 07</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="r4"><label class="txt" for="r4"><b>Balance de blancos ajustado con la luz de show</b><span>No con luz de trabajo. En Panamá el circuito cerrado no funcionó el sábado pese a estar contratado y probado.</span><span class="src">Rider de visuales · 07 y 11</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="r5"><label class="txt" for="r5"><b>Entrega progresiva por bloques, en SSD</b><span>En cada descanso: comida, tarde, final del día y cierre. Nunca acumular todo para el final. Nada de pendrives ni discos mecánicos lentos.</span><span class="src">Riders de sonido y visuales</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="r6"><label class="txt" for="r6"><b>Un archivo por bloque, con nombre descriptivo</b><span>INICIO EVENTO · JAVI MAÑANA · DEJAR IR · ACTIVACIÓN TARDE · JAVI TARDE · VALENTINA TARDE · MESA REDONDA JAVI · JAVI PRE DINÁMICA · PRE-DINÁMICA · CÍRCULO PERDÓN · VENTA · CIERRE EVENTO. Nada de <code>Streaming_297.mp4</code>.</span><span class="src">Riders de sonido y visuales</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="r7"><label class="txt" for="r7"><b>Revisión antes de entregar</b><span>Los archivos abren, el audio se escucha, no hay corruptos ni faltan bloques. Si la entrega queda inutilizable puede considerarse no válida y no abonarse total o parcialmente.</span><span class="src">Rider de sonido · 10</span></label><span class="st st-ok">Definido</span></div>
+  </div>
+</section>
+
+<!-- ============ SALA ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Sala, escenario e infraestructura</h2>
+    <span class="sec-count">Layout no negociable</span>
+  </div>
+  <p class="sec-note">
+    El layout de sala condiciona los tres riders. El pasillo central y la posición de la mesa técnica
+    no son preferencias: son requisitos del opening y de la operación en vivo.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="a1"><label class="txt" for="a1"><b>Pasillo central de 4,00 m</b><span>El opening arranca con el speaker caminando por ahí en oscuridad total.</span><span class="src">Dossier · 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="a2"><label class="txt" for="a2"><b>Mesa técnica unificada y centrada</b><span>Audio, luces, video y CCTV en la misma isla, centrada respecto del escenario. Cabina de DJ al lado, nunca enfrente.</span><span class="src">Dossier · 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="a3"><label class="txt" for="a3"><b>Tarima de 1,20 m con escalera doble y baranda</b><span>Piso antideslizante, sin cables sueltos ni desniveles. Mesa cocktail alta para el agua en escena.</span><span class="src">Rider de sonido · 07 · Pedido La Rural</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="a4"><label class="txt" for="a4"><b>Seis salidas de emergencia despejadas y señalizadas</b><span>Más pasillo transversal entre VIP y General para la circulación del staff.</span><span class="src">Dossier · 03</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="a5"><label class="txt" for="a5"><b>Backstage, camerinos y depósito fuera de la sala principal</b><span>Igual que la zona de cierre.</span><span class="src">Dossier · 01</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="a6"><label class="txt" for="a6"><b>Oficina de producción, VIP y camarín</b><span>Definido en detalle para La Rural: oficina para 100 personas con 5 mesas redondas, sector VIP de 10 con living y división, camarín con espejo maquillador y living. Falta replicarlo como pedido estándar para el resto de las sedes.</span><span class="src">Pedido de presupuesto La Rural</span></label><span class="st st-warn">Sólo La Rural</span></div>
+
+    <div class="item s-warn"><input type="checkbox" id="a7"><label class="txt" for="a7"><b>Mobiliario de sala</b><span>5.000 sillas hoteleras negras, mesas rectangulares de más de 2 m con mantelería negra, flete de armado y desarme. Cotizado sólo para Buenos Aires.</span><span class="src">Pedido de presupuesto La Rural</span></label><span class="st st-warn">Sólo La Rural</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="a8"><label class="txt" for="a8"><b>Plano de sala por sede</b><span>El plano con los 9 puntos de medición, el plot de luz y el flujo de video están hechos para La Rural, Pabellón Azul. Las otras 13 sedes usan &laquo;la misma lógica escalada&raquo;, pero no tienen plano propio. Sin plano no hay P1–P9 ni acta de cobertura verificable.</span><span class="src">Riders · sólo tier Grande</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="a9"><label class="txt" for="a9"><b>Tabla completa de sede → tier → aforo → proveedor</b><span>Los tres tiers tienen sedes de referencia, pero no hay una tabla que asigne las 14 sedes de la gira a su tier, aforo confirmado y proveedor técnico adjudicado.</span><span class="src">Dossier · 01 · incompleto</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ SHOW ============ -->
+<section>
+  <div class="sec-head">
+    <h2>El show del bloque musical</h2>
+    <span class="sec-count">6 etapas · 15–17 min</span>
+  </div>
+  <p class="sec-note">
+    &laquo;El Camino del Despertar&raquo; es la activación musical de después del almuerzo, escrita etapa por etapa
+    en la Mesa de Control. Es la parte del evento con más cues y la que menos cobertura contractual tiene:
+    vive en el guion, no en los riders.
+  </p>
+
+  <div class="list">
+    <div class="item s-ok"><input type="checkbox" id="w1"><label class="txt" for="w1"><b>Guion completo escrito y publicado</b><span>Seis etapas con emoción, track, cues de luz, contenido de pantalla y efectos: La Espera, El Llamado, La Explosión, La Entrega, El Vacío y el Pulso, La Consagración.</span><span class="src">Mesa de Control · cmc2026.com/show</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="w2"><label class="txt" for="w2"><b>Aperturas de sábado y domingo</b><span>El Despertar y El Origen, 10 planos cada una, ambas terminan en el mismo frame blanco que entrega el drop.</span><span class="src">Mesa de Control</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-ok"><input type="checkbox" id="w3"><label class="txt" for="w3"><b>Secuencia del corazón para el cierre</b><span>Cinco tiempos sobre RUNAWAY: corazón acorazado, venas, latido acelerando sincronizado al kick, ruptura de la armadura y loop del corazón desnudo con primer frame igual al último.</span><span class="src">Mesa de Control</span></label><span class="st st-ok">Definido</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="w4"><label class="txt" for="w4"><b>Timecodes de KAI, THE HUM y RUNAWAY</b><span>Build, drop y duración exacta de cada track. Sin eso no se pueden programar los cues ni cortar el contenido a medida.</span><span class="src">Mesa de Control · pendiente declarado</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="w5"><label class="txt" for="w5"><b>Recorrido de entrada de Diego</b><span>Pasillo central, fondo o lateral de escenario. Define la trayectoria del seguidor en la etapa 5.</span><span class="src">Mesa de Control · pendiente declarado</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="w6"><label class="txt" for="w6"><b>Duración de los blackouts del show</b><span>El show pide 4 segundos en la etapa 0 y 6 en la etapa 4. La regla transversal del dossier dice 2 a 3 segundos como máximo entre bloques. Son dos números distintos en dos documentos que van al mismo operador.</span><span class="src">Mesa de Control vs. Dossier · 04</span></label><span class="st st-gap">Falta</span></div>
+
+    <div class="item s-gap"><input type="checkbox" id="w7"><label class="txt" for="w7"><b>Las 6 etapas del show no están en la cue list del rider</b><span>La cue list de iluminación llega hasta &laquo;15:10 Activación DJ&raquo; y ahí se corta. Las seis etapas, con su arsenal de strobe, blinders, láser y efectos, no bajan al documento que firma el proveedor.</span><span class="src">Rider de iluminación · 05</span></label><span class="st st-gap">Falta</span></div>
+  </div>
+</section>
+
+<!-- ============ CRONOGRAMA ============ -->
+<section class="cron-sec">
+  <div class="sec-head">
+    <h2>Cronograma de montaje</h2>
+    <span class="sec-count">Jueves a domingo</span>
+  </div>
+  <p class="sec-note">
+    La columna vertebral operativa. El hito que ordena todo lo demás es el viernes 12:00: el 100% del
+    equipamiento instalado y probado internamente por el proveedor, antes de que llegue nadie de CMC.
+  </p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Día</th><th>Hora</th><th>Sonido</th><th>Iluminación</th><th>Visuales</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="5">Jueves — montaje día 1</td></tr>
+        <tr><td>Jueves</td><td class="h">08:00</td><td>Descarga y rigging</td><td>Truss y motores</td><td>Estructura y paneles LED</td></tr>
+        <tr><td>Jueves</td><td class="h">14:00</td><td>PA colgado, subs en posición</td><td>Luminarias montadas, DMX tendido</td><td>Pantallas encendidas, mapeo cargado</td></tr>
+        <tr><td>Jueves</td><td class="h">20:00</td><td><strong>Sistema energizado con señal</strong></td><td><strong>Trusses en altura definitiva</strong></td><td><strong>Mapeo real confirmado por escrito</strong></td></tr>
+        <tr class="grp"><td colspan="5">Viernes — montaje día 2</td></tr>
+        <tr><td>Viernes</td><td class="h">09:00</td><td>Cableado y pisacables listos</td><td>Patch cargado, prueba aparato por aparato</td><td>Contenido en principal y respaldo</td></tr>
+        <tr><td>Viernes</td><td class="h">11:00</td><td>Escaneo de RF y coordinación</td><td>Apuntado, filtros y prueba de encandilamiento</td><td>Prueba de cada pieza en pantalla real</td></tr>
+        <tr><td>Viernes</td><td class="h">12:00</td><td colspan="3"><strong>100% del equipamiento instalado y probado internamente por el proveedor</strong></td></tr>
+        <tr><td>Viernes</td><td class="h">14:00</td><td>Ajuste fino de sistema</td><td>Programación de las 6 escenas</td><td>Teleprompters espejados con guion</td></tr>
+        <tr><td>Viernes</td><td class="h">15:00</td><td colspan="3"><strong>Validación con producción CMC — máximo 30 minutos por área</strong></td></tr>
+        <tr><td>Viernes</td><td class="h">15:30</td><td colspan="3">Recorrido de aceptación P1–P9 y firma de actas</td></tr>
+        <tr><td>Viernes</td><td class="h">16:00</td><td colspan="3"><strong>Ensayo de opening completo</strong>: timer, blackout, voz en pasillo, seguidor, humo, video y entrada de speaker</td></tr>
+        <tr><td>Viernes</td><td class="h">18:00</td><td colspan="3">Sala liberada y asegurada</td></tr>
+        <tr class="grp"><td colspan="5">Sábado y domingo — evento</td></tr>
+        <tr><td>Sáb/Dom</td><td class="h">07:30</td><td colspan="3">Encendido general, chequeo de todos los sistemas y carga de show files</td></tr>
+        <tr><td>Sáb/Dom</td><td class="h">09:00</td><td colspan="3">Sistemas listos · operadores en posición · escena 1 de ambiente activa</td></tr>
+        <tr><td>Sáb/Dom</td><td class="h">09:30</td><td colspan="3"><strong>Apertura de puertas</strong>: primero Platino, después VIP, después General</td></tr>
+        <tr><td>Sáb/Dom</td><td class="h">10:30</td><td colspan="3">Inicio del show</td></tr>
+        <tr><td>Domingo</td><td class="h">13:30</td><td colspan="3"><strong>Barras de Hierro</strong>: reconfiguración de sala, escena fucsia, piso iluminado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ BRECHAS ============ -->
+<section>
+  <div class="sec-head">
+    <h2>El desglose que falta</h2>
+    <span class="sec-count">16 brechas abiertas</span>
+  </div>
+  <p class="sec-note">
+    Cada brecha tiene un identificador para poder nombrarla en reunión. Están ordenadas por lo que
+    bloquea: primero lo que impide contratar o mandar un pedido, después lo que se puede resolver sede
+    por sede. Las marcadas <b>bloqueante</b> frenan una decisión que ya está en curso.
+  </p>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-01</span><b>No existe un rider de efectos especiales</b><span class="tag block">Bloqueante</span><span class="tag">Efectos</span></div>
+    <p>CO2, chispa fría, láser y humo denso están escritos en la Mesa de Control con condiciones de seguridad, pero la Mesa de Control es un guion de show, no un documento contractual, y no se manda a los proveedores. Resultado: el show pide efectos que nadie cotizó, nadie va a traer y ningún venue autorizó.</p>
+    <p class="ask"><b>Qué hace falta:</b> escribir el rider de efectos con el mismo formato que los otros tres — alcance, equipo mínimo, condiciones de seguridad, autorizaciones por sede, criterios de aceptación y acta — y sumarlo al dossier como anexo D.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-02</span><b>El códec de entrega de visuales se contradice entre documentos</b><span class="tag block">Bloqueante</span><span class="tag">Visuales</span></div>
+    <p>El briefing que se le manda al artista de contenido prohíbe H.264 y exige ProRes o HAP, con el argumento correcto: el contenido es casi todo oscuro y con degradés, y el H.264 produce banding visible en los negros sobre LED. El rider de visuales, en cambio, acepta H.264 a alto bitrate o HAP.</p>
+    <p class="ask"><b>Qué hace falta:</b> decidir uno y alinear los dos documentos antes de contratar al artista. Si se mantiene ProRes/HAP, el rider de visuales tiene que exigirle al proveedor un media server capaz de reproducirlo, lo que cambia el requerimiento de máquina.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-03</span><b>Los blackouts del show duran más de lo que permite la regla transversal</b><span class="tag block">Bloqueante</span><span class="tag">Show</span></div>
+    <p>La regla 2 del dossier fija blackouts de 2 a 3 segundos como máximo entre bloques. El show pide 4 segundos en La Espera y 6 en El Vacío, y esos silencios largos son justamente el efecto dramático de esas dos etapas. El propio guion lo tiene marcado como decisión pendiente de aprobación.</p>
+    <p class="ask"><b>Qué hace falta:</b> aprobar la excepción con dirección y dejarla escrita en el rider de iluminación como cue nombrado, para que el operador no la corte por seguir la regla general.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-04</span><b>Faltan los timecodes de las canciones del show</b><span class="tag block">Bloqueante</span><span class="tag">Show</span></div>
+    <p>Build, drop y duración exacta de KAI, THE HUM y RUNAWAY. Sin eso no se programan los cues, no se cortan los clips a medida y el ensayo del viernes se vuelve tanteo.</p>
+    <p class="ask"><b>Qué hace falta:</b> que el DJ entregue la planilla de timecodes de las tres pistas y se incorpore a la cue list.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-05</span><b>Las 6 etapas del show no bajan al rider que firma el proveedor</b><span class="tag block">Bloqueante</span><span class="tag">Iluminación</span></div>
+    <p>La cue list del rider de iluminación cubre el rundown general y se corta en la activación DJ de las 15:10. Toda la operación del bloque musical — strobe, blinders, láser, arsenal completo en el pico, seguidor en la entrada de Diego — queda fuera del documento contractual.</p>
+    <p class="ask"><b>Qué hace falta:</b> extender la cue list con las seis etapas y sus condiciones, o adjuntar la Mesa de Control como anexo del rider con carácter contractual.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-06</span><b>No hay artista de contenido visual contratado</b><span class="tag block">Bloqueante</span><span class="tag">Visuales</span></div>
+    <p>El briefing está escrito y publicado, con el esquema de contratación definido: una pieza paga de prueba y, si funciona, el resto del paquete. Pero no hay artista adjudicado ni fecha de entrega comprometida, y el rider exige el contenido en manos del proveedor 7 días antes de cada montaje.</p>
+    <p class="ask"><b>Qué hace falta:</b> cerrar el artista y fijar el calendario de entregas contra las fechas de montaje de las próximas sedes, no contra la gira entera.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-07</span><b>No hay cálculo de consumo eléctrico por área</b><span class="tag">Energía</span></div>
+    <p>Exigimos acometida dedicada por área, tablero propio, tierra en estrella y UPS, pero no decimos cuántos kVA necesita sonido, cuántos iluminación y cuántos las pantallas. Es la primera pregunta de cualquier proveedor de generación y hoy no la contestamos por escrito.</p>
+    <p class="ask"><b>Qué hace falta:</b> calcular el consumo por área para cada tier y agregarlo a los tres riders, con el umbral a partir del cual se exige grupo electrógeno.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-08</span><b>No hay documento de seguridad y emergencia</b><span class="tag">Transversal</span></div>
+    <p>Aparecen menciones sueltas — paramédicos en Barras de Hierro, seis salidas despejadas, distancia mínima de la chispa fría — pero no hay un documento que fije paramédicos, extintores, brigada, plan de evacuación, seguros y responsabilidad civil por sede. Barras de Hierro es una dinámica de contacto físico con riesgo de lesión.</p>
+    <p class="ask"><b>Qué hace falta:</b> un anexo de seguridad del dossier, con checklist de aceptación propio y firma del venue.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-09</span><b>No se pide sistema de intercom</b><span class="tag">Sonido</span></div>
+    <p>El show corre por cues que se disparan entre mesa técnica, escenario, seguidores, cabina DJ y backstage. Lo único que hay escrito es el canal 19 de talkback de producción. No hay requerimiento de estaciones de intercom, cantidad de cinturones, canales ni walkies.</p>
+    <p class="ask"><b>Qué hace falta:</b> definir el esquema de comunicación del show y agregarlo al rider de sonido, con cantidad de puestos por tier.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-10</span><b>Sólo existe plano de sala para La Rural</b><span class="tag">Sala</span></div>
+    <p>El plano con los 9 puntos de medición, el plot de luz y el flujo de video están hechos para el Pabellón Azul, tier Grande. Las otras 13 sedes replican &laquo;la misma lógica escalada al aforo&raquo;. Sin plano propio no hay P1–P9 concretos y el acta de cobertura no se puede completar de forma verificable.</p>
+    <p class="ask"><b>Qué hace falta:</b> generar el plano y los puntos de medición de cada sede a medida que se confirma el venue, aunque sea una versión simplificada.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-11</span><b>Falta la tabla de sede → tier → aforo → proveedor</b><span class="tag">Gira</span></div>
+    <p>Los tres tiers tienen sedes de referencia, pero no hay una tabla única con las 14 sedes asignadas a su tier, con aforo confirmado, venue cerrado y proveedor técnico adjudicado. Es la tabla que permite saber, de un vistazo, cuánta producción falta contratar y para cuándo.</p>
+    <p class="ask"><b>Qué hace falta:</b> armarla y usarla como índice de control de la gira.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-12</span><b>Barras de Hierro sin especificación de luz</b><span class="tag">Iluminación</span></div>
+    <p>El fucsia es la única condición cerrada. Queda a definir con dirección y técnica la intensidad, si lleva movimiento o queda fijo, y si se refuerza con haz durante el reingreso — con la condición de seguridad de que el piso quede visible mientras se arman las islas.</p>
+    <p class="ask"><b>Qué hace falta:</b> definirlo con Diego antes del próximo montaje y cerrarlo en la escena 6.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-13</span><b>El fucsia del Círculo del Perdón contradice la paleta de la escena 3</b><span class="tag">Iluminación</span></div>
+    <p>La cue list manda escena 3 · Meditación a las 19:55 para el Círculo del Perdón, con la condición &laquo;fucsia tenue según dirección&raquo;. Pero la escena 3 tiene paleta azul oscuro, morado y verde esmeralda. El operador recibe dos indicaciones incompatibles para el mismo momento.</p>
+    <p class="ask"><b>Qué hace falta:</b> decidir si el Círculo del Perdón es una variante nombrada de la escena 3 o una escena propia, y escribirlo así.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-14</span><b>Frame rate del contenido sin unificar</b><span class="tag">Visuales</span></div>
+    <p>24 fps en el briefing, referencia a 30 fps en el rider, 30 fps en el circuito cerrado. Mezclar frame rates en un mismo media server produce saltos visibles en los loops.</p>
+    <p class="ask"><b>Qué hace falta:</b> fijar el frame rate de entrega en un solo número y corregir el briefing y el rider.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-15</span><b>Infraestructura de sala definida sólo para Buenos Aires</b><span class="tag">Sala</span></div>
+    <p>El pedido de oficina de producción para 100 personas, sector VIP con living, camarín con espejo maquillador, 5.000 sillas y mantelería negra existe como pedido de presupuesto para La Rural. No hay equivalente genérico que se pueda mandar a las otras sedes escalado por aforo.</p>
+    <p class="ask"><b>Qué hace falta:</b> convertir el pedido de La Rural en un rider de infraestructura y mobiliario con cantidades por tier.</p>
+  </div>
+
+  <div class="gap">
+    <div class="gap-head"><span class="gid">G-16</span><b>Contenido por país sin inventario ni responsable</b><span class="tag">Visuales</span></div>
+    <p>La cue list incluye a las 10:50 el video de himno y meta por país, y el rider menciona videos de intro de speaker y de meta por país entre lo que viaja con la gira. No hay lista de qué pieza corresponde a cada sede, quién la produce ni contra qué fecha, aunque el plazo de entrega al proveedor sea de 7 días antes de cada montaje.</p>
+    <p class="ask"><b>Qué hace falta:</b> inventario de piezas por sede con responsable y fecha, atado al calendario de montajes.</p>
+  </div>
+</section>
+
+<!-- ============ USO ============ -->
+<section>
+  <div class="sec-head">
+    <h2>Qué se manda a quién</h2>
+    <span class="sec-count">Documentos de la preproducción</span>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Documento</th><th>Destinatario</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dossier de preproducción</strong></td><td>Productor técnico general de la sede · Director técnico · Venue</td><td>v1.0 — listo</td></tr>
+        <tr><td><strong>Rider de sonido</strong></td><td>Proveedor de audio</td><td>v2.0 — listo</td></tr>
+        <tr><td><strong>Rider de iluminación</strong></td><td>Proveedor de iluminación</td><td>v2.0 — listo</td></tr>
+        <tr><td><strong>Rider de visuales</strong></td><td>Proveedor de video y pantallas</td><td>v1.0 — revisar G-02 y G-14</td></tr>
+        <tr><td><strong>Briefing de contenido visual</strong></td><td>Artista de contenido para pantallas LED</td><td>Publicado — sin adjudicar</td></tr>
+        <tr><td><strong>Mesa de Control del show</strong></td><td>Mesa técnica · DJ · dirección</td><td>Guion — no contractual</td></tr>
+        <tr><td>Rider de efectos especiales</td><td>Proveedor de FX</td><td>No existe — G-01</td></tr>
+        <tr><td>Anexo de seguridad y emergencia</td><td>Venue · seguridad · producción</td><td>No existe — G-08</td></tr>
+        <tr><td>Rider de infraestructura y mobiliario</td><td>Proveedor de sala y mobiliario</td><td>No existe — G-15</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note crit">
+    <p><b>El rider forma parte de la orden de compra.</b> Cuando un solo proveedor cubre las tres áreas se manda el dossier completo; cuando hay proveedores separados, cada uno recibe su rider. En los dos casos el rider se adjunta y se firma junto con la cotización, y toda sustitución de marca, modelo o cantidad requiere aprobación escrita previa de la Coordinación de Producción.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Equipo CMC 2026 · Coordinación de Producción</span>
+  <span>Fuentes: dossier de preproducción, riders de sonido, iluminación y visuales, briefing de contenido visual, Mesa de Control del show, informe de descargo de Panamá y pedidos de presupuesto de La Rural</span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = "cmc2026-checklist-v1";
+  var boxes = document.querySelectorAll('.item input[type=checkbox]');
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return;
+      var done = JSON.parse(raw);
+      if(!done || typeof done !== "object") return;
+      boxes.forEach(function(b){ if(done[b.id]) b.checked = true; });
+    }catch(e){/* almacenamiento no disponible */}
+  }
+
+  function save(){
+    try{
+      var done = {};
+      boxes.forEach(function(b){ if(b.checked) done[b.id] = 1; });
+      localStorage.setItem(KEY, JSON.stringify(done));
+    }catch(e){/* almacenamiento no disponible */}
+  }
+
+  load();
+  boxes.forEach(function(b){ b.addEventListener("change", save); });
+
+  var filter = document.getElementById("filter");
+  filter.addEventListener("click", function(){
+    var on = filter.getAttribute("aria-pressed") === "true";
+    filter.setAttribute("aria-pressed", String(!on));
+    document.body.classList.toggle("only-gaps", !on);
+    filter.textContent = !on ? "Ver todo el checklist" : "Ver sólo lo que falta";
+  });
+
+  document.getElementById("print").addEventListener("click", function(){ window.print(); });
+
+  document.getElementById("reset").addEventListener("click", function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    save();
+  });
+})();
+</script>
