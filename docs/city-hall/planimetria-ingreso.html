@@ -1,0 +1,542 @@
+<title>Planimetría de Ingreso City Hall</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#EAEAE4; --surface:#FFFFFF; --surface-2:#F4F4EE; --sunken:#DEDED6;
+  --ink:#191B1A; --ink-2:#5A5F5D; --ink-3:#848A87;
+  --line:#CFCFC6; --line-strong:#A8A9A0;
+  --accent:#E0A800; --accent-ink:#7A5A00; --accent-dim:#D9C88A;
+  --vip:#2F6273; --vip-soft:#DCE9ED;
+  --alert:#A83E24; --alert-soft:#F4E2DC;
+  --ok:#3F7145;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141618; --surface:#1D2023; --surface-2:#23272A; --sunken:#101214;
+    --ink:#EBEDE8; --ink-2:#A2A7A4; --ink-3:#7C8280;
+    --line:#31363A; --line-strong:#4A5054;
+    --accent:#F0C044; --accent-ink:#F0C044; --accent-dim:#5A4E28;
+    --vip:#86B7C7; --vip-soft:#1D3038;
+    --alert:#E28565; --alert-soft:#3A241D;
+    --ok:#7EB283;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141618; --surface:#1D2023; --surface-2:#23272A; --sunken:#101214;
+  --ink:#EBEDE8; --ink-2:#A2A7A4; --ink-3:#7C8280;
+  --line:#31363A; --line-strong:#4A5054;
+  --accent:#F0C044; --accent-ink:#F0C044; --accent-dim:#5A4E28;
+  --vip:#86B7C7; --vip-soft:#1D3038;
+  --alert:#E28565; --alert-soft:#3A241D;
+  --ok:#7EB283;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px 96px}
+h1,h2,h3,th,.num,.eyebrow{font-family:"Barlow Condensed","IBM Plex Sans",sans-serif}
+h1{font-size:clamp(2.6rem,7vw,4.4rem); font-weight:700; line-height:.94; letter-spacing:-.01em; text-transform:uppercase; margin:.1em 0 .2em; text-wrap:balance}
+h2{font-size:clamp(1.6rem,3.4vw,2.1rem); font-weight:700; text-transform:uppercase; letter-spacing:.01em; line-height:1.05; margin:0 0 .35em}
+h3{font-size:1.22rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; margin:2rem 0 .5rem}
+p{margin:0 0 1rem; max-width:66ch}
+a{color:var(--accent-ink)}
+.eyebrow{
+  font-size:.86rem; font-weight:600; text-transform:uppercase; letter-spacing:.18em;
+  color:var(--accent-ink); margin:0;
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+/* header */
+header.masthead{padding:64px 0 32px; border-bottom:3px solid var(--ink)}
+.lede{font-size:1.12rem; color:var(--ink-2); max-width:60ch}
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:32px}
+.fact{background:var(--surface); padding:14px 16px}
+.fact dt{font-family:"IBM Plex Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-3); margin:0 0 4px}
+.fact dd{margin:0; font-family:"Barlow Condensed",sans-serif; font-size:1.5rem; font-weight:600; line-height:1.1}
+.fact dd small{display:block; font-family:"IBM Plex Sans",sans-serif; font-size:.76rem; font-weight:400; color:var(--ink-2); letter-spacing:0; line-height:1.35; margin-top:2px}
+
+section{margin-top:64px}
+figure{margin:0; background:var(--surface); border:1px solid var(--line); padding:20px}
+figure .scroll{overflow-x:auto}
+figure svg{display:block; width:100%; min-width:560px; height:auto}
+figcaption{margin-top:14px; font-size:.86rem; color:var(--ink-2); border-top:1px solid var(--line); padding-top:10px; max-width:none}
+
+/* route rail */
+.route{display:flex; flex-direction:column; gap:52px; margin-top:36px}
+.stop{display:grid; grid-template-columns:56px 1fr; gap:26px}
+.stop__marker{align-self:stretch; position:relative}
+.stop__marker .num{display:block; font-size:2.1rem; font-weight:700; line-height:1; color:var(--accent-ink); border-bottom:3px solid var(--accent); padding-bottom:6px}
+.stop__marker::after{content:""; position:absolute; left:14px; top:56px; bottom:-52px; border-left:2px dashed var(--accent-dim)}
+.route .stop:last-child .stop__marker::after{display:none}
+.branch{display:grid; grid-template-columns:56px 1fr; gap:26px; margin-top:52px}
+.branch__marker .num{display:block; font-family:"IBM Plex Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.1em; color:var(--vip); border-bottom:3px solid var(--vip); padding-bottom:6px}
+
+/* tables */
+.tablebox{overflow-x:auto; border:1px solid var(--line); background:var(--surface); margin:1.25rem 0}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:.92rem}
+th{
+  text-align:left; font-size:.86rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+  padding:10px 14px; background:var(--surface-2); border-bottom:2px solid var(--line-strong); white-space:nowrap;
+}
+td{padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.n{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+tfoot td{background:var(--surface-2); font-weight:600; border-top:2px solid var(--line-strong)}
+
+/* pills + callouts */
+.pill{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.66rem; text-transform:uppercase; letter-spacing:.1em; padding:3px 8px; border:1px solid currentColor; white-space:nowrap}
+.pill.gen{color:var(--accent-ink)}
+.pill.vip{color:var(--vip)}
+.pill.risk{color:var(--alert)}
+.callout{border-left:4px solid var(--alert); background:var(--alert-soft); padding:14px 18px; margin:1.25rem 0}
+.callout.rule{border-left-color:var(--accent); background:var(--surface-2)}
+.callout p{margin:0; max-width:none}
+.callout p + p{margin-top:.6rem}
+.callout strong{font-weight:600}
+.k{font-family:"IBM Plex Mono",monospace; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-3); display:block; margin-bottom:4px}
+
+ul.checks{list-style:none; padding:0; margin:1rem 0; display:grid; gap:2px}
+ul.checks li{background:var(--surface); border:1px solid var(--line); padding:9px 14px 9px 38px; position:relative; font-size:.93rem}
+ul.checks li::before{content:""; position:absolute; left:14px; top:14px; width:11px; height:11px; border:2px solid var(--line-strong)}
+ul.open{list-style:none; padding:0; margin:1rem 0; display:grid; gap:10px}
+ul.open li{padding-left:24px; position:relative; max-width:66ch}
+ul.open li::before{content:"?"; position:absolute; left:0; top:0; font-family:"Barlow Condensed",sans-serif; font-weight:700; color:var(--accent-ink)}
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px}
+.card{background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--accent); padding:18px}
+.card.v{border-top-color:var(--vip)}
+.card h3{margin-top:0}
+.card p:last-child{margin-bottom:0}
+footer{margin-top:80px; padding-top:20px; border-top:1px solid var(--line); font-size:.84rem; color:var(--ink-3)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+@media (max-width:640px){
+  .stop,.branch{grid-template-columns:40px 1fr; gap:16px}
+  .stop__marker::after{left:8px}
+}
+</style>
+<style>
+svg{font-family:"IBM Plex Sans",sans-serif}
+svg text{fill:currentColor}
+.lbl{font-size:12px; font-weight:600; letter-spacing:.04em}
+.sub{font-size:10.5px; fill:var(--ink-2)}
+.tiny{font-size:9.5px; fill:var(--ink-3); letter-spacing:.06em}
+.f-a{fill:var(--accent-ink)} .f-v{fill:var(--vip)} .f-r{fill:var(--alert)}
+.box{fill:var(--surface-2); stroke:var(--line-strong); stroke-width:1.5}
+.box-2{fill:var(--surface); stroke:var(--line); stroke-width:1.5}
+.band{fill:var(--sunken); stroke:none}
+.flow{stroke:currentColor; fill:none; stroke-width:2}
+.divert{stroke:var(--alert); fill:none; stroke-width:1.6; stroke-dasharray:6 5}
+.dot{fill:var(--surface); stroke:currentColor; stroke-width:2}
+.dot-a{fill:var(--surface); stroke:var(--accent-ink); stroke-width:2}
+.glyph{font-size:11px; font-weight:600; text-anchor:middle}
+.dim{stroke:var(--ink-3); stroke-width:1; fill:none}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">City Hall · Sábado y domingo</p>
+  <h1>Planimetría<br>de ingreso</h1>
+  <p class="lede">Circuito de acreditación en tres capas: escaneo y precinto sobre la rampa, bifurcación General / VIP&nbsp;+&nbsp;Platinum en la explanada, y pulmón de fila antes de la puerta de sala. El sábado es el día crítico: entra el 100% de la acreditación.</p>
+  <dl class="facts">
+    <div class="fact"><dt>Filtros</dt><dd>3<small>Rampa · Explanada · Puerta</small></dd></div>
+    <div class="fact"><dt>Carriles en F1</dt><dd>3<small>4 personas por carril</small></dd></div>
+    <div class="fact"><dt>Dotación estimada</dt><dd>33<small>Sin puerta de sala ni seguridad</small></dd></div>
+    <div class="fact"><dt>Ritmo objetivo</dt><dd>1.100<small>Personas/hora en F1</small></dd></div>
+  </dl>
+</header>
+
+<section>
+  <h2>El recorrido completo</h2>
+  <p>Vista en planta, de la calle hacia la sala. La línea llena es el flujo del público; la punteada es la derivación por incidencia, que siempre sale del carril y vuelve por el costado.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 1000 470" role="img" aria-label="Plano del recorrido de ingreso: cola exterior, filtro 1 sobre la rampa con tres carriles de cuatro personas, bifurcación por color de precinto, filtro 2 en la explanada con lado General y lado VIP más Platinum, pulmón de fila y puerta de sala. Las mesas de incidencias de General quedan fuera del carril sobre las piedritas y la de VIP en el interior.">
+      <defs>
+        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+        <marker id="arwr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-r"/></marker>
+      </defs>
+
+      <!-- cola exterior -->
+      <rect class="box-2" x="14" y="70" width="92" height="120" rx="3"/>
+      <text class="lbl" x="60" y="122" text-anchor="middle">COLA</text>
+      <text class="lbl" x="60" y="138" text-anchor="middle">EXTERIOR</text>
+      <text class="sub" x="60" y="158" text-anchor="middle">calle</text>
+      <line class="flow" x1="110" y1="130" x2="132" y2="130" marker-end="url(#arw)"/>
+
+      <!-- filtro 1 -->
+      <rect class="box" x="138" y="36" width="214" height="200" rx="3"/>
+      <text class="lbl f-a" x="148" y="56">FILTRO 1 · RAMPA</text>
+      <text class="tiny" x="148" y="70">ESCANEO + PRECINTO</text>
+
+      <rect class="band" x="196" y="86" width="146" height="20"/>
+      <rect class="band" x="196" y="142" width="146" height="20"/>
+      <rect class="band" x="196" y="198" width="146" height="20"/>
+      <line class="flow" x1="198" y1="96" x2="340" y2="96" marker-end="url(#arw)"/>
+      <line class="flow" x1="198" y1="152" x2="340" y2="152" marker-end="url(#arw)"/>
+      <line class="flow" x1="198" y1="208" x2="340" y2="208" marker-end="url(#arw)"/>
+      <text class="tiny" x="148" y="100">F1.1</text>
+      <text class="tiny" x="148" y="156">F1.2</text>
+      <text class="tiny" x="148" y="212">F1.3</text>
+
+      <circle class="dot" cx="228" cy="81" r="8"/><text class="glyph" x="228" y="85">E</text>
+      <circle class="dot-a" cx="228" cy="111" r="8"/><text class="glyph f-a" x="228" y="115">P</text>
+      <circle class="dot-a" cx="300" cy="81" r="8"/><text class="glyph f-a" x="300" y="85">P</text>
+      <circle class="dot" cx="300" cy="111" r="8"/><text class="glyph" x="300" y="115">E</text>
+
+      <circle class="dot" cx="228" cy="137" r="8"/><text class="glyph" x="228" y="141">E</text>
+      <circle class="dot-a" cx="228" cy="167" r="8"/><text class="glyph f-a" x="228" y="171">P</text>
+      <circle class="dot-a" cx="300" cy="137" r="8"/><text class="glyph f-a" x="300" y="141">P</text>
+      <circle class="dot" cx="300" cy="167" r="8"/><text class="glyph" x="300" y="171">E</text>
+
+      <circle class="dot" cx="228" cy="193" r="8"/><text class="glyph" x="228" y="197">E</text>
+      <circle class="dot-a" cx="228" cy="223" r="8"/><text class="glyph f-a" x="228" y="227">P</text>
+      <circle class="dot-a" cx="300" cy="193" r="8"/><text class="glyph f-a" x="300" y="197">P</text>
+      <circle class="dot" cx="300" cy="223" r="8"/><text class="glyph" x="300" y="227">E</text>
+
+      <!-- bifurcacion -->
+      <circle class="dot" cx="386" cy="152" r="9"/><text class="glyph" x="386" y="156">S</text>
+      <line class="flow" x1="352" y1="152" x2="374" y2="152"/>
+      <polyline class="flow" points="396,148 412,148 412,100 434,100" marker-end="url(#arw)"/>
+      <polyline class="flow" points="396,156 412,156 412,188 434,188" marker-end="url(#arw)"/>
+      <text class="tiny" x="386" y="262" text-anchor="middle">BIFURCACIÓN · 2 PAX</text>
+      <text class="sub" x="386" y="276" text-anchor="middle">derivan por color de precinto</text>
+
+      <!-- filtro 2 -->
+      <rect class="box" x="440" y="36" width="250" height="200" rx="3"/>
+      <text class="lbl" x="450" y="56">FILTRO 2 · EXPLANADA</text>
+      <text class="tiny" x="450" y="70">TODO VALLADO</text>
+      <rect class="box-2" x="452" y="76" width="226" height="52" rx="3"/>
+      <text class="lbl f-a" x="464" y="98">GENERAL</text>
+      <text class="sub" x="464" y="115">control de precinto · 4 pax</text>
+      <rect class="box-2" x="452" y="162" width="226" height="52" rx="3"/>
+      <text class="lbl f-v" x="464" y="184">VIP + PLATINUM</text>
+      <text class="sub" x="464" y="201">control de precinto · 3 pax</text>
+
+      <!-- pulmon -->
+      <line class="flow" x1="690" y1="100" x2="712" y2="100" marker-end="url(#arw)"/>
+      <line class="flow" x1="690" y1="188" x2="712" y2="188" marker-end="url(#arw)"/>
+      <rect class="box" x="716" y="60" width="112" height="176" rx="3"/>
+      <text class="lbl" x="772" y="80" text-anchor="middle">PULMÓN</text>
+      <text class="tiny" x="772" y="94" text-anchor="middle">FILA DE ESPERA</text>
+      <line class="dim" x1="716" y1="148" x2="828" y2="148" stroke-dasharray="5 4"/>
+      <text class="sub f-a" x="772" y="126" text-anchor="middle">general</text>
+      <text class="sub f-v" x="772" y="176" text-anchor="middle">vip + platinum</text>
+      <text class="tiny" x="772" y="222" text-anchor="middle">2 ORIENTADORES</text>
+
+      <!-- puerta -->
+      <line class="flow" x1="828" y1="100" x2="850" y2="100" marker-end="url(#arw)"/>
+      <line class="flow" x1="828" y1="188" x2="850" y2="188" marker-end="url(#arw)"/>
+      <rect class="box" x="854" y="60" width="130" height="176" rx="3"/>
+      <text class="lbl" x="919" y="126" text-anchor="middle">PUERTA</text>
+      <text class="lbl" x="919" y="142" text-anchor="middle">DE SALA</text>
+      <text class="tiny" x="919" y="162" text-anchor="middle">CONTROL FINAL</text>
+
+      <!-- derivacion incidencias general -->
+      <polyline class="divert" points="245,240 245,336" marker-end="url(#arwr)"/>
+      <text class="tiny f-r" x="253" y="290">NO ESCANEA</text>
+      <rect class="box-2" x="140" y="340" width="312" height="92" rx="3"/>
+      <text class="lbl f-r" x="154" y="366">MESAS DE INCIDENCIAS · GENERAL</text>
+      <text class="sub" x="154" y="386">2 gazebos sobre las piedritas · fuera del carril</text>
+      <text class="sub" x="154" y="404">4 operadores + 1 coordinador</text>
+      <text class="tiny" x="154" y="422">CON FILA PROPIA VALLADA</text>
+      <polyline class="divert" points="452,386 560,386 560,240" marker-end="url(#arwr)"/>
+      <text class="tiny f-r" x="568" y="300">REINGRESO</text>
+      <text class="tiny f-r" x="568" y="314">LATERAL A F2</text>
+
+      <!-- incidencias vip -->
+      <polyline class="divert" points="760,240 760,386 782,386" marker-end="url(#arwr)"/>
+      <rect class="box-2" x="786" y="340" width="198" height="92" rx="3"/>
+      <text class="lbl f-v" x="798" y="366">INCIDENCIAS · VIP</text>
+      <text class="sub" x="798" y="386">interior, pasillo de fachada</text>
+      <text class="sub" x="798" y="404">2 operadores</text>
+
+      <!-- leyenda -->
+      <line class="flow" x1="466" y1="440" x2="496" y2="440" marker-end="url(#arw)"/>
+      <text class="tiny" x="504" y="444">FLUJO DEL PÚBLICO</text>
+      <line class="divert" x1="466" y1="458" x2="496" y2="458" marker-end="url(#arwr)"/>
+      <text class="tiny" x="504" y="462">DERIVACIÓN POR INCIDENCIA</text>
+      <text class="tiny" x="154" y="452">E = ESCANEA · P = COLOCA PRECINTO · S = SPLITTER</text>
+    </svg>
+    </div>
+    <figcaption>Recorrido de ingreso del sábado. Las 12 posiciones del Filtro 1 procesan en paralelo; toda incidencia sale del carril hacia las piedritas y vuelve por el costado, nunca contra la corriente.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Punto por punto</h2>
+
+  <div class="route">
+
+    <article class="stop">
+      <div class="stop__marker"><span class="num">01</span></div>
+      <div>
+        <h2>Filtro 1 · Rampa</h2>
+        <p>Acreditación propiamente dicha: se escanea el ticket y se coloca el precinto. Tres carriles en paralelo, cuatro personas por carril, en dos duplas espejadas. El público camina por el medio.</p>
+
+        <figure>
+          <div class="scroll">
+          <svg viewBox="0 0 760 300" role="img" aria-label="Detalle de un carril del filtro 1: dos duplas escalonadas y espejadas. En la primera, el escáner está de un lado del pasillo y el precintador del otro; en la segunda, invertidos. El público circula entre ambos.">
+            <defs>
+              <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+              <marker id="arw2s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-3)"/></marker>
+            </defs>
+
+            <rect class="band" x="70" y="128" width="620" height="64"/>
+            <line class="flow" x1="80" y1="146" x2="676" y2="146" marker-end="url(#arw2)"/>
+            <text class="tiny" x="86" y="120">SENTIDO DE CIRCULACIÓN</text>
+
+            <line class="dim" x1="96" y1="128" x2="96" y2="192" marker-start="url(#arw2s)" marker-end="url(#arw2s)"/>
+            <text class="tiny" transform="rotate(-90 82 160)" x="82" y="160" text-anchor="middle">PASO 1,0–1,2 M</text>
+
+            <line class="dim" x1="250" y1="178" x2="470" y2="178" marker-start="url(#arw2s)" marker-end="url(#arw2s)"/>
+            <text class="tiny" x="360" y="171" text-anchor="middle">≈ 2,5 M ENTRE DUPLAS</text>
+
+            <text class="tiny" x="250" y="26" text-anchor="middle">DUPLA A</text>
+            <circle class="dot" cx="250" cy="86" r="22"/><text class="glyph" x="250" y="92" font-size="15">E</text>
+            <text class="lbl" x="250" y="44" text-anchor="middle">ESCÁNER</text>
+            <text class="sub" x="250" y="58" text-anchor="middle">lee el QR</text>
+            <circle class="dot-a" cx="250" cy="234" r="22"/><text class="glyph f-a" x="250" y="240" font-size="15">P</text>
+            <text class="lbl f-a" x="250" y="274" text-anchor="middle">PRECINTO</text>
+            <text class="sub" x="250" y="288" text-anchor="middle">coloca la pulsera</text>
+
+            <text class="tiny" x="470" y="26" text-anchor="middle">DUPLA B</text>
+            <circle class="dot-a" cx="470" cy="86" r="22"/><text class="glyph f-a" x="470" y="92" font-size="15">P</text>
+            <text class="lbl f-a" x="470" y="44" text-anchor="middle">PRECINTO</text>
+            <text class="sub" x="470" y="58" text-anchor="middle">coloca la pulsera</text>
+            <circle class="dot" cx="470" cy="234" r="22"/><text class="glyph" x="470" y="240" font-size="15">E</text>
+            <text class="lbl" x="470" y="274" text-anchor="middle">ESCÁNER</text>
+            <text class="sub" x="470" y="288" text-anchor="middle">lee el QR</text>
+          </svg>
+          </div>
+          <figcaption>La célula de cuatro. Al espejar la segunda dupla, cada carril atiende dos personas en simultáneo y ninguna espalda queda contra el sentido de la fila: el escáner de A y el precintador de B trabajan sobre el mismo lado del pasillo.</figcaption>
+        </figure>
+
+        <h3>Dotación y ritmo</h3>
+        <p>Seis duplas activas en total. Con un tiempo real de 11 a 12 segundos por persona (escaneo + precinto + traspaso), el ritmo objetivo del filtro es de <strong>1.100 personas por hora</strong>, ya descontadas las mermas normales.</p>
+        <div class="tablebox">
+          <table>
+            <thead><tr><th>Escenario de público</th><th>Duplas activas</th><th>Ritmo</th><th>Ingreso completo</th></tr></thead>
+            <tbody>
+              <tr><td>800 personas</td><td class="n">6</td><td class="n">1.100/h</td><td class="n">≈ 45 min</td></tr>
+              <tr><td>1.200 personas</td><td class="n">6</td><td class="n">1.100/h</td><td class="n">≈ 1 h 05</td></tr>
+              <tr><td>1.800 personas</td><td class="n">6</td><td class="n">1.100/h</td><td class="n">≈ 1 h 40</td></tr>
+              <tr><td>2.500 personas</td><td class="n">6</td><td class="n">1.100/h</td><td class="n">≈ 2 h 15</td></tr>
+              <tr><td>Con 2 duplas caídas (incidencias, relevo)</td><td class="n">4</td><td class="n">730/h</td><td class="n">+ 50%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mono" style="font-size:.8rem;color:var(--ink-3)">Cifras de diseño, a validar con el volumen real de venta.</p>
+
+        <div class="callout">
+          <span class="k">Riesgo del emplazamiento</span>
+          <p><strong>La rampa es el cuello de botella físico.</strong> Tres carriles necesitan entre 3,5 y 4 m de ancho útil con vallado entre medio. Si la senda mide 2,5&ndash;3 m, no entran: hay que abrir hacia el césped o correr el Filtro 1 al tramo plano previo.</p>
+          <p>Además: las duplas van paradas <strong>en plano, no sobre la pendiente</strong> (la fila empuja desde atrás), la superficie con humedad exige cinta antideslizante o alfombra, y cada dupla necesita luz propia si el ingreso arranca de tarde-noche.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="stop">
+      <div class="stop__marker"><span class="num">02</span></div>
+      <div>
+        <h2>Bifurcación</h2>
+        <p>A la salida del Filtro 1 el público sale mezclado. Dos personas con paleta separan el flujo <strong>por color de precinto</strong>: General hacia un lado de la explanada, VIP y Platinum hacia el otro.</p>
+        <p>Es el punto más barato de resolver y el que más cuesta si se omite: sin splitter, el VIP tiene que atravesar la masa de General para llegar a su filtro, y eso genera contraflujo justo donde el pasillo se abre.</p>
+        <div class="callout rule">
+          <span class="k">Condición</span>
+          <p>Un color de precinto por categoría, definido y comunicado al staff en el briefing. Si el precinto es único para todas las categorías, la bifurcación deja de funcionar y hay que dedicar el carril del extremo del Filtro 1 a VIP + Platinum, con cartelería desde la cola exterior.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="stop">
+      <div class="stop__marker"><span class="num">03</span></div>
+      <div>
+        <h2>Filtro 2 · Explanada</h2>
+        <p>Sector completamente vallado. Acá no se acredita: se <strong>controla el precinto</strong> y se habilita el paso al pulmón de fila. Es también donde el público se ordena por categoría.</p>
+        <div class="cols">
+          <div class="card">
+            <h3><span class="pill gen">General</span></h3>
+            <p>Del lado donde ya está el cartel <span class="mono">GENERAL / INGRESO</span>. Cuatro personas: tres al control de precinto y una en el portón de valla, regulando el goteo hacia el pulmón.</p>
+          </div>
+          <div class="card v">
+            <h3><span class="pill vip">VIP + Platinum</span></h3>
+            <p>Lado enfrentado, también vallado y con cartelería propia. Tres personas: dos al control y una en el portón. Volumen menor pero tolerancia a la espera mucho más baja.</p>
+          </div>
+        </div>
+        <div class="callout rule">
+          <span class="k">Definición pendiente que cambia la dotación</span>
+          <p><strong>Control visual del precinto</strong> (lo dimensionado acá): 7 personas entre los dos lados. <strong>Re-escaneo en F2</strong>: hay que sumar equipos y subir a 10&ndash;12 personas, y el F2 pasa a ser un segundo cuello de botella. Recomiendo control visual, con escáner disponible solo para verificación puntual.</p>
+        </div>
+        <div class="callout">
+          <span class="k">Seguridad · No negociable</span>
+          <p>Sobre la línea de paso hay un <strong>gabinete eléctrico con cartel de riesgo</strong> y un poste con cableado bajo. Va cerrado con valla ciega y sin fila apoyada contra él. Es lo primero que observa bomberos o habilitación si queda expuesto.</p>
+          <p>Los macetones con palmeras sirven para <em>señalizar</em> el carril, no para <em>contener</em> gente. La separación General / VIP se hace con valla, no con maceta.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="stop">
+      <div class="stop__marker"><span class="num">04</span></div>
+      <div>
+        <h2>Pulmón y puerta de sala</h2>
+        <p>Zona de espera de pie entre el Filtro 2 y la puerta. Las dos filas siguen separadas hasta la puerta: si se mezclan acá, el conflicto explota justo cuando se abre la sala.</p>
+        <p>Dos orientadores mantienen la fila armada y el pasillo de emergencia libre. La capacidad del pulmón define el ritmo de apertura del portón del Filtro 2: cuando se llena, el portón cierra y la presión se sostiene atrás, nunca contra la puerta.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <article class="branch">
+    <div class="branch__marker"><span class="num">Ramal</span></div>
+    <div>
+      <h2>Mesas de incidencias</h2>
+      <p>QR fallado, duplicado, entrada a nombre de otra persona, compra no impactada. Todo lo que no resuelve en tres segundos sale del carril.</p>
+      <div class="callout rule">
+        <span class="k">Regla de oro</span>
+        <p><strong>En el filtro no se discute.</strong> El escaneador levanta la mano, un runner saca a la persona del carril y la acompaña a la mesa. La fila nunca se detiene atrás de un caso.</p>
+      </div>
+      <div class="cols">
+        <div class="card">
+          <h3><span class="pill gen">General · sobre las piedritas</span></h3>
+          <p>Dos gazebos, cuatro operadores y un coordinador, con <strong>fila propia vallada</strong> y ubicados <em>antes</em> del Filtro 2: si la mesa queda después, el caso ya ocupó el pulmón y vuelve contra la corriente.</p>
+          <p>El canto rodado obliga a resolver tres cosas: los gazebos no se estaquean, van con <strong>lastre</strong> (tanques o pesos); la zona de atención necesita <strong>tarima o planchas</strong> para que sea pisable y accesible; y hace falta energía e iluminación propias para escáneres, notebooks e impresora de pulseras. Cartelería alta, legible por encima de las cabezas.</p>
+        </div>
+        <div class="card v">
+          <h3><span class="pill vip">VIP · interior</span></h3>
+          <p>Sobre el pasillo baldosado que corre pegado a la fachada vidriada, donde hoy están apiladas las vallas grises. Dos operadores, atención sentada.</p>
+          <p>Ese pasillo es angosto y muy probablemente <strong>vía de evacuación</strong>: la mesa se ubica contra la pared dejando el ancho libre reglamentario, y no se acumula fila sobre el corredor.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2>Dotación del sábado</h2>
+  <p>Personal de acreditación y ordenamiento. No incluye seguridad privada, control de la puerta de sala, cacheo ni personal de venue.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Punto</th><th>Rol</th><th>Pax</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="4">Filtro 1 · Rampa</td><td>Escaneadores (2 por carril)</td><td class="n">6</td></tr>
+        <tr><td>Precintadores (2 por carril)</td><td class="n">6</td></tr>
+        <tr><td>Coordinador de filtro</td><td class="n">1</td></tr>
+        <tr><td>Runners de derivación</td><td class="n">2</td></tr>
+        <tr><td>Bifurcación</td><td>Orientadores con paleta</td><td class="n">2</td></tr>
+        <tr><td rowspan="2">Filtro 2 · General</td><td>Control de precinto</td><td class="n">3</td></tr>
+        <tr><td>Portón de valla</td><td class="n">1</td></tr>
+        <tr><td rowspan="2">Filtro 2 · VIP + Platinum</td><td>Control de precinto</td><td class="n">2</td></tr>
+        <tr><td>Portón de valla</td><td class="n">1</td></tr>
+        <tr><td>Pulmón</td><td>Orientadores de fila</td><td class="n">2</td></tr>
+        <tr><td rowspan="2">Incidencias General</td><td>Operadores (2 por gazebo)</td><td class="n">4</td></tr>
+        <tr><td>Coordinador de incidencias</td><td class="n">1</td></tr>
+        <tr><td>Incidencias VIP</td><td>Operadores interior</td><td class="n">2</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>Acreditación y ordenamiento</td><td class="n">33</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Materiales por punto</h2>
+  <div class="cols">
+    <div>
+      <h3>Vallado y circulación</h3>
+      <ul class="checks">
+        <li>Vallado de los 3 carriles del Filtro 1 + canalización de la cola exterior</li>
+        <li>Vallado perimetral del Filtro 2, con portón por lado</li>
+        <li>Valla ciega para cerrar el gabinete eléctrico y el poste</li>
+        <li>Vallado de la fila propia de las mesas de incidencias</li>
+        <li>Cinta antideslizante o alfombra sobre el tramo de rampa</li>
+        <li>Conos y cintas para el pasillo de emergencia del pulmón</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Puestos y energía</h3>
+      <ul class="checks">
+        <li>2 gazebos con lastre (sin estacas: es canto rodado)</li>
+        <li>Tarima o planchas bajo la zona de atención de incidencias</li>
+        <li>Mesas y sillas · General exterior y VIP interior</li>
+        <li>Iluminación puntual por dupla y sobre cada mesa</li>
+        <li>Distro eléctrico y alargues desde tablero habilitado o grupo</li>
+        <li>Nylon o cobertura de lluvia para escáneres y notebooks</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Acreditación</h3>
+      <ul class="checks">
+        <li>Escáneres por dupla + 2 de repuesto, con powerbanks cargados</li>
+        <li>Precintos por color y categoría, repartidos por carril</li>
+        <li>Contingencia de conectividad (datos móviles / modo offline)</li>
+        <li>Cartelería alta: GENERAL, VIP + PLATINUM, MESA DE INCIDENCIAS</li>
+        <li>Handies con canal propio de acreditación</li>
+        <li>Planilla de conteo por carril para medir ritmo real</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Riesgos del sitio</h2>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Riesgo</th><th>Dónde</th><th>Acción</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill risk">Crítico</span> Gabinete eléctrico y cableado bajo</td><td>Explanada, sobre la línea de paso</td><td>Cerrar con valla ciega antes de abrir puertas. Sin fila apoyada.</td></tr>
+        <tr><td><span class="pill risk">Alto</span> Ancho insuficiente en la rampa</td><td>Filtro 1</td><td>Medir el ancho útil. Si no llega a 3,5 m, correr el filtro al tramo plano.</td></tr>
+        <tr><td><span class="pill risk">Alto</span> Piso mojado en pendiente</td><td>Rampa de acceso</td><td>Antideslizante, duplas paradas en plano, plan de lluvia definido.</td></tr>
+        <tr><td><span class="pill risk">Medio</span> Canto rodado suelto</td><td>Mesas de incidencias General</td><td>Tarima o planchas y lastre en gazebos. Camino firme desde el carril.</td></tr>
+        <tr><td><span class="pill risk">Medio</span> Pasillo interior angosto</td><td>Mesa VIP</td><td>Confirmar ancho libre de evacuación con el venue.</td></tr>
+        <tr><td><span class="pill risk">Medio</span> Falta de luz al atardecer</td><td>Todo el circuito</td><td>Luz puntual por puesto; sin luz no hay escaneo.</td></tr>
+        <tr><td><span class="pill risk">Medio</span> Contraflujo VIP</td><td>Salida del Filtro 1</td><td>Bifurcación con paletas y precinto por color.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Cronograma del sábado</h2>
+  <p>Horas relativas a la apertura de puertas, para ajustar cuando esté confirmado el horario.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Hora</th><th>Hito</th></tr></thead>
+      <tbody>
+        <tr><td class="n">A &minus; 4:00</td><td>Armado de vallado, gazebos con lastre y cierre del gabinete eléctrico.</td></tr>
+        <tr><td class="n">A &minus; 3:00</td><td>Energía, iluminación y cartelería montadas. Prueba de escáneres y conectividad en cada puesto.</td></tr>
+        <tr><td class="n">A &minus; 2:00</td><td>Briefing de staff: flujo, colores de precinto, regla de derivación, canal de handies.</td></tr>
+        <tr><td class="n">A &minus; 1:30</td><td>Staff en posición. Prueba en seco con 10 casos, incluido un QR fallado de punta a punta.</td></tr>
+        <tr><td class="n">A &minus; 1:00</td><td>Se habilita la cola exterior canalizada. Mesas de incidencias operativas.</td></tr>
+        <tr><td class="n">A</td><td>Apertura del Filtro 1. Conteo por carril cada 15 minutos.</td></tr>
+        <tr><td class="n">A + 0:45</td><td>Pico esperado. Coordinador libera o reasigna duplas según el conteo.</td></tr>
+        <tr><td class="n">A + 2:30</td><td>Repliegue a un carril activo y refuerzo en incidencias para rezagados.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Domingo</h3>
+  <p>Asumo que el grueso de la acreditación se resuelve el sábado. Si el precinto es válido para los dos días, el domingo el Filtro 1 baja a <strong>un carril activo</strong> (una célula de cuatro) para rezagados y cambios, y el resto del circuito se sostiene con control visual: alrededor de 15 personas en total. <span class="pill risk">A confirmar</span> Si el precinto se renueva cada día, el domingo replica el esquema completo del sábado.</p>
+</section>
+
+<section>
+  <h2>Lo que falta para cerrar el plano a escala</h2>
+  <ul class="open">
+    <li>Ancho útil de la rampa y de la explanada, aunque sea medido en pasos. Es el dato que confirma o tira abajo los tres carriles.</li>
+    <li>Aforo del sábado y ratio General vs. VIP + Platinum sobre el total.</li>
+    <li>Horario de apertura de puertas y horario de show, para anclar el cronograma.</li>
+    <li>En el Filtro 2, ¿control visual del precinto o re-escaneo? Cambia la dotación de 7 a 12 personas.</li>
+    <li>¿El precinto es único o por categoría y color? De eso depende la bifurcación.</li>
+    <li>¿El precinto sirve los dos días o se renueva el domingo?</li>
+    <li>Capacidad del pulmón entre el Filtro 2 y la puerta de sala, de pie.</li>
+    <li>¿Hay puertas de sala diferenciadas para General y VIP, o una sola con carriles?</li>
+    <li>Plan de lluvia: cobertura sobre los puestos y sobre la fila exterior.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Versión 1 · Armada sobre el relevamiento fotográfico del predio. Las cotas son estimadas: al confirmar los anchos reales se ajusta el plano a escala.</p>
+</footer>
+
+</div>
