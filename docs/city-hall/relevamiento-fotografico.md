@@ -80,3 +80,16 @@ Consideraciones de esos dos puntos:
   primer sector.
 - Pendiente crítico: **largo y ancho útil de la galería**. 600 pax a 2,5 p/m² = 240 m²
   útiles (300 m² brutos con la valla). Si no da, parte de la fila se retiene en F2.
+
+## VOLUMEN CONFIRMADO
+- General: **2.600** (ingreso directo, sin galería)
+- VIP + Platinum: **600** (fila envasada en S en la galería)
+- **Total sábado: 3.200 personas**
+
+Impacto: con 3 carriles (6 duplas · 1.100 pax/h) el ingreso completo tarda 2 h 55.
+Para una ventana de 2 h hacen falta 5 carriles (10 duplas, 20 personas en F1).
+
+## VELA TENSADA (fotos 9 y 10)
+Estructura tensada blanca sobre césped, lindera al sendero baldosado y a la galería.
+Superficie cubierta disponible: evaluar como cola cubierta de General en plan de
+lluvia, o como refugio alternativo de las mesas de incidencias.
