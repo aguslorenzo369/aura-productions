@@ -93,3 +93,22 @@ Para una ventana de 2 h hacen falta 5 carriles (10 duplas, 20 personas en F1).
 Estructura tensada blanca sobre césped, lindera al sendero baldosado y a la galería.
 Superficie cubierta disponible: evaluar como cola cubierta de General en plan de
 lluvia, o como refugio alternativo de las mesas de incidencias.
+
+## MEDICIONES SOBRE EL PLANO (cuadrícula 1×1 m verificada)
+Escala confirmada: la cuadrícula da 1,00 × 1,00 m exacto y el salón cierra en 30 × 60 m.
+
+| Elemento | Medida |
+|---|---|
+| Salón (libre) | 30,00 × 60,48 m = 1.800 m² |
+| Envolvente del salón | 36,41 × 60,48 m |
+| Galería oeste (corredor cubierto) | **7,89 m de ancho × ~52 m** = 410 m² |
+| Bloque de servicios (cafetería, baños, oficinas) | 4,79 m de fondo, abre sobre la galería |
+| Vanos de fachada | 3 por cara (N, centro, S) de **3,85 m** c/u |
+| Portón de ingreso (SO, entre Oficinas y PMU) | 2 hojas, **luz ≈ 4 m** |
+| Franja este (muro a arbolado) | ≈ 7,5 m, con Carpa y Aires |
+| Camerinos 1 y 2 | pegados al muro sur, 12,4 y 11,9 m de largo |
+
+Serpentina VIP resuelta: 3 carriles de 2 m + paso libre de 1,9 m contra el bloque de
+baños = 126 m lineales = **630 personas** a 2,5 p/m². Entran las 600.
+
+Fuera del plano: la rampa y la explanada de los filtros (el plano arranca en el portón).

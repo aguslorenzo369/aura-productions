@@ -135,6 +135,12 @@ svg text{fill:currentColor}
 .dim{stroke:var(--ink-3); stroke-width:1; fill:none}
 .flow-v{stroke:var(--vip); fill:none; stroke-width:2}
 .wall{fill:var(--sunken); stroke:var(--line-strong); stroke-width:1}
+.sala{fill:var(--surface-2)}
+.gal{fill:var(--vip-soft)}
+.blk{fill:var(--sunken); stroke:var(--line-strong); stroke-width:1}
+.muro{stroke:var(--ink); stroke-width:3; fill:none; stroke-linecap:square}
+.vano{stroke:var(--vip); stroke-width:3.5; fill:none}
+.valla{stroke:var(--accent-ink); stroke-width:1.6; fill:none}
 </style>
 
 <div class="wrap">
@@ -146,7 +152,7 @@ svg text{fill:currentColor}
   <dl class="facts">
     <div class="fact"><dt>Público total</dt><dd>3.200<small>Sábado</small></dd></div>
     <div class="fact"><dt>General</dt><dd>2.600<small>Ingreso directo</small></dd></div>
-    <div class="fact"><dt>VIP + Platinum</dt><dd>600<small>Se envasan en la galería</small></dd></div>
+    <div class="fact"><dt>VIP + Platinum</dt><dd>600<small>Galería 7,9 × 52 m · entran 630</small></dd></div>
     <div class="fact"><dt>Carriles en F1</dt><dd>3 <span style="font-size:1rem;color:var(--alert)">&rarr; 5</span><small>3 no alcanzan en menos de 3 h</small></dd></div>
     <div class="fact"><dt>Ritmo con 3 carriles</dt><dd>1.100<small>Personas/hora</small></dd></div>
     <div class="fact"><dt>Dotación base</dt><dd>36<small>44 con 5 carriles</small></dd></div>
@@ -270,6 +276,107 @@ svg text{fill:currentColor}
     </div>
     <figcaption>Recorrido de ingreso del sábado. Las 12 posiciones del Filtro 1 procesan en paralelo; toda incidencia sale del carril hacia las piedritas y vuelve por el costado, nunca contra la corriente.</figcaption>
   </figure>
+</section>
+
+<section>
+  <h2>El plano medido</h2>
+  <p>El plano viene con cuadrícula de 1 × 1 m y da exacto: los cuadros miden 1,00 m y el salón cierra en 30 × 60 m limpios. Todo lo que sigue está medido sobre esa cuadrícula, no estimado.</p>
+
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Elemento</th><th>Medida real</th><th>Qué implica</th></tr></thead>
+      <tbody>
+        <tr><td>Salón</td><td class="n">30 × 60 m</td><td>1.800 m² libres. Envolvente de 36,4 × 60,5 m.</td></tr>
+        <tr><td>Galería oeste</td><td class="n">7,9 × 52 m</td><td>410 m² cubiertos entre el bloque de baños y la fachada. Es el mejor espacio del predio.</td></tr>
+        <tr><td>Bloque de servicios</td><td class="n">4,8 m de fondo</td><td>Cafetería, baños y oficinas abren <em>sobre</em> la galería.</td></tr>
+        <tr><td>Vanos de fachada</td><td class="n">3 × 3,85 m</td><td>Norte, centro y sur, en las dos caras. El central del oeste es el ingreso VIP.</td></tr>
+        <tr><td>Portón de ingreso</td><td class="n">4 m (2 hojas)</td><td>Único acceso del público al predio. Todo pasa por ahí.</td></tr>
+        <tr><td>Franja este</td><td class="n">≈ 7,5 m</td><td>Entre el muro este y el arbolado. Ahí están la carpa y los aires.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <div class="scroll">
+            <svg viewBox="0 0 520 700" role="img" aria-label="Plano medido del City Hall sobre la cuadricula de 1 por 1 metro: salon de 30 por 60 metros, galeria oeste de 7,9 metros de ancho entre el bloque de banos y la fachada, tres vanos de 3,85 metros por fachada, porton de ingreso de 4 metros al suroeste, y la fila envasada de VIP en tres carriles de 2 metros dentro de la galeria.">
+            <defs><marker id="arw4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-v"/></marker></defs>
+            <rect class="sala" x="132.2" y="44.4" width="291.3" height="483.8"/>
+            <line class="muro" x1="132.2" y1="44.4" x2="423.4" y2="44.4"/>
+            <line class="muro" x1="132.2" y1="528.2" x2="423.4" y2="528.2"/>
+            <line class="muro" x1="132.2" y1="44.5" x2="132.2" y2="96.8"/>
+            <line class="muro" x1="423.4" y1="44.5" x2="423.4" y2="96.8"/>
+            <line class="muro" x1="132.2" y1="127.4" x2="132.2" y2="262.2"/>
+            <line class="muro" x1="423.4" y1="127.4" x2="423.4" y2="262.2"/>
+            <line class="muro" x1="132.2" y1="292.8" x2="132.2" y2="427.4"/>
+            <line class="muro" x1="423.4" y1="292.8" x2="423.4" y2="427.4"/>
+            <line class="muro" x1="132.2" y1="458.2" x2="132.2" y2="528.2"/>
+            <line class="muro" x1="423.4" y1="458.2" x2="423.4" y2="528.2"/>
+            <line class="vano" x1="132.2" y1="96.8" x2="132.2" y2="127.4"/>
+            <line class="vano" x1="423.4" y1="96.8" x2="423.4" y2="127.4"/>
+            <line class="vano" x1="132.2" y1="262.2" x2="132.2" y2="292.8"/>
+            <line class="vano" x1="423.4" y1="262.2" x2="423.4" y2="292.8"/>
+            <line class="vano" x1="132.2" y1="427.4" x2="132.2" y2="458.2"/>
+            <line class="vano" x1="423.4" y1="427.4" x2="423.4" y2="458.2"/>
+            <text class="lbl" x="276.0" y="274.0" text-anchor="middle">SALÓN 30 × 60 m</text>
+            <text class="tiny" x="276.0" y="294.8" text-anchor="middle">1.800 m² LIBRES</text>
+            <rect class="gal" x="69.0" y="111.0" width="63.1" height="417.2"/>
+            <rect class="blk" x="30.7" y="111.0" width="38.3" height="48.2"/>
+            <text class="tiny" transform="rotate(-90 49.9 135.2)" x="49.9" y="135.2" text-anchor="middle">CAFETERÍA</text>
+            <rect class="blk" x="30.7" y="159.7" width="38.3" height="97.4"/>
+            <text class="tiny" transform="rotate(-90 49.9 208.4)" x="49.9" y="208.4" text-anchor="middle">BAÑO HOMBRES</text>
+            <rect class="blk" x="30.7" y="268.2" width="38.3" height="23.5"/>
+            <text class="tiny" transform="rotate(-90 49.9 279.9)" x="49.9" y="279.9" text-anchor="middle">BAÑO PMR</text>
+            <rect class="blk" x="30.7" y="305.9" width="38.3" height="97.4"/>
+            <text class="tiny" transform="rotate(-90 49.9 354.6)" x="49.9" y="354.6" text-anchor="middle">BAÑO MUJERES</text>
+            <rect class="blk" x="30.7" y="405.4" width="38.3" height="122.9"/>
+            <text class="tiny" transform="rotate(-90 49.9 466.8)" x="49.9" y="466.8" text-anchor="middle">OFICINAS</text>
+            <rect class="blk" x="30.6" y="625.1" width="19.1" height="52.2"/>
+            <text class="tiny" transform="rotate(-90 40.2 651.2)" x="40.2" y="651.2" text-anchor="middle">PMU</text>
+            <rect class="blk" x="153.1" y="528.2" width="99.0" height="19.4"/>
+            <text class="tiny" x="202.6" y="545.6" text-anchor="middle">CAMERINO 1</text>
+            <rect class="blk" x="310.9" y="528.2" width="95.0" height="19.4"/>
+            <text class="tiny" x="358.4" y="545.7" text-anchor="middle">CAMERINO 2</text>
+            <line class="valla" x1="100.2" y1="142.0" x2="100.2" y2="522.0"/>
+            <line class="valla" x1="116.2" y1="126.0" x2="116.2" y2="502.0"/>
+            <line class="valla" x1="84.2" y1="126.0" x2="84.2" y2="522.0"/>
+            <polyline class="flow-v" points="92.0,546.0 92.0,134.0 108.0,134.0 108.0,514.0 124.0,514.0 124.0,277.2 144.0,277.2" marker-end="url(#arw4)"/>
+            <text class="tiny f-v" transform="rotate(-90 92.0 370.0)" x="92.0" y="370.0" text-anchor="middle">CARRIL A · 2 m</text>
+            <text class="tiny f-v" transform="rotate(-90 108.0 370.0)" x="108.0" y="370.0" text-anchor="middle">CARRIL B · 2 m</text>
+            <text class="tiny f-v" transform="rotate(-90 124.0 386.0)" x="124.0" y="386.0" text-anchor="middle">CARRIL C · 2 m</text>
+            <text class="tiny f-r" transform="rotate(-90 76.8 226.0)" x="76.8" y="226.0" text-anchor="middle">PASO LIBRE 1,9 m · BAÑOS Y EMERGENCIA</text>
+            <line class="dim" x1="69.0" y1="94.0" x2="132.2" y2="94.0"/>
+            <text class="lbl f-v" x="100.0" y="83.6" text-anchor="middle">GALERÍA · 7,9 m</text>
+            <text class="tiny" x="100.0" y="69.2" text-anchor="middle">52 m DE LARGO · 410 m² CUBIERTOS</text>
+            <text class="tiny f-v" x="136.8" y="277.2">PUERTA CENTRAL 3,85 m</text>
+            <text class="tiny" x="136.8" y="112.4">VANO NORTE 3,85 m</text>
+            <text class="tiny" x="136.8" y="442.8">VANO SUR 3,85 m</text>
+            <text class="tiny" x="428.8" y="277.2">VANOS ESTE · ÍDEM</text>
+            <line class="muro" x1="31.2" y1="528.4" x2="31.2" y2="590.8" stroke-width="1.5"/>
+            <line class="muro" x1="31.2" y1="627.6" x2="31.2" y2="677.2" stroke-width="1.5"/>
+            <line class="vano" x1="31.2" y1="590.8" x2="31.2" y2="627.6"/>
+            <polyline class="flow-v" points="4.0,609.2 52.0,609.2 92.0,570.0 92.0,550.0" marker-end="url(#arw4)"/>
+            <text class="lbl f-r" x="-20.0" y="597.2">PORTÓN</text>
+            <text class="tiny f-r" x="-20.0" y="582.8">ÚNICO · 4 m</text>
+            <line class="dim" x1="308.0" y1="610.0" x2="388.0" y2="610.0" stroke-width="2"/>
+            <line class="dim" x1="308.0" y1="603.6" x2="308.0" y2="616.4"/>
+            <line class="dim" x1="348.0" y1="605.2" x2="348.0" y2="614.8"/>
+            <line class="dim" x1="388.0" y1="603.6" x2="388.0" y2="616.4"/>
+            <text class="tiny" x="348.0" y="597.2" text-anchor="middle">0 &nbsp; 5 &nbsp; 10 m</text>
+            </svg>
+    </div>
+    <figcaption>Planta a escala sobre la cuadrícula del plano. La galería oeste aloja la fila envasada de VIP en tres carriles de 2 m, con un paso libre de 1,9 m contra el bloque de servicios que sirve a la vez de acceso a los baños y de vía de emergencia. El recorrido sale por la puerta central de 3,85 m.</figcaption>
+  </figure>
+
+  <div class="callout rule">
+    <span class="k">Lo que resuelve la medición</span>
+    <p><strong>La galería alcanza y sobra para las 600 de VIP.</strong> Tres carriles de 2 m dan 126 metros lineales de fila: a 2,5 personas por m², <strong>630 personas</strong>. Y quedan 1,9 m libres contra el bloque de baños, que no es un lujo: los baños y la cafetería abren sobre esa galería, y la fila no puede taparlos.</p>
+  </div>
+
+  <div class="callout">
+    <span class="k">Lo que la medición no resuelve</span>
+    <p><strong>El portón de ingreso es uno solo y tiene 4 m.</strong> Por ahí entran las 3.200 personas. Como paso no es problema, pero sí lo es como punto único: si se traba el portón, se traba el evento entero.</p>
+    <p>La rampa y la explanada de los filtros <strong>quedan fuera del plano</strong>: el plano arranca en el portón. Sigue abierto el ancho de la rampa, que es lo que define si entran 3 o 5 carriles en el Filtro 1.</p>
+  </div>
 </section>
 
 <section>
@@ -446,19 +553,19 @@ svg text{fill:currentColor}
         </figure>
 
         <h3>Cuánta gente entra en la galería</h3>
-        <p>Con una densidad de diseño de <strong>2,5 personas por m²</strong> (fila de pie, ordenada, sin compresión), 600 personas necesitan <strong>240 m² de superficie útil</strong>. La valla central y los pasos se comen alrededor de un 20%, así que hay que dimensionar sobre 300 m² de galería.</p>
+        <p>Ya no es estimación: la galería mide <strong>7,9 × 52 m</strong>. Descontando el paso libre de 1,9 m contra el bloque de baños, quedan 6 m para la fila, que se arman como <strong>tres carriles de 2 m</strong>.</p>
         <div class="tablebox">
           <table>
-            <thead><tr><th>Ancho útil de galería</th><th>Largo necesario para 600</th><th>Con S de 2 carriles</th></tr></thead>
+            <thead><tr><th>Tramo</th><th>Largo</th><th>Capacidad a 2,5 pers/m²</th></tr></thead>
             <tbody>
-              <tr><td>2,5 m</td><td class="n">96 m</td><td class="n">48 m de galería</td></tr>
-              <tr><td>3,0 m</td><td class="n">80 m</td><td class="n">40 m de galería</td></tr>
-              <tr><td>3,5 m</td><td class="n">69 m</td><td class="n">34 m de galería</td></tr>
-              <tr><td>4,0 m</td><td class="n">60 m</td><td class="n">30 m de galería</td></tr>
+              <tr><td>Carril A · sube desde el portón</td><td class="n">48 m</td><td class="n">240 personas</td></tr>
+              <tr><td>Carril B · baja</td><td class="n">48 m</td><td class="n">240 personas</td></tr>
+              <tr><td>Carril C · sube a la puerta central</td><td class="n">30 m</td><td class="n">150 personas</td></tr>
             </tbody>
+            <tfoot><tr><td>Total</td><td class="n">126 m lineales</td><td class="n">630 personas</td></tr></tfoot>
           </table>
         </div>
-        <p>Si la galería es más corta que eso, el sobrante de la fila queda aguas arriba, en el Filtro 2, y el portón de VIP pasa a regular el goteo. Es manejable, pero hay que decidirlo antes y no descubrirlo el sábado.</p>
+        <p>Entran las 600 con margen, bajo techo y sin tocar el acceso a los baños. Si el sábado la fila se comprime más de lo previsto, el margen real es mayor todavía: a 3 pers/m² la galería sostiene 750.</p>
 
         <div class="callout rule">
           <span class="k">Recomendación operativa</span>
@@ -467,7 +574,8 @@ svg text{fill:currentColor}
 
         <div class="callout">
           <span class="k">Seguridad de la galería</span>
-          <p>Es un corredor cubierto, largo y angosto, con público envasado: <strong>pasos de emergencia cada ±15 m</strong> en la valla central, con vallas removibles y staff que sepa cuál abre. Acceso libre al matafuego y al nicho de incendio que están sobre el pasillo.</p>
+          <p>Es un corredor cubierto con público envasado: <strong>pasos de emergencia cada ±15 m</strong> entre carriles, con vallas removibles y staff que sepa cuál abre. Acceso libre al matafuego y al nicho de incendio que están sobre el pasillo.</p>
+          <p><strong>El paso libre de 1,9 m contra el bloque de servicios no se ocupa nunca.</strong> Es el acceso a los baños y a la cafetería para las 600 personas que están haciendo la fila, y es la vía de emergencia. Una fila de 40 minutos sin acceso a baños se rompe sola.</p>
           <p>Las puertas centrales son de vidrio: van con las <strong>dos hojas trabadas en abierto</strong> antes de que llegue la fila. Una hoja suelta con 600 personas empujando es un vidrio roto.</p>
         </div>
       </div>
@@ -620,16 +728,15 @@ svg text{fill:currentColor}
 <section>
   <h2>Lo que falta para cerrar el plano a escala</h2>
   <ul class="open">
-    <li>Ancho útil de la rampa y de la explanada, aunque sea medido en pasos. Es el dato que confirma o tira abajo los tres carriles.</li>
     <li>Ventana de puertas: a qué hora abre y a qué hora empieza el show. Es lo que define si van 3 o 5 carriles.</li>
-    <li>Largo y ancho útil de la galería VIP: define si las 600 personas entran en la S o si hay que retener parte en el Filtro 2.</li>
     <li>¿Los 600 son VIP y Platinum juntos, o son dos filas que también hay que separar entre sí?</li>
     <li>Horario de apertura de puertas y horario de show, para anclar el cronograma.</li>
     <li>En el Filtro 2, ¿control visual del precinto o re-escaneo? Cambia la dotación de 7 a 12 personas.</li>
     <li>¿El precinto es único o por categoría y color? De eso depende la bifurcación.</li>
     <li>¿El precinto sirve los dos días o se renueva el domingo?</li>
     <li>Capacidad del pulmón entre el Filtro 2 y la puerta de sala, de pie.</li>
-    <li>Ancho de las puertas centrales y capacidad del patio interno: es el filtro que sigue a la galería.</li>
+    <li>Capacidad del patio interno detrás de la puerta central: es el filtro que sigue a la galería.</li>
+    <li>Ancho útil de la rampa y de la explanada: son las dos zonas que quedan fuera del plano.</li>
     <li>¿Hay puerta de sala diferenciada para General, o comparte el patio interno con VIP?</li>
     <li>Plan de lluvia: cobertura sobre los puestos y sobre la fila exterior.</li>
   </ul>
