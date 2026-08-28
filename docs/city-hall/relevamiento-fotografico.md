@@ -130,3 +130,19 @@ a la puerta central no cruce la fila que sube.
 
 Falta ubicar en el mapa: Filtro 1 de acreditación (afuera, sobre la rampa) y mesa de
 incidencias de General (sobre las piedritas).
+
+## TRAZADO SIN CRUCES (versión 5)
+Recorridos separados de punta a punta, verificado por intersección de segmentos: 0 cruces.
+- Dos carriles paralelos desde la calle: General afuera (x 1,2–4,8) y VIP adentro
+  (x 4,8–8,2). VIP dobla al portón en y≈100; General sigue al norte.
+- Cada valla termina antes del giro que la cruzaría (la del carril General corta en
+  y=26, la de la galería en y=56,5 para dejar pasar la salida a la puerta central).
+- La S sube pegada a los baños y baja por el carril interno, que da directo al vano.
+
+| Concepto | Medida |
+|---|---|
+| Recorrido General | 188 m |
+| Recorrido VIP | 118 m |
+| Vallado total | 386 m = 155 vallas de 2,5 m |
+
+Geometría de los recorridos en `rutas-trazado.py`.
