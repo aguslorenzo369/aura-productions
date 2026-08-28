@@ -112,3 +112,21 @@ Serpentina VIP resuelta: 3 carriles de 2 m + paso libre de 1,9 m contra el bloqu
 baños = 126 m lineales = **630 personas** a 2,5 p/m². Entran las 600.
 
 Fuera del plano: la rampa y la explanada de los filtros (el plano arranca en el portón).
+
+## TRAZADO DEFINIDO POR PRODUCCIÓN (croquis del cliente)
+- **General (verde):** sale del Ingreso, sube por el perímetro oeste (por fuera del
+  bloque de servicios), rodea la sala por el norte, baja por el este y entra por los
+  **vanos este norte y centro**. Recorrido ≈ 176 m.
+- **VIP (rojo):** llega por el oeste, entra por el portón y hace la **fila en S dentro
+  de la galería** (2 carriles de 1,9 m), sale por la **puerta central oeste**.
+  Recorrido ≈ 100 m. Capacidad de la S: ~400 de las 600.
+- **Vallas (azul):** cola exterior VIP, corral norte, corral este y las dos vallas de
+  la S en la galería. Total ≈ 217 m de vallado = 87 vallas de 2,5 m.
+- **Mesa de incidencias VIP (amarillo):** contra el perímetro oeste, apenas pasado
+  el portón.
+
+Ajuste hecho sobre el croquis: se invirtieron los carriles de la S para que la salida
+a la puerta central no cruce la fila que sube.
+
+Falta ubicar en el mapa: Filtro 1 de acreditación (afuera, sobre la rampa) y mesa de
+incidencias de General (sobre las piedritas).
