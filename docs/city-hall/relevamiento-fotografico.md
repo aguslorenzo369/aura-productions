@@ -131,18 +131,27 @@ a la puerta central no cruce la fila que sube.
 Falta ubicar en el mapa: Filtro 1 de acreditación (afuera, sobre la rampa) y mesa de
 incidencias de General (sobre las piedritas).
 
-## TRAZADO SIN CRUCES (versión 5)
-Recorridos separados de punta a punta, verificado por intersección de segmentos: 0 cruces.
-- Dos carriles paralelos desde la calle: General afuera (x 1,2–4,8) y VIP adentro
-  (x 4,8–8,2). VIP dobla al portón en y≈100; General sigue al norte.
-- Cada valla termina antes del giro que la cruzaría (la del carril General corta en
-  y=26, la de la galería en y=56,5 para dejar pasar la salida a la puerta central).
-- La S sube pegada a los baños y baja por el carril interno, que da directo al vano.
+## TRAZADO DE PRODUCCIÓN (versión final, calcado del croquis)
+Se respeta el croquis tal cual: mismos recorridos, mismas vallas, mismas referencias.
+Geometría en `rutas-trazado.py`.
 
-| Concepto | Medida |
-|---|---|
-| Recorrido General | 188 m |
-| Recorrido VIP | 118 m |
-| Vallado total | 386 m = 155 vallas de 2,5 m |
+- **General:** cola por el sur, entra por el portón, sube por el **carril oeste de la
+  galería** (contra el bloque de baños), rodea la sala por el **norte**, baja por el
+  **este** y entra por los **vanos este norte y centro**. Recorrido ≈ 177 m.
+- **VIP:** cola exterior al oeste, baja al portón, entra y hace la **fila en S** en la
+  galería (dos pasadas), sale por la **puerta central oeste**. Recorrido ≈ 144 m.
+- **Vallas:** contención de cola VIP, corral norte, corral este, separación entre el
+  carril de General y la fila VIP, y la valla que parte la S. Total ≈ 213 m = 86 vallas.
+- **Mesa de incidencias VIP:** contra el perímetro oeste, pasando el portón.
 
-Geometría de los recorridos en `rutas-trazado.py`.
+### Dos puntos de cruce controlado (marcados con rombo)
+1. **Boca de la galería:** la fila VIP que entra cruza el carril de General que sube.
+2. **Salida de la S:** la pasada que baja cruza la que sube para llegar al vano central.
+Cada uno necesita una persona dando paso. El segundo desaparece si se dan vuelta las
+dos pasadas de la S.
+
+### A revisar
+- El carril de General mide **1,6 m** y por ahí pasan 2.600 personas. Mínimo
+  recomendado para circulación continua: 2 m (correr la valla 40 cm al este).
+- Falta ubicar el Filtro 1 (afuera, sobre la rampa) y las incidencias de General
+  (sobre las piedritas).
