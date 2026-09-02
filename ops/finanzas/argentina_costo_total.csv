@@ -1,0 +1,79 @@
+ARGENTINA · CUMBRE DE LOS MILLONARIOS CONSCIENTES 2026
+"La Rural, Pabellón Azul · montaje 2 de octubre · evento 3 y 4 de octubre de 2026"
+Unifica los presupuestos recibidos por mail (jun-ago 2026) con la hoja Argentina del master de inversión. Corte al 02/09/2026.
+
+Tipo de cambio (ARS por USD),1535,"Dólar oficial venta, Banco Nación, 02/09/2026. Editá este número y se recalcula toda la columna Total USD."
+
+Rubro,Proveedor,Detalle,Estado,Moneda,Monto de la cotización,IVA aplicado,Total con IVA (moneda origen),Total USD,Estimado del sheet (USD),Diferencia,Fuente
+SEDE
+Alquiler Pabellón Azul,La Rural (contrato CC-00957),Locación 2 días de evento + 1 día de montaje,Contratado,USD,75000.0,sin IVA,75000.0,"=IF(H9="""",N(J9),IF(E9=""USD"",H9,H9/$B$5))",70000.0,"=IF(D9=""Alternativa"","""",I9-N(J9))",Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)
+Infraestructura y mobiliario,La Rural — Jefatura de Infraestructura,"Paneles oficina producción 25 m², sala staff 100 m², depósito 64 m² (2.500 barras), camarín speakers, mobiliario, dirección técnica, guardia eléctrica y técnica. NO incluye sillas (fila aparte).",Cotizado,ARS,23994708.2,sin IVA,23994708.2,"=IF(H10="""",N(J10),IF(E10=""USD"",H10,H10/$B$5))",,"=IF(D10=""Alternativa"","""",I10-N(J10))",Mail criccio@larural.com.ar 17/08/2026 · total del PDF $66.494.708 menos $42.500.000 de sillas
+Sillas del público (5.000),La Rural — Infraestructura,"Silla imperio bordó 5.000 u. a $8.500 c/u, dentro del presupuesto de infraestructura",Alternativa,ARS,42500000.0,sin IVA,42500000.0,"=IF(H11="""",N(J11),IF(E11=""USD"",H11,H11/$B$5))",,"=IF(D11=""Alternativa"","""",I11-N(J11))",Mail criccio@larural.com.ar 17/08/2026
+Sillas del público (5.500),FDL Eventos,4.500 sillas plásticas Munro reforzadas + 1.000 sillas hotel negro + flete. NO incluye armado.,Cotizado,ARS,25800000.0,21%,31218000.0,"=IF(H12="""",N(J12),IF(E12=""USD"",H12,H12/$B$5))",16500.0,"=IF(D12=""Alternativa"","""",I12-N(J12))",Mail fdleventos@gmail.com 07/08/2026 · pendiente de resolver facturación al exterior
+Conectividad WiFi,La Rural — Servicios de Conectividad,"2 redes privadas de 30 Mbps (técnica + staff/acreditación), 2 al 4 de octubre",Cotizado,ARS,1438728.01,21%,1740860.89,"=IF(H13="""",N(J13),IF(E13=""USD"",H13,H13/$B$5))",800.0,"=IF(D13=""Alternativa"","""",I13-N(J13))",Mail conectividad@larural.com.ar 16/06/2026
+Subtotal Sede,,,,,,,,"=SUMIF($D$9:$D$13,""<>Alternativa"",$I$9:$I$13)",=SUM($J$9:$J$13),=I14-J14
+TÉCNICA
+Producción técnica integral,Prina,"LED 40 m² + video 4 cámaras + sonido Adamson + iluminación + estructura, staff y guardias. 50% anticipo.",Cotizado,ARS,48885000.0,21%,59150850.0,"=IF(H16="""",N(J16),IF(E16=""USD"",H16,H16/$B$5))",34000.0,"=IF(D16=""Alternativa"","""",I16-N(J16))",Mail valentin.andina@prina.net 18/06/2026 · validez 10 días (VENCIDA)
+Pantallas LED (alternativa parcial),VMG,Sólo pantallas LED 65 m² con operadores y traslado,Alternativa,ARS,12625000.0,21%,15276250.0,"=IF(H17="""",N(J17),IF(E17=""USD"",H17,H17/$B$5))",,"=IF(D17=""Alternativa"","""",I17-N(J17))",Mail presupuestos@vmg-web.com 29/06/2026 · recotiza si el dólar salta más de 15%
+Subtotal Técnica,,,,,,,,"=SUMIF($D$16:$D$17,""<>Alternativa"",$I$16:$I$17)",=SUM($J$16:$J$17),=I18-J18
+SERVICIOS
+Seguridad y vigilancia,Road Seguridad S.A.,"263 horas de vigilancia (armado, evento y desarme) + planos de evacuación $715.000 + supervisión general $795.000",Cotizado,ARS,7218928.96,21%,8734904.04,"=IF(H20="""",N(J20),IF(E20=""USD"",H20,H20/$B$5))",,"=IF(D20=""Alternativa"","""",I20-N(J20))",Mail presupuestos@roadseguridad.com.ar 12/08/2026 (versión V3 con las modificaciones pedidas)
+Servicio médico,Vittal — Socorro Médico Privado,"1 UTIM TRI con dos médicos + enfermero/chofer, los tres días (2, 3 y 4 de octubre)",Cotizado,ARS,6366521.27,"10,5%",7035006.0,"=IF(H21="""",N(J21),IF(E21=""USD"",H21,H21/$B$5))",,"=IF(D21=""Alternativa"","""",I21-N(J21))","Mail vtomas@vittal.com.ar 28/08/2026 · tarifas actualizadas, sin consultorio"
+Limpieza,Higia Eventos,"205,5 horas de limpieza: auditorio, baños y guardarropas, del 2 al 5 de octubre",Cotizado,ARS,3367440.91,21%,4074603.5,"=IF(H22="""",N(J22),IF(E22=""USD"",H22,H22/$B$5))",,"=IF(D22=""Alternativa"","""",I22-N(J22))",Mail higiaeventos 22/06/2026 (reenviado 29/06) · 50% de anticipo antes del armado
+Retiro de residuos,Gale Servicios,Roll off con disposición final incluida. Cotización base abril 2026.,Cotizado,ARS,1471608.62,21%,1780646.43,"=IF(H23="""",N(J23),IF(E23=""USD"",H23,H23/$B$5))",,"=IF(D23=""Alternativa"","""",I23-N(J23))",Mail higiaeventos 22/06/2026 (adjunto Gale) · se factura 100% por adelantado
+Seguro de accidentes personales,Chanes Seguros,"Cobertura MIA (muerte, invalidez y asistencia médica) para 150 personas, exigida por La Rural",Cotizado,ARS,953151.93,sin IVA,953151.93,"=IF(H24="""",N(J24),IF(E24=""USD"",H24,H24/$B$5))",400.0,"=IF(D24=""Alternativa"","""",I24-N(J24))","Mail nestor@chanesseguros.com.ar 13/07/2026 · premio único, cotizado para 15-19/07"
+Subtotal Servicios,,,,,,,,"=SUMIF($D$20:$D$24,""<>Alternativa"",$I$20:$I$24)",=SUM($J$20:$J$24),=I25-J25
+MERCH
+Cintas portacredencial (1.300),Blocko,"Cinta raso 25 mm impresa 4 colores dos caras + mosquetón zamak, $1.346 c/u",Cotizado,ARS,1749800.0,21%,2117258.0,"=IF(H27="""",N(J27),IF(E27=""USD"",H27,H27/$B$5))",,"=IF(D27=""Alternativa"","""",I27-N(J27))",Mail hola@blocko.com.ar 09/06/2026 · producción 3 semanas
+Pañuelos,Proveedor Colombia,"Contrato cerrado, 50% abonado el 24/06. Saldo US$5.491 programado al 13/09.",Contratado,USD,10982.0,sin IVA,10982.0,"=IF(H28="""",N(J28),IF(E28=""USD"",H28,H28/$B$5))",,"=IF(D28=""Alternativa"","""",I28-N(J28))",Hoja PAGOS del master
+Lanyards,Proveedor Colombia,"Contrato cerrado, 50% abonado el 25/06. Saldo US$850 al 13/09.",Contratado,USD,1698.59,sin IVA,1698.59,"=IF(H29="""",N(J29),IF(E29=""USD"",H29,H29/$B$5))",,"=IF(D29=""Alternativa"","""",I29-N(J29))",Hoja PAGOS del master
+Gorras,Proveedor Colombia,Pagado 100% el 25/06,Contratado,USD,1825.0,sin IVA,1825.0,"=IF(H30="""",N(J30),IF(E30=""USD"",H30,H30/$B$5))",5000.0,"=IF(D30=""Alternativa"","""",I30-N(J30))",Hoja PAGOS del master
+Gráfica Argentina,Proveedor Colombia,"Contrato cerrado, saldo US$1.839 al 13/09",Contratado,USD,2481.0,sin IVA,2481.0,"=IF(H31="""",N(J31),IF(E31=""USD"",H31,H31/$B$5))",,"=IF(D31=""Alternativa"","""",I31-N(J31))",Hoja PAGOS del master
+Resto de merch e impresos,Varios (merch desde Colombia),"Contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas, manillas",Sin cotizar,USD,,,,"=IF(H32="""",N(J32),IF(E32=""USD"",H32,H32/$B$5))",8689.0,"=IF(D32=""Alternativa"","""",I32-N(J32))",Estimado de la hoja Argentina del master; sin cotización argentina
+Subtotal Merch,,,,,,,,"=SUMIF($D$27:$D$32,""<>Alternativa"",$I$27:$I$32)",=SUM($J$27:$J$32),=I33-J33
+CATERING
+"Catering VIP, staff y equipo",A definir (Teist / Ambient / Azulado),"AmbientHouse cotizó viandas a $28.500 + IVA por persona por día con base mínima de 480, y se rechazó por estar a precio de consumidor final. Teist envió propuesta el 26/06 sin cerrar.",Sin cotizar,USD,,,,"=IF(H35="""",N(J35),IF(E35=""USD"",H35,H35/$B$5))",33820.0,"=IF(D35=""Alternativa"","""",I35-N(J35))",Estimado de la hoja Argentina del master; ninguna cotización aceptada todavía
+Subtotal Catering,,,,,,,,"=SUMIF($D$35:$D$35,""<>Alternativa"",$I$35:$I$35)",=SUM($J$35:$J$35),=I36-J36
+PRODUCCIÓN
+Unifilas y vallado,A definir,"Estimado del sheet, sin cotización",Sin cotizar,USD,,,,"=IF(H38="""",N(J38),IF(E38=""USD"",H38,H38/$B$5))",2450.0,"=IF(D38=""Alternativa"","""",I38-N(J38))",Hoja Argentina del master (unifilas US$1.200 + vallas US$1.250)
+DJ,A definir,Estimado del sheet,Sin cotizar,USD,,,,"=IF(H39="""",N(J39),IF(E39=""USD"",H39,H39/$B$5))",500.0,"=IF(D39=""Alternativa"","""",I39-N(J39))",Hoja Argentina del master
+Escoltas (2),A definir,Estimado del sheet,Sin cotizar,USD,,,,"=IF(H40="""",N(J40),IF(E40=""USD"",H40,H40/$B$5))",1000.0,"=IF(D40=""Alternativa"","""",I40-N(J40))",Hoja Argentina del master
+Master Mind Hit,A definir,Sala adicional,Sin cotizar,USD,,,,"=IF(H41="""",N(J41),IF(E41=""USD"",H41,H41/$B$5))",3000.0,"=IF(D41=""Alternativa"","""",I41-N(J41))",Hoja Argentina del master
+Personal logístico,A definir,La hoja del master lo tiene en US$0,Sin cotizar,USD,,,,"=IF(H42="""",N(J42),IF(E42=""USD"",H42,H42/$B$5))",,"=IF(D42=""Alternativa"","""",I42-N(J42))",Hoja Argentina del master · valor en cero
+Intercoms,Proveedor Colombia,"Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09",Contratado,USD,560.0,sin IVA,560.0,"=IF(H43="""",N(J43),IF(E43=""USD"",H43,H43/$B$5))",,"=IF(D43=""Alternativa"","""",I43-N(J43))",Hoja PAGOS del master
+Subtotal Producción,,,,,,,,"=SUMIF($D$38:$D$43,""<>Alternativa"",$I$38:$I$43)",=SUM($J$38:$J$43),=I44-J44
+EQUIPO
+Vuelos del equipo,Sin cotizar,No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,"=IF(H46="""",N(J46),IF(E46=""USD"",H46,H46/$B$5))",,"=IF(D46=""Alternativa"","""",I46-N(J46))",No encontrado
+Alojamiento del equipo,Sin cotizar,No hay cotización de hotel en Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,"=IF(H47="""",N(J47),IF(E47=""USD"",H47,H47/$B$5))",,"=IF(D47=""Alternativa"","""",I47-N(J47))",No encontrado
+Traslados internos y viáticos,Sin cotizar,Sin registro,Sin cotizar,USD,,,,"=IF(H48="""",N(J48),IF(E48=""USD"",H48,H48/$B$5))",,"=IF(D48=""Alternativa"","""",I48-N(J48))",No encontrado
+Subtotal Equipo,,,,,,,,"=SUMIF($D$46:$D$48,""<>Alternativa"",$I$46:$I$48)",=SUM($J$46:$J$48),=I49-J49
+
+COSTO TOTAL DEL EVENTO,,,,,,,,=I14+I18+I25+I33+I36+I44+I49,=J14+J18+J25+J33+J36+J44+J49,=K14+K18+K25+K33+K36+K44+K49
+
+COSTO POR PERSONA
+Base de cálculo,Personas,Costo por persona,,Qué incluye
+Aforo general,5000,"=IFERROR($I$51/B55,"""")",,Asistentes de entrada general.
+VIP,1000,"=IFERROR($I$51/B56,"""")",,Asistentes VIP.
+Asistentes pagos (general + VIP),6000,"=IFERROR($I$51/B57,"""")",,La base más útil para fijar el precio de la entrada.
+Mastermind del martes,246,"=IFERROR($I$51/B58,"""")",,"Actividad aparte, no comparte la mayoría de los costos."
+Total de personas en el predio,6108,"=IFERROR($I$51/B59,"""")",,Asistentes pagos + 100 de staff + 8 del equipo interno.
+
+ESTADO DE LOS RUBROS
+Contratado (hay contrato o anticipo pagado),,"=SUMIF($D$8:$D$50,""Contratado"",$I$8:$I$50)"
+Cotizado (hay presupuesto formal por mail),,"=SUMIF($D$8:$D$50,""Cotizado"",$I$8:$I$50)"
+"Sin cotizar (sólo estimado del sheet, o nada)",,"=SUMIF($D$8:$D$50,""Sin cotizar"",$I$8:$I$50)"
+Alternativas descartadas (NO suman al total),,"=SUMIF($D$8:$D$50,""Alternativa"",$I$8:$I$50)"
+
+DECISIONES ABIERTAS QUE MUEVEN EL NÚMERO
+Decisión,Opción A,Opción B,Qué hay que hacer
+Sillas del público,La Rural: 5.000 sillas por $42.500.000 (armado incluido),"FDL Eventos: 5.500 sillas por $25.800.000 + IVA, sin armado","Pedir a La Rural el costo del armado por separado. Si armar las de FDL cuesta menos que la diferencia (unos US$7.350), conviene FDL."
+Técnica,Prina integral: $48.885.000 + IVA,"Por partes: VMG sólo LED $12.625.000 + IVA, más sonido e iluminación aparte","La cotización de Prina venció en junio. Revalidar con Prina, Sound-Light y Dixi sobre el mismo pliego."
+Catering,"AmbientHouse: $28.500 + IVA por persona por día, base mínima 480",Teist: propuesta del 26/06 sin cerrar,Es el hueco más grande. Definir alcance y pedir tres cotizaciones comparables esta semana.
+Vuelos y alojamiento del equipo,Sin cotizar,Sin cotizar,"No hay ni un mail ni una línea en el sheet. Con 8 personas, es plata que hoy no está en ningún número."
+Facturación al exterior,FDL Eventos y Vittal no confirmaron si pueden facturar a la empresa de EE.UU.,"Buscar proveedores que sí facturen, o resolver un circuito de pago local",Resolverlo antes de firmar: puede trabar los dos contratos.
+
+CÓMO LEER ESTA HOJA
+,"Contratado = hay contrato firmado o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción del mismo ítem, NO suma al total. Sin cotizar = sólo hay un estimado del sheet, o ni eso."
+,"La columna Total con IVA ya viene calculada sobre la cotización. La columna Total USD la convierte con el tipo de cambio de arriba, y cae al estimado del sheet cuando no hay cotización."
+,"Los pesos son de la fecha de cada cotización, no de hoy. Prina venció en junio, VMG recotiza si el dólar salta más de 15% y La Rural ajusta el saldo por IPC."
+,"Catering entra con el estimado del sheet. Vuelos y alojamiento del equipo entran en cero porque no hay ni estimado: el costo por persona es un piso, no un techo."
