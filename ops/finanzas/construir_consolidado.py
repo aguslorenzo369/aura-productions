@@ -6,7 +6,7 @@ from openpyxl.utils import get_column_letter as L
 from openpyxl.worksheet.datavalidation import DataValidation
 
 HOY = datetime.date(2026, 9, 2)
-D = json.load(open('consolidado.json'))
+D = json.load(open('datos_origen.json'))
 
 FUENTE = 'Arial'
 AZUL  = Font(name=FUENTE, size=10, color='0000FF')          # input manual
@@ -45,6 +45,55 @@ def encabezados(ws, fila, cols):
         ws.column_dimensions[L(j)].width = ancho
     ws.freeze_panes = ws.cell(fila + 1, 1)
 
+# ---------- orden canonico: bloque (categoria) y pais (itinerario) ----------
+PAISES = ['Ecuador','Panamá','Rep. Dominicana','Colombia 1ra','México','Chile','Uruguay',
+          'Argentina','Salvador','Colombia 2da','Costa Rica','Perú','Guatemala','España']
+ORDEN_PAIS = {p: i for i, p in enumerate(PAISES)}
+FECHA_EVENTO = {'Ecuador':'25 jul','Panamá':'08 ago','Rep. Dominicana':'15 ago','Colombia 1ra':'29 ago',
+                'México':'05 sep','Chile':'12 sep','Uruguay':'19 sep','Argentina':'03 oct','Salvador':'10 oct',
+                'Colombia 2da':'31 oct','Costa Rica':'07 nov','Perú':'14 nov','Guatemala':'21 nov','España':'28 nov'}
+NORM_PAIS = {'Colombia':'Colombia 1ra','Colombia 1ra':'Colombia 1ra','Pendones':'Colombia 1ra',
+             'Republica D.':'Rep. Dominicana','Rep. Dominicana':'Rep. Dominicana',
+             'Panama':'Panamá','Panamá':'Panamá','Ecuador ':'Ecuador','Ecuador':'Ecuador',
+             'México':'México','Mexico':'México','Chile':'Chile','Uruguay':'Uruguay','Argentina':'Argentina',
+             'Salvador':'Salvador','Costa Rica':'Costa Rica','Perú':'Perú','Guatemala':'Guatemala','España':'España'}
+def pais_canonico(p):
+    return NORM_PAIS.get(str(p).strip(), str(p).strip())
+
+BLOQUES = ['Lugar','Salas MM','Técnica','Producción','Dinámica','Merch','Catering','Trámites','Equipo','Otros']
+ORDEN_BLOQUE = {b: i for i, b in enumerate(BLOQUES)}
+NORM_BLOQUE = {'lugar':'Lugar','salas mm':'Salas MM','tecnica':'Técnica','técnica':'Técnica',
+               'produccion':'Producción','producción':'Producción','dinamica':'Dinámica','dinámica':'Dinámica',
+               'merch':'Merch','catering':'Catering','tramites':'Trámites','trámites':'Trámites','equipo':'Equipo'}
+def bloque_canonico(c):
+    return NORM_BLOQUE.get(str(c).strip().lower(), 'Otros')
+def clave_orden(pais, cat):
+    return (ORDEN_PAIS.get(pais_canonico(pais), 99), ORDEN_BLOQUE.get(bloque_canonico(cat), 99))
+
+FBLOQUE = PatternFill('solid', fgColor='DCE6F1')   # banda de bloque (categoria)
+FPAIS   = PatternFill('solid', fgColor='1F3864')   # banda de pais
+
+def banda_pais(ws, fila, pais, ncols, extra=''):
+    """Escribe la banda de encabezado de un pais y devuelve la fila siguiente."""
+    ws.merge_cells(start_row=fila, start_column=1, end_row=fila, end_column=ncols)
+    c = ws.cell(fila, 1, f'{pais}   ·   evento {FECHA_EVENTO.get(pais, "sin fecha")}' + (f'   ·   {extra}' if extra else ''))
+    c.font = Font(name=FUENTE, size=11, bold=True, color='FFFFFF')
+    c.fill = FPAIS
+    c.alignment = Alignment(vertical='center', indent=1)
+    ws.row_dimensions[fila].height = 21
+    for j in range(1, ncols + 1):
+        ws.cell(fila, j).fill = FPAIS
+    return fila + 1
+
+def banda_bloque(ws, fila, bloque, ncols):
+    ws.merge_cells(start_row=fila, start_column=1, end_row=fila, end_column=ncols)
+    c = ws.cell(fila, 1, f'    {bloque}')
+    c.font = Font(name=FUENTE, size=9, bold=True, color='1F3864')
+    c.fill = FBLOQUE
+    for j in range(1, ncols + 1):
+        ws.cell(fila, j).fill = FBLOQUE
+    return fila + 1
+
 MAPP = {'Colombia 1ra':'Colombia','Pendones':'Colombia','Republica D.':'Rep. Dominicana',
         'Panama':'Panamá','Ecuador ':'Ecuador'}
 kp = lambda p: MAPP.get(str(p).strip(), str(p).strip())
@@ -69,6 +118,9 @@ filas = [
  ('', ''),
  ('Supuesto de tipo de cambio', 'Las hojas por evento del MASTER están en moneda local con tasas inconsistentes. Ver hoja EVENTOS, columna "Nota FX": ahí está la tasa que se usó para cada conversión y por qué.'),
  ('Supuesto de no duplicación', 'CALENDARIO UNIFICADO (cuotas futuras y pagadas) y PAGOS REALIZADOS (histórico) son conjuntos disjuntos: el histórico termina el 03/07/2026 y el calendario empieza el 10/07/2026. Sumarlos NO duplica.'),
+ ('Orden de las hojas de datos', 'CALENDARIO UNIFICADO, PAGOS REALIZADOS y CONTRATOS están agrupados por país en orden de gira (Ecuador → España) y, dentro de cada país, por bloque: Lugar, Salas MM, Técnica, Producción, Dinámica, Merch, Catering, Trámites, Equipo. Cada país cierra con su subtotal.'),
+ ('Cómo reordenar', 'Las columnas País y Bloque están repetidas en cada fila de detalle y el filtro está activo en la fila de encabezado: podés filtrar por bloque para ver, por ejemplo, todos los pagos de Lugar de la gira. Las bandas azules son títulos, no datos: si ordenás la tabla se mezclan, mejor usá el filtro.'),
+ ('', ''),
  ('Advertencia importante', 'El presupuesto de la hoja EVENTOS ($1.087.979) y el calendario de pagos ($417.765) NO son comparables: el primero es el costo total de producción de cada evento, el segundo sólo los contratos con anticipo/saldo. No los sumes.'),
  ('', ''),
  ('Qué falta cargar', 'Colombia 2da no tiene hoja de presupuesto en el MASTER. Perú, España y Colombia 2da no tienen ninguna cuota cargada en el calendario.'),
@@ -163,11 +215,12 @@ ws.column_dimensions['D'].width = 16
 
 # ============================ 3. CALENDARIO UNIFICADO ============================
 ws = hoja('CALENDARIO UNIFICADO', 'Calendario unificado de cuotas',
-          'Las 54 cuotas del CRONOGRAMA, con días de atraso y contraste contra el MASTER.')
-cols = [('#',5),('Fecha pago',12),('País',16),('Categoría',12),('Concepto / proveedor',46),
-        ('Cuota',20),('Monto USD',13),('Estado',12),('Días vs corte',13),('Semáforo',14),
-        ('Contradice al MASTER',44)]
-encabezados(ws, 4, cols)
+          'Las 54 cuotas del CRONOGRAMA agrupadas por país (orden de gira) y, dentro de cada país, por bloque.')
+COLS_CAL = [('Bloque',13),('Fecha pago',12),('Concepto / proveedor',46),('Cuota',20),
+            ('Monto USD',13),('Estado',12),('Días vs corte',13),('Semáforo',13),
+            ('País',15),('Contradice al MASTER',44)]
+NC = len(COLS_CAL)
+encabezados(ws, 4, COLS_CAL)
 CONTRA = {
  ('Ecuador','Placas reconocimiento'): 'MASTER dice "Pendiente" (100% sin abonar)',
  ('Colombia 1ra','Camisetas'): 'MASTER dice "Pendiente" (100% sin abonar, total $433)',
@@ -176,87 +229,173 @@ CONTRA = {
  ('Colombia 1ra','Gorras'): 'Etiqueta "Cuota 1 de 1 (100%)" pero es la 1ra mitad del saldo de $2.000',
  ('Panamá','Faranda (Salas MM)'): 'La hoja Panamá registra $1.190 en Faranda + $1.375 en Hotel America Golden Tower',
 }
+cal_orden = sorted(D['calendario'],
+                   key=lambda c: (clave_orden(c['pais'], c['cat']), c['fecha']))
 r = 5
-for i, c in enumerate(sorted(D['calendario'], key=lambda x: x['fecha']), 1):
+filas_detalle_cal, filas_subtotal_pais = [], []
+pais_actual = bloque_actual = None
+inicio_pais = None
+def cerrar_pais(ws, r, inicio, pais):
+    """Escribe la fila de subtotal del país y devuelve la fila siguiente."""
+    ws.cell(r,1,f'Subtotal {pais}').font = BOLD
+    for j, col in ((5,'E'),):
+        pass
+    c = ws.cell(r,5,f'=SUMIF($F${inicio}:$F${r-1},"<>",$E${inicio}:$E${r-1})')
+    c.font = BOLD; c.number_format = MON
+    c = ws.cell(r,6,f'=SUMIF($F${inicio}:$F${r-1},"Programado",$E${inicio}:$E${r-1})')
+    c.font = BOLD; c.number_format = MON
+    ws.cell(r,7,'pendiente →').font = SUB
+    for j in range(1, NC+1):
+        ws.cell(r,j).fill = FGRIS; ws.cell(r,j).border = BOX
+    return r + 1
+
+for c in cal_orden:
+    p = pais_canonico(c['pais']); b = bloque_canonico(c['cat'])
+    if p != pais_actual:
+        if pais_actual is not None:
+            r = cerrar_pais(ws, r, inicio_pais, pais_actual); filas_subtotal_pais.append(r-1)
+        r = banda_pais(ws, r, p, NC)
+        inicio_pais = r
+        pais_actual, bloque_actual = p, None
+    if b != bloque_actual:
+        r = banda_bloque(ws, r, b, NC); bloque_actual = b
     f = datetime.date.fromisoformat(c['fecha'])
-    ws.cell(r,1,i).font = NEGRO
+    ws.cell(r,1,b).font = SUB
     ws.cell(r,2,f).number_format = FECHA; ws.cell(r,2).font = AZUL
-    ws.cell(r,3,c['pais']).font = AZUL
-    ws.cell(r,4,c['cat']).font = AZUL
-    ws.cell(r,5,c['concepto']).font = AZUL
-    ws.cell(r,6,c['cuota']).font = AZUL
-    cc = ws.cell(r,7,c['monto']); cc.number_format = MON; cc.font = AZUL
-    ws.cell(r,8,c['estado']).font = AZUL
-    ws.cell(r,9,f'=IF(H{r}="Pagado","",TABLERO!$G$2-B{r})').font = NEGRO
-    ws.cell(r,10,f'=IF(H{r}="Pagado","PAGADO",IF(B{r}<TABLERO!$G$2,"VENCIDO",IF(B{r}<=TABLERO!$G$2+30,"< 30 dias","futuro")))').font = NEGRO
+    ws.cell(r,3,c['concepto']).font = AZUL
+    ws.cell(r,4,c['cuota']).font = AZUL
+    cc = ws.cell(r,5,c['monto']); cc.number_format = MON; cc.font = AZUL
+    ws.cell(r,6,c['estado']).font = AZUL
+    ws.cell(r,7,f'=IF(F{r}="Pagado","",TABLERO!$G$2-B{r})').font = NEGRO
+    ws.cell(r,8,f'=IF(F{r}="Pagado","PAGADO",IF(B{r}<TABLERO!$G$2,"VENCIDO",IF(B{r}<=TABLERO!$G$2+30,"< 30 dias","futuro")))').font = NEGRO
+    ws.cell(r,9,p).font = NEGRO
     txt = ''
-    for (pais, con), msg in CONTRA.items():
-        if c['pais'] == pais and con.lower() in c['concepto'].lower(): txt = msg
-    ws.cell(r,11,txt).font = NEGRO
+    for (pp, con), msg in CONTRA.items():
+        if p == pp and con.lower() in c['concepto'].lower(): txt = msg
+    ws.cell(r,10,txt).font = NEGRO
     if c['estado'] != 'Pagado' and f < HOY:
-        for j in range(1,12): ws.cell(r,j).fill = FROJO
+        for j in range(1,NC+1): ws.cell(r,j).fill = FROJO
     elif c['estado'] != 'Pagado' and (f-HOY).days <= 30:
-        for j in range(1,12): ws.cell(r,j).fill = FAMAR
-    if txt: ws.cell(r,11).fill = FAMAR
-    for j in range(1,12): ws.cell(r,j).border = BOX
+        for j in range(1,NC+1): ws.cell(r,j).fill = FAMAR
+    if txt: ws.cell(r,10).fill = FAMAR
+    for j in range(1,NC+1): ws.cell(r,j).border = BOX
+    filas_detalle_cal.append(r)
     r += 1
-ws.cell(r,5,'TOTAL').font = BOLD
-c = ws.cell(r,7,f'=SUM(G5:G{r-1})'); c.font = BOLD; c.number_format = MON; c.fill = FGRIS
-c = ws.cell(r+1,5,'Pagado'); c.font = BOLD
-c = ws.cell(r+1,7,f'=SUMIF(H5:H{r-1},"Pagado",G5:G{r-1})'); c.font = BOLD; c.number_format = MON; c.fill = FVERD
-c = ws.cell(r+2,5,'Pendiente real'); c.font = BOLD
-c = ws.cell(r+2,7,f'=SUMIF(H5:H{r-1},"Programado",G5:G{r-1})'); c.font = BOLD; c.number_format = MON; c.fill = FAMAR
-c = ws.cell(r+3,5,'De eso, VENCIDO'); c.font = BOLD
-c = ws.cell(r+3,7,f'=SUMIFS(G5:G{r-1},H5:H{r-1},"Programado",B5:B{r-1},"<"&TABLERO!$G$2)'); c.font = BOLD; c.number_format = MON; c.fill = FROJO
-fin_cal = r - 1
+r = cerrar_pais(ws, r, inicio_pais, pais_actual); filas_subtotal_pais.append(r-1)
+
+r += 1
+suma_sub = '+'.join(f'E{x}' for x in filas_subtotal_pais)
+suma_prog = '+'.join(f'F{x}' for x in filas_subtotal_pais)
+for etiqueta, formula, relleno in [
+    ('TOTAL del calendario', f'={suma_sub}', FGRIS),
+    ('Pagado',  f'=SUMIF($F$5:$F${r-2},"Pagado",$E$5:$E${r-2})', FVERD),
+    ('Pendiente real', f'={suma_prog}', FAMAR),
+    ('De eso, VENCIDO', f'=SUMIFS($E$5:$E${r-2},$F$5:$F${r-2},"Programado",$B$5:$B${r-2},"<"&TABLERO!$G$2)', FROJO)]:
+    ws.cell(r,3,etiqueta).font = BOLD
+    c = ws.cell(r,5,formula); c.font = BOLD; c.number_format = MON; c.fill = relleno; c.border = BOX
+    r += 1
+ws.auto_filter.ref = f'A4:{L(NC)}4'
 
 # ============================ 4. PAGOS REALIZADOS ============================
 ws = hoja('PAGOS REALIZADOS', 'Histórico de pagos ejecutados (marzo–julio 2026)',
-          'Anticipos y pagos completos previos al arranque del calendario. Conjunto disjunto del CALENDARIO UNIFICADO.')
-encabezados(ws, 4, [('Fecha',12),('País',18),('Categoría',14),('Proveedor / concepto',52),('% del total',12),('Monto USD',14)])
+          'Anticipos previos al arranque del calendario, agrupados por país y bloque. Conjunto disjunto del CALENDARIO UNIFICADO.')
+COLS_H = [('Bloque',13),('Fecha',12),('Proveedor / concepto',52),('% del total',12),
+          ('Monto USD',14),('País',16),('País en el archivo original',24)]
+NC = len(COLS_H)
+encabezados(ws, 4, COLS_H)
+hist_orden = sorted(D['historico'], key=lambda h: (clave_orden(h['pais'], h['cat']), h['fecha']))
 r = 5
-for h in sorted(D['historico'], key=lambda x: x['fecha']):
-    ws.cell(r,1,datetime.date.fromisoformat(h['fecha'])).number_format = FECHA
-    ws.cell(r,1).font = AZUL
-    for j, v in enumerate([h['pais'], h['cat'], h['concepto'], h['pct']], 2):
-        ws.cell(r,j,v).font = AZUL
-    c = ws.cell(r,6,h['monto']); c.number_format = MON; c.font = AZUL
-    if str(h['pct']).strip() == '?': ws.cell(r,5).fill = FAMAR
-    for j in range(1,7): ws.cell(r,j).border = BOX
+subtot_h = []
+pais_actual = bloque_actual = None; inicio_pais = None
+for h in hist_orden:
+    p = pais_canonico(h['pais']); b = bloque_canonico(h['cat'])
+    if p != pais_actual:
+        if pais_actual is not None:
+            ws.cell(r,3,f'Subtotal {pais_actual}').font = BOLD
+            c = ws.cell(r,5,f'=SUM(E{inicio_pais}:E{r-1})'); c.font = BOLD; c.number_format = MON
+            for j in range(1,NC+1): ws.cell(r,j).fill = FGRIS; ws.cell(r,j).border = BOX
+            subtot_h.append(r); r += 1
+        r = banda_pais(ws, r, p, NC); inicio_pais = r
+        pais_actual, bloque_actual = p, None
+    if b != bloque_actual:
+        r = banda_bloque(ws, r, b, NC); bloque_actual = b
+    ws.cell(r,1,b).font = SUB
+    ws.cell(r,2,datetime.date.fromisoformat(h['fecha'])).number_format = FECHA
+    ws.cell(r,2).font = AZUL
+    ws.cell(r,3,h['concepto']).font = AZUL
+    ws.cell(r,4,h['pct']).font = AZUL
+    c = ws.cell(r,5,h['monto']); c.number_format = MON; c.font = AZUL
+    ws.cell(r,6,p).font = NEGRO
+    orig = str(h['pais']).strip()
+    ws.cell(r,7,orig if orig != p else '').font = SUB
+    if orig != p: ws.cell(r,7).fill = FAMAR
+    if str(h['pct']).strip() == '?': ws.cell(r,4).fill = FAMAR
+    for j in range(1,NC+1): ws.cell(r,j).border = BOX
     r += 1
-ws.cell(r,4,'TOTAL').font = BOLD
-c = ws.cell(r,6,f'=SUM(F5:F{r-1})'); c.font = BOLD; c.number_format = MON; c.fill = FGRIS
+ws.cell(r,3,f'Subtotal {pais_actual}').font = BOLD
+c = ws.cell(r,5,f'=SUM(E{inicio_pais}:E{r-1})'); c.font = BOLD; c.number_format = MON
+for j in range(1,NC+1): ws.cell(r,j).fill = FGRIS; ws.cell(r,j).border = BOX
+subtot_h.append(r); r += 2
+ws.cell(r,3,'TOTAL histórico').font = BOLD
+c = ws.cell(r,5,'=' + '+'.join(f'E{x}' for x in subtot_h)); c.font = BOLD; c.number_format = MON; c.fill = FGRIS; c.border = BOX
+ws.auto_filter.ref = f'A4:{L(NC)}4'
 
 # ============================ 5. CONTRATOS ============================
 ws = hoja('CONTRATOS', 'Contratos y reservas (hoja PAGOS del MASTER)',
-          '44 contratos. "Saldo master" es el saldo que quedó escrito el día de la reserva: no se actualiza solo.')
-encabezados(ws, 4, [('Fila origen',10),('Fecha reserva',13),('País',16),('Categoría',13),
-                    ('Proveedor',42),('Valor total',14),('% 1er pago',11),('1er pago',14),
-                    ('Saldo master',14),('Fecha saldo',13),('Alerta',52)])
+          '44 contratos por país y bloque. "Saldo master" es el saldo escrito el día de la reserva: no se actualiza solo.')
+COLS_C = [('Bloque',13),('Fecha reserva',13),('Proveedor',42),('Valor total',14),('% 1er pago',11),
+          ('1er pago',14),('Saldo master',14),('Fecha saldo',13),('País',16),
+          ('Fila origen',10),('Alerta',50)]
+NC = len(COLS_C)
+encabezados(ws, 4, COLS_C)
+cont_orden = sorted(D['contratos'], key=lambda c: (clave_orden(c['pais'], c['cat']), c['proveedor'].lower()))
 r = 5
-for c in D['contratos']:
-    ws.cell(r,1,c['fila']).font = NEGRO
+subtot_c = []
+pais_actual = bloque_actual = None; inicio_pais = None
+def cerrar_contratos(ws, r, inicio, pais):
+    ws.cell(r,3,f'Subtotal {pais}').font = BOLD
+    for j in (4,7):
+        c = ws.cell(r,j,f'=SUM({L(j)}{inicio}:{L(j)}{r-1})'); c.font = BOLD; c.number_format = MON
+    for j in range(1,NC+1): ws.cell(r,j).fill = FGRIS; ws.cell(r,j).border = BOX
+    return r + 1
+for c in cont_orden:
+    p = pais_canonico(c['pais']); b = bloque_canonico(c['cat'])
+    if p != pais_actual:
+        if pais_actual is not None:
+            r = cerrar_contratos(ws, r, inicio_pais, pais_actual); subtot_c.append(r-1)
+        r = banda_pais(ws, r, p, NC); inicio_pais = r
+        pais_actual, bloque_actual = p, None
+    if b != bloque_actual:
+        r = banda_bloque(ws, r, b, NC); bloque_actual = b
+    ws.cell(r,1,b).font = SUB
     if c['fecha_reserva']:
         ws.cell(r,2,datetime.date.fromisoformat(c['fecha_reserva'])).number_format = FECHA
     ws.cell(r,2).font = AZUL
-    for j, v in enumerate([c['pais'], c['cat'], c['proveedor']], 3): ws.cell(r,j,v).font = AZUL
-    for j, v in enumerate([c['total'], c['pct1'], c['pago1'] if c['pago1'] is not None else c['pago1_txt'], c['saldo']], 6):
+    ws.cell(r,3,c['proveedor']).font = AZUL
+    for j, v in ((4,c['total']),(5,c['pct1']),
+                 (6,c['pago1'] if c['pago1'] is not None else c['pago1_txt']),(7,c['saldo'])):
         cc = ws.cell(r,j,v); cc.font = AZUL
-        if j in (6,8,9) and isinstance(v,(int,float)): cc.number_format = MON
-        if j == 7 and isinstance(v,(int,float)): cc.number_format = PCT
+        if j in (4,6,7) and isinstance(v,(int,float)): cc.number_format = MON
+        if j == 5 and isinstance(v,(int,float)): cc.number_format = PCT
     if c['fecha_saldo']:
-        ws.cell(r,10,datetime.date.fromisoformat(c['fecha_saldo'])).number_format = FECHA
-    ws.cell(r,10).font = AZUL
+        ws.cell(r,8,datetime.date.fromisoformat(c['fecha_saldo'])).number_format = FECHA
+    ws.cell(r,8).font = AZUL
+    ws.cell(r,9,p).font = NEGRO
+    ws.cell(r,10,c['fila']).font = SUB
     al = []
     if c['pago1_txt']: al.append('Sin abonar según MASTER — revisar contra el CALENDARIO')
     if c['pago1'] is None and not c['pago1_txt'] and c['total']: al.append('Contrato sin ningún dato de pago en el MASTER')
     if str(c['pct1']).strip() == '?': al.append('% del primer pago desconocido')
     ws.cell(r,11,' · '.join(al)).font = NEGRO
     if al: ws.cell(r,11).fill = FAMAR
-    for j in range(1,12): ws.cell(r,j).border = BOX
+    for j in range(1,NC+1): ws.cell(r,j).border = BOX
     r += 1
-ws.cell(r,5,'TOTAL contratado').font = BOLD
-c = ws.cell(r,6,f'=SUM(F5:F{r-1})'); c.font = BOLD; c.number_format = MON; c.fill = FGRIS
+r = cerrar_contratos(ws, r, inicio_pais, pais_actual); subtot_c.append(r-1)
+r += 1
+ws.cell(r,3,'TOTAL contratado').font = BOLD
+c = ws.cell(r,4,'=' + '+'.join(f'D{x}' for x in subtot_c)); c.font = BOLD; c.number_format = MON; c.fill = FGRIS; c.border = BOX
+c = ws.cell(r,7,'=' + '+'.join(f'G{x}' for x in subtot_c)); c.font = BOLD; c.number_format = MON; c.fill = FGRIS; c.border = BOX
+ws.auto_filter.ref = f'A4:{L(NC)}4'
 
 # ============================ 6. EVENTOS ============================
 ws = hoja('EVENTOS', 'Presupuesto por evento y tipos de cambio',
