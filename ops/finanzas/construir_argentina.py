@@ -11,9 +11,10 @@ import datetime
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter as L
+from openpyxl.worksheet.datavalidation import DataValidation
 
 HOY = datetime.date(2026, 9, 2)
-TC_DEFECTO = 1535.0   # dolar oficial venta, Banco Nacion, 02/09/2026
+TC_DEFECTO = 1530.0   # dolar operativo acordado con Agustina, 02/09/2026
 
 F = 'Arial'
 AZUL  = Font(name=F, size=10, color='0000FF')
@@ -63,6 +64,13 @@ def banda(ws, fila, texto, ncols):
     for j in range(1, ncols + 1): ws.cell(fila, j).fill = FPAIS
     return fila + 1
 
+def banda_bloque(ws, fila, texto, ncols):
+    ws.merge_cells(start_row=fila, start_column=1, end_row=fila, end_column=ncols)
+    c = ws.cell(fila, 1, f'  {texto}')
+    c.font = Font(name=F, size=9, bold=True, color='1F3864'); c.fill = FBLOQ
+    for j in range(1, ncols + 1): ws.cell(fila, j).fill = FBLOQ
+    return fila + 1
+
 # ============================================================================
 # DATOS
 # ============================================================================
@@ -70,41 +78,51 @@ def banda(ws, fila, texto, ncols):
 #  estimado_usd_sheet, fuente)
 # estado: Contratado / Cotizado / Alternativa / Sin cotizar
 ARS_, USD_ = 'ARS', 'USD'
+# estado: Cerrado / Contratado / Cotizado / En revisión / En negociación / Bonificado / Alternativa / Sin cotizar
 ITEMS = [
  # ---------------- SEDE ----------------
  ('Sede', 'Alquiler Pabellón Azul', 'La Rural (contrato CC-00957)',
   'Locación 2 días de evento + 1 día de montaje', USD_, 75000.0, 0.0, 'Contratado',
   70000.0, 'Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)'),
- ('Sede', 'Infraestructura y mobiliario', 'La Rural — Jefatura de Infraestructura',
-  'Paneles oficina producción 25 m², sala staff 100 m², depósito 64 m² (2.500 barras), camarín speakers, mobiliario, dirección técnica, guardia eléctrica y técnica. NO incluye sillas (fila aparte).',
-  ARS_, 23994708.20, 0.0, 'Cotizado', 0.0,
-  'Mail criccio@larural.com.ar 17/08/2026 · total del PDF $66.494.708 menos $42.500.000 de sillas'),
- ('Sede', 'Sillas del público (5.000)', 'La Rural — Infraestructura',
-  'Silla imperio bordó 5.000 u. a $8.500 c/u, dentro del presupuesto de infraestructura',
-  ARS_, 42500000.0, 0.0, 'Alternativa', 0.0,
-  'Mail criccio@larural.com.ar 17/08/2026'),
+ ('Sede', 'Infraestructura La Rural (a filtrar)', 'La Rural — Jefatura de Infraestructura',
+  'Escenario provisional: sólo panelería (oficina de producción, sala de staff, depósito de las barras) + dirección técnica + guardias eléctrica y técnica. Se descontó TODO el mobiliario ($49.636.342) porque Agustina lo consigue aparte más barato. FALTA que marque qué ítems se quedan.',
+  ARS_, 16858366.20, 0.0, 'En revisión', 0.0,
+  'Mail criccio@larural.com.ar 17/08/2026 · total del PDF $66.494.708,20 · ver hoja INFRAESTRUCTURA'),
  ('Sede', 'Sillas del público (5.500)', 'FDL Eventos',
   '4.500 sillas plásticas Munro reforzadas + 1.000 sillas hotel negro + flete. NO incluye armado.',
   ARS_, 25800000.0, 0.21, 'Cotizado', 16500.0,
   'Mail fdleventos@gmail.com 07/08/2026 · pendiente de resolver facturación al exterior'),
+ ('Sede', 'Montaje, acomodación y desmontaje de sillas', 'En negociación',
+  'Montaje previo, acomodación el sábado a la noche después de la dinámica y desmontaje el domingo.',
+  ARS_, 900000.0, 0.0, 'En negociación', 0.0,
+  'Negociación de Agustina · cerrar el número antes de firmar las sillas'),
+ ('Sede', 'Replanteo de sillas (ingeniero)', 'Sin cotizar',
+  'Replanteo del layout de sillas del pabellón. Confirmado que va aparte de la dirección técnica de La Rural.',
+  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Pendiente de pedir presupuesto'),
  ('Sede', 'Conectividad WiFi', 'La Rural — Servicios de Conectividad',
-  '2 redes privadas de 30 Mbps (técnica + staff/acreditación), 2 al 4 de octubre',
+  '2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre',
   ARS_, 1438728.01, 0.21, 'Cotizado', 800.0,
   'Mail conectividad@larural.com.ar 16/06/2026'),
  # ---------------- TÉCNICA ----------------
- ('Técnica', 'Producción técnica integral', 'Prina',
-  'LED 40 m² + video 4 cámaras + sonido Adamson + iluminación + estructura, staff y guardias. 50% anticipo.',
-  ARS_, 48885000.0, 0.21, 'Cotizado', 34000.0,
-  'Mail valentin.andina@prina.net 18/06/2026 · validez 10 días (VENCIDA)'),
- ('Técnica', 'Pantallas LED (alternativa parcial)', 'VMG',
-  'Sólo pantallas LED 65 m² con operadores y traslado',
-  ARS_, 12625000.0, 0.21, 'Alternativa', 0.0,
-  'Mail presupuestos@vmg-web.com 29/06/2026 · recotiza si el dólar salta más de 15%'),
+ ('Técnica', 'Producción técnica', 'Cerrado por Agustina',
+  'Sonido, iluminación, video y LED. Cerrado en dólares.',
+  USD_, 60000.0, 0.0, 'Cerrado', 34000.0,
+  'Negociación de Agustina · reemplaza la cotización vencida de Prina'),
+ ('Técnica', 'Entelado', 'Cerrado por Agustina',
+  'Entelado del pabellón. Negociado a la mitad de lo que estaba cotizado.',
+  ARS_, 24500000.0, 0.0, 'Cerrado', 0.0,
+  'Negociación de Agustina · US$16.000 aprox. al dólar de referencia'),
+ ('Técnica', 'Circuito cerrado (CCTV)', 'Cerrado por Agustina',
+  'Circuito cerrado de cámaras para el pabellón.',
+  USD_, 6209.0, 0.0, 'Cerrado', 0.0, 'Negociación de Agustina'),
+ ('Técnica', 'Bonificado por el proveedor de técnica', 'Sin costo',
+  '500 vallas y efectos especiales, sin cargo. Es lo que evita el gasto de vallado que estaba presupuestado.',
+  USD_, 0.0, 0.0, 'Bonificado', 0.0, 'Negociación de Agustina'),
  # ---------------- SERVICIOS ----------------
  ('Servicios', 'Seguridad y vigilancia', 'Road Seguridad S.A.',
   '263 horas de vigilancia (armado, evento y desarme) + planos de evacuación $715.000 + supervisión general $795.000',
   ARS_, 7218928.96, 0.21, 'Cotizado', 0.0,
-  'Mail presupuestos@roadseguridad.com.ar 12/08/2026 (versión V3 con las modificaciones pedidas)'),
+  'Mail presupuestos@roadseguridad.com.ar 12/08/2026 (versión V3, lista para firmar)'),
  ('Servicios', 'Servicio médico', 'Vittal — Socorro Médico Privado',
   '1 UTIM TRI con dos médicos + enfermero/chofer, los tres días (2, 3 y 4 de octubre)',
   ARS_, 6366521.27, 0.105, 'Cotizado', 0.0,
@@ -117,11 +135,22 @@ ITEMS = [
   'Roll off con disposición final incluida. Cotización base abril 2026.',
   ARS_, 1471608.62, 0.21, 'Cotizado', 0.0,
   'Mail higiaeventos 22/06/2026 (adjunto Gale) · se factura 100% por adelantado'),
+ ('Servicios', 'Baños químicos — ecobaños', 'Sin cotizar',
+  'Decidido: ecobaños, no los químicos tradicionales. Más limpios, mejor a la vista y ecofriendly. Falta pedir presupuesto.',
+  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Decisión de Agustina · pendiente de cotizar'),
  ('Servicios', 'Seguro de accidentes personales', 'Chanes Seguros',
   'Cobertura MIA (muerte, invalidez y asistencia médica) para 150 personas, exigida por La Rural',
   ARS_, 953151.93, 0.0, 'Cotizado', 400.0,
   'Mail nestor@chanesseguros.com.ar 13/07/2026 · premio único, cotizado para 15-19/07'),
- # ---------------- MERCH Y GRÁFICA ----------------
+ # ---------------- CATERING ----------------
+ ('Catering', 'Catering VIP, staff y equipo', 'Grupo Ambient',
+  'Número final por las dos propuestas juntas: 600 lunchbox para los VIP + desayuno, almuerzo y cena para 150 personas.',
+  USD_, 13582.0, 0.0, 'Cerrado', 33820.0,
+  'Cierre de Agustina con Grupo Ambient · reemplaza la estimación de $25.000.000'),
+ ('Catering', 'Food trucks', 'Sin costo',
+  'No los paga la producción.',
+  USD_, 0.0, 0.0, 'Bonificado', 0.0, 'Confirmado por Agustina'),
+ # ---------------- MERCH ----------------
  ('Merch', 'Cintas portacredencial (1.300)', 'Blocko',
   'Cinta raso 25 mm impresa 4 colores dos caras + mosquetón zamak, $1.346 c/u',
   ARS_, 1749800.0, 0.21, 'Cotizado', 0.0,
@@ -132,33 +161,34 @@ ITEMS = [
  ('Merch', 'Lanyards', 'Proveedor Colombia',
   'Contrato cerrado, 50% abonado el 25/06. Saldo US$850 al 13/09.',
   USD_, 1698.59, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
- ('Merch', 'Gorras', 'Proveedor Colombia',
-  'Pagado 100% el 25/06',
+ ('Merch', 'Gorras', 'Proveedor Colombia', 'Pagado 100% el 25/06',
   USD_, 1825.0, 0.0, 'Contratado', 5000.0, 'Hoja PAGOS del master'),
  ('Merch', 'Gráfica Argentina', 'Proveedor Colombia',
   'Contrato cerrado, saldo US$1.839 al 13/09',
   USD_, 2481.0, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
+ ('Merch', 'Marquetería y enmarcado', 'Sin cotizar',
+  'Enmarcado de las certificaciones y los premios. Rubro nuevo, no estaba en ninguna planilla.',
+  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Agregado por Agustina · pendiente de cotizar'),
  ('Merch', 'Resto de merch e impresos', 'Varios (merch desde Colombia)',
-  'Contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas, manillas',
+  'Contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas y manillas',
   USD_, 0.0, 0.0, 'Sin cotizar', 8689.0,
   'Estimado de la hoja Argentina del master; sin cotización argentina'),
- # ---------------- CATERING ----------------
- ('Catering', 'Catering VIP, staff y equipo', 'A definir (Teist / Ambient / Azulado)',
-  'AmbientHouse cotizó viandas a $28.500 + IVA por persona por día con base mínima de 480, y se rechazó por estar a precio de consumidor final. Teist envió propuesta el 26/06 sin cerrar.',
-  USD_, 0.0, 0.0, 'Sin cotizar', 33820.0,
-  'Estimado de la hoja Argentina del master; ninguna cotización aceptada todavía'),
  # ---------------- PRODUCCIÓN ----------------
- ('Producción', 'Unifilas y vallado', 'A definir', 'Estimado del sheet, sin cotización',
-  USD_, 0.0, 0.0, 'Sin cotizar', 2450.0, 'Hoja Argentina del master (unifilas US$1.200 + vallas US$1.250)'),
- ('Producción', 'DJ', 'A definir', 'Estimado del sheet', USD_, 0.0, 0.0, 'Sin cotizar', 500.0,
-  'Hoja Argentina del master'),
- ('Producción', 'Escoltas (2)', 'A definir', 'Estimado del sheet', USD_, 0.0, 0.0, 'Sin cotizar', 1000.0,
-  'Hoja Argentina del master'),
- ('Producción', 'Master Mind Hit', 'A definir', 'Sala adicional', USD_, 0.0, 0.0, 'Sin cotizar', 3000.0,
-  'Hoja Argentina del master'),
+ ('Producción', 'Unifilas', 'A definir', 'Estimado del sheet, sin cotización',
+  USD_, 0.0, 0.0, 'Sin cotizar', 1200.0, 'Hoja Argentina del master'),
+ ('Producción', 'Vallado (500 vallas)', 'Bonificado por técnica',
+  'Las 500 vallas las regala el proveedor de técnica. Estaban presupuestadas en US$1.250.',
+  USD_, 0.0, 0.0, 'Bonificado', 1250.0, 'Negociación de Agustina'),
+ ('Producción', 'DJ', 'A definir', 'Estimado del sheet',
+  USD_, 0.0, 0.0, 'Sin cotizar', 500.0, 'Hoja Argentina del master'),
+ ('Producción', 'Escoltas (2)', 'A definir', 'Estimado del sheet',
+  USD_, 0.0, 0.0, 'Sin cotizar', 1000.0, 'Hoja Argentina del master'),
+ ('Producción', 'Master Mind Hit', 'A definir', 'Sala adicional',
+  USD_, 0.0, 0.0, 'Sin cotizar', 3000.0, 'Hoja Argentina del master'),
  ('Producción', 'Personal logístico', 'A definir', 'La hoja del master lo tiene en US$0',
   USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Hoja Argentina del master · valor en cero'),
- ('Producción', 'Intercoms', 'Proveedor Colombia', 'Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09',
+ ('Producción', 'Intercoms', 'Proveedor Colombia',
+  'Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09',
   USD_, 560.0, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
  # ---------------- EQUIPO ----------------
  ('Equipo', 'Vuelos del equipo', 'Sin cotizar',
@@ -229,12 +259,14 @@ for bloque in orden_bloques:
         c = ws.cell(r, 7, iva or None); c.font = AZUL; c.number_format = PCT
         c = ws.cell(r, 8, f'=IF(F{r}="","",F{r}*(1+N(G{r})))'); c.font = NEGRO
         c.number_format = ARS if mon == ARS_ else USD
-        c = ws.cell(r, 9, f'=IF(H{r}="",N(J{r}),IF(E{r}="USD",H{r},H{r}/TABLERO!$C$4))')
+        c = ws.cell(r, 9, f'=IF(D{r}="Bonificado",0,IF(H{r}="",N(J{r}),IF(E{r}="USD",H{r},H{r}/TABLERO!$C$4)))')
         c.font = NEGRO; c.number_format = USD
         c = ws.cell(r, 10, est or None); c.font = AZUL; c.number_format = USD
         c = ws.cell(r, 11, f'=IF(D{r}="Alternativa","",I{r}-N(J{r}))'); c.font = NEGRO; c.number_format = USD
         ws.cell(r, 12, fuente).font = SUB
-        relleno = {'Contratado': FVERD, 'Cotizado': None, 'Alternativa': FGRIS, 'Sin cotizar': FAMAR}[estado]
+        relleno = {'Cerrado': FVERD, 'Contratado': FVERD, 'Cotizado': None, 'En revisión': FAMAR,
+                   'En negociación': FAMAR, 'Bonificado': FGRIS, 'Alternativa': FGRIS,
+                   'Sin cotizar': FAMAR}[estado]
         if relleno:
             for j in range(1, NC + 1): ws.cell(r, j).fill = relleno
         for j in range(1, NC + 1):
@@ -348,26 +380,29 @@ ws = hoja('DECISIONES', 'Decisiones abiertas que mueven el número',
 COLS = [('Decisión', 34), ('Opción A', 34), ('Opción B', 34), ('Diferencia', 15), ('Qué hay que hacer', 56)]
 encabezados(ws, 4, COLS)
 DEC = [
- ('Sillas del público',
-  'La Rural: 5.000 sillas imperio bordó por $42.500.000 (sin IVA, armado incluido)',
-  'FDL Eventos: 5.500 sillas por $25.800.000 + IVA, sin armado ni facturación al exterior resuelta',
-  '=(42500000-25800000*1.21)/TABLERO!$C$4',
-  'Pedir a La Rural el costo del armado por separado. Si armar las de FDL cuesta menos que la diferencia, conviene FDL.'),
- ('Técnica',
-  'Prina integral: $48.885.000 + IVA (sonido, luces, LED, video, estructura y staff)',
-  'Armado por partes: VMG sólo LED $12.625.000 + IVA, más sonido e iluminación por separado',
-  '', 'La cotización de Prina venció en junio. Pedir revalidación a Prina, Sound-Light y Dixi con el mismo pliego y comparar en una sola planilla.'),
- ('Catering',
-  'AmbientHouse: viandas $28.500 + IVA por persona por día, base mínima 480',
-  'Teist: propuesta del 26/06 sin cerrar. Azulado nunca envió.',
-  '', 'Es el hueco más grande del presupuesto. Definir alcance (¿desayuno VIP para 1.000?) y pedir tres cotizaciones comparables esta semana.'),
+ ('Infraestructura de La Rural',
+  'Presupuesto completo: $66.494.708 (US$43.461), con las 5.000 sillas y todo el mobiliario',
+  'Sólo panelería + dirección técnica + guardias: $16.858.366 (US$11.019). El mobiliario se compra aparte.',
+  '=(66494708.2-16858366.2)/TABLERO!$C$4',
+  'Agustina marca ítem por ítem qué se queda. La hoja INFRAESTRUCTURA tiene las 28 líneas del presupuesto para filtrar.'),
+ ('Montaje de las sillas',
+  'La Rural con las sillas incluidas y armadas',
+  'FDL Eventos + montaje/acomodación/desmontaje negociado en $900.000',
+  '', 'Con FDL a $31.218.000 más $900.000 de montaje son US$20.992 contra US$27.778 de La Rural. Cerrar el número del montaje y firmar.'),
+ ('Catering — cerrado', 'Grupo Ambient: US$13.582 por las dos propuestas',
+  'La planilla tenía US$33.820 estimados',
+  '=13582-33820', 'Cerrado. Es la mejor negociación del evento: US$20.238 por debajo de lo presupuestado.'),
+ ('Rubros nuevos sin cotizar',
+  'Ecobaños, marquetería de certificaciones y premios, replanteo de sillas con ingeniero',
+  'Hoy entran en US$0',
+  '', 'Pedir las tres cotizaciones esta semana. Son los últimos huecos que quedan además de vuelos y alojamiento.'),
  ('Vuelos y alojamiento del equipo',
   'Sin cotizar', 'Sin cotizar', '',
-  'No hay ni un mail ni una línea en el sheet. Con 8 personas del equipo interno, es plata que hoy no está en ningún número.'),
+  'No hay ni un mail ni una línea en el sheet. Con 8 personas de equipo interno, es el hueco más grande que queda.'),
  ('Facturación al exterior',
   'FDL Eventos y Vittal no confirmaron si pueden facturar a la empresa de EE.UU.',
   'Buscar proveedores que sí facturen, o resolver un circuito de pago local',
-  '', 'Resolverlo antes de firmar: es el punto que puede trabar los dos contratos.'),
+  '', 'Resolverlo antes de firmar: puede trabar los dos contratos.'),
 ]
 r = 5
 for dec, a, b, formula, accion in DEC:
@@ -382,6 +417,80 @@ for dec, a, b, formula, accion in DEC:
         ws.cell(r, j).alignment = Alignment(wrap_text=True, vertical='top')
     ws.row_dimensions[r].height = 56
     r += 1
+
+# ============================================================================
+# 5. INFRAESTRUCTURA — las 28 líneas de La Rural, para marcar cuáles se quedan
+# ============================================================================
+INFRA = [
+ ('PANELERÍA (montaje de estructuras)', [
+   ('Oficina de producción — 25 m² (panelería + puerta + iluminación)', 1314575.00),
+   ('Sala de staff — 100 m² (panelería + puerta + iluminación)',        5258300.00),
+   ('Depósito 8×8 para las 2.500 barras — 64 m²',                       3365312.00)]),
+ ('MOBILIARIO · oficina de producción', [
+   ('Mesa redonda 1,60 ×2', 236000.0), ('Silla imperio bordó ×10', 85000.0),
+   ('Sillón Valencia 2C ×2', 254000.0), ('Sillón BRNO ×2', 160000.0),
+   ('Mesa ratona ×1', 118000.0), ('Perchero de pie ×1', 40000.0),
+   ('Tacho de basura grande ×1', 56300.0)]),
+ ('MOBILIARIO · sala de staff', [
+   ('Mesa redonda 1,60 ×5', 590000.0), ('Silla imperio bordó ×40', 340000.0),
+   ('Perchero de pie ×1', 40000.0), ('Tacho de basura grande ×1', 56300.0)]),
+ ('MOBILIARIO · sala principal', [
+   ('Silla imperio bordó ×5.000', 42500000.0), ('Mesa 1,80 × 0,90 ×40', 2500000.0),
+   ('Mantel ×40', 900000.0), ('Mantel redondo ×8', 256000.0)]),
+ ('MOBILIARIO · camarín de speakers', [
+   ('Mesa redonda 1,60 ×1', 118000.0), ('Espejo ×1', 79500.0),
+   ('Juego de living (sillones + mesa ratona)', 1103642.0),
+   ('Perchero de pie ×1', 40000.0), ('Tacho de basura grande ×1', 56300.0)]),
+ ('MOBILIARIO · escenario y técnica', [
+   ('Mesa cocktail alta (escenario) ×1', 45000.0), ('Mesa alta para DJ ×1', 62300.0)]),
+ ('GENERALES', [
+   ('Dirección técnica de todo el evento + replanteo', 5149179.20),
+   ('Guardia eléctrica × 2 días', 865800.0), ('Guardia técnica × 2 días', 905200.0)]),
+]
+PROVISIONAL = {1, 2, 3, 26, 27, 28}   # panelería + generales: el escenario que está cargado hoy
+
+ws = hoja('INFRAESTRUCTURA', 'Presupuesto de infraestructura de La Rural, línea por línea',
+          'Las 28 líneas del PDF del 17/08. Marcá SÍ o NO en la columna "¿Se queda?" y el subtotal se recalcula.')
+COLS = [('#', 5), ('Bloque', 30), ('Ítem', 48), ('Precio (ARS)', 15), ('USD', 12),
+        ('¿Se queda?', 12), ('Si se queda (ARS)', 17), ('Nota', 44)]
+NC = len(COLS)
+encabezados(ws, 4, COLS)
+dv = DataValidation(type='list', formula1='"SÍ,NO"', allow_blank=True)
+ws.add_data_validation(dv)
+NOTAS = {
+ 3: 'Depósito para las 2.500 barras de la dinámica.',
+ 15: 'Reemplazadas por las 5.500 sillas de FDL Eventos.',
+ 21: 'El mobiliario "más fino" del camarín: candidato a contratárselo a La Rural.',
+ 26: 'Ojo: el replanteo de sillas va aparte, con ingeniero propio.',
+}
+r, n, filas_infra = 5, 0, []
+for bloque, items in INFRA:
+    r = banda_bloque(ws, r, bloque, NC)
+    for desc, precio in items:
+        n += 1
+        ws.cell(r, 1, n).font = SUB
+        ws.cell(r, 2, bloque.split('·')[-1].strip()).font = SUB
+        ws.cell(r, 3, desc).font = AZUL
+        c = ws.cell(r, 4, precio); c.font = AZUL; c.number_format = ARS
+        c = ws.cell(r, 5, f'=D{r}/TABLERO!$C$4'); c.font = NEGRO; c.number_format = USD
+        c = ws.cell(r, 6, 'SÍ' if n in PROVISIONAL else 'NO'); c.font = AZUL; c.fill = FIN
+        dv.add(c)
+        c = ws.cell(r, 7, f'=IF(F{r}="SÍ",D{r},0)'); c.font = NEGRO; c.number_format = ARS
+        ws.cell(r, 8, NOTAS.get(n, '')).font = SUB
+        for j in range(1, NC + 1): ws.cell(r, j).border = BOX
+        filas_infra.append(r)
+        r += 1
+ini_i, fin_i = filas_infra[0], filas_infra[-1]
+r += 1
+for etiqueta, formula, relleno in [
+    ('TOTAL del presupuesto de La Rural', f'=SUM(D{ini_i}:D{fin_i})', FGRIS),
+    ('Lo que se queda (marcado SÍ)',      f'=SUM(G{ini_i}:G{fin_i})', FVERD),
+    ('Lo que se saca (marcado NO)',       f'=D{r}-D{r+1}',            FAMAR)]:
+    ws.cell(r, 3, etiqueta).font = BOLD
+    c = ws.cell(r, 4, formula); c.font = BOLD; c.number_format = ARS; c.fill = relleno; c.border = BOX
+    c = ws.cell(r, 5, f'=D{r}/TABLERO!$C$4'); c.font = BOLD; c.number_format = USD; c.fill = relleno; c.border = BOX
+    r += 1
+ws.cell(r + 1, 3, 'Lo marcado hoy es el escenario provisional cargado en COSTOS UNIFICADOS: panelería + dirección técnica + guardias. Cambiá los SÍ/NO y llevá el nuevo total a esa hoja.').font = SUB
 
 del wb['Sheet']
 wb.save('ARGENTINA_CMC2026_Costo_Total.xlsx')
