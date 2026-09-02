@@ -84,10 +84,10 @@ ITEMS = [
  ('Sede', 'Alquiler Pabellón Azul', 'La Rural (contrato CC-00957)',
   'Locación 2 días de evento + 1 día de montaje', USD_, 75000.0, 0.0, 'Contratado',
   70000.0, 'Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)'),
- ('Sede', 'Infraestructura La Rural (a filtrar)', 'La Rural — Jefatura de Infraestructura',
-  'Escenario provisional: sólo panelería (oficina de producción, sala de staff, depósito de las barras) + dirección técnica + guardias eléctrica y técnica. Se descontó TODO el mobiliario ($49.636.342) porque Agustina lo consigue aparte más barato. FALTA que marque qué ítems se quedan.',
-  ARS_, 16858366.20, 0.0, 'En revisión', 0.0,
-  'Mail criccio@larural.com.ar 17/08/2026 · total del PDF $66.494.708,20 · ver hoja INFRAESTRUCTURA'),
+ ('Sede', 'Infraestructura y mobiliario de stands', 'La Rural — Jefatura de Infraestructura',
+  'Definido: armado de los stands y su mobiliario. Stand de staff 100 m², stand de producción menos de 50 m², y el mobiliario del camarín de speakers. Falta pedirles los espejos.',
+  USD_, 9270.0, 0.0, 'Cerrado', 0.0,
+  'Definición de Agustina sobre el presupuesto de $66.494.708 del 17/08 · ver hoja AHORROS'),
  ('Sede', 'Sillas del público (5.500)', 'FDL Eventos',
   '4.500 sillas plásticas Munro reforzadas + 1.000 sillas hotel negro + flete. NO incluye armado.',
   ARS_, 25800000.0, 0.21, 'Cotizado', 16500.0,
@@ -101,8 +101,8 @@ ITEMS = [
   USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Pendiente de pedir presupuesto'),
  ('Sede', 'Conectividad WiFi', 'La Rural — Servicios de Conectividad',
   '2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre',
-  ARS_, 1438728.01, 0.21, 'Cotizado', 800.0,
-  'Mail conectividad@larural.com.ar 16/06/2026'),
+  ARS_, 1466063.84, 0.21, 'Cotizado', 800.0,
+  'Mail conectividad@larural.com.ar 05/08/2026 · presupuesto N.º 2, base IPC junio (el del 16/06 era $1.438.728)'),
  # ---------------- TÉCNICA ----------------
  ('Técnica', 'Producción técnica', 'Cerrado por Agustina',
   'Sonido, iluminación, video y LED. Cerrado en dólares.',
@@ -416,6 +416,83 @@ for dec, a, b, formula, accion in DEC:
         ws.cell(r, j).border = BOX
         ws.cell(r, j).alignment = Alignment(wrap_text=True, vertical='top')
     ws.row_dimensions[r].height = 56
+    r += 1
+
+# ============================================================================
+# 6. AHORROS — comparativa entre lo cotizado y lo que se cerró
+# ============================================================================
+# (rubro, referencia, ref_ars, ref_usd, cerrado, cer_ars, cer_usd, respaldo)
+# ref_ars/cer_ars en None cuando el número está directamente en dólares.
+AHORROS = [
+ ('Infraestructura y mobiliario',
+  'Grupo MET, cotización de mobiliario', 40000000.0, None,
+  'Armado de stands + mobiliario, definido por Agustina', 14183100.0, 9270.0,
+  'La cotización de Grupo MET no está en el correo: dato aportado por Agustina. En el correo sí está el presupuesto de La Rural del 17/08 por $66.494.708 (con las 5.000 sillas adentro).'),
+ ('Sillas del público',
+  'La Rural: 5.000 sillas imperio bordó, armado incluido', 42500000.0, None,
+  'FDL Eventos 5.500 sillas + montaje, acomodación y desmontaje', 32118000.0, None,
+  'Mail criccio@larural.com.ar 17/08 y mail fdleventos@gmail.com 07/08. El montaje ($900.000) está en negociación.'),
+ ('Entelado',
+  'Primera cotización recibida', 39000000.0, None,
+  'Negociado a la mitad', 24500000.0, None,
+  'Dato aportado por Agustina; la cotización inicial no está en el correo.'),
+ ('Catering',
+  'Primera propuesta de Grupo Ambient', 30000000.0, None,
+  '600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas', None, 13582.0,
+  'Cierre informado por Agustina. En el correo está la propuesta de AmbientHouse del 16/06 a $28.500 + IVA por persona por día con base mínima de 480.'),
+ ('Vallado del público',
+  'Presupuestado en la hoja de Argentina', None, 1250.0,
+  '500 vallas bonificadas por el proveedor de técnica', None, 0.0,
+  'Negociación de Agustina. Además bonifican los efectos especiales, que no estaban valorizados.'),
+]
+
+ws = hoja('AHORROS', 'Lo cotizado contra lo que se cerró',
+          'Cuánto se bajó rubro por rubro. La columna "Respaldo" dice si la referencia está documentada en el correo o si es un dato aportado.')
+COLS = [('Rubro', 26), ('Referencia cotizada', 40), ('Ref. en pesos', 15), ('Ref. USD', 12),
+        ('Lo que se cerró', 44), ('Cerrado en pesos', 15), ('Cerrado USD', 12),
+        ('Ahorro USD', 13), ('Ahorro %', 10), ('Respaldo', 60)]
+NC = len(COLS)
+encabezados(ws, 4, COLS)
+r = 5
+filas_ah = []
+for rubro, ref, ref_ars, ref_usd, cer, cer_ars, cer_usd, respaldo in AHORROS:
+    ws.cell(r, 1, rubro).font = BOLD
+    ws.cell(r, 2, ref).font = NEGRO
+    c = ws.cell(r, 3, ref_ars); c.font = AZUL; c.number_format = ARS
+    c = ws.cell(r, 4, ref_usd if ref_usd is not None else f'=C{r}/TABLERO!$C$4')
+    c.font = AZUL if ref_usd is not None else NEGRO; c.number_format = USD
+    ws.cell(r, 5, cer).font = NEGRO
+    c = ws.cell(r, 6, cer_ars); c.font = AZUL; c.number_format = ARS
+    c = ws.cell(r, 7, cer_usd if cer_usd is not None else f'=F{r}/TABLERO!$C$4')
+    c.font = AZUL if cer_usd is not None else NEGRO; c.number_format = USD
+    c = ws.cell(r, 8, f'=D{r}-G{r}'); c.font = BOLD; c.number_format = USD; c.fill = FVERD
+    c = ws.cell(r, 9, f'=IFERROR(H{r}/D{r},"")'); c.font = NEGRO; c.number_format = PCT
+    ws.cell(r, 10, respaldo).font = SUB
+    for j in range(1, NC + 1):
+        ws.cell(r, j).border = BOX
+        ws.cell(r, j).alignment = Alignment(wrap_text=True, vertical='top')
+    ws.row_dimensions[r].height = 46
+    filas_ah.append(r)
+    r += 1
+ws.cell(r, 1, 'AHORRO TOTAL').font = Font(name=F, size=12, bold=True)
+for col in (4, 7, 8):
+    c = ws.cell(r, col, f'=SUM({L(col)}{filas_ah[0]}:{L(col)}{filas_ah[-1]})')
+    c.font = Font(name=F, size=12, bold=True); c.number_format = USD; c.fill = FVERD; c.border = BOX
+fila_ah_total = r
+
+r += 2
+ws.cell(r, 1, 'TÉCNICA — la comparación no es directa').font = Font(name=F, size=11, bold=True, color='C00000')
+r += 1
+for t in [
+ 'Se cerró con Grupo MET en US$60.000 (unos $91.800.000 al dólar de referencia), con todos los agregados que se fueron sumando después de la visita al predio.',
+ 'Las otras cotizaciones fueron sobre el pliego base, que según Agustina no cubría lo que necesita el pabellón. Por eso no se pueden restar sin más:',
+ '   · Sound-Light (16/06): no se pudo abrir el PDF, el mail pesa 33 MB. En el mail del 19/06 se les dice que las otras cotizaciones son "prácticamente la mitad", así que estaba cerca de los $100.000.000.',
+ '   · 2MG (24/06): $53.655.470, con descuento especial $45.000.000 + IVA. Con los adicionales de iluminación y estructura llega a unos $78.000.000.',
+ '   · Prina (18/06): $48.885.000 + IVA = $59.150.850. Validez de 10 días, vencida.',
+ '   · VMG (29/06): $12.625.000 + IVA, sólo las pantallas LED de 65 m².',
+ 'Para poder mostrar un ahorro defendible en técnica hace falta el PDF de Grupo MET y el alcance final, para compararlo contra el mismo alcance de los otros tres.',
+]:
+    ws.cell(r, 1, t).font = SUB
     r += 1
 
 # ============================================================================
