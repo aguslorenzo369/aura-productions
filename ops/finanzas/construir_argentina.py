@@ -716,9 +716,11 @@ DEC = [
   'La Rural con las sillas incluidas y armadas',
   'FDL Eventos + montaje/acomodación/desmontaje negociado en $900.000',
   '', 'Con FDL a $31.218.000 más $900.000 de montaje son US$20.992 contra US$27.778 de La Rural. Cerrar el número del montaje y firmar.'),
- ('Catering — cerrado', 'Grupo Ambient: US$13.582 por las dos propuestas',
+ ('Catering — cerrado', 'Grupo Ambient: US$14.569 por las dos propuestas',
   'La planilla tenía US$33.820 estimados',
-  '=13582-33820', 'Cerrado. Es la mejor negociación del evento: US$20.238 por debajo de lo presupuestado.'),
+  '=14569-33820', 'Cerrado: 600 desayunos VIP (no 800) + comidas para 150 personas. '
+  'US$19.251 por debajo de lo presupuestado. OJO: la factura 2601021 está calculada sobre 800 desayunos; '
+  'pedirle a Ángeles que la reemita por 600 antes de pagar el anticipo.'),
  ('Rubros nuevos sin cotizar',
   'Ecobaños, marquetería de certificaciones y premios, replanteo de sillas con ingeniero',
   'Hoy entran en US$0',

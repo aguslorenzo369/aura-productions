@@ -1,0 +1,31 @@
+Argentina en una pantalla
+La Rural · Pabellón Azul · 3 y 4 de octubre de 2026
+"Valores calculados al 02/09/2026. La versión editable, con fórmulas, es el .xlsx."
+
+Tipo de cambio (ARS por USD),,1510.0,,Dólar con el que trabaja Agustina. Verificado contra dos de sus cifras: $900.000 de montaje = US$596 y $24.500.000 de entelado = US$16.225.
+
+COSTO DEL EVENTO
+Costo total (cotizaciones reales + estimados),,242347.2,,"Suma de contratado, cotizado y lo que sólo tiene estimado. No incluye las alternativas descartadas."
+Lo que decía el presupuesto original,,176159.0,,"Total de la hoja ""Argentina (3 oct-4 oct)"" del master."
+Diferencia contra el presupuesto,,66188.2,,"Cuánto se corre el evento respecto de lo presupuestado, con los precios que hoy están sobre la mesa."
+
+COSTO POR PERSONA
+Base de cálculo,Personas,Costo por persona,,Qué incluye
+Aforo general,5000,48.47,,Asistentes de entrada general según la hoja del master.
+VIP,1000,242.35,,Asistentes VIP.
+Asistentes pagos (general + VIP),6000,40.39,,La base más útil para decidir el precio de la entrada.
+Mastermind del martes,246,985.15,,"Actividad aparte, no comparte la mayoría de los costos."
+Total de personas en el predio,6108,39.68,,Asistentes pagos + 100 de staff + 8 del equipo interno.
+
+ESTADO DE LOS RUBROS
+Estado,,USD,,Qué hay adentro
+Cerrado,,106833.17,,"Técnica, entelado, CCTV, catering, infraestructura y montaje: cerrados por Agustina."
+Contratado,,92416.52,,"Sede, las nueve facturas de merch e intercoms."
+Cotizado,,36801.48,,"Sillas, WiFi, seguridad, servicio médico, limpieza, retiro de residuos y seguro."
+En negociación,,596.03,,"Montaje, acomodación y desmontaje de las sillas."
+Sin cotizar,,5700.0,,"Vuelos, alojamiento, ecobaños, marquetería, replanteo, unifilas, DJ, escoltas, Master Mind, personal logístico."
+Alternativa,,1402.16,,Cotización descartada de Blocko. NO suma al costo.
+Bonificado,,0.0,,"Vallas, efectos especiales y food trucks: sin cargo."
+Otro pais,,0.0,,Gráfica de Uruguay. NO suma al costo de Argentina.
+Reemplazado,,0.0,,"Estimado global de merch del master, ya cubierto por las facturas reales."
+SUMA (sin alternativas ni bonificados),,242347.2,,Tiene que dar igual al costo total de arriba.

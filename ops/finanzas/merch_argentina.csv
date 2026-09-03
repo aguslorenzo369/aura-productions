@@ -1,0 +1,56 @@
+"Todo el merch, factura por factura"
+"Carpeta de Drive ""Presupuestos merch"" · facturas 2601009 a 2601019 · emisor IIDAI LLC. Los proveedores son argentinos, no colombianos."
+"Valores calculados al 02/09/2026. La versión editable, con fórmulas, es el .xlsx."
+
+Proveedor,Ítem,Cant.,Factura,Fecha,Neto (ARS),IVA,Total (ARS),USDT de la factura,País,% Argentina,Costo Argentina (USD),Falta pagar · regla 50%,Falta pagar · según factura,Nota
+REMERASYESTAMPADOS,Pañuelos / pañoletas estampados,8.500,2601012 → saldo 2601019,20/06 → 16/08,13387500,0.21,16198875.0,5276.51,Argentina + Uruguay,0.65,6973.03,3429.73,3429.73,La 2601019 ya viene emitida por el 50% restante. Falta definir con Uruguay como se reparte: aca se imputa el 65% a Argentina.
+REMERASYESTAMPADOS,Remeras premium estampadas,250,2601017,16/08,3527500,0.21,4268275.0,2780.64,Argentina,1,2826.67,2780.64,2780.64,"Se debe el 100%. Sube de 230 a 250 unidades contra la factura original 2601011, al mismo precio unitario de $14.110."
+REMERASYESTAMPADOS,Bordado computarizado en gorras,940,2601016,10/08,2643200,,2643200,1721.95,Argentina,1,1750.46,1721.95,1721.95,"Se debe el 100%. Precio final sin IVA, con el descuento de $411.800 ya aplicado. Las gorras las provee el cliente."
+TEXTIL RYU S.R.L.,Gorra Flex unicolor/bicolor,940,2601009,20/06,2224980,0.21,2692225.8,,Argentina,1,1782.93,0.0,0.0,"Pagada al 100% el 25/06. Es la compra de la gorra, distinta del bordado."
+LEOTEX,Lanyard premium doble raso 25 mm,1.360,2601013 → 2601018,20/06 → 16/08,2070600,0.21,2505426.0,1632.2,Argentina,1,1659.22,816.1,1632.2,"A CONFIRMAR: la carpeta se llama ""Nuevo pago - 50%"" pero la factura 2601018 viene por el total, igual que la original. El master registraba un saldo de US$850."
+DERQUI IMPRESIONES,Grafica oficial CMC — Argentina,—,2601014,20/06 → 16/08,3025260,0.21,3660564.6,2384.73,Argentina,1,2424.21,1192.37,2384.73,A CONFIRMAR: la reemision del 16/08 viene por el total. El master registraba un saldo de US$1.839 al 13/09.
+DERQUI IMPRESIONES,Grafica oficial CMC — Uruguay,—,2601015,20/06 → 16/08,1564626,0.21,1893197.46,1233.35,Uruguay,0,0.0,0.0,0.0,NO ES DE ARGENTINA. En la hoja PAGOS del master estaba cargada con pais = Argentina: es el monto que inflaba el total argentino.
+Blocko,Cintas portacredencial (alternativa descartada),1.300,presupuesto 09/06,09/06,1749800,0.21,2117258.0,,Argentina,0,0.0,0.0,0.0,"Es el mismo item que los lanyards de LEOTEX, que ya esta contratado. Estaba sumando dos veces en la version anterior de esta planilla."
+,TOTAL IMPUTADO A ARGENTINA,,,,,,,,,,17416.52,9940.79,11949.25
+
+CÓMO LEER LOS COLORES
+Verde — pagado al 100%: la compra de las gorras de Textil Ryu.
+"Amarillo — 50% abonado, queda el saldo: pañuelos, lanyards y gráfica de Argentina."
+"Rojo — sin pagar nada, se debe el 100%: las remeras y el bordado de las gorras."
+Gris — no suma al costo de Argentina: la gráfica de Uruguay y la cotización descartada de Blocko.
+
+LO QUE IBA A COSTAR CONTRA LO QUE COSTÓ
+"Precios unitarios de merch.cmc2026.com al 06/07/2026, dólar $1.515. Compara el proveedor que traía Cumbre contra los proveedores argentinos que consiguió Agustina."
+Producto,Cant.,Unitario Cumbre,Total Cumbre,Unitario Agustina,Total Agustina,Ahorro,Ahorro %
+  ARGENTINA
+Remeras estampadas,100,16.17,1617.16,9.31,931.35,685.81,0.4241
+Gorras negras,1.000,9.9,9900.99,1.64,1636.96,8264.03,0.8347
+Cinta colgante / lanyard,1.000,1.25,1247.52,1,1004.95,242.57,0.1944
+Credenciales 10 × 13 cm,1.000,0.57,574.65,0.48,475.06,99.59,0.1733
+Hojas A4 (contrato),5.500,0.2,1107.26,0.05,265.31,841.95,0.7604
+"Tarjetas 21,5 × 10 cm (cheque)",5.500,0.12,671.62,0.02,109.78,561.84,0.8365
+"Bolsas de friselina, 2 colores",1.000,1.14,1141.91,0.64,644.55,497.36,0.4356
+Pulseras tyvek — fuera de la comparación,5.500,0.1,544.55
+Subtotal Argentina,,,16261.11,,5067.96,11193.15,0.6883
+  URUGUAY
+Mapas de niveles de consciencia,3.000,0.254,763,0.089,266.14,496.86,0.6512
+Escarapelas / credenciales,600,1.322,793,0.475,285.03,507.97,0.6406
+Contratos (hojas A4),3.000,0.153,458,0.048,144.71,313.29,0.684
+Cheques (tarjetas),3.000,0.127,382,0.02,59.88,322.12,0.8432
+Cordones con mosquetón — fuera de la comparación,600,1.5
+Subtotal Uruguay,,,2396.0,,755.76,1640.24,0.6846
+TOTAL DE LA CANASTA — ARGENTINA + URUGUAY,,,18657.11,,5823.72,12833.39,0.6879
+
+"La gorra sola explica la mitad del ahorro: el proveedor de Cumbre la cobraba US$9,90 y Agustina la consiguió a US$1,64. Sobre 1.000 unidades son US$8.264."
+Las pulseras tyvek quedan fuera de los dos lados de la cuenta porque no hay precio comparable del lado argentino.
+"OJO: esta canasta NO es el total del rubro merch. Los pañuelos (US$6.973) y el bordado de gorras (US$1.750) no entran en la comparación, y las cantidades"
+"del sitio no son exactamente las de las facturas finales (remeras 100 contra 250, gorras 1.000 contra 940). Sirve para medir el ahorro por precio unitario,"
+"no para reemplazar el costo del rubro, que sale de las nueve facturas de arriba."
+"Uruguay va con su propio subtotal: US$2.396,00 contra US$755,77, US$1.640,23 de ahorro. Es la misma negociación con los mismos proveedores, pero NO entra en el costo del evento de Argentina."
+Los cordones con mosquetón de Uruguay quedan fuera de la cuenta por la misma razón que las pulseras tyvek: no hay precio comparable del lado argentino.
+"Sumando los dos países, la canasta pasa de US$18.657,12 a US$5.823,74: US$12.833,38 de ahorro, un 68,8%."
+
+TRES COSAS QUE HAY QUE CONFIRMAR
+"1) Lanyards y gráfica de Argentina: las facturas reemitidas en agosto vienen por el TOTAL, pero la carpeta y el master dicen que ya se abonó el 50%. Si las facturas están bien, hay que pagar US$2.008 más de lo que sale por la regla del 50%. Una sola consulta a LEOTEX y a Derqui lo resuelve."
+"2) Pañuelos: son 8.500 unidades compartidas entre Argentina y Uruguay y la factura no las separa. Acá se imputó el 65% a Argentina (5.500 de 8.500, la misma proporción que la gráfica). Si van todos a Argentina, el costo sube US$3.755."
+"3) La gráfica de Uruguay (US$1.233) estaba cargada en el master como Argentina. Ya quedó fuera del costo argentino, pero conviene corregirla también en el master para que no se arrastre."

@@ -1,0 +1,46 @@
+"Presupuesto de infraestructura de La Rural, línea por línea"
+"Las 28 líneas del PDF del 17/08. Marcá SÍ o NO en la columna ""¿Se queda?"" y el subtotal se recalcula."
+"Valores calculados al 02/09/2026. Los SÍ/NO son la selección de hoy; para cambiarlos y que recalcule, usá el .xlsx."
+
+#,Bloque,Ítem,Precio (ARS),USD,¿Se queda?,Si se queda (ARS),Nota
+  PANELERÍA (montaje de estructuras)
+1,PANELERÍA (montaje de estructuras),Oficina de producción — 25 m² (panelería + puerta + iluminación),1314575,870.58,SÍ,1314575
+2,PANELERÍA (montaje de estructuras),Sala de staff — 100 m² (panelería + puerta + iluminación),5258300,3482.32,SÍ,5258300
+3,PANELERÍA (montaje de estructuras),Depósito 8×8 para las 2.500 barras — 64 m²,3365312,2228.68,SÍ,3365312,Depósito para las 2.500 barras de la dinámica.
+  MOBILIARIO · oficina de producción
+4,oficina de producción,"Mesa redonda 1,60 ×2",236000,156.29,NO,0
+5,oficina de producción,Silla imperio bordó ×10,85000,56.29,NO,0
+6,oficina de producción,Sillón Valencia 2C ×2,254000,168.21,NO,0
+7,oficina de producción,Sillón BRNO ×2,160000,105.96,NO,0
+8,oficina de producción,Mesa ratona ×1,118000,78.15,NO,0
+9,oficina de producción,Perchero de pie ×1,40000,26.49,NO,0
+10,oficina de producción,Tacho de basura grande ×1,56300,37.28,NO,0
+  MOBILIARIO · sala de staff
+11,sala de staff,"Mesa redonda 1,60 ×5",590000,390.73,NO,0
+12,sala de staff,Silla imperio bordó ×40,340000,225.17,NO,0
+13,sala de staff,Perchero de pie ×1,40000,26.49,NO,0
+14,sala de staff,Tacho de basura grande ×1,56300,37.28,NO,0
+  MOBILIARIO · sala principal
+15,sala principal,Silla imperio bordó ×5.000,42500000,28145.7,NO,0,Reemplazadas por las 5.500 sillas de FDL Eventos.
+16,sala principal,"Mesa 1,80 × 0,90 ×40",2500000,1655.63,NO,0
+17,sala principal,Mantel ×40,900000,596.03,NO,0
+18,sala principal,Mantel redondo ×8,256000,169.54,NO,0
+  MOBILIARIO · camarín de speakers
+19,camarín de speakers,"Mesa redonda 1,60 ×1",118000,78.15,NO,0
+20,camarín de speakers,Espejo ×1,79500,52.65,NO,0
+21,camarín de speakers,Juego de living (sillones + mesa ratona),1103642,730.89,NO,0,"El mobiliario ""más fino"" del camarín: candidato a contratárselo a La Rural."
+22,camarín de speakers,Perchero de pie ×1,40000,26.49,NO,0
+23,camarín de speakers,Tacho de basura grande ×1,56300,37.28,NO,0
+  MOBILIARIO · escenario y técnica
+24,escenario y técnica,Mesa cocktail alta (escenario) ×1,45000,29.8,NO,0
+25,escenario y técnica,Mesa alta para DJ ×1,62300,41.26,NO,0
+  GENERALES
+26,GENERALES,Dirección técnica de todo el evento + replanteo,5149179.2,3410.05,SÍ,5149179.2,"Ojo: el replanteo de sillas va aparte, con ingeniero propio."
+27,GENERALES,Guardia eléctrica × 2 días,865800,573.38,SÍ,865800
+28,GENERALES,Guardia técnica × 2 días,905200,599.47,SÍ,905200
+
+,,TOTAL del presupuesto de La Rural,66494708.2,44036.23
+,,Lo que se queda (marcado SÍ),16858366.2,11164.48
+,,Lo que se saca (marcado NO),49636342.0,32871.75
+
+,,Lo marcado hoy es el escenario provisional cargado en COSTOS UNIFICADOS: panelería + dirección técnica + guardias. Cambiá los SÍ/NO y llevá el nuevo total a esa hoja.
