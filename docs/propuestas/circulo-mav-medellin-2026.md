@@ -10,7 +10,7 @@
 | Franja | 16:00 – 20:00 (4 horas) |
 | Ciudad | Medellín, Colombia |
 | Criterio rector | Que sea hermoso. Privado, VIP, cool. |
-| Anticipación | 41 días desde el 3 de septiembre de 2026 |
+| Anticipación | 42 días desde el 3 de septiembre de 2026 |
 
 Dossier publicado: https://claude.ai/code/artifact/1694bc9a-8997-4f82-83d6-5f1920c5997a
 
@@ -131,7 +131,7 @@ Museo de Arte Moderno, Ciudad del Río · 10 min de Provenza
 
 ## 5. Plan de siete días
 
-Con 41 días a la fecha, la disponibilidad manda sobre la preferencia: no se elige la
+Con 42 días a la fecha, la disponibilidad manda sobre la preferencia: no se elige la
 locación, se elige entre las que digan sí. Las tres finalistas se cotizan en paralelo.
 
 1. **Día 1** — Consulta simultánea de disponibilidad para el jueves 15/10, 15:00 a
@@ -147,7 +147,7 @@ locación, se elige entre las que digan sí. Las tres finalistas se cotizan en p
    hermosa y la más segura, con render de montaje y guion de las 4 horas marcado
    sobre la hora dorada.
 5. **Días 6–7** — Reserva, anticipo, contrato con cláusula de lluvia y bloqueo de
-   catering, sonido, iluminación y equipo de foto y video. En 41 días los buenos
+   catering, sonido, iluminación y equipo de foto y video. En 42 días los buenos
    proveedores son el segundo cuello de botella.
 
 ---
