@@ -15,14 +15,16 @@ La Rural, Pabellón Azul. Montaje 2 de octubre, evento 3 y 4 de octubre de 2026.
 
 | | USD |
 |---|---:|
-| Costo total del evento | 250.302 |
+| Costo total del evento | 252.008 |
 | Presupuesto original (hoja Argentina del master) | 176.159 |
-| Diferencia | +74.143 (+42,1 %) |
-| Costo por asistente pago (6.000) | 41,72 |
-| **Ahorro negociado contra lo cotizado** | **40.412** (~$61,8 M) |
+| Diferencia | +75.849 (+43,1 %) |
+| Costo por asistente pago (6.000) | 42,00 |
+| **Ahorro negociado contra lo cotizado** | **40.247** (~$60,8 M) |
 
-Composición: cerrado 105.074 · contratado 92.547 · cotizado 37.704 · sin cotizar 14.389 · en negociación 588.
-Tipo de cambio: ARS 1.530 por USD.
+Composición: cerrado 106.273 · contratado 92.547 · cotizado 38.204 · sin cotizar 14.389 · en negociación 596.
+
+Tipo de cambio: **ARS 1.510 por USD**, que es el que usa Agustina. Verificado contra dos de sus
+cifras: el montaje de $900.000 le da US$596 y el entelado de $24.500.000 le da US$16.225.
 
 ## De dónde salen las cotizaciones
 
@@ -32,8 +34,8 @@ Todas se extrajeron de los adjuntos del correo de agustinalorenzog@gmail.com:
 |---|---|---:|---|
 | La Rural — Infraestructura | Paneles, mobiliario, dirección técnica, guardias | ARS 23.994.708 (sin las sillas) | 17/08/2026 |
 | La Rural — Infraestructura | 5.000 sillas (alternativa) | ARS 42.500.000 | 17/08/2026 |
-| FDL Eventos | 5.500 sillas + flete | ARS 25.800.000 + IVA | 07/08/2026 |
-| La Rural — Conectividad | 2 redes WiFi privadas | ARS 1.438.728 + IVA | 16/06/2026 |
+| FDL Eventos (presup. 026-2697) | 1.000 sillas hotel + 4.500 plásticas Munro + flete, alquiler 4 días | ARS 25.800.000 + IVA | 07/08/2026 |
+| La Rural — Conectividad | 2 redes WiFi privadas (presup. N.º 2) | ARS 1.466.064 + IVA | 05/08/2026 |
 | Prina | Técnica integral | ARS 48.885.000 + IVA | 18/06/2026 |
 | VMG | Pantallas LED 65 m² (alternativa) | ARS 12.625.000 + IVA | 29/06/2026 |
 | Road Seguridad | 263 h de vigilancia + planos + supervisión | ARS 7.218.929 + IVA | 12/08/2026 |
@@ -72,12 +74,12 @@ pagado US$52.253.
 
 | Rubro | Referencia cotizada | Cerrado | Ahorro |
 |---|---:|---:|---:|
-| Infraestructura y mobiliario | 26.144 | 9.270 | 16.874 (65 %) |
-| Sillas del público | 27.778 | 20.992 | 6.786 (24 %) |
-| Entelado | 25.490 | 16.013 | 9.477 (37 %) |
-| Catering | 19.608 | 13.582 | 6.026 (31 %) |
+| Infraestructura y mobiliario | 26.490 | 9.270 | 17.220 (65 %) |
+| Sillas del público | 28.146 | 21.270 | 6.876 (24 %) |
+| Entelado | 25.828 | 16.225 | 9.603 (37 %) |
+| Catering | 19.868 | 14.569 | 5.299 (27 %) |
 | Vallado | 1.250 | 0 | 1.250 (100 %) |
-| **Total** | **100.270** | **59.857** | **40.412 (40 %)** |
+| **Total** | **101.581** | **61.334** | **40.247 (40 %)** |
 
 Técnica queda fuera de la comparativa: se cerró con Grupo MET en US$60.000 con todos los agregados,
 y las otras cotizaciones (Sound-Light ~$100 M, 2MG $45–78 M, Prina $59,2 M, VMG $15,3 M sólo LED)

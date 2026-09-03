@@ -14,7 +14,7 @@ from openpyxl.utils import get_column_letter as L
 from openpyxl.worksheet.datavalidation import DataValidation
 
 HOY = datetime.date(2026, 9, 2)
-TC_DEFECTO = 1530.0   # dolar operativo acordado con Agustina, 02/09/2026
+TC_DEFECTO = 1510.0   # dolar operativo con el que trabaja Agustina (verificado: $900.000 = US$596 y $24.500.000 = US$16.225)
 
 F = 'Arial'
 AZUL  = Font(name=F, size=10, color='0000FF')
@@ -89,9 +89,9 @@ ITEMS = [
   USD_, 9270.0, 0.0, 'Cerrado', 0.0,
   'Definición de Agustina sobre el presupuesto de $66.494.708 del 17/08 · ver hoja AHORROS'),
  ('Sede', 'Sillas del público (5.500)', 'FDL Eventos',
-  '4.500 sillas plásticas Munro reforzadas + 1.000 sillas hotel negro + flete. NO incluye armado.',
+  'Presupuesto 026-2697, alquiler por 4 días: 1.000 sillas hotel caño gris tapizado negro ($7.000.000) + 4.500 sillas plásticas Munro reforzadas ($17.100.000) + flete ($1.700.000). NO incluye armado.',
   ARS_, 25800000.0, 0.21, 'Cotizado', 16500.0,
-  'Mail fdleventos@gmail.com 07/08/2026 · pendiente de resolver facturación al exterior'),
+  'Presupuesto FDL Eventos N.º 026-2697 del 07/08/2026 · pendiente de resolver facturación al exterior'),
  ('Sede', 'Montaje, acomodación y desmontaje de sillas', 'En negociación',
   'Montaje previo, acomodación el sábado a la noche después de la dinámica y desmontaje el domingo.',
   ARS_, 900000.0, 0.0, 'En negociación', 0.0,
@@ -145,7 +145,7 @@ ITEMS = [
  # ---------------- CATERING ----------------
  ('Catering', 'Catering VIP, staff y equipo', 'Grupo Ambient',
   'Número final por las dos propuestas juntas: 600 lunchbox para los VIP + desayuno, almuerzo y cena para 150 personas.',
-  USD_, 13582.0, 0.0, 'Cerrado', 33820.0,
+  USD_, 14569.0, 0.0, 'Cerrado', 33820.0,
   'Cierre de Agustina con Grupo Ambient · reemplaza la estimación de $25.000.000'),
  ('Catering', 'Food trucks', 'Sin costo',
   'No los paga la producción.',
@@ -210,7 +210,7 @@ ws.column_dimensions['A'].width = 30; ws.column_dimensions['B'].width = 115
 filas = [
  ('Qué es esto', 'Unifica los presupuestos que llegaron por mail (jun-ago 2026) con la hoja "Argentina (3 oct-4 oct)" del master de inversión, para poder decir cuánto sale el evento de verdad y cuánto por persona.'),
  ('Fecha de corte', 'Todo calculado al 02/09/2026.'),
- ('Tipo de cambio', 'Celda TABLERO!C4, editable. Por defecto $1.535 = dólar oficial venta del Banco Nación al 02/09/2026. Todas las conversiones de pesos a dólares salen de esa única celda.'),
+ ('Tipo de cambio', 'Celda TABLERO!C4, editable. $1.510, que es el dólar con el que viene trabajando Agustina. Se verificó contra dos de sus cifras: el montaje de $900.000 le da US$596 y el entelado de $24.500.000 le da US$16.225. Todas las conversiones de pesos a dólares salen de esa única celda.'),
  ('', ''),
  ('Cómo leer los estados', 'Contratado = hay contrato o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción para el mismo ítem, NO suma al total. Sin cotizar = sólo hay un estimado del sheet, o ni eso.'),
  ('Regla del total', 'El total suma los ítems Contratado + Cotizado + Sin cotizar. Los marcados "Alternativa" quedan fuera para no duplicar (las sillas de La Rural vs las de FDL, y las LED de VMG contra la técnica integral de Prina).'),
@@ -302,7 +302,7 @@ ws.column_dimensions['E'].width = 76
 
 ws['A4'] = 'Tipo de cambio (ARS por USD)'; ws['A4'].font = BOLD
 ws['C4'] = TC_DEFECTO; ws['C4'].font = AZUL; ws['C4'].fill = FIN; ws['C4'].number_format = '#,##0.00'
-ws['E4'] = 'Dólar oficial venta, Banco Nación, 02/09/2026. Editá esta celda y se recalcula todo el libro.'
+ws['E4'] = 'Dólar con el que trabaja Agustina. Verificado contra dos de sus cifras: $900.000 de montaje = US$596 y $24.500.000 de entelado = US$16.225. Editá esta celda y se recalcula todo el libro.'
 ws['E4'].font = SUB
 
 fila = 6
@@ -438,7 +438,7 @@ AHORROS = [
   'Dato aportado por Agustina; la cotización inicial no está en el correo.'),
  ('Catering',
   'Primera propuesta de Grupo Ambient', 30000000.0, None,
-  '600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas', None, 13582.0,
+  '600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas', None, 14569.0,
   'Cierre informado por Agustina. En el correo está la propuesta de AmbientHouse del 16/06 a $28.500 + IVA por persona por día con base mínima de 480.'),
  ('Vallado del público',
   'Presupuestado en la hoja de Argentina', None, 1250.0,
