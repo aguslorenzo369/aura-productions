@@ -151,28 +151,51 @@ ITEMS = [
   'No los paga la producción.',
   USD_, 0.0, 0.0, 'Bonificado', 0.0, 'Confirmado por Agustina'),
  # ---------------- MERCH ----------------
- ('Merch', 'Cintas portacredencial (1.300)', 'Blocko',
-  'Cinta raso 25 mm impresa 4 colores dos caras + mosquetón zamak, $1.346 c/u',
-  ARS_, 1749800.0, 0.21, 'Cotizado', 0.0,
-  'Mail hola@blocko.com.ar 09/06/2026 · producción 3 semanas'),
- ('Merch', 'Pañuelos', 'Proveedor Colombia',
-  'Contrato cerrado, 50% abonado el 24/06. Saldo US$5.491 programado al 13/09.',
-  USD_, 10982.0, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
- ('Merch', 'Lanyards', 'Proveedor Colombia',
-  'Contrato cerrado, 50% abonado el 25/06. Saldo US$850 al 13/09.',
-  USD_, 1698.59, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
- ('Merch', 'Gorras', 'Proveedor Colombia', 'Pagado 100% el 25/06',
-  USD_, 1825.0, 0.0, 'Contratado', 5000.0, 'Hoja PAGOS del master'),
- ('Merch', 'Gráfica Argentina', 'Proveedor Colombia',
-  'Contrato cerrado, saldo US$1.839 al 13/09',
-  USD_, 2481.0, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
- ('Merch', 'Marquetería y enmarcado', 'Sin cotizar',
+ # Todo el merch sale de la carpeta de Drive "Presupuestos merch" (facturas 2601009 a 2601019).
+ # Los proveedores son argentinos y facturan a IIDAI LLC; el master los tenia como "Colombia".
+ ('Merch', 'Pañuelos / pañoletas estampados (8.500)', 'REMERASYESTAMPADOS',
+  'Factura 2601012 del 20/06. Compra compartida Argentina + Uruguay: se imputa a Argentina el 65% (5.500 de 8.500 unidades, la misma proporcion que la grafica). El 50% ya esta abonado; el saldo se paga con la factura 2601019 por 5.276,51 USDT, de los cuales 3.429,73 son de Argentina.',
+  ARS_, 13387500.0, 0.21, 'Contratado', 0.0,
+  'Drive · Presupuesto Pañuelos - Arg y Uru · facturas 2601012 (20/06) y 2601019 (16/08)', 0.65),
+ ('Merch', 'Remeras premium estampadas (250)', 'REMERASYESTAMPADOS',
+  'Factura 2601017 del 16/08, $14.110 por unidad. Sube de 230 a 250 unidades contra la factura original 2601011, al mismo precio unitario. SIN PAGAR: se debe el 100% (2.780,64 USDT).',
+  ARS_, 3527500.0, 0.21, 'Contratado', 0.0,
+  'Drive · Presupuestos camisetas + pañoletas · factura 2601017 (16/08)', 1.0),
+ ('Merch', 'Bordado de gorras (940)', 'REMERASYESTAMPADOS',
+  'Bordado computarizado sobre las gorras que provee el cliente. Presupuesto del 03/07 con el descuento de $411.800 ya aplicado. Precio final, no lleva IVA. SIN PAGAR: se debe el 100% (1.721,95 USDT).',
+  ARS_, 2643200.0, 0.0, 'Contratado', 0.0,
+  'Drive · Presupuesto gorras (compra y bordado) / Bordado · factura 2601016 (10/08)', 1.0),
+ ('Merch', 'Gorras Flex unicolor/bicolor (940)', 'TEXTIL RYU S.R.L.',
+  'Factura 2601009 del 20/06, pagada al 100% el 25/06. Es la compra de las gorras; el bordado va en su propia linea.',
+  ARS_, 2224980.0, 0.21, 'Contratado', 5000.0,
+  'Drive · Compra de gorras · factura 2601009 · hoja PAGOS del master', 1.0),
+ ('Merch', 'Lanyards premium doble raso 25 mm (1.360)', 'LEOTEX',
+  'Sublimacion full print en ambas caras, 1.300 negros + 50 azules (la factura dice 1.360, la suma da 1.350: hay 10 de diferencia). Reemitida como 2601018 en USDT. OJO: la carpeta se llama "Nuevo pago - 50%" pero la factura viene por el total.',
+  ARS_, 2070600.0, 0.21, 'Contratado', 0.0,
+  'Drive · Presupuesto Lanyards · facturas 2601013 (20/06) y 2601018 (16/08)', 1.0),
+ ('Merch', 'Grafica oficial CMC — Argentina', 'DERQUI IMPRESIONES',
+  '5.500 hojas A4, 5.500 tarjetas, 1.030 credenciales, 5.500 mapas y 1.000 bolsas de friselina. Reemitida el 16/08 para cambiar el medio de pago a USDT.',
+  ARS_, 3025260.0, 0.21, 'Contratado', 0.0,
+  'Drive · Factura/presu ARGENTINA · factura 2601014 (20/06, reemitida 16/08)', 1.0),
+ ('Merch', 'Grafica oficial CMC — Uruguay', 'DERQUI IMPRESIONES',
+  'NO ES DE ARGENTINA. 2.800 hojas A4, 2.800 tarjetas, 530 credenciales, 2.800 mapas y 1.000 bolsas de friselina, para el evento de Uruguay. Se deja a la vista en cero porque en la hoja PAGOS del master estaba cargada como Argentina: es el monto que no cerraba.',
+  ARS_, 1564626.0, 0.21, 'Otro pais', 0.0,
+  'Drive · Factura/presu URUGUAY · factura 2601015 (20/06, reemitida 16/08)', 0.0),
+ ('Merch', 'Cintas portacredencial (1.300) — alternativa', 'Blocko',
+  'Cinta raso 25 mm impresa a 4 colores dos caras + mosqueton zamak, $1.346 c/u. Es el MISMO item que los lanyards de LEOTEX, que ya esta contratado y con anticipo pagado. Estaba sumando dos veces: ahora queda como alternativa descartada.',
+  ARS_, 1749800.0, 0.21, 'Alternativa', 0.0,
+  'Mail hola@blocko.com.ar 09/06/2026 · descartada contra la factura 2601013 de LEOTEX', 1.0),
+ ('Merch', 'Marqueteria y enmarcado', 'Sin cotizar',
   'Enmarcado de las certificaciones y los premios. Rubro nuevo, no estaba en ninguna planilla.',
-  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Agregado por Agustina · pendiente de cotizar'),
- ('Merch', 'Resto de merch e impresos', 'Varios (merch desde Colombia)',
-  'Contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas y manillas',
-  USD_, 0.0, 0.0, 'Sin cotizar', 8689.0,
-  'Estimado de la hoja Argentina del master; sin cotización argentina'),
+  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Agregado por Agustina · pendiente de cotizar', 1.0),
+ ('Merch', 'Cheques, escarapelas, diplomas, placas y manillas', 'Sin cotizar',
+  'Lo unico del merch que las facturas de Drive NO cubren. Las camisetas, los mapas, las bolsas y las credenciales ya estan facturados arriba.',
+  USD_, 0.0, 0.0, 'Sin cotizar', 0.0,
+  'Pendiente de cotizar · antes estaba dentro del estimado global de US$8.689', 1.0),
+ ('Merch', 'Estimado global de merch del master (reemplazado)', 'Varios',
+  'La hoja Argentina del master tenia US$8.689 en un solo renglon por contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas y manillas. Queda en cero como costo porque las facturas reales de arriba lo reemplazan; se conserva el estimado para poder comparar contra el presupuesto original.',
+  USD_, 0.0, 0.0, 'Reemplazado', 8689.0,
+  'Hoja Argentina del master · reemplazado por las facturas 2601009 a 2601019', 1.0),
  # ---------------- PRODUCCIÓN ----------------
  ('Producción', 'Unifilas', 'A definir', 'Estimado del sheet, sin cotización',
   USD_, 0.0, 0.0, 'Sin cotizar', 1200.0, 'Hoja Argentina del master'),
@@ -212,12 +235,17 @@ filas = [
  ('Fecha de corte', 'Todo calculado al 02/09/2026.'),
  ('Tipo de cambio', 'Celda TABLERO!C4, editable. $1.510, que es el dólar con el que viene trabajando Agustina. Se verificó contra dos de sus cifras: el montaje de $900.000 le da US$596 y el entelado de $24.500.000 le da US$16.225. Todas las conversiones de pesos a dólares salen de esa única celda.'),
  ('', ''),
- ('Cómo leer los estados', 'Contratado = hay contrato o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción para el mismo ítem, NO suma al total. Sin cotizar = sólo hay un estimado del sheet, o ni eso.'),
+ ('Cómo leer los estados', 'Contratado = hay contrato o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción para el mismo ítem, NO suma al total. Otro país = es un gasto de otro evento de la gira, entra en cero. Reemplazado = estimado viejo que ya está cubierto por facturas reales, entra en cero. Sin cotizar = sólo hay un estimado del sheet, o ni eso.'),
+ ('Columna "% Argentina"', 'Es la parte de cada compra que se le imputa a este evento. Vale 100% en casi todo. Los pañuelos son una compra compartida con Uruguay y van al 65% (5.500 de 8.500 unidades); la gráfica de Uruguay va al 0%.'),
  ('Regla del total', 'El total suma los ítems Contratado + Cotizado + Sin cotizar. Los marcados "Alternativa" quedan fuera para no duplicar (las sillas de La Rural vs las de FDL, y las LED de VMG contra la técnica integral de Prina).'),
  ('IVA', 'Las cotizaciones argentinas casi todas vienen sin IVA. La columna IVA aplica la alícuota de cada una (21% general, 10,5% el servicio médico) para llegar al costo real.'),
  ('', ''),
  ('Advertencia 1 — vencimientos', 'La cotización de Prina (técnica, el ítem más caro en pesos) tenía validez de 10 días y venció en junio. VMG se reserva recotizar si el dólar salta más de 15%. La Rural ajusta el saldo por IPC. Los pesos de este libro son de la fecha de cada cotización, no de hoy.'),
- ('Advertencia 2 — huecos', 'Catering, vuelos y alojamiento del equipo no tienen ninguna cotización cerrada. Catering entra al total con el estimado del sheet (US$39.820); vuelos y alojamiento entran en cero porque no hay ni estimado. El costo por persona es, por lo tanto, un piso.'),
+ ('Advertencia 2 — huecos', 'Vuelos y alojamiento del equipo entran en cero: no hay cotización ni estimado. Tampoco están cotizados los ecobaños, la marquetería, el replanteo de sillas ni los cheques, escarapelas, diplomas, placas y manillas. El costo por persona es, por lo tanto, un piso.'),
+ ('', ''),
+ ('Merch', 'Todo el merch sale de la carpeta de Drive "Presupuestos merch": nueve facturas reales (2601009 a 2601019) que reemplazan el renglón único de US$8.689 que traía el master. Los proveedores son argentinos (Remerasyestampados, Textil Ryu, Leotex, Derqui), no colombianos como decía la hoja PAGOS. Ver la hoja MERCH.'),
+ ('Merch — qué se pagó', 'Las gorras están pagadas al 100%. Pañuelos, lanyards y gráfica de Argentina tienen el 50% abonado. Las remeras y el bordado de las gorras no tienen nada pagado: se debe el 100%.'),
+ ('Merch — dos ajustes', 'Se sacaron dos duplicaciones: las cintas de Blocko eran el mismo ítem que los lanyards de Leotex ya contratados, y la gráfica de Uruguay (US$1.233) estaba cargada en el master con país = Argentina.'),
  ('Advertencia 3 — facturación', 'FDL Eventos (sillas) y Vittal (servicio médico) todavía no confirmaron si pueden facturar a la empresa de EE.UU. Si no pueden, hay que resolver el circuito de pago antes de cerrar.'),
  ('', ''),
  ('Fuentes de mail', 'La Rural infraestructura (criccio@larural.com.ar, 17/08) · La Rural conectividad (16/06) · Prina (18/06) · VMG (29/06) · Road Seguridad (12/08) · Vittal (28/08) · Higia + Gale (22/06) · Chanes Seguros (13/07) · Blocko (09/06) · FDL Eventos (07/08) · AmbientHouse (16/06).'),
@@ -236,7 +264,7 @@ for a, b in filas:
 ws = hoja('COSTOS UNIFICADOS', 'Todos los costos de Argentina, bloque por bloque',
           'Una fila por concepto. "Monto a usar" toma la cotización real cuando existe y el estimado del sheet cuando no.')
 COLS = [('Rubro', 34), ('Proveedor', 30), ('Detalle', 62), ('Estado', 13), ('Moneda', 8),
-        ('Monto sin IVA', 15), ('IVA', 8), ('Total moneda origen', 17),
+        ('Monto sin IVA', 15), ('IVA', 8), ('Total moneda origen', 17), ('% Argentina', 11),
         ('Total USD', 14), ('Estimado del sheet\n(USD)', 15), ('Diferencia', 14), ('Fuente', 62)]
 NC = len(COLS)
 encabezados(ws, 4, COLS)
@@ -249,7 +277,9 @@ for bloque in orden_bloques:
     if not grupo: continue
     r = banda(ws, r, bloque.upper(), NC)
     ini = r
-    for (_, rubro, prov, det, mon, monto, iva, estado, est, fuente) in grupo:
+    for it in grupo:
+        (_, rubro, prov, det, mon, monto, iva, estado, est, fuente) = it[:10]
+        pct = it[10] if len(it) > 10 else 1.0
         ws.cell(r, 1, rubro).font = BOLD
         ws.cell(r, 2, prov).font = AZUL
         ws.cell(r, 3, det).font = NEGRO
@@ -259,14 +289,16 @@ for bloque in orden_bloques:
         c = ws.cell(r, 7, iva or None); c.font = AZUL; c.number_format = PCT
         c = ws.cell(r, 8, f'=IF(F{r}="","",F{r}*(1+N(G{r})))'); c.font = NEGRO
         c.number_format = ARS if mon == ARS_ else USD
-        c = ws.cell(r, 9, f'=IF(D{r}="Bonificado",0,IF(H{r}="",N(J{r}),IF(E{r}="USD",H{r},H{r}/TABLERO!$C$4)))')
+        c = ws.cell(r, 9, pct); c.font = AZUL if pct != 1.0 else SUB; c.number_format = PCT
+        c = ws.cell(r, 10, f'=IF(OR(D{r}="Bonificado",D{r}="Reemplazado"),0,'
+                           f'N(I{r})*IF(H{r}="",N(K{r}),IF(E{r}="USD",H{r},H{r}/TABLERO!$C$4)))')
         c.font = NEGRO; c.number_format = USD
-        c = ws.cell(r, 10, est or None); c.font = AZUL; c.number_format = USD
-        c = ws.cell(r, 11, f'=IF(D{r}="Alternativa","",I{r}-N(J{r}))'); c.font = NEGRO; c.number_format = USD
-        ws.cell(r, 12, fuente).font = SUB
+        c = ws.cell(r, 11, est or None); c.font = AZUL; c.number_format = USD
+        c = ws.cell(r, 12, f'=IF(D{r}="Alternativa","",J{r}-N(K{r}))'); c.font = NEGRO; c.number_format = USD
+        ws.cell(r, 13, fuente).font = SUB
         relleno = {'Cerrado': FVERD, 'Contratado': FVERD, 'Cotizado': None, 'En revisión': FAMAR,
                    'En negociación': FAMAR, 'Bonificado': FGRIS, 'Alternativa': FGRIS,
-                   'Sin cotizar': FAMAR}[estado]
+                   'Otro pais': FGRIS, 'Reemplazado': FGRIS, 'Sin cotizar': FAMAR}[estado]
         if relleno:
             for j in range(1, NC + 1): ws.cell(r, j).fill = relleno
         for j in range(1, NC + 1):
@@ -276,17 +308,17 @@ for bloque in orden_bloques:
         filas_detalle.append((r, estado))
         r += 1
     ws.cell(r, 1, f'Subtotal {bloque}').font = BOLD
-    c = ws.cell(r, 9, f'=SUMIF($D${ini}:$D${r-1},"<>Alternativa",$I${ini}:$I${r-1})')
+    c = ws.cell(r, 10, f'=SUMIF($D${ini}:$D${r-1},"<>Alternativa",$J${ini}:$J${r-1})')
     c.font = BOLD; c.number_format = USD
-    c = ws.cell(r, 10, f'=SUM($J${ini}:$J${r-1})'); c.font = BOLD; c.number_format = USD
-    c = ws.cell(r, 11, f'=I{r}-J{r}'); c.font = BOLD; c.number_format = USD
+    c = ws.cell(r, 11, f'=SUM($K${ini}:$K${r-1})'); c.font = BOLD; c.number_format = USD
+    c = ws.cell(r, 12, f'=J{r}-K{r}'); c.font = BOLD; c.number_format = USD
     for j in range(1, NC + 1): ws.cell(r, j).fill = FGRIS; ws.cell(r, j).border = BOX
     subtotales.append(r)
     r += 1
 
 r += 1
 ws.cell(r, 1, 'COSTO TOTAL DEL EVENTO').font = Font(name=F, size=12, bold=True)
-for col, letra in ((9, 'I'), (10, 'J'), (11, 'K')):
+for col, letra in ((10, 'J'), (11, 'K'), (12, 'L')):
     c = ws.cell(r, col, '=' + '+'.join(f'{letra}{x}' for x in subtotales))
     c.font = Font(name=F, size=12, bold=True); c.number_format = USD0; c.fill = FVERD; c.border = BOX
 fila_total = r
@@ -309,11 +341,11 @@ fila = 6
 ws.cell(fila, 1, 'COSTO DEL EVENTO').font = Font(name=F, size=12, bold=True, color='1F3864')
 fila += 1
 lineas = [
- ('Costo total (cotizaciones reales + estimados)', f"='COSTOS UNIFICADOS'!I{fila_total}", USD0,
+ ('Costo total (cotizaciones reales + estimados)', f"='COSTOS UNIFICADOS'!J{fila_total}", USD0,
   'Suma de contratado, cotizado y lo que sólo tiene estimado. No incluye las alternativas descartadas.'),
- ('Lo que decía el presupuesto original', f"='COSTOS UNIFICADOS'!J{fila_total}", USD0,
+ ('Lo que decía el presupuesto original', f"='COSTOS UNIFICADOS'!K{fila_total}", USD0,
   'Total de la hoja "Argentina (3 oct-4 oct)" del master: US$176.159.'),
- ('Diferencia contra el presupuesto', f"='COSTOS UNIFICADOS'!K{fila_total}", USD0,
+ ('Diferencia contra el presupuesto', f"='COSTOS UNIFICADOS'!L{fila_total}", USD0,
   'Cuánto se corre el evento respecto de lo presupuestado, con los precios que hoy están sobre la mesa.'),
 ]
 filas_kpi = {}
@@ -358,19 +390,132 @@ fila += 2
 ws.cell(fila, 1, 'ESTADO DE LOS RUBROS').font = Font(name=F, size=12, bold=True, color='1F3864')
 fila += 1
 for etiqueta, criterio, relleno, nota in [
-    ('Contratado (hay contrato o anticipo)', 'Contratado', FVERD, 'Sede, merch de Colombia e intercoms.'),
-    ('Cotizado (hay presupuesto formal)', 'Cotizado', None, 'Infraestructura, técnica, seguridad, médico, limpieza, residuos, seguro, WiFi, cintas, sillas.'),
-    ('Sin cotizar (sólo estimado o nada)', 'Sin cotizar', FAMAR, 'Catering, vuelos, alojamiento, unifilas, DJ, escoltas, Master Mind, personal logístico.'),
+    ('Contratado (hay contrato o anticipo)', 'Contratado', FVERD, 'Sede, las nueve facturas de merch e intercoms.'),
+    ('Cotizado (hay presupuesto formal)', 'Cotizado', None, 'Sillas, WiFi, seguridad, servicio médico, limpieza, retiro de residuos y seguro.'),
+    ('Sin cotizar (sólo estimado o nada)', 'Sin cotizar', FAMAR, 'Vuelos, alojamiento, ecobaños, marquetería, replanteo, unifilas, DJ, escoltas, Master Mind, personal logístico.'),
 ]:
     ws.cell(fila, 1, etiqueta).font = NEGRO
-    c = ws.cell(fila, 3, f"=SUMIF('COSTOS UNIFICADOS'!$D:$D,\"{criterio}\",'COSTOS UNIFICADOS'!$I:$I)")
+    c = ws.cell(fila, 3, f"=SUMIF('COSTOS UNIFICADOS'!$D:$D,\"{criterio}\",'COSTOS UNIFICADOS'!$J:$J)")
     c.font = VERDE; c.number_format = USD0; c.border = BOX
     if relleno: c.fill = relleno
     ws.cell(fila, 5, nota).font = SUB
     fila += 1
 ws.cell(fila, 1, 'Alternativas descartadas (no suman)').font = SUB
-c = ws.cell(fila, 3, "=SUMIF('COSTOS UNIFICADOS'!$D:$D,\"Alternativa\",'COSTOS UNIFICADOS'!$I:$I)")
+c = ws.cell(fila, 3, "=SUMIF('COSTOS UNIFICADOS'!$D:$D,\"Alternativa\",'COSTOS UNIFICADOS'!$J:$J)")
 c.font = SUB; c.number_format = USD0
+
+# ============================================================================
+# 3bis. MERCH — el detalle factura por factura
+# ============================================================================
+# (proveedor, item, cant, factura, fecha, ars_neto, iva, usdt_factura, pais,
+#  pct_arg, pagado_pct, falta_regla, falta_factura, nota)
+MERCH = [
+ ('REMERASYESTAMPADOS', 'Pañuelos / pañoletas estampados', '8.500',
+  '2601012 → saldo 2601019', '20/06 → 16/08', 13387500.0, 0.21, 5276.51,
+  'Argentina + Uruguay', 0.65, 0.50, 5276.51, 5276.51,
+  'La 2601019 ya viene emitida por el 50% restante. Falta definir con Uruguay como se reparte: aca se imputa el 65% a Argentina.'),
+ ('REMERASYESTAMPADOS', 'Remeras premium estampadas', '250',
+  '2601017', '16/08', 3527500.0, 0.21, 2780.64,
+  'Argentina', 1.0, 0.0, 2780.64, 2780.64,
+  'Se debe el 100%. Sube de 230 a 250 unidades contra la factura original 2601011, al mismo precio unitario de $14.110.'),
+ ('REMERASYESTAMPADOS', 'Bordado computarizado en gorras', '940',
+  '2601016', '10/08', 2643200.0, 0.0, 1721.95,
+  'Argentina', 1.0, 0.0, 1721.95, 1721.95,
+  'Se debe el 100%. Precio final sin IVA, con el descuento de $411.800 ya aplicado. Las gorras las provee el cliente.'),
+ ('TEXTIL RYU S.R.L.', 'Gorra Flex unicolor/bicolor', '940',
+  '2601009', '20/06', 2224980.0, 0.21, 0.0,
+  'Argentina', 1.0, 1.0, 0.0, 0.0,
+  'Pagada al 100% el 25/06. Es la compra de la gorra, distinta del bordado.'),
+ ('LEOTEX', 'Lanyard premium doble raso 25 mm', '1.360',
+  '2601013 → 2601018', '20/06 → 16/08', 2070600.0, 0.21, 1632.20,
+  'Argentina', 1.0, 0.50, 816.10, 1632.20,
+  'A CONFIRMAR: la carpeta se llama "Nuevo pago - 50%" pero la factura 2601018 viene por el total, igual que la original. El master registraba un saldo de US$850.'),
+ ('DERQUI IMPRESIONES', 'Grafica oficial CMC — Argentina', '—',
+  '2601014', '20/06 → 16/08', 3025260.0, 0.21, 2384.73,
+  'Argentina', 1.0, 0.50, 1192.37, 2384.73,
+  'A CONFIRMAR: la reemision del 16/08 viene por el total. El master registraba un saldo de US$1.839 al 13/09.'),
+ ('DERQUI IMPRESIONES', 'Grafica oficial CMC — Uruguay', '—',
+  '2601015', '20/06 → 16/08', 1564626.0, 0.21, 1233.35,
+  'Uruguay', 0.0, 0.50, 616.68, 1233.35,
+  'NO ES DE ARGENTINA. En la hoja PAGOS del master estaba cargada con pais = Argentina: es el monto que inflaba el total argentino.'),
+ ('Blocko', 'Cintas portacredencial (alternativa descartada)', '1.300',
+  'presupuesto 09/06', '09/06', 1749800.0, 0.21, 0.0,
+  'Argentina', 0.0, 0.0, 0.0, 0.0,
+  'Es el mismo item que los lanyards de LEOTEX, que ya esta contratado. Estaba sumando dos veces en la version anterior de esta planilla.'),
+]
+
+ws = hoja('MERCH', 'Todo el merch, factura por factura',
+          'Carpeta de Drive "Presupuestos merch" · facturas 2601009 a 2601019 · emisor IIDAI LLC. Los proveedores son argentinos, no colombianos.')
+COLS = [('Proveedor', 24), ('Ítem', 34), ('Cant.', 8), ('Factura', 20), ('Fecha', 15),
+        ('Neto (ARS)', 15), ('IVA', 7), ('Total (ARS)', 15), ('USDT de la factura', 15),
+        ('País', 18), ('% Argentina', 11), ('Costo Argentina (USD)', 15),
+        ('Falta pagar · regla 50%', 15), ('Falta pagar · según factura', 15), ('Nota', 62)]
+NC = len(COLS)
+encabezados(ws, 4, COLS)
+r = 5
+filas_merch = []
+for (prov, item, cant, fact, fecha, neto, iva, usdt, pais, pct, pagado, f_regla, f_fact, nota) in MERCH:
+    ws.cell(r, 1, prov).font = BOLD
+    ws.cell(r, 2, item).font = NEGRO
+    ws.cell(r, 3, cant).font = NEGRO
+    ws.cell(r, 4, fact).font = AZUL
+    ws.cell(r, 5, fecha).font = AZUL
+    c = ws.cell(r, 6, neto); c.font = AZUL; c.number_format = ARS
+    c = ws.cell(r, 7, iva or None); c.font = AZUL; c.number_format = PCT
+    c = ws.cell(r, 8, f'=F{r}*(1+N(G{r}))'); c.font = NEGRO; c.number_format = ARS
+    c = ws.cell(r, 9, usdt or None); c.font = AZUL; c.number_format = USD
+    ws.cell(r, 10, pais).font = NEGRO
+    c = ws.cell(r, 11, pct); c.font = AZUL; c.number_format = PCT
+    c = ws.cell(r, 12, f'=K{r}*H{r}/TABLERO!$C$4'); c.font = BOLD; c.number_format = USD
+    c = ws.cell(r, 13, f'=K{r}*{f_regla}'); c.font = NEGRO; c.number_format = USD
+    c = ws.cell(r, 14, f'=K{r}*{f_fact}'); c.font = NEGRO; c.number_format = USD
+    ws.cell(r, 15, nota).font = SUB
+    if pais == 'Uruguay' or pct == 0.0:
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FGRIS
+    elif pagado == 0.0:
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FROJO
+    elif pagado == 1.0:
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FVERD
+    else:
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FAMAR
+    for j in range(1, NC + 1):
+        ws.cell(r, j).border = BOX
+        ws.cell(r, j).alignment = Alignment(wrap_text=True, vertical='top')
+    ws.row_dimensions[r].height = 46
+    filas_merch.append(r)
+    r += 1
+ini_m, fin_m = filas_merch[0], filas_merch[-1]
+ws.cell(r, 2, 'TOTAL IMPUTADO A ARGENTINA').font = Font(name=F, size=11, bold=True)
+for col in (12, 13, 14):
+    c = ws.cell(r, col, f'=SUM({L(col)}{ini_m}:{L(col)}{fin_m})')
+    c.font = Font(name=F, size=11, bold=True); c.number_format = USD; c.fill = FVERD; c.border = BOX
+fila_merch_total = r
+ws.auto_filter.ref = f'A4:{L(NC)}4'
+
+r += 2
+ws.cell(r, 1, 'CÓMO LEER LOS COLORES').font = Font(name=F, size=11, bold=True, color='1F3864'); r += 1
+for t, rel in [
+    ('Verde — pagado al 100%: la compra de las gorras de Textil Ryu.', FVERD),
+    ('Amarillo — 50% abonado, queda el saldo: pañuelos, lanyards y gráfica de Argentina.', FAMAR),
+    ('Rojo — sin pagar nada, se debe el 100%: las remeras y el bordado de las gorras.', FROJO),
+    ('Gris — no suma al costo de Argentina: la gráfica de Uruguay y la cotización descartada de Blocko.', FGRIS),
+]:
+    c = ws.cell(r, 1, t); c.font = NEGRO; c.fill = rel; c.border = BOX
+    ws.merge_cells(start_row=r, start_column=1, end_row=r, end_column=6)
+    r += 1
+
+r += 1
+ws.cell(r, 1, 'TRES COSAS QUE HAY QUE CONFIRMAR').font = Font(name=F, size=11, bold=True, color='C00000'); r += 1
+for t in [
+ '1) Lanyards y gráfica de Argentina: las facturas reemitidas en agosto vienen por el TOTAL, pero la carpeta y el master dicen que ya se abonó el 50%. Si las facturas están bien, hay que pagar US$2.008 más de lo que sale por la regla del 50%. Una sola consulta a LEOTEX y a Derqui lo resuelve.',
+ '2) Pañuelos: son 8.500 unidades compartidas entre Argentina y Uruguay y la factura no las separa. Acá se imputó el 65% a Argentina (5.500 de 8.500, la misma proporción que la gráfica). Si van todos a Argentina, el costo sube US$3.755.',
+ '3) La gráfica de Uruguay (US$1.233) estaba cargada en el master como Argentina. Ya quedó fuera del costo argentino, pero conviene corregirla también en el master para que no se arrastre.',
+]:
+    c = ws.cell(r, 1, t); c.font = NEGRO
+    ws.merge_cells(start_row=r, start_column=1, end_row=r, end_column=15)
+    c.alignment = Alignment(wrap_text=True, vertical='top')
+    ws.row_dimensions[r].height = 30
+    r += 1
 
 # ============================================================================
 # 4. DECISIONES ABIERTAS
@@ -396,6 +541,16 @@ DEC = [
   'Ecobaños, marquetería de certificaciones y premios, replanteo de sillas con ingeniero',
   'Hoy entran en US$0',
   '', 'Pedir las tres cotizaciones esta semana. Son los últimos huecos que quedan además de vuelos y alojamiento.'),
+ ('Merch — el 50% que falta pagar',
+  'Regla del 50%: quedan US$9.941 por transferir en USDT',
+  'Según las facturas reemitidas en agosto: US$11.949',
+  '=11949.25-9940.79',
+  'Las facturas de LEOTEX (lanyards) y Derqui (gráfica ARG) vienen por el total aunque ya se abonó el 50%. Una consulta a cada proveedor cierra la diferencia. Lo urgente igual son las remeras (US$2.781) y el bordado de gorras (US$1.722): esos no tienen nada pagado.'),
+ ('Merch — cómo se reparten los pañuelos con Uruguay',
+  'Los 8.500 pañuelos se imputan 65% a Argentina (US$6.973)',
+  'Si van todos a Argentina: US$10.728',
+  '=0.35*13387500*1.21/TABLERO!$C$4',
+  'La factura no separa las unidades por país. Definir el reparto con Uruguay antes de cerrar el número para el CEO.'),
  ('Vuelos y alojamiento del equipo',
   'Sin cotizar', 'Sin cotizar', '',
   'No hay ni un mail ni una línea en el sheet. Con 8 personas de equipo interno, es el hueco más grande que queda.'),

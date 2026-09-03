@@ -7,7 +7,7 @@ La Rural, Pabellón Azul. Montaje 2 de octubre, evento 3 y 4 de octubre de 2026.
 | Qué | Dónde |
 |---|---|
 | Google Sheet (una hoja, valores calculados) | https://docs.google.com/spreadsheets/d/1SfTv0IzslQQjWe5ROmxbHTaAK51zUMRdTrW2wGwK1L4/edit |
-| Libro con fórmulas vivas (4 hojas) | `ARGENTINA_CMC2026_Costo_Total.xlsx` |
+| Libro con fórmulas vivas (7 hojas) | `ARGENTINA_CMC2026_Costo_Total.xlsx` |
 | CSV fuente del Google Sheet | `argentina_costo_total.csv` |
 | Generadores | `construir_argentina.py`, `generar_csv_argentina.py` |
 
@@ -15,16 +15,56 @@ La Rural, Pabellón Azul. Montaje 2 de octubre, evento 3 y 4 de octubre de 2026.
 
 | | USD |
 |---|---:|
-| Costo total del evento | 252.008 |
+| Costo total del evento | 242.347 |
 | Presupuesto original (hoja Argentina del master) | 176.159 |
-| Diferencia | +75.849 (+43,1 %) |
-| Costo por asistente pago (6.000) | 42,00 |
+| Diferencia | +66.188 (+37,6 %) |
+| Costo por asistente pago (6.000) | 40,39 |
 | **Ahorro negociado contra lo cotizado** | **40.247** (~$60,8 M) |
 
-Composición: cerrado 106.273 · contratado 92.547 · cotizado 38.204 · sin cotizar 14.389 · en negociación 596.
+Por bloque: Sede 106.715 · Técnica 82.434 · Merch 17.417 · Servicios 14.953 · Catering 14.569 · Producción 6.260 · Equipo 0.
+
+Por estado: cerrado 106.273 · contratado 92.977 · cotizado 36.801 · sin cotizar 5.700 · en negociación 596.
 
 Tipo de cambio: **ARS 1.510 por USD**, que es el que usa Agustina. Verificado contra dos de sus
 cifras: el montaje de $900.000 le da US$596 y el entelado de $24.500.000 le da US$16.225.
+
+## Merch — las nueve facturas de Drive
+
+Todo el merch sale de la carpeta compartida *Presupuestos merch* (facturas 2601009 a 2601019,
+emisor IIDAI LLC). Reemplazan el renglón único de US$8.689 que traía el master. Los proveedores
+son **argentinos**, no colombianos como decía la hoja PAGOS.
+
+| Proveedor | Ítem | Cant. | Total ARS | % ARG | Costo ARG (USD) | Estado de pago |
+|---|---|---:|---:|---:|---:|---|
+| REMERASYESTAMPADOS | Pañuelos / pañoletas estampados | 8.500 | 16.198.875 | 65 % | 6.973 | 50 % abonado |
+| REMERASYESTAMPADOS | Remeras premium estampadas | 250 | 4.268.275 | 100 % | 2.827 | **sin pagar** |
+| REMERASYESTAMPADOS | Bordado computarizado en gorras | 940 | 2.643.200 | 100 % | 1.750 | **sin pagar** |
+| TEXTIL RYU | Gorra Flex unicolor/bicolor | 940 | 2.692.226 | 100 % | 1.783 | pagada 100 % |
+| LEOTEX | Lanyard premium doble raso 25 mm | 1.360 | 2.505.426 | 100 % | 1.659 | 50 % abonado |
+| DERQUI IMPRESIONES | Gráfica oficial — Argentina | — | 3.660.565 | 100 % | 2.424 | 50 % abonado |
+| DERQUI IMPRESIONES | Gráfica oficial — Uruguay | — | 1.893.197 | 0 % | 0 | otro evento |
+| Blocko | Cintas portacredencial | 1.300 | 2.117.258 | — | 0 | alternativa descartada |
+| | **Total imputado a Argentina** | | | | **17.417** | |
+
+**Falta pagar:** US$9.941 por la regla del 50 %, o US$11.949 si las facturas reemitidas de
+agosto están bien. Lo urgente son las remeras (US$2.781) y el bordado de gorras (US$1.722),
+que no tienen nada abonado.
+
+Dos duplicaciones que se sacaron del costo:
+
+- **Blocko** cotizó las cintas portacredencial (US$1.402) — es el mismo ítem que los lanyards de
+  LEOTEX, que ya está contratado y con anticipo pagado. Estaba sumando dos veces.
+- **La gráfica de Uruguay** (US$1.233) figuraba en la hoja PAGOS del master con país = Argentina.
+
+Tres cosas a confirmar:
+
+1. Las facturas reemitidas de **LEOTEX** (2601018) y **Derqui Argentina** (2601014) vienen por el
+   total, pero la carpeta y el master dicen que ya se abonó el 50 %. Son US$2.008 de diferencia en
+   el calendario de pagos, no en el costo.
+2. Los **8.500 pañuelos** son una compra compartida con Uruguay y la factura no separa unidades.
+   Acá se imputó el 65 % a Argentina (5.500 de 8.500, la misma proporción que la gráfica). Si van
+   todos a Argentina, el costo sube US$3.755.
+3. Conviene corregir la gráfica de Uruguay también en el master, para que no se siga arrastrando.
 
 ## De dónde salen las cotizaciones
 
@@ -43,14 +83,17 @@ Todas se extrajeron de los adjuntos del correo de agustinalorenzog@gmail.com:
 | Higia Eventos | Limpieza, 205,5 h | ARS 3.367.441 + IVA | 22/06/2026 |
 | Gale Servicios | Retiro de residuos | ARS 1.471.609 + IVA | 22/06/2026 |
 | Chanes Seguros | Accidentes personales, 150 personas | ARS 953.152 | 13/07/2026 |
-| Blocko | 1.300 cintas portacredencial | ARS 1.749.800 + IVA | 09/06/2026 |
+| Blocko | 1.300 cintas portacredencial (descartada) | ARS 1.749.800 + IVA | 09/06/2026 |
+
+El merch no sale del correo sino de la carpeta de Drive *Presupuestos merch*: ver la tabla de arriba.
 
 ## Advertencias
 
-- **Prina venció.** La cotización de técnica tenía validez de 10 días y es del 18 de junio. Es el ítem más caro en pesos: hay que revalidarla.
+- **Técnica cerrada** con Grupo MET en US$60.000, pero sin PDF en el correo. Es el único ítem grande sin respaldo escrito, y sin él la comparativa de ahorro de técnica no se puede defender.
 - **Los pesos son de la fecha de cada cotización.** VMG recotiza si el dólar salta más de 15 % y La Rural ajusta el saldo por IPC.
-- **Catering no tiene cotización aceptada.** Entra al total con el estimado del sheet (US$33.820). AmbientHouse se rechazó por precio y Teist no cerró.
-- **Vuelos y alojamiento del equipo entran en cero.** No hay cotización en el correo ni monto en el sheet. El costo por persona es un piso, no un techo.
+- **Catering cerrado** con Grupo Ambient en US$14.569 (600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas), contra los US$33.820 que tenía el presupuesto.
+- **Vuelos y alojamiento del equipo entran en cero.** No hay cotización en el correo ni monto en el sheet.
+- **Cuatro rubros sin cotizar:** ecobaños, marquetería de certificaciones y premios, replanteo de sillas con ingeniero, y los cheques, escarapelas, diplomas, placas y manillas. El costo por persona es un piso, no un techo.
 - **Facturación al exterior sin resolver** con FDL Eventos y Vittal (la empresa que paga es de EE.UU.).
 
 ## Cómo se reconstruyeron los adjuntos

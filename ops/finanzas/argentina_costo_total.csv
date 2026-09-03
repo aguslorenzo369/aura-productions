@@ -1,75 +1,102 @@
 ARGENTINA · CUMBRE DE LOS MILLONARIOS CONSCIENTES 2026
 "La Rural, Pabellón Azul · montaje 2 de octubre · evento 3 y 4 de octubre de 2026"
-"Actualizado con los cierres del 02/09: técnica, entelado, CCTV, catering y bonificaciones."
+"Corte al 02/09/2026. Incluye los cierres de técnica, entelado, CCTV, catering y las nueve facturas de merch de la carpeta de Drive."
 
-Tipo de cambio usado (ARS por USD),1530,La columna Total USD está calculada con este valor.
+Tipo de cambio usado (ARS por USD),1510.0,Dólar operativo de Agustina. Verificado contra dos de sus cifras: $900.000 de montaje = US$596 y $24.500.000 de entelado = US$16.225.
 
-Rubro,Proveedor,Detalle,Estado,Moneda,Monto de la cotización,IVA,Total con IVA (moneda origen),Total USD,Estimado del sheet (USD),Diferencia,Fuente
+Rubro,Proveedor,Detalle,Estado,Moneda,Monto sin IVA,IVA,Total con IVA (moneda origen),% Argentina,Total USD,Estimado del sheet (USD),Diferencia,Fuente
 SEDE
-Alquiler Pabellón Azul,La Rural (contrato CC-00957),Locación 2 días de evento + 1 día de montaje,Contratado,USD,75000.0,sin IVA,75000.0,75000.0,70000.0,5000.0,Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)
-Infraestructura La Rural (a filtrar),La Rural — Jefatura de Infraestructura,"Escenario provisional: sólo panelería (oficina de producción, sala de staff, depósito de las barras) + dirección técnica + guardias eléctrica y técnica. Se descontó TODO el mobiliario ($49.636.342) porque Agustina lo consigue aparte más barato. FALTA que marque qué ítems se quedan.",En revisión,ARS,16858366.2,sin IVA,16858366.2,11018.54,,11018.54,"Mail criccio@larural.com.ar 17/08/2026 · total del PDF $66.494.708,20 · ver hoja INFRAESTRUCTURA"
-Sillas del público (5.500),FDL Eventos,4.500 sillas plásticas Munro reforzadas + 1.000 sillas hotel negro + flete. NO incluye armado.,Cotizado,ARS,25800000.0,21%,31218000.0,20403.92,16500.0,3903.92,Mail fdleventos@gmail.com 07/08/2026 · pendiente de resolver facturación al exterior
-"Montaje, acomodación y desmontaje de sillas",En negociación,"Montaje previo, acomodación el sábado a la noche después de la dinámica y desmontaje el domingo.",En negociación,ARS,900000.0,sin IVA,900000.0,588.24,,588.24,Negociación de Agustina · cerrar el número antes de firmar las sillas
-Replanteo de sillas (ingeniero),Sin cotizar,Replanteo del layout de sillas del pabellón. Confirmado que va aparte de la dirección técnica de La Rural.,Sin cotizar,USD,,,,0.0,,0.0,Pendiente de pedir presupuesto
-Conectividad WiFi,La Rural — Servicios de Conectividad,"2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre",Cotizado,ARS,1438728.01,21%,1740860.89,1137.82,800.0,337.82,Mail conectividad@larural.com.ar 16/06/2026
-Subtotal Sede,,,,,,,,108148.52,87300.0,20848.52
+Alquiler Pabellón Azul,La Rural (contrato CC-00957),Locación 2 días de evento + 1 día de montaje,Contratado,USD,75000.0,sin IVA,75000.0,100%,75000.0,70000.0,5000.0,Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)
+Infraestructura La Rural (armado de stands),La Rural — Jefatura de Infraestructura,"Armado del stand de staff (100 m²), el de producción (menos de 50 m²) y el mobiliario del camarín de speakers. Falta pedirles los espejos. Las sillas del público van en su propia línea.",Cerrado,USD,9270.0,sin IVA,9270.0,100%,9270.0,,9270.0,Definición de Agustina sobre el presupuesto de $66.494.708 del 17/08 · ver hoja AHORROS
+Sillas del público (5.500),FDL Eventos,"Presupuesto 026-2697, alquiler por 4 días: 1.000 sillas hotel caño gris tapizado negro ($7.000.000) + 4.500 sillas plásticas Munro reforzadas ($17.100.000) + flete ($1.700.000). NO incluye armado.",Cotizado,ARS,25800000.0,21%,31218000.0,100%,20674.17,16500.0,4174.17,Presupuesto FDL Eventos N.º 026-2697 del 07/08/2026 · pendiente de resolver facturación al exterior
+"Montaje, acomodación y desmontaje de sillas",En negociación,"Montaje previo, acomodación el sábado a la noche después de la dinámica y desmontaje el domingo.",En negociación,ARS,900000.0,sin IVA,900000.0,100%,596.03,,596.03,Negociación de Agustina · cerrar el número antes de firmar las sillas
+Replanteo de sillas (ingeniero),Sin cotizar,Replanteo del layout de sillas del pabellón. Confirmado que va aparte de la dirección técnica de La Rural.,Sin cotizar,USD,,,,100%,0.0,,0.0,Pendiente de pedir presupuesto
+Conectividad WiFi,La Rural — Servicios de Conectividad,"2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre",Cotizado,ARS,1466063.84,21%,1773937.25,100%,1174.79,800.0,374.79,"Mail conectividad@larural.com.ar 05/08/2026 · presupuesto N.º 2, base IPC junio (el del 16/06 era $1.438.728)"
+Subtotal Sede,,,,,,,,,106714.99,87300.0,19414.99
 TÉCNICA
-Producción técnica,Cerrado por Agustina,"Sonido, iluminación, video y LED. Cerrado en dólares.",Cerrado,USD,60000.0,sin IVA,60000.0,60000.0,34000.0,26000.0,Negociación de Agustina · reemplaza la cotización vencida de Prina
-Entelado,Cerrado por Agustina,Entelado del pabellón. Negociado a la mitad de lo que estaba cotizado.,Cerrado,ARS,24500000.0,sin IVA,24500000.0,16013.07,,16013.07,Negociación de Agustina · US$16.000 aprox. al dólar de referencia
-Circuito cerrado (CCTV),Cerrado por Agustina,Circuito cerrado de cámaras para el pabellón.,Cerrado,USD,6209.0,sin IVA,6209.0,6209.0,,6209.0,Negociación de Agustina
-Bonificado por el proveedor de técnica,Sin costo,"500 vallas y efectos especiales, sin cargo. Es lo que evita el gasto de vallado que estaba presupuestado.",Bonificado,USD,,,,0.0,,,Negociación de Agustina
-Subtotal Técnica,,,,,,,,82222.07,34000.0,48222.07
+Producción técnica,Cerrado por Agustina,"Sonido, iluminación, video y LED. Cerrado en dólares.",Cerrado,USD,60000.0,sin IVA,60000.0,100%,60000.0,34000.0,26000.0,Negociación de Agustina · reemplaza la cotización vencida de Prina
+Entelado,Cerrado por Agustina,Entelado del pabellón. Negociado a la mitad de lo que estaba cotizado.,Cerrado,ARS,24500000.0,sin IVA,24500000.0,100%,16225.17,,16225.17,Negociación de Agustina · US$16.000 aprox. al dólar de referencia
+Circuito cerrado (CCTV),Cerrado por Agustina,Circuito cerrado de cámaras para el pabellón.,Cerrado,USD,6209.0,sin IVA,6209.0,100%,6209.0,,6209.0,Negociación de Agustina
+Bonificado por el proveedor de técnica,Sin costo,"500 vallas y efectos especiales, sin cargo. Es lo que evita el gasto de vallado que estaba presupuestado.",Bonificado,USD,,,,100%,0.0,,0.0,Negociación de Agustina
+Subtotal Técnica,,,,,,,,,82434.17,34000.0,48434.17
 SERVICIOS
-Seguridad y vigilancia,Road Seguridad S.A.,"263 horas de vigilancia (armado, evento y desarme) + planos de evacuación $715.000 + supervisión general $795.000",Cotizado,ARS,7218928.96,21%,8734904.04,5709.09,,5709.09,"Mail presupuestos@roadseguridad.com.ar 12/08/2026 (versión V3, lista para firmar)"
-Servicio médico,Vittal — Socorro Médico Privado,"1 UTIM TRI con dos médicos + enfermero/chofer, los tres días (2, 3 y 4 de octubre)",Cotizado,ARS,6366521.27,"10,5%",7035006.0,4598.04,,4598.04,"Mail vtomas@vittal.com.ar 28/08/2026 · tarifas actualizadas, sin consultorio"
-Limpieza,Higia Eventos,"205,5 horas de limpieza: auditorio, baños y guardarropas, del 2 al 5 de octubre",Cotizado,ARS,3367440.91,21%,4074603.5,2663.14,,2663.14,Mail higiaeventos 22/06/2026 (reenviado 29/06) · 50% de anticipo antes del armado
-Retiro de residuos,Gale Servicios,Roll off con disposición final incluida. Cotización base abril 2026.,Cotizado,ARS,1471608.62,21%,1780646.43,1163.82,,1163.82,Mail higiaeventos 22/06/2026 (adjunto Gale) · se factura 100% por adelantado
-Baños químicos — ecobaños,Sin cotizar,"Decidido: ecobaños, no los químicos tradicionales. Más limpios, mejor a la vista y ecofriendly. Falta pedir presupuesto.",Sin cotizar,USD,,,,0.0,,0.0,Decisión de Agustina · pendiente de cotizar
-Seguro de accidentes personales,Chanes Seguros,"Cobertura MIA (muerte, invalidez y asistencia médica) para 150 personas, exigida por La Rural",Cotizado,ARS,953151.93,sin IVA,953151.93,622.98,400.0,222.98,"Mail nestor@chanesseguros.com.ar 13/07/2026 · premio único, cotizado para 15-19/07"
-Subtotal Servicios,,,,,,,,14757.07,400.0,14357.07
+Seguridad y vigilancia,Road Seguridad S.A.,"263 horas de vigilancia (armado, evento y desarme) + planos de evacuación $715.000 + supervisión general $795.000",Cotizado,ARS,7218928.96,21%,8734904.04,100%,5784.7,,5784.7,"Mail presupuestos@roadseguridad.com.ar 12/08/2026 (versión V3, lista para firmar)"
+Servicio médico,Vittal — Socorro Médico Privado,"1 UTIM TRI con dos médicos + enfermero/chofer, los tres días (2, 3 y 4 de octubre)",Cotizado,ARS,6366521.27,"10,5%",7035006.0,100%,4658.94,,4658.94,"Mail vtomas@vittal.com.ar 28/08/2026 · tarifas actualizadas, sin consultorio"
+Limpieza,Higia Eventos,"205,5 horas de limpieza: auditorio, baños y guardarropas, del 2 al 5 de octubre",Cotizado,ARS,3367440.91,21%,4074603.5,100%,2698.41,,2698.41,Mail higiaeventos 22/06/2026 (reenviado 29/06) · 50% de anticipo antes del armado
+Retiro de residuos,Gale Servicios,Roll off con disposición final incluida. Cotización base abril 2026.,Cotizado,ARS,1471608.62,21%,1780646.43,100%,1179.24,,1179.24,Mail higiaeventos 22/06/2026 (adjunto Gale) · se factura 100% por adelantado
+Baños químicos — ecobaños,Sin cotizar,"Decidido: ecobaños, no los químicos tradicionales. Más limpios, mejor a la vista y ecofriendly. Falta pedir presupuesto.",Sin cotizar,USD,,,,100%,0.0,,0.0,Decisión de Agustina · pendiente de cotizar
+Seguro de accidentes personales,Chanes Seguros,"Cobertura MIA (muerte, invalidez y asistencia médica) para 150 personas, exigida por La Rural",Cotizado,ARS,953151.93,sin IVA,953151.93,100%,631.23,400.0,231.23,"Mail nestor@chanesseguros.com.ar 13/07/2026 · premio único, cotizado para 15-19/07"
+Subtotal Servicios,,,,,,,,,14952.52,400.0,14552.52
 MERCH
-Cintas portacredencial (1.300),Blocko,"Cinta raso 25 mm impresa 4 colores dos caras + mosquetón zamak, $1.346 c/u",Cotizado,ARS,1749800.0,21%,2117258.0,1383.83,,1383.83,Mail hola@blocko.com.ar 09/06/2026 · producción 3 semanas
-Pañuelos,Proveedor Colombia,"Contrato cerrado, 50% abonado el 24/06. Saldo US$5.491 programado al 13/09.",Contratado,USD,10982.0,sin IVA,10982.0,10982.0,,10982.0,Hoja PAGOS del master
-Lanyards,Proveedor Colombia,"Contrato cerrado, 50% abonado el 25/06. Saldo US$850 al 13/09.",Contratado,USD,1698.59,sin IVA,1698.59,1698.59,,1698.59,Hoja PAGOS del master
-Gorras,Proveedor Colombia,Pagado 100% el 25/06,Contratado,USD,1825.0,sin IVA,1825.0,1825.0,5000.0,-3175.0,Hoja PAGOS del master
-Gráfica Argentina,Proveedor Colombia,"Contrato cerrado, saldo US$1.839 al 13/09",Contratado,USD,2481.0,sin IVA,2481.0,2481.0,,2481.0,Hoja PAGOS del master
-Marquetería y enmarcado,Sin cotizar,"Enmarcado de las certificaciones y los premios. Rubro nuevo, no estaba en ninguna planilla.",Sin cotizar,USD,,,,0.0,,0.0,Agregado por Agustina · pendiente de cotizar
-Resto de merch e impresos,Varios (merch desde Colombia),"Contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas y manillas",Sin cotizar,USD,,,,8689.0,8689.0,0.0,Estimado de la hoja Argentina del master; sin cotización argentina
-Subtotal Merch,,,,,,,,27059.42,13689.0,13370.42
+Pañuelos / pañoletas estampados (8.500),REMERASYESTAMPADOS,"Factura 2601012 del 20/06. Compra compartida Argentina + Uruguay: se imputa a Argentina el 65% (5.500 de 8.500 unidades, la misma proporcion que la grafica). El 50% ya esta abonado; el saldo se paga con la factura 2601019 por 5.276,51 USDT, de los cuales 3.429,73 son de Argentina.",Contratado,ARS,13387500.0,21%,16198875.0,65%,6973.03,,6973.03,Drive · Presupuesto Pañuelos - Arg y Uru · facturas 2601012 (20/06) y 2601019 (16/08)
+Remeras premium estampadas (250),REMERASYESTAMPADOS,"Factura 2601017 del 16/08, $14.110 por unidad. Sube de 230 a 250 unidades contra la factura original 2601011, al mismo precio unitario. SIN PAGAR: se debe el 100% (2.780,64 USDT).",Contratado,ARS,3527500.0,21%,4268275.0,100%,2826.67,,2826.67,Drive · Presupuestos camisetas + pañoletas · factura 2601017 (16/08)
+Bordado de gorras (940),REMERASYESTAMPADOS,"Bordado computarizado sobre las gorras que provee el cliente. Presupuesto del 03/07 con el descuento de $411.800 ya aplicado. Precio final, no lleva IVA. SIN PAGAR: se debe el 100% (1.721,95 USDT).",Contratado,ARS,2643200.0,sin IVA,2643200.0,100%,1750.46,,1750.46,Drive · Presupuesto gorras (compra y bordado) / Bordado · factura 2601016 (10/08)
+Gorras Flex unicolor/bicolor (940),TEXTIL RYU S.R.L.,"Factura 2601009 del 20/06, pagada al 100% el 25/06. Es la compra de las gorras; el bordado va en su propia linea.",Contratado,ARS,2224980.0,21%,2692225.8,100%,1782.93,5000.0,-3217.07,Drive · Compra de gorras · factura 2601009 · hoja PAGOS del master
+Lanyards premium doble raso 25 mm (1.360),LEOTEX,"Sublimacion full print en ambas caras, 1.300 negros + 50 azules (la factura dice 1.360, la suma da 1.350: hay 10 de diferencia). Reemitida como 2601018 en USDT. OJO: la carpeta se llama ""Nuevo pago - 50%"" pero la factura viene por el total.",Contratado,ARS,2070600.0,21%,2505426.0,100%,1659.22,,1659.22,Drive · Presupuesto Lanyards · facturas 2601013 (20/06) y 2601018 (16/08)
+Grafica oficial CMC — Argentina,DERQUI IMPRESIONES,"5.500 hojas A4, 5.500 tarjetas, 1.030 credenciales, 5.500 mapas y 1.000 bolsas de friselina. Reemitida el 16/08 para cambiar el medio de pago a USDT.",Contratado,ARS,3025260.0,21%,3660564.6,100%,2424.21,,2424.21,"Drive · Factura/presu ARGENTINA · factura 2601014 (20/06, reemitida 16/08)"
+Grafica oficial CMC — Uruguay,DERQUI IMPRESIONES,"NO ES DE ARGENTINA. 2.800 hojas A4, 2.800 tarjetas, 530 credenciales, 2.800 mapas y 1.000 bolsas de friselina, para el evento de Uruguay. Se deja a la vista en cero porque en la hoja PAGOS del master estaba cargada como Argentina: es el monto que no cerraba.",Otro pais,ARS,1564626.0,21%,1893197.46,0%,0.0,,0.0,"Drive · Factura/presu URUGUAY · factura 2601015 (20/06, reemitida 16/08)"
+Cintas portacredencial (1.300) — alternativa,Blocko,"Cinta raso 25 mm impresa a 4 colores dos caras + mosqueton zamak, $1.346 c/u. Es el MISMO item que los lanyards de LEOTEX, que ya esta contratado y con anticipo pagado. Estaba sumando dos veces: ahora queda como alternativa descartada.",Alternativa,ARS,1749800.0,21%,2117258.0,100%,1402.16,,,Mail hola@blocko.com.ar 09/06/2026 · descartada contra la factura 2601013 de LEOTEX
+Marqueteria y enmarcado,Sin cotizar,"Enmarcado de las certificaciones y los premios. Rubro nuevo, no estaba en ninguna planilla.",Sin cotizar,USD,,,,100%,0.0,,0.0,Agregado por Agustina · pendiente de cotizar
+"Cheques, escarapelas, diplomas, placas y manillas",Sin cotizar,"Lo unico del merch que las facturas de Drive NO cubren. Las camisetas, los mapas, las bolsas y las credenciales ya estan facturados arriba.",Sin cotizar,USD,,,,100%,0.0,,0.0,Pendiente de cotizar · antes estaba dentro del estimado global de US$8.689
+Estimado global de merch del master (reemplazado),Varios,"La hoja Argentina del master tenia US$8.689 en un solo renglon por contratos, cheques, escarapelas, bolsas, camisetas, mapas, diplomas, placas y manillas. Queda en cero como costo porque las facturas reales de arriba lo reemplazan; se conserva el estimado para poder comparar contra el presupuesto original.",Reemplazado,USD,,,,100%,0.0,8689.0,-8689.0,Hoja Argentina del master · reemplazado por las facturas 2601009 a 2601019
+Subtotal Merch,,,,,,,,,17416.53,13689.0,3727.53
 CATERING
-"Catering VIP, staff y equipo",Grupo Ambient,"Número final por las dos propuestas juntas: 600 lunchbox para los VIP + desayuno, almuerzo y cena para 150 personas.",Cerrado,USD,13582.0,sin IVA,13582.0,13582.0,33820.0,-20238.0,Cierre de Agustina con Grupo Ambient · reemplaza la estimación de $25.000.000
-Food trucks,Sin costo,No los paga la producción.,Bonificado,USD,,,,0.0,,,Confirmado por Agustina
-Subtotal Catering,,,,,,,,13582.0,33820.0,-20238.0
+"Catering VIP, staff y equipo",Grupo Ambient,"Número final por las dos propuestas juntas: 600 lunchbox para los VIP + desayuno, almuerzo y cena para 150 personas.",Cerrado,USD,14569.0,sin IVA,14569.0,100%,14569.0,33820.0,-19251.0,Cierre de Agustina con Grupo Ambient · reemplaza la estimación de $25.000.000
+Food trucks,Sin costo,No los paga la producción.,Bonificado,USD,,,,100%,0.0,,0.0,Confirmado por Agustina
+Subtotal Catering,,,,,,,,,14569.0,33820.0,-19251.0
 PRODUCCIÓN
-Unifilas,A definir,"Estimado del sheet, sin cotización",Sin cotizar,USD,,,,1200.0,1200.0,0.0,Hoja Argentina del master
-Vallado (500 vallas),Bonificado por técnica,Las 500 vallas las regala el proveedor de técnica. Estaban presupuestadas en US$1.250.,Bonificado,USD,,,,0.0,1250.0,,Negociación de Agustina
-DJ,A definir,Estimado del sheet,Sin cotizar,USD,,,,500.0,500.0,0.0,Hoja Argentina del master
-Escoltas (2),A definir,Estimado del sheet,Sin cotizar,USD,,,,1000.0,1000.0,0.0,Hoja Argentina del master
-Master Mind Hit,A definir,Sala adicional,Sin cotizar,USD,,,,3000.0,3000.0,0.0,Hoja Argentina del master
-Personal logístico,A definir,La hoja del master lo tiene en US$0,Sin cotizar,USD,,,,0.0,,0.0,Hoja Argentina del master · valor en cero
-Intercoms,Proveedor Colombia,"Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09",Contratado,USD,560.0,sin IVA,560.0,560.0,,560.0,Hoja PAGOS del master
-Subtotal Producción,,,,,,,,6260.0,6950.0,-690.0
+Unifilas,A definir,"Estimado del sheet, sin cotización",Sin cotizar,USD,,,,100%,1200.0,1200.0,0.0,Hoja Argentina del master
+Vallado (500 vallas),Bonificado por técnica,Las 500 vallas las regala el proveedor de técnica. Estaban presupuestadas en US$1.250.,Bonificado,USD,,,,100%,0.0,1250.0,-1250.0,Negociación de Agustina
+DJ,A definir,Estimado del sheet,Sin cotizar,USD,,,,100%,500.0,500.0,0.0,Hoja Argentina del master
+Escoltas (2),A definir,Estimado del sheet,Sin cotizar,USD,,,,100%,1000.0,1000.0,0.0,Hoja Argentina del master
+Master Mind Hit,A definir,Sala adicional,Sin cotizar,USD,,,,100%,3000.0,3000.0,0.0,Hoja Argentina del master
+Personal logístico,A definir,La hoja del master lo tiene en US$0,Sin cotizar,USD,,,,100%,0.0,,0.0,Hoja Argentina del master · valor en cero
+Intercoms,Proveedor Colombia,"Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09",Contratado,USD,560.0,sin IVA,560.0,100%,560.0,,560.0,Hoja PAGOS del master
+Subtotal Producción,,,,,,,,,6260.0,6950.0,-690.0
 EQUIPO
-Vuelos del equipo,Sin cotizar,No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,0.0,,0.0,No encontrado
-Alojamiento del equipo,Sin cotizar,No hay cotización de hotel en Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,0.0,,0.0,No encontrado
-Traslados internos y viáticos,Sin cotizar,Sin registro,Sin cotizar,USD,,,,0.0,,0.0,No encontrado
-Subtotal Equipo,,,,,,,,0.0,0.0,0.0
+Vuelos del equipo,Sin cotizar,No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
+Alojamiento del equipo,Sin cotizar,No hay cotización de hotel en Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
+Traslados internos y viáticos,Sin cotizar,Sin registro,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
+Subtotal Equipo,,,,,,,,,0.0,0.0,0.0
 
-COSTO TOTAL DEL EVENTO,,,,,,,,252029.08,176159.0,75870.08
+COSTO TOTAL DEL EVENTO,,,,,,,,,242347.21,176159.0,66188.21
 
 COSTO POR PERSONA
 Base de cálculo,Personas,Costo por persona (USD),,Qué incluye
-Aforo general,5000,50.41,,Asistentes de entrada general.
-VIP,1000,252.03,,Asistentes VIP.
-Asistentes pagos (general + VIP),6000,42.0,,La base más útil para fijar el precio de la entrada.
-Mastermind del martes,246,1024.51,,Actividad aparte.
-Total de personas en el predio,6108,41.26,,Pagos + 100 staff + 8 equipo.
+Aforo general,5000,48.47,,Asistentes de entrada general.
+VIP,1000,242.35,,Asistentes VIP.
+Asistentes pagos (general + VIP),6000,40.39,,La base más útil para fijar el precio de la entrada.
+Mastermind del martes,246,985.15,,Actividad aparte.
+Total de personas en el predio,6108,39.68,,Pagos + 100 de staff + 8 del equipo interno.
 
 ESTADO DE LOS RUBROS,,USD
-Cerrado,,95804.07
-Contratado,,92546.59
-Cotizado,,37682.64
-En revisión,,11018.54
-En negociación,,588.24
-Sin cotizar,,14389.0
+Cerrado,,106273.17
+Contratado,,92976.53
+Cotizado,,36801.49
+Sin cotizar,,5700.0
+Alternativa,,1402.16
+En negociación,,596.03
 Bonificado,,0.0
+Otro pais,,0.0
+Reemplazado,,0.0
+
+MERCH · FACTURA POR FACTURA
+Proveedor,Ítem,Cant.,Factura,Fecha,Neto (ARS),IVA,Total (ARS),USDT de la factura,País,% Argentina,Costo Argentina (USD),Falta pagar · regla 50%,Falta pagar · según factura,Nota
+REMERASYESTAMPADOS,Pañuelos / pañoletas estampados,8.500,2601012 → saldo 2601019,20/06 → 16/08,13387500.0,21%,16198875.0,5276.51,Argentina + Uruguay,65%,6973.03,3429.73,3429.73,La 2601019 ya viene emitida por el 50% restante. Falta definir con Uruguay como se reparte: aca se imputa el 65% a Argentina.
+REMERASYESTAMPADOS,Remeras premium estampadas,250,2601017,16/08,3527500.0,21%,4268275.0,2780.64,Argentina,100%,2826.67,2780.64,2780.64,"Se debe el 100%. Sube de 230 a 250 unidades contra la factura original 2601011, al mismo precio unitario de $14.110."
+REMERASYESTAMPADOS,Bordado computarizado en gorras,940,2601016,10/08,2643200.0,sin IVA,2643200.0,1721.95,Argentina,100%,1750.46,1721.95,1721.95,"Se debe el 100%. Precio final sin IVA, con el descuento de $411.800 ya aplicado. Las gorras las provee el cliente."
+TEXTIL RYU S.R.L.,Gorra Flex unicolor/bicolor,940,2601009,20/06,2224980.0,21%,2692225.8,,Argentina,100%,1782.93,0.0,0.0,"Pagada al 100% el 25/06. Es la compra de la gorra, distinta del bordado."
+LEOTEX,Lanyard premium doble raso 25 mm,1.360,2601013 → 2601018,20/06 → 16/08,2070600.0,21%,2505426.0,1632.2,Argentina,100%,1659.22,816.1,1632.2,"A CONFIRMAR: la carpeta se llama ""Nuevo pago - 50%"" pero la factura 2601018 viene por el total, igual que la original. El master registraba un saldo de US$850."
+DERQUI IMPRESIONES,Grafica oficial CMC — Argentina,—,2601014,20/06 → 16/08,3025260.0,21%,3660564.6,2384.73,Argentina,100%,2424.21,1192.37,2384.73,A CONFIRMAR: la reemision del 16/08 viene por el total. El master registraba un saldo de US$1.839 al 13/09.
+DERQUI IMPRESIONES,Grafica oficial CMC — Uruguay,—,2601015,20/06 → 16/08,1564626.0,21%,1893197.46,1233.35,Uruguay,0%,0.0,0.0,0.0,NO ES DE ARGENTINA. En la hoja PAGOS del master estaba cargada con pais = Argentina: es el monto que inflaba el total argentino.
+Blocko,Cintas portacredencial (alternativa descartada),1.300,presupuesto 09/06,09/06,1749800.0,21%,2117258.0,,Argentina,0%,0.0,0.0,0.0,"Es el mismo item que los lanyards de LEOTEX, que ya esta contratado. Estaba sumando dos veces en la version anterior de esta planilla."
+TOTAL IMPUTADO A ARGENTINA,,,,,,,,,,,17416.53,9940.79,11949.25
+
+CÓMO LEER ESTA HOJA
+,"Contratado = hay contrato o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción del mismo ítem, NO suma. Otro país = gasto de otro evento de la gira, entra en cero. Reemplazado = estimado viejo ya cubierto por facturas reales, entra en cero. Sin cotizar = sólo un estimado, o nada."
+,"La columna ""% Argentina"" es la parte de cada compra que se le imputa a este evento. Vale 100% en casi todo. Los pañuelos son una compra compartida con Uruguay y van al 65% (5.500 de 8.500 unidades); la gráfica de Uruguay va al 0%."
+,"Las cotizaciones argentinas vienen casi todas sin IVA: la columna IVA aplica la alícuota de cada una (21% general, 10,5% el servicio médico)."
+,"Los pesos son de la fecha de cada cotización, no de hoy. La Rural ajusta el saldo por IPC y las facturas de merch se emitieron a dólar blue $1.535."
+,"Vuelos y alojamiento del equipo entran en cero porque no hay ni cotización ni estimado. Tampoco están cotizados los ecobaños, la marquetería, el replanteo de sillas ni los cheques, escarapelas, diplomas, placas y manillas. El costo por persona es un piso, no un techo."
+,"Del merch: las gorras están pagadas al 100%; pañuelos, lanyards y gráfica de Argentina tienen el 50% abonado; las remeras y el bordado de gorras no tienen nada pagado."
+,"A confirmar: las facturas reemitidas de LEOTEX y Derqui vienen por el total aunque ya se abonó el 50%. Son US$2.008 de diferencia en el calendario de pagos, no en el costo."

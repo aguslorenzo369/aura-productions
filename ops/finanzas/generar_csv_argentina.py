@@ -1,122 +1,135 @@
 # -*- coding: utf-8 -*-
-"""Genera el CSV de una sola hoja para subir a Google Sheets (con fórmulas vivas)."""
-import csv, io, importlib.util, sys
+"""Genera el CSV de una sola hoja para subir a Google Sheets.
 
-spec = importlib.util.spec_from_file_location('ca', 'construir_argentina.py')
-# Reutilizamos la lista ITEMS sin ejecutar la construcción del xlsx
+Las fórmulas NO sobreviven la importación de un CSV a Google Sheets (las celdas
+quedan en blanco), así que acá se escriben los valores ya calculados. La versión
+con fórmulas vivas es el .xlsx que arma construir_argentina.py.
+"""
+import csv, io
+
 fuente = open('construir_argentina.py', encoding='utf-8').read()
-ini = fuente.index('ARS_, USD_ =')
-fin = fuente.index('# ====', ini)
 ns = {}
-exec(fuente[ini:fin], ns)
+exec(fuente[fuente.index('ARS_, USD_ ='):fuente.index('# ====', fuente.index('ARS_, USD_ ='))], ns)
 ITEMS = ns['ITEMS']
-TC = 1535.0
+ini_m = fuente.index('MERCH = [')
+exec(fuente[ini_m:fuente.index('\n]\n', ini_m) + 3], ns)
+MERCH = ns['MERCH']
+
+TC = 1510.0   # dólar operativo de Agustina
+
+def pct_de(it):
+    return it[10] if len(it) > 10 else 1.0
+
+def total_usd(it):
+    (_, rubro, prov, det, mon, monto, iva, estado, est, fuente_txt) = it[:10]
+    if estado in ('Bonificado', 'Reemplazado'):
+        return 0.0
+    if monto:
+        bruto = monto * (1 + iva)
+        return pct_de(it) * (bruto if mon == 'USD' else bruto / TC)
+    return pct_de(it) * est
+
+def total_origen(it):
+    monto, iva = it[5], it[6]
+    return monto * (1 + iva) if monto else ''
 
 filas = []
 def f(*c): filas.append(list(c))
 
 f('ARGENTINA · CUMBRE DE LOS MILLONARIOS CONSCIENTES 2026')
 f('La Rural, Pabellón Azul · montaje 2 de octubre · evento 3 y 4 de octubre de 2026')
-f('Unifica los presupuestos recibidos por mail (jun-ago 2026) con la hoja Argentina del master de inversión. Corte al 02/09/2026.')
+f('Corte al 02/09/2026. Incluye los cierres de técnica, entelado, CCTV, catering y las nueve facturas de merch de la carpeta de Drive.')
 f()
-f('Tipo de cambio (ARS por USD)', TC, 'Dólar oficial venta, Banco Nación, 02/09/2026. Editá este número y se recalcula todo.')
-FILA_TC = len(filas)          # 1-indexada
+f('Tipo de cambio usado (ARS por USD)', TC,
+  'Dólar operativo de Agustina. Verificado contra dos de sus cifras: $900.000 de montaje = US$596 y $24.500.000 de entelado = US$16.225.')
 f()
-f('Rubro', 'Proveedor', 'Detalle', 'Estado', 'Moneda', 'Monto sin IVA',
-  'IVA', 'Total moneda origen', 'Total USD', 'Estimado del sheet (USD)', 'Diferencia', 'Fuente')
-FILA_HDR = len(filas)
+f('Rubro', 'Proveedor', 'Detalle', 'Estado', 'Moneda', 'Monto sin IVA', 'IVA',
+  'Total con IVA (moneda origen)', '% Argentina', 'Total USD',
+  'Estimado del sheet (USD)', 'Diferencia', 'Fuente')
 
 orden = ['Sede', 'Técnica', 'Servicios', 'Merch', 'Catering', 'Producción', 'Equipo']
-subtotales = []
+gran_total = gran_est = 0.0
 for bloque in orden:
     grupo = [x for x in ITEMS if x[0] == bloque]
     if not grupo: continue
     f(bloque.upper())
-    ini_b = len(filas) + 1
-    for (_, rubro, prov, det, mon, monto, iva, estado, est, fuente_txt) in grupo:
-        n = len(filas) + 1
+    sub = sub_est = 0.0
+    for it in grupo:
+        (_, rubro, prov, det, mon, monto, iva, estado, est, fuente_txt) = it[:10]
+        tu = total_usd(it)
+        if estado != 'Alternativa':
+            sub += tu; sub_est += est
         f(rubro, prov, det, estado, mon,
-          monto if monto else '', iva if iva else '',
-          f'=IF(F{n}="","",F{n}*(1+N(G{n})))',
-          f'=IF(H{n}="",N(J{n}),IF(E{n}="USD",H{n},H{n}/$B${FILA_TC}))',
-          est if est else '',
-          f'=IF(D{n}="Alternativa","",I{n}-N(J{n}))',
+          round(monto, 2) if monto else '',
+          {0.21: '21%', 0.105: '10,5%'}.get(iva, 'sin IVA' if monto else ''),
+          round(total_origen(it), 2) if monto else '',
+          f'{pct_de(it):.0%}',
+          round(tu, 2), round(est, 2) if est else '',
+          round(tu - est, 2) if estado != 'Alternativa' else '',
           fuente_txt)
-    n = len(filas) + 1
-    f(f'Subtotal {bloque}', '', '', '', '', '', '', '',
-      f'=SUMIF($D${ini_b}:$D${n-1},"<>Alternativa",$I${ini_b}:$I${n-1})',
-      f'=SUM($J${ini_b}:$J${n-1})',
-      f'=I{n}-J{n}')
-    subtotales.append(n)
+    f(f'Subtotal {bloque}', '', '', '', '', '', '', '', '',
+      round(sub, 2), round(sub_est, 2), round(sub - sub_est, 2))
+    gran_total += sub; gran_est += sub_est
 
 f()
-n = len(filas) + 1
-f('COSTO TOTAL DEL EVENTO', '', '', '', '', '', '', '',
-  '=' + '+'.join(f'I{x}' for x in subtotales),
-  '=' + '+'.join(f'J{x}' for x in subtotales),
-  '=' + '+'.join(f'K{x}' for x in subtotales))
-FILA_TOTAL = n
+f('COSTO TOTAL DEL EVENTO', '', '', '', '', '', '', '', '',
+  round(gran_total, 2), round(gran_est, 2), round(gran_total - gran_est, 2))
 
 f()
 f('COSTO POR PERSONA')
-f('Base de cálculo', 'Personas', 'Costo por persona', '', 'Qué incluye')
+f('Base de cálculo', 'Personas', 'Costo por persona (USD)', '', 'Qué incluye')
 for etiqueta, personas, nota in [
     ('Aforo general', 5000, 'Asistentes de entrada general.'),
     ('VIP', 1000, 'Asistentes VIP.'),
     ('Asistentes pagos (general + VIP)', 6000, 'La base más útil para fijar el precio de la entrada.'),
-    ('Mastermind del martes', 246, 'Actividad aparte, no comparte la mayoría de los costos.'),
-    ('Total de personas en el predio', 6108, 'Asistentes pagos + 100 de staff + 8 del equipo interno.'),
+    ('Mastermind del martes', 246, 'Actividad aparte.'),
+    ('Total de personas en el predio', 6108, 'Pagos + 100 de staff + 8 del equipo interno.'),
 ]:
-    n = len(filas) + 1
-    f(etiqueta, personas, f'=IFERROR($I${FILA_TOTAL}/B{n},"")', '', nota)
+    f(etiqueta, personas, round(gran_total / personas, 2), '', nota)
 
 f()
-f('ESTADO DE LOS RUBROS')
-for etiqueta, criterio in [
-    ('Contratado (hay contrato o anticipo pagado)', 'Contratado'),
-    ('Cotizado (hay presupuesto formal por mail)', 'Cotizado'),
-    ('Sin cotizar (sólo estimado del sheet, o nada)', 'Sin cotizar'),
-    ('Alternativas descartadas (NO suman al total)', 'Alternativa'),
-]:
-    f(etiqueta, '', f'=SUMIF($D${FILA_HDR+1}:$D${FILA_TOTAL-1},"{criterio}",$I${FILA_HDR+1}:$I${FILA_TOTAL-1})')
+f('ESTADO DE LOS RUBROS', '', 'USD')
+por_estado = {}
+for it in ITEMS:
+    por_estado[it[7]] = por_estado.get(it[7], 0.0) + total_usd(it)
+for e, v in sorted(por_estado.items(), key=lambda x: -x[1]):
+    f(e, '', round(v, 2))
 
 f()
-f('DECISIONES ABIERTAS QUE MUEVEN EL NÚMERO')
-f('Decisión', 'Opción A', 'Opción B', 'Qué hay que hacer')
-for dec, a, b, accion in [
- ('Sillas del público',
-  'La Rural: 5.000 sillas por $42.500.000 (armado incluido)',
-  'FDL Eventos: 5.500 sillas por $25.800.000 + IVA, sin armado',
-  'Pedir a La Rural el costo del armado por separado. Si armar las de FDL cuesta menos que la diferencia (unos US$7.350), conviene FDL.'),
- ('Técnica',
-  'Prina integral: $48.885.000 + IVA',
-  'Por partes: VMG sólo LED $12.625.000 + IVA, más sonido e iluminación aparte',
-  'La cotización de Prina venció en junio. Revalidar con Prina, Sound-Light y Dixi sobre el mismo pliego.'),
- ('Catering',
-  'AmbientHouse: $28.500 + IVA por persona por día, base mínima 480',
-  'Teist: propuesta del 26/06 sin cerrar',
-  'Es el hueco más grande. Definir alcance y pedir tres cotizaciones comparables esta semana.'),
- ('Vuelos y alojamiento del equipo', 'Sin cotizar', 'Sin cotizar',
-  'No hay ni un mail ni una línea en el sheet. Con 8 personas, es plata que hoy no está en ningún número.'),
- ('Facturación al exterior',
-  'FDL Eventos y Vittal no confirmaron si pueden facturar a la empresa de EE.UU.',
-  'Buscar proveedores que sí facturen, o resolver un circuito de pago local',
-  'Resolverlo antes de firmar: puede trabar los dos contratos.'),
-]:
-    f(dec, a, b, accion)
+f('MERCH · FACTURA POR FACTURA')
+f('Proveedor', 'Ítem', 'Cant.', 'Factura', 'Fecha', 'Neto (ARS)', 'IVA', 'Total (ARS)',
+  'USDT de la factura', 'País', '% Argentina', 'Costo Argentina (USD)',
+  'Falta pagar · regla 50%', 'Falta pagar · según factura', 'Nota')
+t_arg = t_regla = t_fact = 0.0
+for (prov, item, cant, fact, fecha, neto, iva, usdt, pais, pct, pagado, fr, ff, nota) in MERCH:
+    bruto = neto * (1 + iva)
+    ca = pct * bruto / TC
+    t_arg += ca; t_regla += pct * fr; t_fact += pct * ff
+    f(prov, item, cant, fact, fecha, round(neto, 2),
+      {0.21: '21%'}.get(iva, 'sin IVA'), round(bruto, 2),
+      round(usdt, 2) if usdt else '', pais, f'{pct:.0%}',
+      round(ca, 2), round(pct * fr, 2), round(pct * ff, 2), nota)
+f('TOTAL IMPUTADO A ARGENTINA', '', '', '', '', '', '', '', '', '', '',
+  round(t_arg, 2), round(t_regla, 2), round(t_fact, 2))
 
 f()
 f('CÓMO LEER ESTA HOJA')
 for t in [
- 'Contratado = hay contrato firmado o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción del mismo ítem, NO suma al total. Sin cotizar = sólo hay un estimado del sheet, o ni eso.',
- 'La columna "Total USD" toma la cotización real cuando existe y cae al estimado del sheet cuando no hay cotización.',
+ 'Contratado = hay contrato o anticipo pagado. Cotizado = hay presupuesto formal por mail. Alternativa = segunda opción del mismo ítem, NO suma. Otro país = gasto de otro evento de la gira, entra en cero. Reemplazado = estimado viejo ya cubierto por facturas reales, entra en cero. Sin cotizar = sólo un estimado, o nada.',
+ 'La columna "% Argentina" es la parte de cada compra que se le imputa a este evento. Vale 100% en casi todo. Los pañuelos son una compra compartida con Uruguay y van al 65% (5.500 de 8.500 unidades); la gráfica de Uruguay va al 0%.',
  'Las cotizaciones argentinas vienen casi todas sin IVA: la columna IVA aplica la alícuota de cada una (21% general, 10,5% el servicio médico).',
- 'Los pesos son de la fecha de cada cotización, no de hoy. Prina venció en junio, VMG recotiza si el dólar salta más de 15% y La Rural ajusta el saldo por IPC.',
- 'Catering entra con el estimado del sheet. Vuelos y alojamiento del equipo entran en cero porque no hay ni estimado: el costo por persona es un piso, no un techo.',
+ 'Los pesos son de la fecha de cada cotización, no de hoy. La Rural ajusta el saldo por IPC y las facturas de merch se emitieron a dólar blue $1.535.',
+ 'Vuelos y alojamiento del equipo entran en cero porque no hay ni cotización ni estimado. Tampoco están cotizados los ecobaños, la marquetería, el replanteo de sillas ni los cheques, escarapelas, diplomas, placas y manillas. El costo por persona es un piso, no un techo.',
+ 'Del merch: las gorras están pagadas al 100%; pañuelos, lanyards y gráfica de Argentina tienen el 50% abonado; las remeras y el bordado de gorras no tienen nada pagado.',
+ 'A confirmar: las facturas reemitidas de LEOTEX y Derqui vienen por el total aunque ya se abonó el 50%. Son US$2.008 de diferencia en el calendario de pagos, no en el costo.',
 ]:
     f('', t)
 
 sal = io.StringIO()
 csv.writer(sal, lineterminator='\n').writerows(filas)
 open('argentina_costo_total.csv', 'w', encoding='utf-8').write(sal.getvalue())
-print('filas:', len(filas), '· fila TC:', FILA_TC, '· fila TOTAL:', FILA_TOTAL)
+print('filas:', len(filas))
+print('COSTO TOTAL: US$%s · estimado original US$%s · desvio US$%s'
+      % (f'{gran_total:,.2f}', f'{gran_est:,.2f}', f'{gran_total-gran_est:,.2f}'))
+print('MERCH ARG: US$%s · falta(regla) US$%s · falta(factura) US$%s'
+      % (f'{t_arg:,.2f}', f'{t_regla:,.2f}', f'{t_fact:,.2f}'))
