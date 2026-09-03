@@ -147,6 +147,34 @@
   .steps h4{font-size:15px; margin:14px 0 8px; color:var(--ivory);}
   .steps p{font-size:13.5px; color:var(--muted); line-height:1.6;}
 
+
+  /* ---------------- presupuesto ---------------- */
+  .budget-note{margin-top:26px; font-size:13px; color:var(--faint); max-width:66ch; line-height:1.6;}
+  .totals{margin-top:34px; border:1px solid var(--rule); background:var(--raise);}
+  .totals .line{
+    display:flex; justify-content:space-between; align-items:baseline; gap:20px;
+    padding:16px 26px; border-bottom:1px solid var(--rule-soft);
+  }
+  .totals .line span:first-child{font-size:14px; color:var(--muted);}
+  .totals .line span:last-child{font-size:14.5px; color:rgba(242,238,230,.86); font-variant-numeric:tabular-nums; text-align:right;}
+  .totals .grand{
+    background:var(--black); border-bottom:none; padding:26px;
+    display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:16px;
+  }
+  .totals .grand .k{font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold);}
+  .totals .grand .v{font-family:var(--display); font-size:clamp(26px,4.4vw,40px); color:var(--gold-light); line-height:1; letter-spacing:.01em;}
+  .totals .perhead{
+    background:rgba(201,168,76,.06); border-bottom:none; padding:18px 26px;
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+  }
+  .totals .perhead span:first-child{font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);}
+  .totals .perhead span:last-child{font-size:19px; color:var(--ivory); font-variant-numeric:tabular-nums;}
+  .levers{margin-top:34px; display:grid; grid-template-columns:1fr; gap:1px; background:var(--rule-soft); border:1px solid var(--rule-soft);}
+  @media(min-width:760px){ .levers{grid-template-columns:repeat(3,1fr);} }
+  .levers > div{background:var(--deep); padding:24px 22px;}
+  .levers h4{font-size:14.5px; color:var(--gold-light); margin-bottom:8px;}
+  .levers p{font-size:13.5px; color:var(--muted); line-height:1.6;}
+
   footer{margin-top:96px; padding-top:34px; border-top:1px solid var(--rule); text-align:center;}
   footer .sig{font-family:var(--display); font-size:26px; color:var(--gold); letter-spacing:.14em;}
   footer p{margin-top:14px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint);}
@@ -424,6 +452,57 @@
       <p>Montpellier queda como la alternativa de menor inversión —dos millones menos, y muy linda— pero recién compite de igual a igual cuando confirmen por escrito qué mobiliario y cuántas horas entran. El Tesoro queda como red de seguridad: si algo falla, es el lugar donde no falla nada.</p>
     </div>
     <p class="caveat"><b>Lo único que hay que resolver antes de firmar:</b> ninguna de las tres tiene el exterior cubierto, y octubre es el mes más lluvioso de Medellín con lluvia de tarde. Cotizamos carpa transparente para el jardín de Fábula junto con el alquiler. No es un extra decorativo: es lo que garantiza que el momento de las 17:05 ocurra pase lo que pase. También queda por confirmar el tiempo exacto de traslado desde El Poblado, dato que pedimos en la misma llamada.</p>
+  </div>
+</section>
+
+<section>
+  <p class="label">El presupuesto</p>
+  <h2>Qué cuesta la velada completa</h2>
+  <div class="lede">
+    <p>Este es el número integral: no el alquiler del lugar, sino las 120 invitadas entrando a una velada terminada. Incluye locación, carpa, gastronomía, producción técnica, ambientación, fotografía y video, música, el detalle que cada una se lleva, el equipo en piso y nuestra dirección.</p>
+    <p>Va como rango y no como cifra cerrada por una razón honesta: <strong>hoy solo las líneas de Fábula son precios de proveedor</strong>. El resto son valores de mercado de Medellín, y se reemplazan por cotizaciones firmes en cuanto reserves la fecha. El rango bajo es una velada impecable; el alto es una velada sin ningún techo.</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Rubro</th><th>Desde</th><th>Hasta</th><th>Peso</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="venue-cell">Locación<small>alquiler, carpa transparente y calentadores</small></td><td class="n">$8.400.000</td><td class="n">$11.200.000</td><td class="n">15%</td></tr>
+        <tr><td class="venue-cell">Gastronomía<small>catering, coctelería de autor y staff de servicio</small></td><td class="n">$9.360.000</td><td class="n">$15.040.000</td><td class="n">20%</td></tr>
+        <tr><td class="venue-cell">Producción técnica<small>sonido, iluminación, proyección, tarima</small></td><td class="n">$6.500.000</td><td class="n">$13.000.000</td><td class="n">17%</td></tr>
+        <tr><td class="venue-cell">Ambientación<small>diseño floral, lounge y mantelería</small></td><td class="n">$4.500.000</td><td class="n">$10.000.000</td><td class="n">13%</td></tr>
+        <tr><td class="venue-cell">Contenido<small>fotografía y video con edición</small></td><td class="n">$5.000.000</td><td class="n">$10.000.000</td><td class="n">13%</td></tr>
+        <tr><td class="venue-cell">Experiencia<small>música en vivo, detalle para cada invitada, papelería</small></td><td class="n">$6.300.000</td><td class="n">$14.300.000</td><td class="n">19%</td></tr>
+        <tr><td class="venue-cell">Operación<small>transporte y logística de montaje</small></td><td class="n">$800.000</td><td class="n">$1.500.000</td><td class="n">2%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="totals">
+    <div class="line"><span>Subtotal directo</span><span>$40.860.000 &nbsp;a&nbsp; $75.040.000</span></div>
+    <div class="line"><span>Producción y dirección · Aura Productions (12%)</span><span>$4.903.200 &nbsp;a&nbsp; $9.004.800</span></div>
+    <div class="line"><span>Imprevistos (8%)</span><span>$3.268.800 &nbsp;a&nbsp; $6.003.200</span></div>
+    <div class="grand"><span class="k">Total de la velada</span><span class="v">$49.032.000 — $90.048.000</span></div>
+    <div class="perhead"><span>Por invitada</span><span>$408.600 &nbsp;a&nbsp; $750.400 COP</span></div>
+  </div>
+
+  <p class="budget-note">Valores en pesos colombianos, para 120 invitadas y cuatro horas de evento. Confirmado a precio de proveedor: alquiler de Fábula, calentadores y hora adicional. Todo lo demás son rangos de mercado de Medellín para eventos de 120 a 200 personas.</p>
+
+  <div class="levers">
+    <div>
+      <h4>Catering</h4>
+      <p>Entre $45.000 y $70.000 por invitada. Es la palanca más grande y la que más se nota: mover diez mil pesos por persona cambia el total en $1.200.000.</p>
+    </div>
+    <div>
+      <h4>El detalle que se llevan</h4>
+      <p>Entre $35.000 y $80.000 cada uno. Acá la decisión no es de plata sino de concepto: qué querés que quede en sus manos el viernes a la mañana.</p>
+    </div>
+    <div>
+      <h4>Diseño floral</h4>
+      <p>Entre $3.000.000 y $7.000.000. Con carpa transparente y hora dorada, la flor puede ser más contenida: la luz ya está haciendo la mitad del trabajo.</p>
+    </div>
   </div>
 </section>
 
