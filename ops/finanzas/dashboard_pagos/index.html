@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F5F1E8">
+<title>Estado de Cuenta de Pagos · CMC 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<style>
+  /* ============================================================
+     Calendario de Pagos · Cumbre 2026
+     Rediseño light-mode inspirado en apple.com/macbook-pro
+     · Fondo off-white Apple, tipografía SF Pro
+     · Conserva la tipología Excel: tabular nums, columnas, hairlines
+     · Solo CSS · lógica Firebase y clases dinámicas intactas
+     ============================================================ */
+
+  :root{
+    --bg:#f5f5f7;             /* off-white Apple, no cansa la vista */
+    --surface:#ffffff;         /* card / container */
+    --surface-2:#fafafa;       /* alt row / subtle bg */
+    --surface-3:#f2f2f4;       /* headers de tabla */
+    --brd:rgba(0,0,0,.08);
+    --brd-strong:rgba(0,0,0,.14);
+    --brd-hair:rgba(0,0,0,.05);
+
+    --txt:#1d1d1f;            /* negro Apple */
+    --txt-2:#3a3a3c;
+    --txt-3:#6e6e73;
+    --txt-4:#8e8e93;
+    --txt-5:#aeaeb2;
+
+    /* Categorías — paleta Apple soft */
+    --cat-lugar:#5e5ce6;             /* indigo — Lugar */
+    --cat-lugar-bg:#eeedff;
+    --cat-tecnica:#ff9500;           /* orange — Técnica */
+    --cat-tecnica-bg:#fff2df;
+    --cat-merch:#30d158;             /* green — Merch */
+    --cat-merch-bg:#e3f8e9;
+    --cat-produccion:#0071e3;        /* blue Apple — Producción */
+    --cat-produccion-bg:#e3f0fc;
+    --cat-dinamica:#bf5af2;          /* violet — Dinámica */
+    --cat-dinamica-bg:#f5e9fd;
+    --cat-tramites:#5ac8fa;          /* teal — Trámites */
+    --cat-tramites-bg:#e0f4fc;
+    --cat-infraestructura:#00857a;   /* teal — Infraestructura */
+    --cat-infraestructura-bg:#dff3f1;
+    --cat-mobiliario:#a2610a;        /* amber — Mobiliario */
+    --cat-mobiliario-bg:#fbeeda;
+    --cat-servicios:#0a84c1;         /* cyan — Servicios */
+    --cat-servicios-bg:#e0f2fb;
+    --cat-catering:#d6336c;          /* rose — Catering */
+    --cat-catering-bg:#fce6ee;
+    --cat-neutral:#8e8e93;
+    --cat-neutral-bg:#f2f2f4;
+
+    /* Estados de urgencia */
+    --danger:#ff3b30;                /* vencido */
+    --danger-bg:#ffe9e7;
+    --warn:#ff9500;                  /* urgente */
+    --warn-bg:#fff2df;
+    --ok:#34c759;                    /* en fecha / pagado */
+    --ok-bg:#e3f8e9;
+    --info:#0071e3;
+
+    --radius-lg:18px;
+    --radius-md:12px;
+    --radius-sm:8px;
+    --radius-xs:6px;
+    --ease:cubic-bezier(.4,0,.2,1);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.04);
+    --shadow-md:0 4px 16px rgba(0,0,0,.06);
+    --shadow-lg:0 12px 40px rgba(0,0,0,.08);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  body{
+    background:var(--bg);
+    color:var(--txt);
+    font-family:"SF Pro Text","SF Pro Display",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:15px;
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.008em;
+    min-height:100vh;
+  }
+
+  ::selection{background:rgba(0,113,227,.18);color:var(--txt)}
+
+  /* Números tabulares (feel Excel) */
+  .amount,.pago-monto,.pais-subtotal,.usd,#totalUsd,#tgUsd,
+  .v,.stat .v,.pago-num,.pais-num,#statCount,#statUrgent,#statCountries,
+  #tgCountries,#tgCount,.pago-fecha{
+    font-variant-numeric:tabular-nums lining-nums;
+    font-feature-settings:'tnum','lnum';
+  }
+
+  .wrap{
+    max-width:1160px;
+    margin:0 auto;
+    padding:40px 24px 96px;
+  }
+
+  /* ================== BANNER ================== */
+  .banner{
+    background:var(--surface);
+    color:var(--txt);
+    padding:56px 40px 46px;
+    margin-bottom:0;
+    text-align:center;
+    border:1px solid var(--brd);
+    border-bottom:none;
+    border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .banner-title{
+    font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:clamp(2.2rem,5vw,3.8rem);
+    font-weight:700;
+    letter-spacing:-.028em;
+    line-height:1.05;
+    margin:0;
+    padding-bottom:.06em;
+    /* Gradient Apple Intelligence: azul → violeta → magenta → naranja */
+    background:linear-gradient(100deg,
+      #0084ff 0%,
+      #6c3fd8 22%,
+      #b83bce 42%,
+      #e83568 60%,
+      #ff6b35 82%,
+      #ff9f00 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+  }
+  .banner-title .banner-sep{
+    /* El separador · vuelve a color sólido para que no se pierda en el gradient */
+    -webkit-text-fill-color:#8e8e93;
+    font-weight:300;
+    margin:0 12px;
+  }
+  .banner-sub{
+    margin-top:16px;
+    font-size:.92rem;
+    color:var(--txt-3);
+    letter-spacing:-.005em;
+    line-height:1.55;
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* ================== INFO STRIP ================== */
+  .info-strip{
+    background:var(--surface-3);
+    padding:12px 24px;
+    margin-bottom:36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    border:1px solid var(--brd);
+    border-radius:0 0 var(--radius-lg) var(--radius-lg);
+  }
+  .strip-left,.strip-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+  .strip-item{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:.82rem;
+    color:var(--txt-3);
+    letter-spacing:-.005em;
+  }
+  .strip-item .lbl{
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    font-size:.7rem;
+    font-weight:500;
+    color:var(--txt-4);
+  }
+  .strip-item .val{
+    color:var(--txt-2);
+    font-weight:500;
+  }
+  .sync-status{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+  }
+  .sync-dot{
+    display:inline-block;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--txt-4);
+    box-shadow:0 0 6px rgba(0,0,0,.15);
+    transition:background .3s var(--ease),box-shadow .3s var(--ease);
+  }
+  .sync-status.ok .sync-dot{
+    background:var(--ok);
+    box-shadow:0 0 8px rgba(52,199,89,.4);
+  }
+  .sync-status.err .sync-dot{
+    background:var(--danger);
+    box-shadow:0 0 8px rgba(255,59,48,.4);
+  }
+  .sync-label{
+    font-size:.75rem;
+    color:var(--txt-3);
+    font-weight:500;
+  }
+  .confidencial{
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--txt-4);
+    font-weight:600;
+    padding:3px 10px;
+    border:1px solid var(--brd-strong);
+    border-radius:999px;
+    background:var(--surface);
+  }
+
+  /* ================== TOTAL BLOCK ================== */
+  .total{
+    background:var(--surface);
+    border:1px solid var(--brd);
+    border-radius:var(--radius-lg);
+    padding:36px 40px;
+    margin-bottom:32px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:40px;
+    align-items:center;
+    box-shadow:var(--shadow-sm);
+  }
+  .total-main{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .total-main .label{
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--txt-4);
+    font-weight:600;
+  }
+  .total-main .amount{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    font-size:clamp(2.5rem,5vw,4rem);
+    font-weight:700;
+    letter-spacing:-.03em;
+    color:var(--txt);
+    line-height:1;
+  }
+  .total-main .amount .cur{
+    font-size:.4em;
+    font-weight:500;
+    color:var(--txt-3);
+    letter-spacing:.02em;
+  }
+  .total-main .sub{
+    font-size:.88rem;
+    color:var(--txt-3);
+    letter-spacing:-.005em;
+  }
+  .total-side{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(140px,1fr));
+    gap:14px;
+  }
+  .stat{
+    background:var(--surface-3);
+    border:1px solid var(--brd-hair);
+    border-radius:var(--radius-md);
+    padding:14px 16px;
+  }
+  .stat .k{
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--txt-4);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .stat .v{
+    font-size:1.5rem;
+    font-weight:700;
+    letter-spacing:-.02em;
+    color:var(--txt);
+    line-height:1.1;
+  }
+  .stat.urgent{
+    background:var(--danger-bg);
+    border-color:rgba(255,59,48,.15);
+  }
+  .stat.urgent .k{color:var(--danger);opacity:.85}
+  .stat.urgent .v{color:var(--danger)}
+
+  /* ================== FILTROS ================== */
+  .filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:14px 20px;
+    background:var(--surface);
+    border:1px solid var(--brd);
+    border-radius:var(--radius-md);
+    margin-bottom:24px;
+    align-items:center;
+  }
+  .filter-label{
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--txt-4);
+    font-weight:600;
+    margin-right:6px;
+    margin-left:2px;
+  }
+  .filter-label:not(:first-child){margin-left:12px}
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 14px;
+    background:var(--surface-3);
+    border:1px solid var(--brd);
+    border-radius:999px;
+    color:var(--txt-3);
+    font-family:inherit;
+    font-size:.82rem;
+    font-weight:500;
+    letter-spacing:-.005em;
+    cursor:pointer;
+    transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease);
+  }
+  .chip:hover{
+    background:var(--surface);
+    color:var(--txt-2);
+    border-color:var(--brd-strong);
+  }
+  .chip.on{
+    background:var(--txt);
+    color:var(--surface);
+    border-color:var(--txt);
+    font-weight:600;
+  }
+  .chip.on:hover{
+    background:#000;
+    border-color:#000;
+  }
+
+  /* ================== LEDGER ================== */
+  #ledger{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-bottom:32px;
+  }
+
+  /* ================== BLOQUE ================== */
+  .bloque{
+    background:transparent;
+  }
+  .bloque > .bloque-title,
+  .bloque .titulo{
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--txt-4);
+    font-weight:600;
+    margin:24px 0 12px;
+  }
+
+  /* ================== PAIS CARD ================== */
+  .bloque > div,
+  .pais{
+    background:var(--surface);
+    border:1px solid var(--brd);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:var(--shadow-sm);
+    transition:box-shadow .3s var(--ease);
+    margin-bottom:14px;
+  }
+  .bloque > div:hover,
+  .pais:hover{box-shadow:var(--shadow-md)}
+
+  .pais-head{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:16px;
+    align-items:center;
+    padding:20px 24px;
+    background:var(--surface);
+    border-bottom:1px solid var(--brd-hair);
+    cursor:pointer;
+    transition:background .25s var(--ease);
+  }
+  .pais-head:hover{background:var(--surface-2)}
+
+  .pais-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:30px;height:30px;padding:0 10px;
+    background:var(--surface-3);
+    border:1px solid var(--brd);
+    border-radius:999px;
+    font-size:.8rem;
+    font-weight:600;
+    color:var(--txt-2);
+    letter-spacing:-.01em;
+    flex-shrink:0;
+  }
+  .pais-title{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    min-width:0;
+  }
+  .pais-title h2{
+    font-size:clamp(1.2rem,2.2vw,1.55rem);
+    font-weight:700;
+    letter-spacing:-.024em;
+    color:var(--txt);
+    line-height:1.15;
+    margin:0;
+  }
+  .pais-title h2 span{
+    /* la ciudad se estila inline desde el JS, respetamos */
+  }
+  .pais-title .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:.84rem;
+    color:var(--txt-3);
+    letter-spacing:-.005em;
+    line-height:1.4;
+    align-items:center;
+  }
+  .pais-title .meta > span{
+    display:inline-flex;
+    align-items:center;
+  }
+  .pais-title .meta .bloque{
+    padding:2px 9px;
+    background:var(--surface-3);
+    border:1px solid var(--brd);
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.02em;
+    color:var(--txt-3);
+    text-transform:uppercase;
+  }
+  .pais-title .urgentes{
+    display:inline-flex;
+    align-items:center;
+    padding:2px 9px;
+    background:var(--danger-bg);
+    color:var(--danger);
+    border-radius:999px;
+    font-size:.7rem;
+    font-weight:700;
+    margin-left:6px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    border:1px solid rgba(255,59,48,.2);
+  }
+  /* Footer de cada card de país (subtotal) — DENTRO de la card */
+  .pais-subtotal{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 24px;
+    background:var(--surface-3);
+    border-top:1px solid var(--brd);
+    gap:16px;
+  }
+  .pais-subtotal .lbl{
+    font-size:.78rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--txt-3);
+  }
+  .pais-subtotal .val{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-.022em;
+    color:var(--txt);
+    font-variant-numeric:tabular-nums;
+    line-height:1;
+  }
+  .pais-subtotal .val .cur{
+    font-size:.62em;
+    font-weight:500;
+    color:var(--txt-4);
+    margin-right:5px;
+    letter-spacing:.02em;
+  }
+
+  /* ================== PAGOS TABLE (feel Excel) ================== */
+  .pagos{
+    background:var(--surface);
+  }
+  .pagos-header{
+    display:grid;
+    grid-template-columns:52px 96px 1.7fr 140px 120px 130px 118px;
+    gap:0;
+    padding:12px 24px;
+    background:var(--surface-3);
+    border-bottom:1px solid var(--brd);
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:600;
+    color:var(--txt-4);
+  }
+  .pagos-header > *{padding:0 8px}
+  .ph-num{text-align:center;padding-left:0;padding-right:4px}
+  .ph-fecha{text-align:center;padding-left:4px}
+  .ph-check{text-align:center}
+  .ph-monto{text-align:right}
+
+  /* Cada row de pago — mismo grid que el header */
+  .pagos > div:not(.pagos-header):not(.empty){
+    display:grid;
+    grid-template-columns:52px 96px 1.7fr 140px 120px 130px 118px;
+    gap:0;
+    padding:15px 24px;
+    align-items:center;
+    border-bottom:1px solid var(--brd-hair);
+    transition:background .2s var(--ease);
+    font-size:.9rem;
+  }
+  .pagos > div:not(.pagos-header):not(.empty):last-child{border-bottom:none}
+  .pagos > div:not(.pagos-header):not(.empty):hover{background:var(--surface-2)}
+  .pagos > div > *{padding:0 8px}
+  .pagos > div .pago-num{padding-left:0;padding-right:4px}
+  .pagos > div .pago-fecha{padding-left:4px}
+
+  .pago-num{
+    font-size:.78rem;
+    color:var(--txt-4);
+    font-weight:500;
+    text-align:center;
+    letter-spacing:-.005em;
+  }
+  .pago-desc{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    min-width:0;
+  }
+  .pago-desc .concepto{
+    font-size:.94rem;
+    font-weight:500;
+    color:var(--txt);
+    letter-spacing:-.01em;
+    line-height:1.35;
+  }
+  .pago-desc .prov,
+  .pago-desc .meta{
+    font-size:.78rem;
+    color:var(--txt-3);
+    letter-spacing:-.005em;
+    line-height:1.3;
+  }
+  .pago-desc .prov{font-weight:500;color:var(--txt-2)}
+
+  /* Categoría chip */
+  .pago-cat{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+  }
+  .cat{
+    display:inline-flex;
+    align-items:center;
+    padding:3px 10px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.01em;
+    background:var(--cat-neutral-bg);
+    color:var(--cat-neutral);
+    border:1px solid rgba(0,0,0,.04);
+    text-transform:capitalize;
+    white-space:nowrap;
+  }
+  /* Colores por categoría — el JS pone la clase que corresponda */
+  .cat.lugar,.cat-lugar{background:var(--cat-lugar-bg);color:var(--cat-lugar)}
+  .cat.tecnica,.cat.técnica,.cat-tecnica{background:var(--cat-tecnica-bg);color:var(--cat-tecnica)}
+  .cat.merch,.cat-merch{background:var(--cat-merch-bg);color:var(--cat-merch)}
+  .cat.produccion,.cat.producción,.cat-produccion{background:var(--cat-produccion-bg);color:var(--cat-produccion)}
+  .cat.dinamica,.cat.dinámica,.cat-dinamica{background:var(--cat-dinamica-bg);color:var(--cat-dinamica)}
+  .cat.tramites,.cat.trámites,.cat-tramites{background:var(--cat-tramites-bg);color:var(--cat-tramites)}
+  .cat.infraestructura{background:var(--cat-infraestructura-bg);color:var(--cat-infraestructura)}
+  .cat.mobiliario{background:var(--cat-mobiliario-bg);color:var(--cat-mobiliario)}
+  .cat.servicios{background:var(--cat-servicios-bg);color:var(--cat-servicios)}
+  .cat.catering{background:var(--cat-catering-bg);color:var(--cat-catering)}
+  .cat.otro{background:var(--cat-neutral-bg);color:var(--cat-neutral)}
+
+  /* Fecha */
+  .pago-fecha{
+    font-size:.86rem;
+    color:var(--txt-2);
+    text-align:center;
+    letter-spacing:-.005em;
+    font-weight:500;
+  }
+  .pago-fecha .sem{
+    display:block;
+    font-size:.7rem;
+    color:var(--txt-4);
+    font-weight:400;
+    letter-spacing:.02em;
+    margin-top:1px;
+  }
+  .pago-fecha .rel{
+    display:inline-block;
+    padding:2px 8px;
+    background:var(--surface-3);
+    border-radius:6px;
+    font-size:.7rem;
+    font-weight:600;
+    color:var(--txt-3);
+    margin-top:3px;
+    letter-spacing:0;
+  }
+  /* Estado por urgencia */
+  .pago-fecha.urg .rel,
+  .rel.urg,
+  .pago-fecha.vencido .rel{
+    background:var(--danger-bg);
+    color:var(--danger);
+  }
+  .rel.urg7,.pago-fecha.urg7 .rel{
+    background:var(--warn-bg);
+    color:var(--warn);
+  }
+  .rel.ok,.pago-fecha.ok .rel{
+    background:var(--ok-bg);
+    color:var(--ok);
+  }
+  /* Semaforo — las clases que realmente emite el JS */
+  .pago-fecha.urgente .rel{background:var(--warn-bg);color:var(--warn)}
+  .pago-fecha.enfecha .rel{background:var(--ok-bg);color:var(--ok)}
+  .pago-fecha.sinfecha .rel{background:var(--cat-neutral-bg);color:var(--cat-neutral)}
+  .pago.vencido{box-shadow:inset 3px 0 0 var(--danger)}
+  .pago.urgente{box-shadow:inset 3px 0 0 var(--warn)}
+  .pago.sinfecha{box-shadow:inset 3px 0 0 var(--cat-neutral)}
+  .pago-desc .meta{font-size:.74rem;color:var(--txt-3);line-height:1.35}
+  .pago-desc .meta b{font-weight:600;color:var(--txt-2)}
+
+  /* Monto */
+  .pago-monto{
+    font-size:.98rem;
+    font-weight:700;
+    letter-spacing:-.015em;
+    color:var(--txt);
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+  }
+  .pago-monto .cur{
+    font-size:.72em;
+    font-weight:500;
+    color:var(--txt-4);
+    margin-right:3px;
+    letter-spacing:.02em;
+  }
+
+  /* Factura column */
+  .pago-factura{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  /* Botón "+ agregar" — es pill con texto, NO un cuadrado */
+  .factura-add{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:5px 12px;
+    min-height:26px;
+    border-radius:999px;
+    background:var(--surface-3);
+    border:1px solid var(--brd);
+    color:var(--txt-3);
+    cursor:pointer;
+    transition:all .25s var(--ease);
+    font-family:inherit;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .factura-add:hover{
+    background:var(--info);
+    color:#fff;
+    border-color:var(--info);
+  }
+  /* Botón × — sí es cuadradito, solo tiene el símbolo */
+  .factura-del{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;height:26px;
+    border-radius:999px;
+    background:var(--surface-3);
+    border:1px solid var(--brd);
+    color:var(--txt-4);
+    cursor:pointer;
+    transition:all .25s var(--ease);
+    font-family:inherit;
+    font-size:.95rem;
+    line-height:1;
+    margin-left:6px;
+  }
+  .factura-del:hover{
+    background:var(--danger);
+    color:#fff;
+    border-color:var(--danger);
+  }
+  /* Link "Ver ↗" cuando la factura ya existe */
+  .factura-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:5px 12px;
+    min-height:26px;
+    border-radius:999px;
+    background:var(--ok-bg);
+    border:1px solid rgba(52,199,89,.28);
+    color:var(--ok);
+    text-decoration:none;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    transition:all .25s var(--ease);
+  }
+  .factura-link:hover{
+    background:var(--ok);
+    color:#fff;
+    border-color:var(--ok);
+  }
+
+  /* Check cell (marca PAGADO) */
+  .check-cell{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .status-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:3px 9px;
+    border-radius:999px;
+    font-size:.68rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    background:var(--surface-3);
+    color:var(--txt-3);
+    border:1px solid var(--brd);
+    cursor:pointer;
+    transition:all .25s var(--ease);
+    white-space:nowrap;
+  }
+  .status-chip:hover{
+    background:var(--surface);
+    color:var(--txt-2);
+    border-color:var(--brd-strong);
+  }
+  .status-chip.pagado{
+    background:var(--ok-bg);
+    color:var(--ok);
+    border-color:rgba(52,199,89,.28);
+  }
+  .status-chip.pagado:hover{
+    background:var(--ok);
+    color:#fff;
+    border-color:var(--ok);
+  }
+
+  /* Row completo marcado como pagado */
+  .pagado{
+    opacity:.55;
+  }
+  .pagado .pago-monto,
+  .pagado .concepto{
+    text-decoration:line-through;
+    text-decoration-color:var(--txt-4);
+    text-decoration-thickness:1px;
+  }
+
+  /* Empty state */
+  .empty{
+    padding:40px 24px;
+    text-align:center;
+    color:var(--txt-4);
+    font-size:.9rem;
+    font-style:italic;
+  }
+
+  /* ================== TOTAL GENERAL ================== */
+  .total-general{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:28px 32px;
+    background:var(--txt);
+    color:#fff;
+    border-radius:var(--radius-lg);
+    margin-top:32px;
+    box-shadow:var(--shadow-md);
+  }
+  .total-general .label{
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:rgba(255,255,255,.65);
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .total-general .sub{
+    font-size:.85rem;
+    color:rgba(255,255,255,.75);
+    letter-spacing:-.005em;
+  }
+  .total-general .val{
+    font-size:clamp(2rem,4vw,3rem);
+    font-weight:700;
+    letter-spacing:-.028em;
+    color:#fff;
+    line-height:1;
+  }
+  .total-general .val .cur{
+    font-size:.42em;
+    font-weight:500;
+    color:rgba(255,255,255,.7);
+    margin-right:6px;
+    letter-spacing:.02em;
+  }
+
+  /* ================== FOOTER ================== */
+  footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 4px 0;
+    margin-top:40px;
+    border-top:1px solid var(--brd);
+    color:var(--txt-4);
+    font-size:.78rem;
+    letter-spacing:-.005em;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  /* ================== RESPONSIVE ================== */
+  @media (max-width:900px){
+    .wrap{padding:24px 16px 60px}
+    .banner{padding:44px 24px 34px}
+    .info-strip{padding:12px 18px}
+    .strip-left,.strip-right{gap:14px}
+    .total{
+      grid-template-columns:1fr;
+      gap:24px;
+      padding:28px 24px;
+    }
+    .total-side{
+      grid-template-columns:1fr 1fr;
+    }
+    .filters{padding:12px 16px}
+    .filter-label{width:100%;margin-bottom:2px}
+
+    .pagos-header{display:none}
+    .pagos > div:not(.pagos-header):not(.empty){
+      grid-template-columns:44px 1fr auto;
+      grid-template-areas:
+        "num desc monto"
+        "num cat fecha"
+        "num factura check";
+      row-gap:10px;
+      padding:16px 20px;
+    }
+    .pago-num{grid-area:num;align-self:start}
+    .pago-desc{grid-area:desc}
+    .pago-cat{grid-area:cat}
+    .pago-fecha{grid-area:fecha;text-align:right}
+    .pago-monto{grid-area:monto;text-align:right}
+    .pago-factura{grid-area:factura;justify-content:flex-start}
+    .check-cell{grid-area:check;justify-content:flex-end}
+
+    .pais-head{padding:16px 20px}
+    .pais-title{font-size:1.02rem}
+    .pais-subtotal{font-size:1rem}
+    .total-general{padding:22px 24px;flex-direction:column;align-items:flex-start;gap:14px}
+  }
+
+  @media (max-width:520px){
+    .banner-title{font-size:clamp(1.6rem,7vw,2.2rem)}
+    .banner-sub{font-size:.82rem}
+    .total-main .amount{font-size:clamp(2rem,8vw,3rem)}
+    .total-side{grid-template-columns:1fr}
+    .pais-head{grid-template-columns:auto 1fr;grid-template-areas:"num title" "num subtotal";column-gap:14px}
+    .pais-num{grid-area:num;align-self:center}
+    .pais-title{grid-area:title;font-size:.98rem}
+    .pais-subtotal{grid-area:subtotal;text-align:left;margin-top:2px;font-size:.9rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- BANNER -->
+  <header class="banner">
+    <div class="banner-title">Calendario de Pagos <span class="banner-sep">·</span> Cumbre 2026</div>
+    <div class="banner-sub">Argentina: checklist verificado contra contratos y facturas · dólar $1.510 · los pagos sin fecha acordada figuran como &laquo;sin fecha&raquo;<br>Resto de los países: cronograma proyectado (lugar 10 días antes · merch 20 días antes · Ecuador pago único)</div>
+  </header>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="strip-left">
+      <span class="strip-item"><span class="lbl">Emitido</span><span class="val" id="upd">—</span></span>
+      <span class="strip-item"><span class="lbl">Preparado por</span><span class="val">Equipo CMC 2026</span></span>
+      <span class="strip-item sync-status" id="syncStatus"><span class="sync-dot"></span><span class="sync-label">Conectando...</span></span>
+    </div>
+    <div class="strip-right">
+      <span class="confidencial">Confidencial · Uso Interno</span>
+    </div>
+  </div>
+
+  <!-- TOTAL BLOCK -->
+  <section class="total">
+    <div class="total-main">
+      <div class="label">Total a pagar</div>
+      <div class="amount"><span class="cur">USD</span><span id="totalUsd">0</span></div>
+      <div class="sub"><span id="subInfo">—</span></div>
+    </div>
+    <div class="total-side">
+      <div class="stat">
+        <div class="k">Pagos pendientes</div>
+        <div class="v" id="statCount">0</div>
+      </div>
+      <div class="stat urgent">
+        <div class="k">Vencidos o &lt;7 días</div>
+        <div class="v" id="statUrgent">0</div>
+      </div>
+      <div class="stat">
+        <div class="k">Próximo vencimiento</div>
+        <div class="v" id="statNext">—</div>
+      </div>
+      <div class="stat">
+        <div class="k">Países involucrados</div>
+        <div class="v" id="statCountries">0</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTROS -->
+  <section class="filters">
+    <span class="filter-label">Bloque</span>
+    <div id="filterBloque" style="display:contents"></div>
+    <span class="filter-label">Urgencia</span>
+    <button class="chip on" data-filter="urgencia" data-val="all">Todas</button>
+    <button class="chip" data-filter="urgencia" data-val="vencido">Vencidos</button>
+    <button class="chip" data-filter="urgencia" data-val="urgente">&lt;7 días</button>
+    <button class="chip" data-filter="urgencia" data-val="enfecha">En fecha</button>
+    <button class="chip" data-filter="urgencia" data-val="sinfecha">Sin fecha acordada</button>
+  </section>
+
+  <!-- LEDGER -->
+  <div id="ledger"></div>
+
+  <!-- TOTAL GENERAL -->
+  <section class="total-general" id="totalGeneral" style="display:none">
+    <div>
+      <div class="label">Total General a Pagar</div>
+      <div class="sub"><span id="tgCountries">0</span> países · <span id="tgCount">0</span> pagos pendientes</div>
+    </div>
+    <div>
+      <div class="val"><span class="cur">USD</span><span id="tgUsd">0</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Estado de cuenta · CMC 2026 · Uso interno</div>
+    <div id="foot-count">— pagos</div>
+  </footer>
+
+</div>
+
+<script id="pagos-data" type="application/json">
+{
+  "pagos": [
+    {
+      "id": 1,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "lugar",
+      "proveedor": "Saldo inicial Quorum Quito",
+      "concepto": "Saldo inicial Quorum Quito · Pago total (100%)",
+      "monto_usd": 18545.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 2,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "lugar",
+      "proveedor": "Saldo extras (comida staff) Quorum Quito",
+      "concepto": "Saldo extras (comida staff) Quorum Quito · Pago total (100%)",
+      "monto_usd": 5074.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 3,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "lugar",
+      "proveedor": "Wyndham Quintas (Salas MM) y alojamiento 8 pax",
+      "concepto": "Wyndham Quintas (Salas MM) y alojamiento 8 pax · Cuota 1 de 2 (50%)",
+      "monto_usd": 2640.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 4,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "merch",
+      "proveedor": "Jorge (gorras, bolsas, pañuelos, camisetas)",
+      "concepto": "Jorge (gorras, bolsas, pañuelos, camisetas) - saldo · Pago total",
+      "monto_usd": 2015.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 5,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "merch",
+      "proveedor": "Jorge (pañuelos RD)",
+      "concepto": "Jorge (pañuelos RD) - saldo · Pago total",
+      "monto_usd": 1075.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 6,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "merch",
+      "proveedor": "Placas reconocimiento",
+      "concepto": "Placas reconocimiento - (1 extra) · Pago total (100%)",
+      "monto_usd": 50.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 7,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "producción",
+      "proveedor": "Unifilas",
+      "concepto": "Unifilas · Pago total (100%)",
+      "monto_usd": 600.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 8,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "producción",
+      "proveedor": "Seguridad / Guarda espaldas",
+      "concepto": "Seguridad / Guarda espaldas - Pagamos alla cash · Pago total (100%)",
+      "monto_usd": 500.0,
+      "fecha_limite": "2026-07-15"
+    },
+    {
+      "id": 9,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "lugar",
+      "proveedor": "Riu Plaza",
+      "concepto": "Riu Plaza - saldo (70%) · Cuota 1 de 2 (50%)",
+      "monto_usd": 14688.66,
+      "fecha_limite": "2026-07-16"
+    },
+    {
+      "id": 10,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "lugar",
+      "proveedor": "Faranda (Salas MM)",
+      "concepto": "Faranda (Salas MM) · Cuota 1 de 2 (50%)",
+      "monto_usd": 1000.0,
+      "fecha_limite": "2026-07-16"
+    },
+    {
+      "id": 11,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "técnica",
+      "proveedor": "Plataforma AV",
+      "concepto": "Plataforma AV · Cuota 1 de 2 (50%)",
+      "monto_usd": 7500.0,
+      "fecha_limite": "2026-07-16"
+    },
+    {
+      "id": 12,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "merch",
+      "proveedor": "Impresos",
+      "concepto": "Impresos - mediante link de pago · Cuota 1 de 2 (50%)",
+      "monto_usd": 700.0,
+      "fecha_limite": "2026-07-16"
+    },
+    {
+      "id": 13,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "dinámica",
+      "proveedor": "Varillas",
+      "concepto": "Varillas · Cuota 1 de 2 (50%)",
+      "monto_usd": 600.0,
+      "fecha_limite": "2026-07-22"
+    },
+    {
+      "id": 14,
+      "bloque": 0,
+      "pais": "Rep. Dominicana",
+      "categoria": "lugar",
+      "proveedor": "Crowne Plaza",
+      "concepto": "Crowne Plaza · Cuota 1 de 2 (50%)",
+      "monto_usd": 17000.0,
+      "fecha_limite": "2026-07-16"
+    },
+    {
+      "id": 15,
+      "bloque": 0,
+      "pais": "Rep. Dominicana",
+      "categoria": "técnica",
+      "proveedor": "Plataforma AV",
+      "concepto": "Plataforma AV · Cuota 1 de 2 (50%)",
+      "monto_usd": 7500.0,
+      "fecha_limite": "2026-07-30"
+    },
+    {
+      "id": 16,
+      "bloque": 0,
+      "pais": "Rep. Dominicana",
+      "categoria": "dinámica",
+      "proveedor": "Varillas",
+      "concepto": "Varillas · Cuota 1 de 2 (50%)",
+      "monto_usd": 1200.0,
+      "fecha_limite": "2026-07-30"
+    },
+    {
+      "id": 17,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "lugar",
+      "proveedor": "City Hall",
+      "concepto": "City Hall · Cuota 1 de 2 (50%)",
+      "monto_usd": 36500.0,
+      "fecha_limite": "2026-07-20"
+    },
+    {
+      "id": 18,
+      "bloque": 1,
+      "pais": "Ecuador",
+      "categoria": "técnica",
+      "proveedor": "Jhon (técnica)",
+      "concepto": "Jhon (técnica) - saldo · Pago total",
+      "monto_usd": 5500.0,
+      "fecha_limite": "2026-07-20"
+    },
+    {
+      "id": 19,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "merch",
+      "proveedor": "Gorras",
+      "concepto": "Gorras - saldo · Cuota 1 de 2 (50%)",
+      "monto_usd": 1000.0,
+      "fecha_limite": "2026-07-20"
+    },
+    {
+      "id": 20,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "técnica",
+      "proveedor": "Plataforma AV",
+      "concepto": "Plataforma AV · Cuota 2 de 2 (50%)",
+      "monto_usd": 7500.0,
+      "fecha_limite": "2026-07-24"
+    },
+    {
+      "id": 21,
+      "bloque": 2,
+      "pais": "México",
+      "categoria": "lugar",
+      "proveedor": "World Trade Center Mexiquense",
+      "concepto": "World Trade Center Mexiquense - saldo (50%) · Cuota 1 de 2 (50%)",
+      "monto_usd": 13392.5,
+      "fecha_limite": "2026-07-27"
+    },
+    {
+      "id": 22,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "lugar",
+      "proveedor": "Riu Plaza",
+      "concepto": "Riu Plaza - saldo (70%) · Cuota 2 de 2 (50%)",
+      "monto_usd": 14688.66,
+      "fecha_limite": "2026-07-29"
+    },
+    {
+      "id": 23,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "lugar",
+      "proveedor": "Faranda (Salas MM)",
+      "concepto": "Faranda (Salas MM) · Cuota 2 de 2 (50%)",
+      "monto_usd": 1000.0,
+      "fecha_limite": "2026-07-29"
+    },
+    {
+      "id": 24,
+      "bloque": 1,
+      "pais": "Panamá",
+      "categoria": "dinámica",
+      "proveedor": "Varillas",
+      "concepto": "Varillas · Cuota 2 de 2 (50%)",
+      "monto_usd": 600.0,
+      "fecha_limite": "2026-07-29"
+    },
+    {
+      "id": 25,
+      "bloque": 0,
+      "pais": "Rep. Dominicana",
+      "categoria": "técnica",
+      "proveedor": "Plataforma AV",
+      "concepto": "Plataforma AV · Cuota 2 de 2 (50%)",
+      "monto_usd": 7500.0,
+      "fecha_limite": "2026-07-31"
+    },
+    {
+      "id": 26,
+      "bloque": 2,
+      "pais": "Chile",
+      "categoria": "lugar",
+      "proveedor": "Espacio Riesco",
+      "concepto": "Espacio Riesco - saldo (70%) · Cuota 1 de 2 (50%)",
+      "monto_usd": 22974.0,
+      "fecha_limite": "2026-08-03"
+    },
+    {
+      "id": 27,
+      "bloque": 0,
+      "pais": "Rep. Dominicana",
+      "categoria": "lugar",
+      "proveedor": "Crowne Plaza",
+      "concepto": "Crowne Plaza · Cuota 2 de 2 (50%)",
+      "monto_usd": 17000.0,
+      "fecha_limite": "2026-08-05"
+    },
+    {
+      "id": 28,
+      "bloque": 0,
+      "pais": "Rep. Dominicana",
+      "categoria": "dinámica",
+      "proveedor": "Varillas",
+      "concepto": "Varillas · Cuota 2 de 2 (50%)",
+      "monto_usd": 600.0,
+      "fecha_limite": "2026-08-05"
+    },
+    {
+      "id": 29,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "merch",
+      "proveedor": "Gorras",
+      "concepto": "Gorras - saldo · Cuota 2 de 2 (50%)",
+      "monto_usd": 1000.0,
+      "fecha_limite": "2026-08-09"
+    },
+    {
+      "id": 30,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "merch",
+      "proveedor": "Camisetas",
+      "concepto": "Camisetas · Cuota 2 de 2 (50%)",
+      "monto_usd": 216.5,
+      "fecha_limite": "2026-08-09"
+    },
+    {
+      "id": 31,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "merch",
+      "proveedor": "100 Tarjetas platino",
+      "concepto": "100 Tarjetas platino · Cuota 2 de 2 (50%)",
+      "monto_usd": 305.5,
+      "fecha_limite": "2026-08-09"
+    },
+    {
+      "id": 32,
+      "bloque": 2,
+      "pais": "Uruguay",
+      "categoria": "lugar",
+      "proveedor": "Centro Convenciones",
+      "concepto": "Centro Convenciones - saldo (70%) · Cuota 1 de 2 (50%)",
+      "monto_usd": 30306.0,
+      "fecha_limite": "2026-08-10"
+    },
+    {
+      "id": 33,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "merch",
+      "proveedor": "D'vinni sas",
+      "concepto": "D'vinni sas - saldo · Pago total",
+      "monto_usd": 1094.0,
+      "fecha_limite": "2026-08-15"
+    },
+    {
+      "id": 34,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "lugar",
+      "proveedor": "City Hall",
+      "concepto": "City Hall · Cuota 2 de 2 (50%)",
+      "monto_usd": 36500.0,
+      "fecha_limite": "2026-08-19"
+    },
+    {
+      "id": 35,
+      "bloque": 0,
+      "pais": "Colombia 1ra",
+      "categoria": "merch",
+      "proveedor": "Pañuelos Colombia",
+      "concepto": "Pañuelos Colombia - saldo · Pago total",
+      "monto_usd": 3475.0,
+      "fecha_limite": "2026-08-20"
+    },
+    {
+      "id": 37,
+      "bloque": 2,
+      "pais": "México",
+      "categoria": "lugar",
+      "proveedor": "World Trade Center Mexiquense",
+      "concepto": "World Trade Center Mexiquense - saldo (50%) · Cuota 2 de 2 (50%)",
+      "monto_usd": 13392.5,
+      "fecha_limite": "2026-08-26"
+    },
+    {
+      "id": 38,
+      "bloque": 0,
+      "pais": "Salvador",
+      "categoria": "lugar",
+      "proveedor": "Círculo Militar",
+      "concepto": "Círculo Militar - saldo · Cuota 1 de 2 (50%)",
+      "monto_usd": 8606.5,
+      "fecha_limite": "2026-08-31"
+    },
+    {
+      "id": 39,
+      "bloque": 2,
+      "pais": "Chile",
+      "categoria": "lugar",
+      "proveedor": "Espacio Riesco",
+      "concepto": "Espacio Riesco - saldo (70%) · Cuota 2 de 2 (50%)",
+      "monto_usd": 22974.0,
+      "fecha_limite": "2026-09-02"
+    },
+    {
+      "id": 40,
+      "bloque": 2,
+      "pais": "Uruguay",
+      "categoria": "lugar",
+      "proveedor": "Centro Convenciones",
+      "concepto": "Centro Convenciones - saldo (70%) · Cuota 2 de 2 (50%)",
+      "monto_usd": 30306.0,
+      "fecha_limite": "2026-09-09"
+    },
+    {
+      "id": 47,
+      "bloque": 3,
+      "pais": "Costa Rica",
+      "categoria": "lugar",
+      "proveedor": "Centro Convenciones",
+      "concepto": "Centro Convenciones - saldo (50%) · Cuota 1 de 2 (50%)",
+      "monto_usd": 16247.5,
+      "fecha_limite": "2026-09-28"
+    },
+    {
+      "id": 48,
+      "bloque": 0,
+      "pais": "Salvador",
+      "categoria": "lugar",
+      "proveedor": "Círculo Militar",
+      "concepto": "Círculo Militar - saldo · Cuota 2 de 2 (50%)",
+      "monto_usd": 8606.5,
+      "fecha_limite": "2026-09-30"
+    },
+    {
+      "id": 49,
+      "bloque": 3,
+      "pais": "Guatemala",
+      "categoria": "trámites",
+      "proveedor": "Michelle Taylor",
+      "concepto": "Michelle Taylor - saldo (50%) · Cuota 1 de 2 (50%)",
+      "monto_usd": 250.0,
+      "fecha_limite": "2026-10-12"
+    },
+    {
+      "id": 50,
+      "bloque": 3,
+      "pais": "Guatemala",
+      "categoria": "lugar",
+      "proveedor": "Parque de la Industria",
+      "concepto": "Parque de la Industria - saldo · Cuota 1 de 2 (50%)",
+      "monto_usd": 1750.0,
+      "fecha_limite": "2026-10-12"
+    },
+    {
+      "id": 51,
+      "bloque": 3,
+      "pais": "Costa Rica",
+      "categoria": "lugar",
+      "proveedor": "Centro Convenciones",
+      "concepto": "Centro Convenciones - saldo (50%) · Cuota 2 de 2 (50%)",
+      "monto_usd": 16247.5,
+      "fecha_limite": "2026-10-28"
+    },
+    {
+      "id": 52,
+      "bloque": 3,
+      "pais": "Guatemala",
+      "categoria": "trámites",
+      "proveedor": "Michelle Taylor",
+      "concepto": "Michelle Taylor - saldo (50%) · Cuota 2 de 2 (50%)",
+      "monto_usd": 250.0,
+      "fecha_limite": "2026-11-11"
+    },
+    {
+      "id": 53,
+      "bloque": 3,
+      "pais": "Guatemala",
+      "categoria": "lugar",
+      "proveedor": "Parque de la Industria",
+      "concepto": "Parque de la Industria - saldo · Cuota 2 de 2 (50%)",
+      "monto_usd": 1750.0,
+      "fecha_limite": "2026-11-11"
+    },
+    {
+      "id": 44,
+      "bloque": 2,
+      "pais": "Uruguay",
+      "categoria": "merch",
+      "proveedor": "Gráfica URU",
+      "concepto": "Gráfica Uruguay - saldo · Pago total (100%)",
+      "monto_usd": 42.0,
+      "fecha_limite": "2026-09-13"
+    },
+    {
+      "id": 36,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "lugar",
+      "proveedor": "La Rural",
+      "concepto": "Saldo del contrato CC-00957, cuota 1 de 2",
+      "monto_usd": 15777.0,
+      "fecha_limite": "2026-08-24",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "1 · VENCIDO O YA FACTURADO",
+      "como": "Transferencia",
+      "contacto": "Victoria Grosi · vgrosi@larural.com.ar · congresosyeventos@larural.com.ar",
+      "nota": "Lleva 10 días vencida."
+    },
+    {
+      "id": 100,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "REMERASYESTAMPADOS",
+      "concepto": "Remeras premium x250 — factura 2601017",
+      "monto_usd": 2780.64,
+      "fecha_limite": "2026-08-16",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "1 · VENCIDO O YA FACTURADO",
+      "como": "USDT BEP20",
+      "contacto": "Leandro Petracci · CUIT 20-30367082-4 · Uruguay 41, Villa Martelli",
+      "nota": "Wallet 0xae874c3db52ca1e45604549a5527f450a877b97a"
+    },
+    {
+      "id": 101,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "REMERASYESTAMPADOS",
+      "concepto": "Bordado de 940 gorras — factura 2601016",
+      "monto_usd": 1721.95,
+      "fecha_limite": "2026-08-10",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "1 · VENCIDO O YA FACTURADO",
+      "como": "USDT BEP20",
+      "contacto": "Leandro Petracci · CUIT 20-30367082-4 · Uruguay 41, Villa Martelli",
+      "nota": "Mismo wallet que las remeras."
+    },
+    {
+      "id": 102,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "tecnica",
+      "proveedor": "Grupo MET · Lalo Aizenberg",
+      "concepto": "Producción técnica — resto del anticipo del 50%",
+      "monto_usd": 25000.0,
+      "fecha_limite": null,
+      "vence": "Urgente",
+      "urgencia": "urgente",
+      "tramo": "2 · ANTICIPOS QUE DESTRABAN CONTRATOS",
+      "como": "Transferencia / Mercury",
+      "contacto": "Lalo Aizenberg · 11 6411-6748",
+      "nota": "El 50% son US$30.000; ya se pagaron US$5.000 con la factura INV-11 del 31/07."
+    },
+    {
+      "id": 103,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "catering",
+      "proveedor": "Grupo Ambient · Ángeles",
+      "concepto": "Catering — anticipo del 50%",
+      "monto_usd": 7284.5,
+      "fecha_limite": null,
+      "vence": "Urgente",
+      "urgencia": "urgente",
+      "tramo": "2 · ANTICIPOS QUE DESTRABAN CONTRATOS",
+      "como": "Transferencia",
+      "contacto": "Ángeles · angeles@grupoambient.com.ar",
+      "nota": "Total cerrado US$14.569 por las dos propuestas."
+    },
+    {
+      "id": 104,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "mobiliario",
+      "proveedor": "FDL Eventos · Federico",
+      "concepto": "5.500 sillas + flete",
+      "monto_usd": 20674.17,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "A resolver",
+      "contacto": "Federico · 11 4403-0698 / 11 4040-7012",
+      "nota": "PENDIENTE: no confirmaron si pueden facturar al exterior. Lo hacen con un tercero que emite en EE.UU."
+    },
+    {
+      "id": 105,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "infraestructura",
+      "proveedor": "La Rural",
+      "concepto": "Armado de stands",
+      "monto_usd": 9270.0,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "Arq. Christian Riccio · +54 9 11 3481-2179",
+      "nota": "criccio@larural.com.ar · falta pedirle los espejos."
+    },
+    {
+      "id": 106,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "Road Seguridad S.A.",
+      "concepto": "263 h de vigilancia + planos + supervisión",
+      "monto_usd": 5784.7,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "Javier Celiz · Cel 11 6303-7845 · Of. 4756-5691",
+      "nota": "presupuestos@roadseguridad.com.ar · versión V3 del 12/08, lista para firmar."
+    },
+    {
+      "id": 107,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "Vittal",
+      "concepto": "Servicio médico, 3 días",
+      "monto_usd": 4658.94,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "A resolver",
+      "contacto": "vtomas@vittal.com.ar",
+      "nota": "PENDIENTE: tampoco confirmaron si pueden facturar al exterior."
+    },
+    {
+      "id": 108,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "Higia Eventos",
+      "concepto": "Limpieza, 205,5 h — ANTICIPO 50%",
+      "monto_usd": 1349.21,
+      "fecha_limite": null,
+      "vence": "Antes del armado",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "Malena Carrizo / Yanina Cruz · malena.carrizo@higiaeventos.com",
+      "nota": "Piden 50% de anticipo antes del armado. El saldo (US$1.349) va contra el evento."
+    },
+    {
+      "id": 109,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "Gale Servicios",
+      "concepto": "Retiro de residuos — 100% ADELANTADO",
+      "monto_usd": 1179.24,
+      "fecha_limite": null,
+      "vence": "Antes del evento",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "Yanina Cruz · info@galeservicios.com",
+      "nota": "Se factura 100% por adelantado. Trabajan con ARCILLEX; hay que estar dado de alta como generador."
+    },
+    {
+      "id": 110,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "La Rural",
+      "concepto": "Conectividad WiFi, 2 redes privadas",
+      "monto_usd": 1174.79,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "Gonzalo · conectividad@larural.com.ar",
+      "nota": "Presupuesto N.º 2 del 05/08. Ajusta por IPC."
+    },
+    {
+      "id": 111,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "Chanes Seguros",
+      "concepto": "Seguro de accidentes, 150 personas",
+      "monto_usd": 631.23,
+      "fecha_limite": null,
+      "vence": "Antes del armado",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "Néstor · nestor@chanesseguros.com.ar",
+      "nota": "Lo exige La Rural para habilitar. Premio único."
+    },
+    {
+      "id": 112,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "mobiliario",
+      "proveedor": "A definir",
+      "concepto": "Montaje, acomodación y desmontaje de sillas",
+      "monto_usd": 596.03,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "3 · PROVEEDORES DEL PREDIO — firmar y señar",
+      "como": "Transferencia",
+      "contacto": "",
+      "nota": "EN NEGOCIACIÓN: cerrar el número antes de firmar las sillas."
+    },
+    {
+      "id": 113,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "REMERASYESTAMPADOS",
+      "concepto": "Pañuelos — saldo 50% (parte Argentina)",
+      "monto_usd": 3429.73,
+      "fecha_limite": "2026-09-13",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "4 · PROGRAMADO",
+      "como": "USDT BEP20",
+      "contacto": "Leandro Petracci · Uruguay 41, Villa Martelli",
+      "nota": "Factura 2601019 por 5.276,51 USDT; a Argentina le toca el 65%."
+    },
+    {
+      "id": 45,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "lugar",
+      "proveedor": "La Rural",
+      "concepto": "Saldo del contrato CC-00957, cuota 2 de 2",
+      "monto_usd": 15777.0,
+      "fecha_limite": "2026-09-23",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "4 · PROGRAMADO",
+      "como": "Transferencia",
+      "contacto": "Victoria Grosi · vgrosi@larural.com.ar",
+      "nota": ""
+    },
+    {
+      "id": 114,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "DERQUI IMPRESIONES",
+      "concepto": "Gráfica Argentina — saldo",
+      "monto_usd": 1192.37,
+      "fecha_limite": "2026-09-13",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "4 · PROGRAMADO",
+      "como": "USDT BEP20",
+      "contacto": "Germán Marino · CUIT 20-37540906-3 · Charrúa 3366, CABA",
+      "nota": "A CONFIRMAR: la factura 2601014 viene por el total, no por el saldo."
+    },
+    {
+      "id": 115,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "LEOTEX",
+      "concepto": "Lanyards — saldo",
+      "monto_usd": 816.1,
+      "fecha_limite": "2026-09-13",
+      "vence": "",
+      "urgencia": null,
+      "tramo": "4 · PROGRAMADO",
+      "como": "USDT BEP20",
+      "contacto": "DNI 33914106 · Marengo 4178, Villa Ballester",
+      "nota": "A CONFIRMAR: la factura 2601018 viene por el total, no por el saldo."
+    },
+    {
+      "id": 116,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "tecnica",
+      "proveedor": "Grupo MET · Lalo Aizenberg",
+      "concepto": "Producción técnica — saldo del 50%",
+      "monto_usd": 30000.0,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "5 · RESTO DEL SALDO — sin fecha acordada",
+      "como": "Transferencia / Mercury",
+      "contacto": "Lalo Aizenberg · 11 6411-6748",
+      "nota": "Falta el PDF con el alcance final."
+    },
+    {
+      "id": 117,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "tecnica",
+      "proveedor": "Grupo MET · Lalo Aizenberg",
+      "concepto": "Entelado del pabellón",
+      "monto_usd": 16225.17,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "5 · RESTO DEL SALDO — sin fecha acordada",
+      "como": "Transferencia",
+      "contacto": "Lalo Aizenberg · 11 6411-6748",
+      "nota": ""
+    },
+    {
+      "id": 118,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "tecnica",
+      "proveedor": "Grupo MET · Lalo Aizenberg",
+      "concepto": "Circuito cerrado de cámaras (CCTV)",
+      "monto_usd": 6209.0,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "5 · RESTO DEL SALDO — sin fecha acordada",
+      "como": "Transferencia",
+      "contacto": "Lalo Aizenberg · 11 6411-6748",
+      "nota": "Con grúa incluida."
+    },
+    {
+      "id": 119,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "catering",
+      "proveedor": "Grupo Ambient · Ángeles",
+      "concepto": "Catering — saldo del 50%",
+      "monto_usd": 7284.5,
+      "fecha_limite": null,
+      "vence": "A definir",
+      "urgencia": "sinfecha",
+      "tramo": "5 · RESTO DEL SALDO — sin fecha acordada",
+      "como": "Transferencia",
+      "contacto": "Ángeles · angeles@grupoambient.com.ar",
+      "nota": ""
+    },
+    {
+      "id": 120,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "Higia Eventos",
+      "concepto": "Limpieza — saldo del 50%",
+      "monto_usd": 1349.2,
+      "fecha_limite": null,
+      "vence": "Contra el evento",
+      "urgencia": "sinfecha",
+      "tramo": "5 · RESTO DEL SALDO — sin fecha acordada",
+      "como": "Transferencia",
+      "contacto": "Malena Carrizo · malena.carrizo@higiaeventos.com",
+      "nota": ""
+    },
+    {
+      "id": 121,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "produccion",
+      "proveedor": "A definir",
+      "concepto": "Master Mind Hit (sala adicional)",
+      "monto_usd": 3000.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Estimado de la planilla, sin cotización."
+    },
+    {
+      "id": 122,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "produccion",
+      "proveedor": "A definir",
+      "concepto": "Unifilas",
+      "monto_usd": 1200.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Estimado de la planilla."
+    },
+    {
+      "id": 123,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "produccion",
+      "proveedor": "A definir",
+      "concepto": "Escoltas (2)",
+      "monto_usd": 1000.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Estimado de la planilla."
+    },
+    {
+      "id": 124,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "produccion",
+      "proveedor": "A definir",
+      "concepto": "DJ",
+      "monto_usd": 500.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Estimado de la planilla."
+    },
+    {
+      "id": 125,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "servicios",
+      "proveedor": "A definir",
+      "concepto": "Ecobaños",
+      "monto_usd": 0.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Decidido que van ecobaños. Sin cotizar: hoy entra en cero."
+    },
+    {
+      "id": 126,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "A definir",
+      "concepto": "Marquetería y enmarcado",
+      "monto_usd": 0.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Certificaciones y premios. Sin cotizar."
+    },
+    {
+      "id": 127,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "A definir",
+      "concepto": "Cheques, escarapelas, diplomas, placas y manillas",
+      "monto_usd": 0.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Lo único del merch que las facturas no cubren."
+    },
+    {
+      "id": 128,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "mobiliario",
+      "proveedor": "A definir",
+      "concepto": "Replanteo de sillas con ingeniero",
+      "monto_usd": 0.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "Va aparte de la dirección técnica de La Rural."
+    },
+    {
+      "id": 129,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "otro",
+      "proveedor": "A definir",
+      "concepto": "Vuelos, alojamiento y traslados del equipo (8 personas)",
+      "monto_usd": 0.0,
+      "fecha_limite": null,
+      "vence": "Pedir presup.",
+      "urgencia": "sinfecha",
+      "tramo": "6 · SIN COTIZAR — pedir presupuesto",
+      "como": "",
+      "contacto": "",
+      "nota": "El hueco más grande: no hay cotización ni estimado."
+    },
+    {
+      "id": 130,
+      "bloque": 2,
+      "pais": "Argentina",
+      "categoria": "merch",
+      "proveedor": "A definir",
+      "concepto": "Diferencia de tipo de cambio y saldo de gráfica a confirmar",
+      "monto_usd": 590.59,
+      "fecha_limite": null,
+      "vence": "A conciliar",
+      "urgencia": "sinfecha",
+      "tramo": "7 · AJUSTE DE CONCILIACIÓN",
+      "como": "",
+      "contacto": "",
+      "nota": "Las facturas de merch se emitieron a dólar $1.535 y los pagos de junio se hicieron a $1.475, así que las mitades no suman exacto. El grueso es el saldo de la gráfica de Argentina: el master dice US$1.839 y la factura 2601014 viene por US$2.385."
+    }
+  ],
+  "lastSync": "2026-09-03T15:41:11.432037+00:00",
+  "schemaVersion": 2
+}
+</script>
+<script>
+  // Cargar datos del sync-pagos service
+  try {
+    const dataEl = document.getElementById('pagos-data');
+    if (dataEl) {
+      window.PAGOS_DATA = JSON.parse(dataEl.textContent);
+    }
+  } catch(e){
+    console.warn('[pagos] error parseando pagos-data:', e);
+    window.PAGOS_DATA = {pagos:[], lastSync:null};
+  }
+</script>
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const REF_USD_ARS = 1515;
+
+const CATEGORIAS = {
+  lugar:      { label: 'Lugar',      cls: 'lugar' },
+  tecnica:    { label: 'Técnica',    cls: 'tecnica' },
+  merch:      { label: 'Merch',      cls: 'merch' },
+  produccion: { label: 'Producción', cls: 'produccion' },
+  dinamica:   { label: 'Dinámica',   cls: 'dinamica' },
+  tramites:   { label: 'Trámites',   cls: 'tramites' },
+  infraestructura: { label: 'Infraestructura', cls: 'infraestructura' },
+  mobiliario: { label: 'Mobiliario', cls: 'mobiliario' },
+  servicios:  { label: 'Servicios',  cls: 'servicios' },
+  catering:   { label: 'Catering',   cls: 'catering' },
+  otro:       { label: 'Otro',       cls: 'otro' }
+};
+
+const PAIS_INFO = {
+  'Ecuador':              { ciudad: 'Quito',              fecha: '25-26 Julio',       bloque: 1 },
+  'Panamá':               { ciudad: 'Ciudad de Panamá',   fecha: '8-9 Agosto',        bloque: 1 },
+  'República Dominicana': { ciudad: 'Santo Domingo',      fecha: '15-16 Agosto',      bloque: 1 },
+  'Colombia 1ra Fecha':   { ciudad: 'Bogotá',             fecha: '29-30 Agosto',      bloque: 1 },
+  'México':               { ciudad: 'CDMX',               fecha: '5-6 Septiembre',    bloque: 2 },
+  'Chile':                { ciudad: 'Santiago',           fecha: '12-13 Septiembre',  bloque: 2 },
+  'Uruguay':              { ciudad: 'Montevideo',         fecha: '19-20 Septiembre',  bloque: 2 },
+  'Argentina':            { ciudad: 'Buenos Aires',       fecha: '3-4 Octubre',       bloque: 2 },
+  'Salvador':             { ciudad: 'San Salvador',       fecha: '10-11 Octubre',     bloque: 2 },
+  'Colombia 2da Fecha':   { ciudad: 'Medellín',           fecha: '31 Oct - 1 Nov',    bloque: 3 },
+  'Costa Rica':           { ciudad: 'San José',           fecha: '7-8 Noviembre',     bloque: 3 },
+  'Perú':                 { ciudad: 'Lima',               fecha: '14-15 Noviembre',   bloque: 3 },
+  'Guatemala':            { ciudad: 'Guatemala',          fecha: '21-22 Noviembre',   bloque: 3 },
+  'España':               { ciudad: 'Madrid',             fecha: '28-29 Noviembre',   bloque: 3 }
+};
+
+// Argentina: CHECKLIST DE PAGOS · Argentina CMC 2026 (checklist centralizado, dólar $1.510).
+// Resto de los países: Cronograma_Pagos_Cumbre.xlsx (Aleja).
+// Los pagos sin fecha acordada van con fecha_limite = null: no se inventan fechas.
+const PAGOS = (window.PAGOS_DATA && window.PAGOS_DATA.pagos) ? window.PAGOS_DATA.pagos : [];
+
+// ============================================================
+// UTIL
+// ============================================================
+const HOY = new Date();
+HOY.setHours(0,0,0,0);
+const daysDiff = (s) => s ? Math.round((new Date(s + 'T00:00:00') - HOY) / 86400000) : Infinity;
+// Recibe el pago entero: hay pagos sin fecha acordada, y algunos traen la urgencia fijada a mano.
+const getUrgencia = (p) => {
+  if (p.urgencia) return p.urgencia;
+  if (!p.fecha_limite) return 'sinfecha';
+  const d = daysDiff(p.fecha_limite);
+  if (d < 0) return 'vencido';
+  if (d < 7) return 'urgente';
+  return 'enfecha';
+};
+const RANGO_URG = { vencido:0, urgente:1, enfecha:2, sinfecha:3 };
+const ordenPago = (a,b) =>
+  (RANGO_URG[getUrgencia(a)] - RANGO_URG[getUrgencia(b)]) ||
+  (daysDiff(a.fecha_limite) - daysDiff(b.fecha_limite)) ||
+  (a.id - b.id);
+const fmtUsd = (n) => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+const fmtArs = (n) => '$' + n.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+const fmtDate = (s) => new Date(s + 'T00:00:00').toLocaleDateString('es-AR', { day: '2-digit', month: 'short' }).replace('.', '');
+const fmtRel = (p) => {
+  if (!p.fecha_limite) return getUrgencia(p) === 'urgente' ? 'ya' : 'sin fecha';
+  const d = daysDiff(p.fecha_limite);
+  if (d < 0) return `hace ${Math.abs(d)}d`;
+  if (d === 0) return 'HOY';
+  if (d === 1) return 'mañana';
+  return `en ${d}d`;
+};
+
+// ============================================================
+// STATE
+// ============================================================
+const state = { bloque: 'all', urgencia: 'all' };
+const pagadosSet = new Set();
+
+// ============================================================
+// FIREBASE — sincronización en tiempo real de links de factura
+// ============================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyAcVeOVYw9vmDCO2ljZThvxTPaMQAKrRWI",
+  authDomain: "cmc2026-pagos.firebaseapp.com",
+  databaseURL: "https://cmc2026-pagos-default-rtdb.firebaseio.com",
+  projectId: "cmc2026-pagos",
+  storageBucket: "cmc2026-pagos.firebasestorage.app",
+  messagingSenderId: "686640016015",
+  appId: "1:686640016015:web:0efe928c95fd06f6841efa"
+};
+
+let fbDb = null, fbAuth = null;
+try {
+  firebase.initializeApp(firebaseConfig);
+  fbDb = firebase.database();
+  fbAuth = firebase.auth();
+} catch (e) {
+  console.warn('[pagos] Firebase no disponible, sigo sin sincronizar links:', e);
+}
+
+// Cache local de los links (id_pago -> URL)
+const facturasLinks = {};
+let facturasRef = null;
+
+function setSyncStatus(status, label) {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  el.classList.remove('ok', 'error');
+  if (status) el.classList.add(status);
+  el.querySelector('.sync-label').textContent = label;
+}
+
+function initFirebase() {
+  if (!fbAuth) { setSyncStatus('error', 'Sin sincronización'); return; }
+  setSyncStatus(null, 'Conectando...');
+  fbAuth.signInAnonymously()
+    .then(() => {
+      setSyncStatus('ok', 'Sincronizado');
+      facturasRef = fbDb.ref('pagos_facturas');
+      // Listener en tiempo real: cada vez que cambia algo, actualizo cache y re-render
+      facturasRef.on('value', (snap) => {
+        Object.keys(facturasLinks).forEach(k => delete facturasLinks[k]);
+        Object.assign(facturasLinks, snap.val() || {});
+        render();
+      }, (err) => {
+        console.error('Firebase read error:', err);
+        setSyncStatus('error', 'Error de conexión');
+      });
+    })
+    .catch((err) => {
+      console.error('Firebase auth error:', err);
+      setSyncStatus('error', 'Error de autenticación');
+    });
+}
+
+function saveFactura(id, url) {
+  if (!facturasRef) return;
+  facturasRef.child(id).set(url).catch(err => {
+    console.error('Error guardando factura:', err);
+    alert('No se pudo guardar el link. Revisá tu conexión y probá de nuevo.');
+  });
+}
+
+function deleteFactura(id) {
+  if (!facturasRef) return;
+  facturasRef.child(id).remove().catch(err => {
+    console.error('Error borrando factura:', err);
+    alert('No se pudo borrar el link. Revisá tu conexión y probá de nuevo.');
+  });
+}
+
+function filteredPagos() {
+  return PAGOS.filter(p => {
+    if (state.bloque !== 'all' && p.bloque !== parseInt(state.bloque)) return false;
+    if (state.urgencia !== 'all' && getUrgencia(p) !== state.urgencia) return false;
+    return true;
+  });
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderTop(list) {
+  const totalUsd = list.reduce((s,p) => s + p.monto_usd, 0);
+  const urgentCount = list.filter(p => ['vencido','urgente'].includes(getUrgencia(p))).length;
+  const countries = new Set(list.map(p => p.pais)).size;
+  const next = list.filter(p => p.fecha_limite && daysDiff(p.fecha_limite) >= 0)
+                   .sort((a,b) => daysDiff(a.fecha_limite) - daysDiff(b.fecha_limite))[0];
+  const sinFecha = list.filter(p => getUrgencia(p) === 'sinfecha').length;
+
+  document.getElementById('totalUsd').textContent = fmtUsd(totalUsd);
+  document.getElementById('statCount').textContent = list.length;
+  document.getElementById('statUrgent').textContent = urgentCount;
+  document.getElementById('statCountries').textContent = countries;
+  document.getElementById('statNext').textContent = next ? fmtDate(next.fecha_limite) : '—';
+
+  // Info sub-hero (reemplaza al cambio ARS)
+  const partes = [];
+  if (list.length) partes.push(`<b>${list.length}</b> pagos pendientes`);
+  if (countries) partes.push(`<b>${countries}</b> países`);
+  if (next) partes.push(`próximo vencimiento: <b>${fmtDate(next.fecha_limite)}</b>`);
+  if (sinFecha) partes.push(`<b>${sinFecha}</b> sin fecha acordada`);
+  document.getElementById('subInfo').innerHTML = partes.join(' · ');
+}
+
+function renderTotalGeneral(list) {
+  const totalUsd = list.reduce((s,p) => s + p.monto_usd, 0);
+  const countries = new Set(list.map(p => p.pais)).size;
+  const el = document.getElementById('totalGeneral');
+  if (list.length === 0) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  document.getElementById('tgUsd').textContent = fmtUsd(totalUsd);
+  document.getElementById('tgCount').textContent = list.length;
+  document.getElementById('tgCountries').textContent = countries;
+}
+
+function renderLedger(list) {
+  const ledger = document.getElementById('ledger');
+  ledger.innerHTML = '';
+
+  if (list.length === 0) {
+    ledger.innerHTML = '<div class="empty">No hay pagos que coincidan con los filtros actuales.</div>';
+    return;
+  }
+
+  const byPais = {};
+  list.forEach(p => { (byPais[p.pais] = byPais[p.pais] || []).push(p); });
+
+  const paisesSorted = Object.keys(byPais).sort((a,b) => {
+    const nA = Math.min(...byPais[a].map(p => daysDiff(p.fecha_limite)));
+    const nB = Math.min(...byPais[b].map(p => daysDiff(p.fecha_limite)));
+    return nA - nB;
+  });
+
+  paisesSorted.forEach((paisName, paisIdx) => {
+    const pagos = byPais[paisName].slice().sort(ordenPago);
+    const totalPais = pagos.reduce((s,p) => s + p.monto_usd, 0);
+    const info = PAIS_INFO[paisName] || { ciudad: '', fecha: '', bloque: 0 };
+    const urgentCount = pagos.filter(p => ['vencido','urgente'].includes(getUrgencia(p))).length;
+
+    const el = document.createElement('div');
+    el.className = 'pais';
+
+    el.innerHTML = `
+      <div class="pais-head">
+        <div class="pais-num">${String(paisIdx+1).padStart(2,'0')}</div>
+        <div class="pais-title">
+          <h2>${paisName}${info.ciudad ? ' <span style="color:var(--muted); font-weight:400; font-size:0.7em; font-style:italic">· ' + info.ciudad + '</span>' : ''}</h2>
+          <div class="meta">
+            <span class="bloque">Bloque ${info.bloque}</span>
+            <span>${info.fecha}</span>
+            <span>${pagos.length} pagos</span>
+            ${urgentCount ? `<span class="urgentes">${urgentCount} urgentes</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="pagos-header">
+        <div class="ph-num">N°</div>
+        <div class="ph-fecha">Fecha</div>
+        <div class="ph-desc">Descripción</div>
+        <div class="ph-cat">Categoría</div>
+        <div class="ph-factura">Factura</div>
+        <div class="ph-monto">Monto</div>
+        <div class="ph-check">Estado</div>
+      </div>
+      <div class="pagos"></div>
+      <div class="pais-subtotal">
+        <div class="lbl">Total ${paisName}</div>
+        <div class="val"><span class="cur">USD</span>${fmtUsd(totalPais)}</div>
+      </div>
+    `;
+
+    const pagosEl = el.querySelector('.pagos');
+    pagos.forEach((p, i) => {
+      const urg = getUrgencia(p);
+      const cat = CATEGORIAS[p.categoria] || CATEGORIAS.otro;
+      const isPagado = pagadosSet.has(p.id);
+      const arsMonto = p.monto_usd * REF_USD_ARS;
+
+      const pagoEl = document.createElement('div');
+      pagoEl.className = 'pago ' + urg + (isPagado ? ' pagado' : '');
+      const linkUrl = facturasLinks[p.id];
+      const facturaCell = linkUrl
+        ? `<a href="${linkUrl}" class="factura-link" target="_blank" rel="noopener">Ver ↗</a><button class="factura-del" data-id="${p.id}" title="Borrar link">×</button>`
+        : `<button class="factura-add" data-id="${p.id}">+ agregar</button>`;
+      pagoEl.innerHTML = `
+        <div class="pago-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="pago-fecha ${urg}">
+          <span>${p.fecha_limite ? fmtDate(p.fecha_limite) : (p.vence || 'A definir')}</span>
+          <span class="rel">${fmtRel(p)}</span>
+        </div>
+        <div class="pago-desc">
+          <div class="prov">${p.proveedor}</div>
+          <div class="concepto">${p.concepto}</div>
+          ${p.contacto ? `<div class="meta">${p.contacto}${p.como ? ' · <b>' + p.como + '</b>' : ''}</div>` : ''}
+          ${p.nota ? `<div class="meta">${p.nota}</div>` : ''}
+        </div>
+        <div class="pago-cat"><span class="cat ${cat.cls}">${cat.label}</span></div>
+        <div class="pago-factura">${facturaCell}</div>
+        <div class="pago-monto">
+          <div class="usd"><span class="cur">USD</span>${fmtUsd(p.monto_usd)}</div>
+        </div>
+        <div class="check-cell">
+          <span class="status-chip${isPagado ? ' pagado' : ''}" data-id="${p.id}">${isPagado ? 'Pagado' : 'Programado'}</span>
+        </div>
+      `;
+      pagosEl.appendChild(pagoEl);
+    });
+
+    ledger.appendChild(el);
+  });
+
+  document.getElementById('foot-count').textContent = `${list.length} de ${PAGOS.length} pagos pendientes`;
+}
+
+// ============================================================
+// FILTROS DINÁMICOS
+// ============================================================
+function buildFilters() {
+  const bloques = [...new Set(PAGOS.map(p => p.bloque))].sort();
+  const el = document.getElementById('filterBloque');
+  let html = `<button class="chip on" data-filter="bloque" data-val="all">Todos</button>`;
+  bloques.forEach(b => {
+    html += `<button class="chip" data-filter="bloque" data-val="${b}">Bloque ${b}</button>`;
+  });
+  el.innerHTML = html;
+}
+
+// ============================================================
+// EVENTS
+// ============================================================
+document.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (chip) {
+    const type = chip.dataset.filter;
+    const val = chip.dataset.val;
+    state[type] = val;
+    document.querySelectorAll(`.chip[data-filter="${type}"]`).forEach(c => {
+      c.classList.toggle('on', c.dataset.val === val);
+    });
+    render();
+    return;
+  }
+  const st = e.target.closest('.status-chip');
+  if (st) {
+    const id = parseInt(st.dataset.id);
+    if (pagadosSet.has(id)) pagadosSet.delete(id);
+    else pagadosSet.add(id);
+    st.classList.toggle('pagado');
+    st.textContent = st.classList.contains('pagado') ? 'Pagado' : 'Programado';
+    st.closest('.pago').classList.toggle('pagado');
+    return;
+  }
+
+  // Agregar link de factura
+  const addBtn = e.target.closest('.factura-add');
+  if (addBtn) {
+    const id = parseInt(addBtn.dataset.id);
+    const url = prompt('Pegá el link de la factura:', '');
+    if (url && url.trim()) {
+      let cleanUrl = url.trim();
+      if (!/^https?:\/\//i.test(cleanUrl)) cleanUrl = 'https://' + cleanUrl;
+      saveFactura(id, cleanUrl);
+    }
+    return;
+  }
+
+  // Borrar link de factura
+  const delBtn = e.target.closest('.factura-del');
+  if (delBtn) {
+    const id = parseInt(delBtn.dataset.id);
+    if (confirm('¿Borrar el link de esta factura?')) {
+      deleteFactura(id);
+    }
+    return;
+  }
+});
+
+// ============================================================
+// MAIN
+// ============================================================
+function updateTimestamp() {
+  const now = new Date();
+  const fecha = now.toLocaleDateString('es-AR', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/\./g, '');
+  const hora = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('upd').textContent = `${fecha} · ${hora}`;
+}
+
+function render() {
+  const list = filteredPagos();
+  renderTop(list);
+  renderLedger(list);
+  renderTotalGeneral(list);
+}
+
+buildFilters();
+updateTimestamp();
+render();
+initFirebase();
+</script>
+
+</body>
+</html>
