@@ -588,9 +588,9 @@ AHORROS = [
   'FDL Eventos 5.500 sillas + montaje, acomodación y desmontaje', 32118000.0, None,
   'Mail criccio@larural.com.ar 17/08 y mail fdleventos@gmail.com 07/08. El montaje ($900.000) está en negociación.'),
  ('Entelado',
-  'Primera cotización recibida', 39000000.0, None,
-  'Negociado a la mitad', 24500000.0, None,
-  'Dato aportado por Agustina; la cotización inicial no está en el correo.'),
+  'Primer presupuesto de Grupo MET', 40000000.0, None,
+  'Negociado a poco más de la mitad', 24500000.0, None,
+  'Dato aportado por Agustina: ni el presupuesto inicial ni el cierre están en el correo. OJO: primero dijo $24.500.000 (que es el número cargado, y el que da los US$16.225 que ella misma usa) y después $25.500.000. Confirmar cuál es antes de firmar el informe.'),
  ('Catering',
   'Primera propuesta de Grupo Ambient', 30000000.0, None,
   '600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas', None, 14569.0,
@@ -639,15 +639,118 @@ r += 2
 ws.cell(r, 1, 'TÉCNICA — la comparación no es directa').font = Font(name=F, size=11, bold=True, color='C00000')
 r += 1
 for t in [
- 'Se cerró con Grupo MET en US$60.000 (unos $91.800.000 al dólar de referencia), con todos los agregados que se fueron sumando después de la visita al predio.',
- 'Las otras cotizaciones fueron sobre el pliego base, que según Agustina no cubría lo que necesita el pabellón. Por eso no se pueden restar sin más:',
- '   · Sound-Light (16/06): no se pudo abrir el PDF, el mail pesa 33 MB. En el mail del 19/06 se les dice que las otras cotizaciones son "prácticamente la mitad", así que estaba cerca de los $100.000.000.',
- '   · 2MG (24/06): $53.655.470, con descuento especial $45.000.000 + IVA. Con los adicionales de iluminación y estructura llega a unos $78.000.000.',
- '   · Prina (18/06): $48.885.000 + IVA = $59.150.850. Validez de 10 días, vencida.',
- '   · VMG (29/06): $12.625.000 + IVA, sólo las pantallas LED de 65 m².',
- 'Para poder mostrar un ahorro defendible en técnica hace falta el PDF de Grupo MET y el alcance final, para compararlo contra el mismo alcance de los otros tres.',
+ 'Se pidió cotización de técnica a NUEVE empresas el 13 y 14 de junio. Respondieron seis con número. El detalle completo está en la hoja COTIZACIONES TÉCNICA.',
+ '',
+ '   · Sound-Light (16/06): el PDF no se pudo abrir, el mail pesa 33 MB. El mail del 19/06 les dice que las otras estaban "prácticamente la mitad", lo que lo ubica por encima de los $100.000.000.',
+ '   · Bonetto (17/06): $94.936.000 — sonido e iluminación $69.736.000, LED $20.720.000, CCTV $4.480.000. Grúas y efectos aparte (la chispa fría la cobra POR MINUTO).',
+ '   · Prina (18/06): $48.885.000 + IVA = $59.150.850. Pero cotiza 40 m² de LED cuando el rider pide 65, y deja afuera grúas y energía. Vencida.',
+ '   · 2MG (24/06): $45.000.000 con descuento + IVA = $54.450.000, más $19.202.700 de adicionales. Sonido más liviano, cotizado para "2000 / 5000 pax".',
+ '   · Dixi Group (26/06): $82.000.000 + IVA = $99.220.000 llave en mano, con rigging completo, encomiendas y 4 máquinas de chispa fría.',
+ '   · VMG (29/06): $15.276.250 con IVA, sólo las pantallas LED de 65 m².',
+ '',
+ 'POR QUÉ TÉCNICA NO ENTRA EN LA TABLA DE ARRIBA: Grupo MET cerró en US$60.000 ($90.600.000) y con el circuito cerrado el paquete queda cerca de $100.000.000.',
+ 'Eso es prácticamente lo mismo que Dixi llave en mano y menos que Bonetto, pero está POR ENCIMA de 2MG y de Prina. Poner esa diferencia como ahorro no se sostendría',
+ 'delante del CEO, porque los alcances no son iguales: Prina cotizó 38% menos de LED, 2MG un sonido más chico, y Grupo MET incluye lo que se agregó tras la visita al predio.',
+ '',
+ 'LO QUE SÍ SE SOSTIENE EN TÉCNICA: las 500 vallas y los efectos especiales van bonificados. Bonetto los cobra: $300.000 la máquina de humo y $600.000 POR MINUTO las dos de chispa fría.',
+ 'Con los 6 disparos por día que pide el rider, en cualquiera de las otras propuestas eso es plata.',
+ '',
+ 'FALTA UNA SOLA COSA para cerrar el ahorro de técnica con un número: el PDF de Grupo MET con el alcance final. Es el único de los siete proveedores sin presupuesto escrito en el correo.',
 ]:
     ws.cell(r, 1, t).font = SUB
+    r += 1
+
+# ============================================================================
+# 6bis. COTIZACIONES DE TÉCNICA — las siete propuestas que llegaron
+# ============================================================================
+# (proveedor, fecha, contacto, sin_iva, con_iva, alcance, aparte, respaldo)
+# sin_iva/con_iva en None cuando no hay número firme.
+TECNICA = [
+ ('Sound-Light', '16/06/2026', 'ventas@sound-light.com.ar (Noelia Escudero)',
+  None, None,
+  'Técnica integral sobre el pliego base.',
+  'Sin detalle: no se pudo abrir el adjunto.',
+  'El mail pesa 33 MB y el PDF no se puede extraer desde acá. Lo que sí está documentado es el mail del 19/06 en el que Agustina les dice que las otras cotizaciones estaban "prácticamente la mitad de lo cotizado por ustedes". Sobre las de esa fecha (Bonetto y Prina) eso lo ubica por encima de los $100.000.000.'),
+ ('Bonetto Sonido e Iluminación', '17/06/2026', 'cristian@bonetto.net',
+  94936000.0, None,
+  'Sonido e iluminación $69.736.000 · pantallas LED $20.720.000 · CCTV $4.480.000. 16 L-Acoustics Kiva II, 240 LED ST18-15, 322 truss box, consola Yamaha QL5.',
+  'Grúas (2 autoelevadores tijera x 3 días) $4.480.000 · máquina de humo $300.000 · 2 máquinas de chispa fría $600.000 POR MINUTO · minuto adicional $150.000.',
+  'Presupuesto PR26-287 V.1. El PDF viene con el texto vectorizado: hubo que renderizarlo a imagen para leerlo. No aclara si los valores llevan IVA. Dice expresamente "NO CONTEMPLA RIDER DE BANDA".'),
+ ('Prina', '18/06/2026', 'valentin.andina@prina.net',
+  48885000.0, 59150850.0,
+  'LED 40 m² $6.700.000 · CCTV 2 cámaras $4.510.000 · sonido (16 Adamson Y10) $10.465.000 · iluminación $12.490.000 · RRHH y logística $14.720.000.',
+  'Incluye 2 máquinas Sparkular y máquina de humo.',
+  'OJO CON EL ALCANCE: cotiza 40 m² de LED (6×4 + 2 de 2×4) cuando el rider pide 65 m² (7×5 + 2 de 3×5). No incluye grúas, brazos articulados ni tijeras, ni la generación de energía. Validez de 10 días: vencida desde el 28/06.'),
+ ('2MG', '24/06/2026', 'rocio.g@2mg.net',
+  45000000.0, 54450000.0,
+  'Sonido, video (LED 65 m², medida correcta), iluminación, CCTV, efectos especiales, RRHH y logística. Total de lista $53.655.470, con descuento especial $45.000.000.',
+  'Extras de iluminación $10.177.500 · escenario 13×3 m con pasarela $5.692.500. Los dos juntos suman $15.870.000 sin IVA.',
+  'Incluye certificación de planos por escribano, eléctrico matriculado y autoelevadora, hasta 8 puntos de colgado. El sonido es más liviano que el de los otros (12 gabinetes DVA T8) y el presupuesto dice "2000 / 5000 pax". Validez 15 días.'),
+ ('Dixi Group', '26/06/2026', 'g.judcovski@dixieventos.com.ar',
+  82000000.0, 99220000.0,
+  'Llave en mano: sonido, iluminación (90 par LED, 6 beam, 8 wash), video (LED 65 m²), CCTV y rigging completo (6 puentes de 12 m, 14 aparejos de 1 T, motores).',
+  'Nada: es llave en mano.',
+  'Es el alcance más completo de todos. Incluye 4 máquinas de chispa fría con 8 disparos por día, plano general con puntos de colgado firmado por arquitecto, encomienda eléctrica de profesional matriculado y productores generales de técnica.'),
+ ('VMG Visual Solutions', '29/06/2026', 'presupuestos@vmg-web.com',
+  12625000.0, 15276250.0,
+  'Sólo pantallas LED: 65 m² (7×5 central + 2 de 3×5), pitch 2.6 indoor blackface, con control, servidor y operador.',
+  'Todo lo demás.',
+  'NO ES COMPARABLE con las otras: es únicamente video. Sirve para poner precio al renglón de LED. No incluye estructuras de colgado, rigging, tarimas, entelados ni autoelevadores. Recotiza si el dólar salta más de 15%.'),
+ ('Grupo MET — ES EL QUE SE CONTRATÓ', 'sin PDF', 'lalo@somosgrupomet.com',
+  None, 90600000.0,
+  'Sonido, iluminación, video y LED por US$60.000. Aparte: entelado $24.500.000 y circuito cerrado US$6.209.',
+  'Bonifica 500 vallas y los efectos especiales, que en las otras cotizaciones se pagan.',
+  'ES EL ÚNICO DE LOS SIETE SIN PRESUPUESTO ESCRITO EN EL CORREO. Se revisó todo el Gmail: en el hilo con Lalo Aizenberg hay ocho idas y vueltas entre el 16 y el 30 de junio y una visita al predio el 30/06, pero nunca llegó un PDF. Lo único que hay es la factura INV-11 de Mercury por US$5.000, pagada el 31/07.'),
+]
+
+ws = hoja('COTIZACIONES TÉCNICA', 'Las siete propuestas de técnica que llegaron',
+          'Se pidió cotización a nueve empresas entre el 13 y el 14 de junio. Respondieron seis con número; Black-Out y 4A Latam nunca contestaron y una dirección rebotó.')
+COLS = [('Proveedor', 30), ('Fecha', 12), ('Contacto', 34), ('Sin IVA', 16), ('Con IVA 21%', 16),
+        ('USD al dólar de trabajo', 15), ('Qué incluye', 62), ('Qué queda aparte', 44), ('Observaciones', 70)]
+NC = len(COLS)
+encabezados(ws, 4, COLS)
+r = 5
+for prov, fecha, contacto, sin_iva, con_iva, alcance, aparte, respaldo in TECNICA:
+    ws.cell(r, 1, prov).font = BOLD
+    ws.cell(r, 2, fecha).font = AZUL
+    ws.cell(r, 3, contacto).font = SUB
+    c = ws.cell(r, 4, sin_iva); c.font = AZUL; c.number_format = ARS
+    c = ws.cell(r, 5, con_iva if con_iva is not None else (f'=D{r}*1.21' if sin_iva else None))
+    c.font = AZUL if con_iva is not None else NEGRO; c.number_format = ARS
+    c = ws.cell(r, 6, f'=IF(E{r}="","",E{r}/TABLERO!$C$4)'); c.font = NEGRO; c.number_format = USD0
+    ws.cell(r, 7, alcance).font = NEGRO
+    ws.cell(r, 8, aparte).font = NEGRO
+    ws.cell(r, 9, respaldo).font = SUB
+    if prov.startswith('Grupo MET'):
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FVERD
+    elif prov.startswith('VMG'):
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FGRIS
+    elif sin_iva is None:
+        for j in range(1, NC + 1): ws.cell(r, j).fill = FAMAR
+    for j in range(1, NC + 1):
+        ws.cell(r, j).border = BOX
+        ws.cell(r, j).alignment = Alignment(wrap_text=True, vertical='top')
+    ws.row_dimensions[r].height = 86
+    r += 1
+
+r += 1
+ws.cell(r, 1, 'CÓMO LEER ESTA TABLA — Y POR QUÉ NO SE PUEDE RESTAR SIN MÁS').font = Font(name=F, size=11, bold=True, color='C00000')
+r += 1
+for t in [
+ 'Los siete números NO cotizan lo mismo, así que la diferencia contra Grupo MET no es un ahorro hasta que se iguale el alcance:',
+ '   · Grupo MET cerró en US$60.000 (unos $90.600.000) por sonido, iluminación, video y LED, con todo lo que se fue agregando después de la visita al predio del 30 de junio.',
+ '   · Sumándole el circuito cerrado (US$6.209) el paquete de técnica queda cerca de los $100.000.000, que es prácticamente lo mismo que cotizó Dixi llave en mano ($99.220.000) y por debajo de Bonetto ($114.872.560 más grúas y efectos).',
+ '   · En cambio queda POR ENCIMA de 2MG con descuento ($54.450.000 más $19.202.700 de adicionales = $73.652.700) y de Prina ($59.150.850).',
+ '   · Pero Prina cotizó 40 m² de LED cuando el rider pide 65, y dejó afuera las grúas y la energía; y 2MG cotizó un sonido más liviano, para "2000 / 5000 pax".',
+ '',
+ 'Lo que sí está documentado y se sostiene solo:',
+ '   · Sound-Light quedó afuera por precio, y hay un mail del 19/06 pidiéndoles que revisen porque las otras estaban "prácticamente la mitad".',
+ '   · Los efectos especiales y las 500 vallas los bonifica Grupo MET. Bonetto los cobra: $300.000 la máquina de humo y $600.000 POR MINUTO las dos de chispa fría.',
+ '   · Se pidieron nueve cotizaciones y se compararon seis. Ese trabajo está entero en el correo.',
+ '',
+ 'PARA CERRAR EL AHORRO DE TÉCNICA FALTA UNA SOLA COSA: el PDF de Grupo MET con el alcance final. Con eso se puede comparar contra el mismo alcance en Dixi, Bonetto, 2MG y Prina, y recién ahí poner un número.',
+]:
+    ws.cell(r, 1, t).font = SUB if not t.startswith('PARA CERRAR') else Font(name=F, size=10, bold=True, color='C00000')
     r += 1
 
 # ============================================================================

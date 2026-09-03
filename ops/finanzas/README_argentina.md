@@ -20,7 +20,7 @@ La Rural, Pabellón Azul. Montaje 2 de octubre, evento 3 y 4 de octubre de 2026.
 | Presupuesto original (hoja Argentina del master) | 176.159 |
 | Diferencia | +66.188 (+37,6 %) |
 | Costo por asistente pago (6.000) | 40,39 |
-| **Ahorro negociado contra lo cotizado** | **40.247** (~$60,8 M) |
+| **Ahorro negociado contra lo cotizado** | **40.909** (~$61,8 M) |
 
 Por bloque: Sede 106.715 · Técnica 82.434 · Merch 17.417 · Servicios 14.953 · Catering 14.569 · Producción 6.260 · Equipo 0.
 
@@ -88,9 +88,37 @@ Todas se extrajeron de los adjuntos del correo de agustinalorenzog@gmail.com:
 
 El merch no sale del correo sino de la carpeta de Drive *Presupuestos merch*: ver la tabla de arriba.
 
+## Técnica — las siete cotizaciones
+
+Se pidió cotización a **nueve empresas** el 13 y 14 de junio de 2026. Respondieron seis con número;
+Black-Out y 4A Latam nunca contestaron y una dirección de Sound-Light rebotó.
+
+| Proveedor | Fecha | Sin IVA | Con IVA | Alcance |
+|---|---|---:|---:|---|
+| Sound-Light | 16/06 | — | +$100 M | PDF no legible (mail de 33 MB). El correo del 19/06 les pide revisar porque las otras estaban «prácticamente la mitad». |
+| Bonetto | 17/06 | 94.936.000 | 114.872.560 | Sonido e iluminación 69.736.000 · LED 20.720.000 · CCTV 4.480.000. Grúas 4.480.000 y efectos aparte: chispa fría **$600.000 por minuto**. |
+| Prina | 18/06 | 48.885.000 | 59.150.850 | LED de sólo 40 m² (el rider pide 65). Sin grúas ni energía. Validez vencida. |
+| 2MG | 24/06 | 45.000.000 | 54.450.000 | Con descuento especial (lista 53.655.470). Adicionales aparte por 19.202.700. Sonido más liviano, «2000 / 5000 pax». |
+| Dixi Group | 26/06 | 82.000.000 | 99.220.000 | Llave en mano: rigging completo, encomiendas, plano de arquitecto, 4 máquinas de chispa fría. |
+| VMG | 29/06 | 12.625.000 | 15.276.250 | Sólo pantallas LED de 65 m². No comparable. |
+| **Grupo MET** | contratado | — | **90.600.000** | US$60.000 por sonido, iluminación, video y LED. Bonifica 500 vallas y los efectos. |
+
+**Por qué técnica no entra en la tabla de ahorros.** Sumándole el circuito cerrado (US$6.209), el paquete
+de Grupo MET queda cerca de los $100 M: prácticamente lo mismo que Dixi llave en mano y por debajo de
+Bonetto, pero **por encima de 2MG y de Prina**. Los alcances no son iguales — Prina cotizó 38 % menos de
+LED y dejó afuera grúas y energía, 2MG cotizó un sonido más chico — pero eso hay que poder probarlo, y
+para eso hace falta el PDF de Grupo MET con el alcance final.
+
+Notas de extracción: el PDF de Bonetto trae el texto vectorizado (sin fuentes), así que hubo que
+renderizarlo a imagen con `pymupdf` y leerlo visualmente. El de Sound-Light no se pudo bajar: pedir el
+mensaje en formato RAW tumba la sesión del conector de Gmail por el tamaño (33 MB).
+
+Hay un borrador en Gmail, *«Comparativa de técnica — las 7 cotizaciones de Argentina»*, con los montos y
+el link directo a cada mail original.
+
 ## Advertencias
 
-- **Técnica cerrada** con Grupo MET en US$60.000, pero sin PDF en el correo. Es el único ítem grande sin respaldo escrito, y sin él la comparativa de ahorro de técnica no se puede defender.
+- **Técnica cerrada** con Grupo MET en US$60.000, pero sin PDF en el correo. Es el único de los siete proveedores sin respaldo escrito: ver la sección de abajo.
 - **Los pesos son de la fecha de cada cotización.** VMG recotiza si el dólar salta más de 15 % y La Rural ajusta el saldo por IPC.
 - **Catering cerrado** con Grupo Ambient en US$14.569 (600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas), contra los US$33.820 que tenía el presupuesto.
 - **Vuelos y alojamiento del equipo entran en cero.** No hay cotización en el correo ni monto en el sheet.
