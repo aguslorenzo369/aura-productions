@@ -1,0 +1,70 @@
+# Carta formal — Solicitud de cambio de sala
+
+> Versión en texto de `carta-cambio-de-sala.docx`.
+> Reemplazar todos los campos entre corchetes `[ ]` antes de enviar.
+
+---
+
+**AURA PRODUCTIONS**
+Producción de eventos y experiencias · hola@auraproductions.com.ar
+
+---
+
+[Ciudad], [día] de [mes] de [año]
+
+**Sr./Sra. [Nombre y apellido]**
+[Cargo]
+[Nombre del predio / Centro de Convenciones]
+[Dirección]
+
+**REF.: Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — [Nombre del evento], [fecha del evento].**
+
+De nuestra mayor consideración:
+
+Por medio de la presente, y en representación de Aura Productions, productora responsable de [Nombre del evento] a realizarse el [fecha] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).
+
+Fundamentamos nuestro pedido en los siguientes puntos:
+
+1. **Adecuación del espacio al aforo confirmado.** Al día de la fecha contamos con 1.600 personas confirmadas. El Gran Salón, con sus 1.600 m², ofrece la capacidad necesaria para recibirlas con comodidad y con los estándares de circulación, seguridad y servicio que exige un evento de estas características.
+
+2. **Calidad de la experiencia y percepción del evento.** Una sala de 4.600 m² ocupada por 1.600 asistentes genera una inevitable sensación de vacío que atenta contra la atmósfera del encuentro. Que la sala se vea llena no es un detalle estético: es parte central de la experiencia que comprometimos con nuestro público, nuestros sponsors y nuestros oradores, y condiciona además todo el registro audiovisual con el que comunicamos el evento.
+
+3. **Montaje ya recotizado y aprobado.** Contamos con la recotización de nuestro proveedor técnico y con el montaje aprobado para el Gran Salón. Por lo tanto, el cambio no implica demoras, retrabajos ni ajustes adicionales en la planificación operativa acordada.
+
+4. **Rentabilidad y sostenibilidad del proyecto.** El correcto dimensionamiento de la sala es determinante para la rentabilidad de esta edición. Que este evento cierre en positivo es, precisamente, la condición que nos habilita a proyectar las próximas ediciones junto a ustedes.
+
+**Proyección de crecimiento y compromiso a futuro.** Queremos ser transparentes respecto de nuestra visión: Aura Productions trabaja con un plan de escalamiento anual sostenido. En Argentina pasamos de 3.000 asistentes el año pasado a un aforo de 6.000 personas en la edición de este año. Bajo esa misma lógica, nuestra proyección para [año próximo] es de entre 3.000 y 4.000 asistentes, volumen para el cual la Sala Expo Center resulta el espacio natural y al que aspiramos a llegar de la mano de ustedes.
+
+En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center el año próximo. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.
+
+Quedamos a entera disposición para coordinar a la brevedad los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera.
+
+Agradecemos desde ya la atención dispensada y confiamos en contar con una respuesta favorable, en el marco de la relación de trabajo a largo plazo que deseamos construir con ustedes.
+
+Sin otro particular, saludamos a ustedes muy atentamente.
+
+---
+
+**[Nombre y apellido]**
+[Cargo] — Aura Productions
+hola@auraproductions.com.ar · [Teléfono]
+
+---
+
+## Campos a completar
+
+| Campo | Dónde aparece |
+|---|---|
+| `[Ciudad]`, `[día] de [mes] de [año]` | Fecha de emisión |
+| `[Nombre y apellido]`, `[Cargo]` (destinatario) | Bloque destinatario |
+| `[Nombre del predio / Centro de Convenciones]`, `[Dirección]` | Bloque destinatario |
+| `[Nombre del evento]`, `[fecha del evento]` | Referencia y primer párrafo |
+| `[año próximo]` | Párrafo de proyección |
+| `[Nombre y apellido]`, `[Cargo]`, `[Teléfono]` (firmante) | Bloque de firma |
+
+## Regenerar el .docx
+
+```bash
+npm install docx
+node generar-carta.js carta-cambio-de-sala.docx
+```
