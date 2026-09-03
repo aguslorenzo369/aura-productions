@@ -505,6 +505,59 @@ for t, rel in [
     r += 1
 
 r += 1
+ws.cell(r, 1, 'LO QUE IBA A COSTAR CONTRA LO QUE COSTÓ').font = Font(name=F, size=12, bold=True, color='1F3864'); r += 1
+ws.cell(r, 1, 'Precios unitarios de merch.cmc2026.com al 06/07/2026, dólar $1.515. Compara el proveedor que traía Cumbre contra los proveedores argentinos que consiguió Agustina.').font = SUB; r += 1
+CMP = [
+ ('Remeras estampadas',            '100',   16.17, 1617.16,  9.31,  931.35),
+ ('Gorras negras',                 '1.000',  9.90, 9900.99,  1.64, 1636.96),
+ ('Cinta colgante / lanyard',      '1.000',  1.25, 1247.52,  1.00, 1004.95),
+ ('Credenciales 10 × 13 cm',       '1.000',  0.57,  574.65,  0.48,  475.06),
+ ('Hojas A4 (contrato)',           '5.500',  0.20, 1107.26,  0.05,  265.31),
+ ('Tarjetas 21,5 × 10 cm (cheque)','5.500',  0.12,  671.62,  0.02,  109.78),
+ ('Bolsas de friselina, 2 colores','1.000',  1.14, 1141.91,  0.64,  644.55),
+ ('Pulseras tyvek — fuera de la comparación', '5.500', 0.10, 544.55, None, None),
+]
+CC = [('Producto', 34), ('Cant.', 9), ('Unitario Cumbre', 13), ('Total Cumbre', 13),
+      ('Unitario Agustina', 13), ('Total Agustina', 13), ('Ahorro', 13), ('Ahorro %', 10)]
+for j, (t, an) in enumerate(CC, 1):
+    c = ws.cell(r, j, t); c.font = HDR; c.fill = FH; c.border = BOX
+    c.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+r += 1
+ini_c = r
+for prod, cant, uc, tc, ua, ta in CMP:
+    ws.cell(r, 1, prod).font = BOLD if ua is not None else SUB
+    ws.cell(r, 2, cant).font = NEGRO
+    c = ws.cell(r, 3, uc); c.font = AZUL; c.number_format = USD
+    c = ws.cell(r, 4, tc); c.font = AZUL; c.number_format = USD
+    c = ws.cell(r, 5, ua); c.font = AZUL; c.number_format = USD
+    c = ws.cell(r, 6, ta); c.font = AZUL; c.number_format = USD
+    if ua is not None:
+        c = ws.cell(r, 7, f'=D{r}-F{r}'); c.font = BOLD; c.number_format = USD; c.fill = FVERD
+        c = ws.cell(r, 8, f'=G{r}/D{r}'); c.font = NEGRO; c.number_format = PCT
+    else:
+        for j in range(1, 9): ws.cell(r, j).fill = FGRIS
+    for j in range(1, 9):
+        ws.cell(r, j).border = BOX
+    r += 1
+fin_c = r - 2   # la última fila (pulseras) queda fuera del total
+ws.cell(r, 1, 'TOTAL DE LA CANASTA COMPARADA').font = Font(name=F, size=11, bold=True)
+for col, letra in ((4, 'D'), (6, 'F'), (7, 'G')):
+    c = ws.cell(r, col, f'=SUM({letra}{ini_c}:{letra}{fin_c})')
+    c.font = Font(name=F, size=11, bold=True); c.number_format = USD; c.fill = FVERD; c.border = BOX
+c = ws.cell(r, 8, f'=G{r}/D{r}'); c.font = Font(name=F, size=11, bold=True); c.number_format = PCT; c.fill = FVERD; c.border = BOX
+r += 2
+for t in [
+ 'La gorra sola explica la mitad del ahorro: el proveedor de Cumbre la cobraba US$9,90 y Agustina la consiguió a US$1,64. Sobre 1.000 unidades son US$8.264.',
+ 'Las pulseras tyvek quedan fuera de los dos lados de la cuenta porque no hay precio comparable del lado argentino.',
+ 'OJO: esta canasta NO es el total del rubro merch. Los pañuelos (US$6.973) y el bordado de gorras (US$1.750) no entran en la comparación, y las cantidades',
+ 'del sitio no son exactamente las de las facturas finales (remeras 100 contra 250, gorras 1.000 contra 940). Sirve para medir el ahorro por precio unitario,',
+ 'no para reemplazar el costo del rubro, que sale de las nueve facturas de arriba.',
+ 'Uruguay tiene su propia comparativa en el mismo sitio: US$2.396,00 contra US$755,77, con un ahorro de US$1.640,23. No entra en el costo de Argentina.',
+]:
+    ws.cell(r, 1, t).font = SUB
+    r += 1
+
+r += 1
 ws.cell(r, 1, 'TRES COSAS QUE HAY QUE CONFIRMAR').font = Font(name=F, size=11, bold=True, color='C00000'); r += 1
 for t in [
  '1) Lanyards y gráfica de Argentina: las facturas reemitidas en agosto vienen por el TOTAL, pero la carpeta y el master dicen que ya se abonó el 50%. Si las facturas están bien, hay que pagar US$2.008 más de lo que sale por la regla del 50%. Una sola consulta a LEOTEX y a Derqui lo resuelve.',
@@ -595,6 +648,10 @@ AHORROS = [
   'Primera propuesta de Grupo Ambient', 30000000.0, None,
   '600 lunchbox VIP + desayuno, almuerzo y cena para 150 personas', None, 14569.0,
   'Cierre informado por Agustina. En el correo está la propuesta de AmbientHouse del 16/06 a $28.500 + IVA por persona por día con base mínima de 480.'),
+ ('Merch e impresos',
+  'Proveedor de Cumbre, precios unitarios al 06/07', None, 16261.12,
+  'Proveedores argentinos conseguidos por Agustina', None, 5067.97,
+  'Comparativa de merch.cmc2026.com al 06/07/2026 (dólar $1.515). Es una canasta cerrada de siete ítems: remeras, gorras, lanyards, credenciales, hojas A4, tarjetas y bolsas de friselina. Las pulseras tyvek quedan fuera de los dos lados porque no hay precio comparable. NO es el total del rubro merch: los pañuelos y el bordado de gorras no entran en esta comparación.'),
  ('Vallado del público',
   'Presupuestado en la hoja de Argentina', None, 1250.0,
   '500 vallas bonificadas por el proveedor de técnica', None, 0.0,

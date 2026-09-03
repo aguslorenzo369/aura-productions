@@ -20,7 +20,7 @@ La Rural, Pabellón Azul. Montaje 2 de octubre, evento 3 y 4 de octubre de 2026.
 | Presupuesto original (hoja Argentina del master) | 176.159 |
 | Diferencia | +66.188 (+37,6 %) |
 | Costo por asistente pago (6.000) | 40,39 |
-| **Ahorro negociado contra lo cotizado** | **40.909** (~$61,8 M) |
+| **Ahorro negociado contra lo cotizado** | **52.102** (~$78,7 M) |
 
 Por bloque: Sede 106.715 · Técnica 82.434 · Merch 17.417 · Servicios 14.953 · Catering 14.569 · Producción 6.260 · Equipo 0.
 
@@ -87,6 +87,31 @@ Todas se extrajeron de los adjuntos del correo de agustinalorenzog@gmail.com:
 | Blocko | 1.300 cintas portacredencial (descartada) | ARS 1.749.800 + IVA | 09/06/2026 |
 
 El merch no sale del correo sino de la carpeta de Drive *Presupuestos merch*: ver la tabla de arriba.
+
+## Merch — lo que iba a costar contra lo que costó
+
+Fuente: `merch.cmc2026.com`, precios unitarios al 06/07/2026, dólar $1.515. Compara el proveedor que
+traía Cumbre contra los proveedores argentinos conseguidos por Agustina.
+
+| Producto | Cant. | Unit. Cumbre | Total Cumbre | Unit. Agustina | Total Agustina | Ahorro |
+|---|---:|---:|---:|---:|---:|---:|
+| Gorras negras | 1.000 | 9,90 | 9.901 | 1,64 | 1.637 | **8.264** (83 %) |
+| Remeras estampadas | 100 | 16,17 | 1.617 | 9,31 | 931 | 686 (42 %) |
+| Hojas A4 (contrato) | 5.500 | 0,20 | 1.107 | 0,05 | 265 | 842 (76 %) |
+| Bolsas de friselina | 1.000 | 1,14 | 1.142 | 0,64 | 645 | 497 (44 %) |
+| Tarjetas (cheque) | 5.500 | 0,12 | 672 | 0,02 | 110 | 562 (84 %) |
+| Cinta colgante / lanyard | 1.000 | 1,25 | 1.248 | 1,00 | 1.005 | 243 (19 %) |
+| Credenciales 10 × 13 cm | 1.000 | 0,57 | 575 | 0,48 | 475 | 100 (17 %) |
+| **Total** | | | **16.261** | | **5.068** | **11.193 (69 %)** |
+
+La gorra sola explica tres cuartos del ahorro. Las pulseras tyvek quedan fuera de los dos lados porque
+no hay precio comparable. Uruguay tiene su propia comparativa (US$2.396 contra US$755,77, ahorro
+US$1.640,23) que **no** entra en el costo de Argentina.
+
+**Esta canasta no reemplaza el costo del rubro.** Mide el ahorro por precio unitario sobre siete ítems y
+deja fuera los pañuelos y el bordado de gorras; además las cantidades del sitio no son exactamente las de
+las facturas finales (remeras 100 contra 250, gorras 1.000 contra 940). El costo real del merch
+—US$17.417— sale de las nueve facturas de Drive.
 
 ## Técnica — las siete cotizaciones
 
