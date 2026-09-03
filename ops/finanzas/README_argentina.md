@@ -6,7 +6,8 @@ La Rural, Pabellón Azul. Montaje 2 de octubre, evento 3 y 4 de octubre de 2026.
 
 | Qué | Dónde |
 |---|---|
-| Google Sheet (una hoja, valores calculados) | https://docs.google.com/spreadsheets/d/1SfTv0IzslQQjWe5ROmxbHTaAK51zUMRdTrW2wGwK1L4/edit |
+| Google Sheet (una hoja, valores calculados) | https://docs.google.com/spreadsheets/d/1JaRn7MCDlVf8fC1KveJiMSg0lp6ZuNI74yTzRpvxS0Y/edit |
+| Informe al CEO (artifact) | https://claude.ai/code/artifact/a3d38d15-ee52-4433-935c-692bbf18aca4 |
 | Libro con fórmulas vivas (7 hojas) | `ARGENTINA_CMC2026_Costo_Total.xlsx` |
 | CSV fuente del Google Sheet | `argentina_costo_total.csv` |
 | Generadores | `construir_argentina.py`, `generar_csv_argentina.py` |
