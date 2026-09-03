@@ -84,22 +84,22 @@ ITEMS = [
  ('Sede', 'Alquiler Pabellón Azul', 'La Rural (contrato CC-00957)',
   'Locación 2 días de evento + 1 día de montaje', USD_, 75000.0, 0.0, 'Contratado',
   70000.0, 'Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)'),
- ('Sede', 'Infraestructura La Rural (armado de stands)', 'La Rural — Jefatura de Infraestructura',
+ ('Infraestructura', 'Armado de stands', 'La Rural — Jefatura de Infraestructura',
   'Armado del stand de staff (100 m²), el de producción (menos de 50 m²) y el mobiliario del camarín de speakers. Falta pedirles los espejos. Las sillas del público van en su propia línea.',
   USD_, 9270.0, 0.0, 'Cerrado', 0.0,
   'Definición de Agustina sobre el presupuesto de $66.494.708 del 17/08 · ver hoja AHORROS'),
- ('Sede', 'Sillas del público (5.500)', 'FDL Eventos',
+ ('Mobiliario', 'Sillas del público (5.500)', 'FDL Eventos',
   'Presupuesto 026-2697, alquiler por 4 días: 1.000 sillas hotel caño gris tapizado negro ($7.000.000) + 4.500 sillas plásticas Munro reforzadas ($17.100.000) + flete ($1.700.000). NO incluye armado.',
   ARS_, 25800000.0, 0.21, 'Cotizado', 16500.0,
   'Presupuesto FDL Eventos N.º 026-2697 del 07/08/2026 · pendiente de resolver facturación al exterior'),
- ('Sede', 'Montaje, acomodación y desmontaje de sillas', 'En negociación',
+ ('Mobiliario', 'Montaje, acomodación y desmontaje de sillas', 'En negociación',
   'Montaje previo, acomodación el sábado a la noche después de la dinámica y desmontaje el domingo.',
   ARS_, 900000.0, 0.0, 'En negociación', 0.0,
   'Negociación de Agustina · cerrar el número antes de firmar las sillas'),
- ('Sede', 'Replanteo de sillas (ingeniero)', 'Sin cotizar',
+ ('Mobiliario', 'Replanteo de sillas (ingeniero)', 'Sin cotizar',
   'Replanteo del layout de sillas del pabellón. Confirmado que va aparte de la dirección técnica de La Rural.',
   USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Pendiente de pedir presupuesto'),
- ('Sede', 'Conectividad WiFi', 'La Rural — Servicios de Conectividad',
+ ('Servicios', 'Conectividad WiFi', 'La Rural — Servicios de Conectividad',
   '2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre',
   ARS_, 1466063.84, 0.21, 'Cotizado', 800.0,
   'Mail conectividad@larural.com.ar 05/08/2026 · presupuesto N.º 2, base IPC junio (el del 16/06 era $1.438.728)'),
@@ -269,7 +269,7 @@ COLS = [('Rubro', 34), ('Proveedor', 30), ('Detalle', 62), ('Estado', 13), ('Mon
 NC = len(COLS)
 encabezados(ws, 4, COLS)
 
-orden_bloques = ['Sede', 'Técnica', 'Servicios', 'Merch', 'Catering', 'Producción', 'Equipo']
+orden_bloques = ['Sede', 'Infraestructura', 'Mobiliario', 'Técnica', 'Servicios', 'Merch', 'Catering', 'Producción', 'Equipo']
 r = 5
 filas_detalle, subtotales = [], []
 for bloque in orden_bloques:
@@ -723,11 +723,15 @@ for dec, a, b, formula, accion in DEC:
 # (rubro, referencia, ref_ars, ref_usd, cerrado, cer_ars, cer_usd, respaldo)
 # ref_ars/cer_ars en None cuando el número está directamente en dólares.
 AHORROS = [
- ('Infraestructura y mobiliario',
-  'Grupo MET, cotización de mobiliario', 40000000.0, None,
-  'Armado de stands + mobiliario, definido por Agustina', 14183100.0, 9270.0,
-  'La cotización de Grupo MET no está en el correo: dato aportado por Agustina. En el correo sí está el presupuesto de La Rural del 17/08 por $66.494.708 (con las 5.000 sillas adentro).'),
- ('Sillas del público',
+ ('Infraestructura — armado de stands',
+  'La Rural: panelería + dirección técnica + guardias', 16858366.2, None,
+  'Armado del stand de staff, el de producción y el camarín', None, 9270.0,
+  'Presupuesto de La Rural del 17/08 (mail criccio@larural.com.ar): panelería $9.938.187 más generales $6.920.179. Cerrado por Agustina en US$9.270.'),
+ ('Mobiliario',
+  'Grupo MET y La Rural, ambos alrededor de $40.000.000', 40000000.0, None,
+  'Conseguido aparte por Agustina', 24500000.0, None,
+  'A CONFIRMAR: dato aportado por Agustina, no está en el correo. Usa los mismos dos números que la fila del entelado ($40.000.000 y $24.500.000) y además ese costo no aparece como línea en COSTOS UNIFICADOS. Antes de firmar el informe hay que confirmar que son dos negociaciones distintas y no una contada dos veces.'),
+ ('Sillas del público — aparte',
   'La Rural: 5.000 sillas imperio bordó, armado incluido', 42500000.0, None,
   'FDL Eventos 5.500 sillas + montaje, acomodación y desmontaje', 32118000.0, None,
   'Mail criccio@larural.com.ar 17/08 y mail fdleventos@gmail.com 07/08. El montaje ($900.000) está en negociación.'),
