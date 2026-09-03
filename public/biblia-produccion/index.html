@@ -126,10 +126,20 @@ svg text{font-family:var(--f-m);fill:var(--text)}
 .cat-h h3{font-family:var(--f-d);font-size:27px;font-weight:500}
 .cat-h .c{font-family:var(--f-m);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-left:auto}
 .cat-h p{margin:0;color:var(--text2);font-size:14.5px;max-width:52ch}
-.ficha{display:grid;grid-template-columns:120px 1fr;gap:26px;padding:30px 0 32px;border-bottom:1px solid var(--line)}
+.ficha{display:grid;grid-template-columns:242px 1fr;gap:30px;padding:30px 0 32px;border-bottom:1px solid var(--line)}
+.shot{margin:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--panel2);cursor:zoom-in;transition:border-color .15s}
+.shot:hover,.shot:focus-visible{border-color:var(--gold)}
+.shot img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--panel2)}
+.shot figcaption{padding:6px 9px;font-family:var(--f-m);font-size:9px;line-height:1.4;color:var(--muted);border-top:1px solid var(--line);background:var(--panel);letter-spacing:.01em}
+.qrow{display:flex;gap:11px;align-items:flex-start;margin-top:11px}
+.qrow>svg{width:34px;height:34px;flex:0 0 auto;color:var(--gold)}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(6,6,10,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:34px;cursor:zoom-out}
+#lb img{max-width:min(1000px,92vw);max-height:76vh;object-fit:contain;border:1px solid var(--line-gold);background:var(--panel2)}
+#lb p{margin:0;max-width:80ch;text-align:center;font-family:var(--f-m);font-size:11.5px;line-height:1.6;color:#A19C90}
+#lb b{display:block;color:#E8C97A;font-size:13px;margin-bottom:5px;letter-spacing:.04em}
 .ficha .glyph{position:sticky;top:56px;align-self:start}
-.ficha .glyph svg{width:100%;height:auto;display:block;color:var(--gold)}
-.ficha .glyph .qty{font-family:var(--f-m);font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.04em;margin-top:9px;line-height:1.35}
+.ficha .glyph>svg{width:88px;height:88px;display:block;color:var(--gold)}
+.ficha .glyph .qty{font-family:var(--f-m);font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.04em;line-height:1.35}
 .ficha .glyph .qty em{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
 .f-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .f-head h4{font-size:20px;font-weight:700;letter-spacing:-.012em}
@@ -179,8 +189,8 @@ footer{margin-top:66px;border-top:1px solid var(--line);padding:26px 0 46px;font
 #empty{padding:40px 0;color:var(--muted);font-family:var(--f-m);font-size:13px}
 @media (max-width:720px){
   .vs{grid-template-columns:1fr} .vs>div+div{border-left:0;border-top:1px solid var(--line)}
-  .ficha{grid-template-columns:1fr;gap:16px} .ficha .glyph{position:static;display:flex;align-items:center;gap:14px}
-  .ficha .glyph svg{width:64px} .ficha .glyph .qty{margin-top:0}
+  .ficha{grid-template-columns:1fr;gap:16px} .ficha .glyph{position:static}
+  .shot img{aspect-ratio:16/9} .ficha .glyph>svg{width:56px;height:56px}
   .bar{grid-template-columns:1fr;gap:7px} .fact{border-right:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -878,6 +888,14 @@ w:['<b>Cotizar vigilancia nocturna del pabellón para las dos noches.</b> Es má
 const TIER={ref:'Referencia',pro:'Profesional',ok:'Con reparos',no:'Faltante'};
 const esc=s=>s;
 const host=document.getElementById('fichas');
+const IMG=window.IMG||{},IMMAP=window.IMMAP||{};
+function shot(f){
+  const k=IMMAP[f.n], im=IMG[k];
+  if(!im) return `<svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-${f.g}"></use></svg>`;
+  return `<figure class="shot" tabindex="0" role="button" aria-label="Ampliar foto: ${f.n}" data-k="${k}">
+    <img src="${im.d}" alt="${im.a}" loading="lazy">
+    <figcaption>${im.c}</figcaption></figure>`;
+}
 
 host.innerHTML=CATS.map(cat=>{
   const items=D.filter(f=>f.c===cat.id);
@@ -887,8 +905,8 @@ host.innerHTML=CATS.map(cat=>{
     ${items.map(f=>`
     <article class="ficha" data-k="${(f.n+' '+f.en+' '+f.j+' '+f.qn+' '+f.mk).toLowerCase().replace(/<[^>]+>/g,' ')}">
       <div class="glyph">
-        <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-${f.g}"></use></svg>
-        <div class="qty">${f.q}<em>${f.qn}</em></div>
+        ${shot(f)}
+        <div class="qrow"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-${f.g}"></use></svg><div class="qty">${f.q}<em>${f.qn}</em></div></div>
       </div>
       <div>
         <div class="f-head"><h4>${f.n}</h4><span class="en">${f.en}</span><span class="tier ${f.t}">${TIER[f.t]}</span></div>
