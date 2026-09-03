@@ -1,5 +1,7 @@
 # Carta formal — Solicitud de cambio de sala
 
+**Evento:** Cumbre de los Millonarios Conscientes · **Sede:** Expo Center, Chile
+
 > Versión en texto de `carta-cambio-de-sala.docx`.
 > Reemplazar todos los campos entre corchetes `[ ]` antes de enviar.
 
@@ -10,18 +12,18 @@ Producción de eventos y experiencias · hola@auraproductions.com.ar
 
 ---
 
-[Ciudad], [día] de [mes] de [año]
+Santiago de Chile, [día] de [mes] de [año]
 
 **Sr./Sra. [Nombre y apellido]**
 [Cargo]
 [Nombre del predio / Centro de Convenciones]
 [Dirección]
 
-**REF.: Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — [Nombre del evento], [fecha del evento].**
+**REF.: Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — Cumbre de los Millonarios Conscientes, [fecha del evento].**
 
 De nuestra mayor consideración:
 
-Por medio de la presente, y en representación de Aura Productions, productora responsable de [Nombre del evento] a realizarse el [fecha] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).
+Por medio de la presente, y en representación de Aura Productions, productora responsable de la Cumbre de los Millonarios Conscientes, a realizarse el [fecha del evento] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).
 
 Fundamentamos nuestro pedido en los siguientes puntos:
 
@@ -33,9 +35,9 @@ Fundamentamos nuestro pedido en los siguientes puntos:
 
 4. **Rentabilidad y sostenibilidad del proyecto.** El correcto dimensionamiento de la sala es determinante para la rentabilidad de esta edición. Que este evento cierre en positivo es, precisamente, la condición que nos habilita a proyectar las próximas ediciones junto a ustedes.
 
-**Proyección de crecimiento y compromiso a futuro.** Queremos ser transparentes respecto de nuestra visión: Aura Productions trabaja con un plan de escalamiento anual sostenido. En Argentina pasamos de 3.000 asistentes el año pasado a un aforo de 6.000 personas en la edición de este año. Bajo esa misma lógica, nuestra proyección para [año próximo] es de entre 3.000 y 4.000 asistentes, volumen para el cual la Sala Expo Center resulta el espacio natural y al que aspiramos a llegar de la mano de ustedes.
+**Proyección de crecimiento y compromiso a futuro.** Queremos ser transparentes respecto de nuestra visión: la Cumbre de los Millonarios Conscientes es un proyecto con un plan de escalamiento anual sostenido. En Argentina pasamos de 3.000 asistentes el año pasado a un aforo de 6.000 personas en la edición de este año, y nuestro objetivo es replicar esa misma curva de crecimiento en Chile. Bajo esa lógica, nuestra proyección para la edición 2027 es de entre 3.000 y 4.000 asistentes, volumen para el cual la Sala Expo Center resulta el espacio natural y al que aspiramos a llegar de la mano de ustedes.
 
-En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center el año próximo. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.
+En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center en 2027. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.
 
 Quedamos a entera disposición para coordinar a la brevedad los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera.
 
@@ -55,12 +57,13 @@ hola@auraproductions.com.ar · [Teléfono]
 
 | Campo | Dónde aparece |
 |---|---|
-| `[Ciudad]`, `[día] de [mes] de [año]` | Fecha de emisión |
+| `[día] de [mes] de [año]` | Fecha de emisión (la ciudad ya dice Santiago de Chile) |
 | `[Nombre y apellido]`, `[Cargo]` (destinatario) | Bloque destinatario |
-| `[Nombre del predio / Centro de Convenciones]`, `[Dirección]` | Bloque destinatario |
-| `[Nombre del evento]`, `[fecha del evento]` | Referencia y primer párrafo |
-| `[año próximo]` | Párrafo de proyección |
+| `[Nombre del predio / Centro de Convenciones]`, `[Dirección]` | Bloque destinatario — razón social del predio |
+| `[fecha del evento]` | Referencia y primer párrafo |
 | `[Nombre y apellido]`, `[Cargo]`, `[Teléfono]` (firmante) | Bloque de firma |
+
+> Datos ya completados: nombre del evento (Cumbre de los Millonarios Conscientes), ciudad (Santiago de Chile), salas y metrajes, aforo confirmado (1.600), proyección 2027 (3.000–4.000).
 
 ## Regenerar el .docx
 

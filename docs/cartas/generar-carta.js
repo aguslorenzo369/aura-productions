@@ -19,8 +19,8 @@ const t = (text, opts = {}) => new TextRun({ text, font: FONT, size: 22, color: 
 
 const doc = new Document({
   creator: 'Aura Productions',
-  title: 'Solicitud formal de cambio de sala',
-  description: 'Carta formal de solicitud de cambio de sala — Expo Center a Gran Salon',
+  title: 'Solicitud de cambio de sala — Cumbre de los Millonarios Conscientes',
+  description: 'Carta de solicitud de cambio de sala — Expo Center a Gran Salon — Cumbre de los Millonarios Conscientes, Chile',
   numbering: {
     config: [{
       reference: 'args',
@@ -61,7 +61,7 @@ const doc = new Document({
       }),
 
       // ---------- Lugar y fecha ----------
-      p([t('[Ciudad], [día] de [mes] de [año]')], { alignment: AlignmentType.RIGHT, spacing: { after: 360 } }),
+      p([t('Santiago de Chile, [día] de [mes] de [año]')], { alignment: AlignmentType.RIGHT, spacing: { after: 360 } }),
 
       // ---------- Destinatario ----------
       p([t('Sr./Sra. [Nombre y apellido]', { bold: true })], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
@@ -72,13 +72,13 @@ const doc = new Document({
       // ---------- Referencia ----------
       p([
         t('REF.: ', { bold: true, color: GOLD }),
-        t('Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — [Nombre del evento], [fecha del evento].', { bold: true }),
+        t('Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — Cumbre de los Millonarios Conscientes, [fecha del evento].', { bold: true }),
       ], { alignment: AlignmentType.LEFT, spacing: { after: 320 } }),
 
       // ---------- Cuerpo ----------
       p([t('De nuestra mayor consideración:')], { alignment: AlignmentType.LEFT, spacing: { after: 240 } }),
 
-      p([t('Por medio de la presente, y en representación de Aura Productions, productora responsable de [Nombre del evento] a realizarse el [fecha] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).')]),
+      p([t('Por medio de la presente, y en representación de Aura Productions, productora responsable de la Cumbre de los Millonarios Conscientes, a realizarse el [fecha del evento] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).')]),
 
       p([t('Fundamentamos nuestro pedido en los siguientes puntos:')], { spacing: { after: 200 } }),
 
@@ -104,10 +104,10 @@ const doc = new Document({
 
       p([
         t('Proyección de crecimiento y compromiso a futuro. ', { bold: true }),
-        t('Queremos ser transparentes respecto de nuestra visión: Aura Productions trabaja con un plan de escalamiento anual sostenido. En Argentina pasamos de 3.000 asistentes el año pasado a un aforo de 6.000 personas en la edición de este año. Bajo esa misma lógica, nuestra proyección para [año próximo] es de entre 3.000 y 4.000 asistentes, volumen para el cual la Sala Expo Center resulta el espacio natural y al que aspiramos a llegar de la mano de ustedes.'),
+        t('Queremos ser transparentes respecto de nuestra visión: la Cumbre de los Millonarios Conscientes es un proyecto con un plan de escalamiento anual sostenido. En Argentina pasamos de 3.000 asistentes el año pasado a un aforo de 6.000 personas en la edición de este año, y nuestro objetivo es replicar esa misma curva de crecimiento en Chile. Bajo esa lógica, nuestra proyección para la edición 2027 es de entre 3.000 y 4.000 asistentes, volumen para el cual la Sala Expo Center resulta el espacio natural y al que aspiramos a llegar de la mano de ustedes.'),
       ]),
 
-      p([t('En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center el año próximo. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.')]),
+      p([t('En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center en 2027. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.')]),
 
       p([t('Quedamos a entera disposición para coordinar a la brevedad los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera.')]),
 
