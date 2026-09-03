@@ -1,536 +1,518 @@
 <title>Velada Círculo Íntimo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
 <style>
   :root{
-    --deep:#08080F; --black:#000000; --raise:#12121C; --raise-2:#191926;
-    --gold:#C9A84C; --gold-light:#E8C97A;
-    --ivory:#F2EEE6; --muted:rgba(255,255,255,0.42); --faint:rgba(255,255,255,0.20);
-    --rule:rgba(201,168,76,0.22); --rule-soft:rgba(255,255,255,0.07);
-    --display:'Italiana', 'Didot', Georgia, serif;
-    --body:'Jost', 'Helvetica Neue', Arial, sans-serif;
-    --quote:'Cormorant Garamond', Georgia, serif;
+    --wine:#501817; --wine-2:#5C1A1B; --wine-deep:#3A0F0E; --wine-ink:#2A0A09;
+    --gold:#D9B25F; --gold-soft:#EBD3A0; --gold-line:rgba(217,178,95,0.30);
+    --ivory:#F7F0E9; --soft:rgba(247,240,233,0.74); --muted:rgba(247,240,233,0.52);
+    --faint:rgba(247,240,233,0.32); --hair:rgba(247,240,233,0.12);
+    --sans:'Montserrat','Helvetica Neue',Arial,sans-serif;
   }
   *{box-sizing:border-box;}
   body{
-    background:var(--deep); color:var(--ivory);
-    font-family:var(--body); font-weight:300; font-size:16px; line-height:1.72;
+    background:var(--wine); color:var(--ivory);
+    font-family:var(--sans); font-weight:300; font-size:16px; line-height:1.75;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:960px; margin:0 auto; padding:0 30px 110px;}
-  p{margin:0;} h1,h2,h3,h4{margin:0; text-wrap:balance; font-weight:400;}
+  p{margin:0;} h1,h2,h3,h4,h5{margin:0; text-wrap:balance;}
 
-  .label{
-    font-size:10.5px; letter-spacing:.34em; text-transform:uppercase;
-    color:var(--gold); font-weight:400;
-  }
-  .rule{height:1px; background:var(--rule); border:0; margin:0;}
+  .band{width:100%;}
+  .band.deep{background:var(--wine-deep);}
+  .band.ink{background:var(--wine-ink);}
+  .inner{max-width:1000px; margin:0 auto; padding:0 28px;}
+  .pad{padding-top:92px; padding-bottom:92px;}
 
-  /* ---------------- hero ---------------- */
-  header{padding:88px 0 0; text-align:center;}
-  .crest{
-    width:46px; height:1px; background:var(--gold); margin:0 auto 30px;
+  .eyebrow{
+    font-size:11px; font-weight:600; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--gold); display:flex; align-items:center; gap:12px;
   }
-  h1{
-    font-family:var(--display); font-size:clamp(58px,12vw,124px);
-    line-height:.92; letter-spacing:.02em; color:var(--ivory); margin:20px 0 0;
-  }
-  h1 span{display:block; color:var(--gold-light); font-size:.42em; letter-spacing:.2em; margin-top:22px;}
-  .hero-meta{
-    margin:38px auto 0; max-width:560px;
-    font-size:13px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted);
-  }
-  .hero-meta b{color:var(--ivory); font-weight:400;}
-  .hero-rule{display:flex; align-items:center; gap:18px; margin:56px 0 0;}
-  .hero-rule .rule{flex:1;}
-  .hero-rule .label{white-space:nowrap;}
+  .eyebrow::before{content:"◆"; font-size:9px; letter-spacing:0;}
+  .center .eyebrow{justify-content:center;}
 
-  /* ---------------- sections ---------------- */
-  section{margin-top:96px;}
   h2{
-    font-family:var(--display); font-size:clamp(34px,5.4vw,54px);
-    line-height:1.04; letter-spacing:.015em; margin:16px 0 26px; color:var(--ivory);
+    font-size:clamp(28px,4.6vw,44px); font-weight:700; line-height:1.14;
+    letter-spacing:-.01em; text-transform:uppercase; margin:18px 0 26px; color:var(--ivory);
   }
-  .lede{max-width:60ch; color:rgba(242,238,230,.72); font-size:16.5px; display:flex; flex-direction:column; gap:16px;}
-  .lede strong{color:var(--gold-light); font-weight:400;}
+  h2 em{font-style:normal; color:var(--gold);}
+  .lede{max-width:62ch; color:var(--soft); display:flex; flex-direction:column; gap:18px; font-size:16.5px;}
+  .lede b{color:var(--gold-soft); font-weight:600;}
+  .up{font-weight:600; text-transform:uppercase; letter-spacing:.02em; color:var(--ivory);}
 
-  blockquote{
-    margin:44px 0 0; padding:0 0 0 26px; border-left:1px solid var(--gold);
-    font-family:var(--quote); font-style:italic; font-weight:300;
-    font-size:clamp(21px,3vw,29px); line-height:1.42; color:var(--gold-light); max-width:32ch;
+  /* ---------- hero ---------- */
+  header{
+    background:linear-gradient(180deg,var(--wine-ink) 0%,var(--wine-deep) 45%,var(--wine) 100%);
+    text-align:center; padding:96px 28px 84px;
   }
+  header .inner{max-width:900px;}
+  h1{
+    font-size:clamp(38px,7.4vw,74px); font-weight:700; line-height:1.06;
+    text-transform:uppercase; letter-spacing:-.015em; margin:26px 0 0;
+  }
+  h1 span{display:block; color:var(--gold);}
+  .kicker{font-size:12px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:var(--gold);}
+  .sub{
+    margin:30px auto 0; max-width:56ch; font-size:17px; font-weight:300; color:var(--soft);
+  }
+  .stamp{
+    margin:38px auto 0; display:inline-flex; flex-wrap:wrap; justify-content:center;
+    align-items:center; gap:14px; border:1px solid var(--gold-line);
+    padding:14px 26px; font-size:12px; font-weight:600; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--gold-soft);
+  }
+  .stamp i{font-style:normal; color:var(--gold); font-size:9px;}
 
-  /* ---------------- guion ---------------- */
-  .guion{margin-top:34px; border-top:1px solid var(--rule-soft);}
+  /* ---------- quote ---------- */
+  .quote{
+    margin:0 auto; max-width:26ch; text-align:center;
+    font-size:clamp(22px,3.6vw,34px); font-weight:600; line-height:1.34;
+    text-transform:uppercase; color:var(--gold-soft); letter-spacing:-.005em;
+  }
+  .quote-rule{width:44px; height:2px; background:var(--gold); margin:0 auto 30px;}
+
+  /* ---------- guion ---------- */
+  .guion{margin-top:34px;}
   .beat{
-    display:grid; grid-template-columns:1fr; gap:6px;
-    padding:26px 0; border-bottom:1px solid var(--rule-soft);
+    display:grid; grid-template-columns:1fr; gap:8px;
+    padding:26px 0; border-bottom:1px solid var(--hair);
   }
-  @media(min-width:720px){
-    .beat{grid-template-columns:104px 1fr; gap:34px; align-items:baseline;}
-  }
-  .beat time{
-    font-size:17px; letter-spacing:.06em; color:var(--gold);
-    font-variant-numeric:tabular-nums; font-weight:400;
-  }
-  .beat h4{font-size:18px; color:var(--ivory); margin-bottom:6px;}
-  .beat p{color:var(--muted); font-size:14.5px; line-height:1.65; max-width:58ch;}
-  .beat.hero-beat{background:linear-gradient(90deg, rgba(201,168,76,.10), rgba(201,168,76,0)); padding-left:16px; margin-left:-16px;}
-  .beat.hero-beat time{color:var(--gold-light);}
-  .beat.hero-beat h4{color:var(--gold-light);}
-  .sun-note{
-    margin-top:26px; font-size:13px; color:var(--faint); letter-spacing:.04em; max-width:64ch;
-  }
+  @media(min-width:720px){ .beat{grid-template-columns:110px 1fr; gap:36px; align-items:baseline;} }
+  .beat:first-child{border-top:1px solid var(--hair);}
+  .beat time{font-size:19px; font-weight:600; color:var(--gold); font-variant-numeric:tabular-nums; letter-spacing:.02em;}
+  .beat h4{font-size:15px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; color:var(--ivory);}
+  .beat p{color:var(--muted); font-size:14.5px; line-height:1.7; max-width:60ch;}
+  .beat.key{background:linear-gradient(90deg,rgba(217,178,95,.13),rgba(217,178,95,0)); padding-left:18px; margin-left:-18px;}
+  .beat.key time, .beat.key h4{color:var(--gold-soft);}
+  .foot-note{margin-top:28px; font-size:13px; color:var(--faint); max-width:66ch; line-height:1.65;}
 
-  /* ---------------- escenarios ---------------- */
-  .venue{padding:40px 0; border-top:1px solid var(--rule);}
-  .venue:first-of-type{border-top:1px solid var(--gold);}
-  .venue-top{display:grid; grid-template-columns:1fr; gap:22px;}
-  @media(min-width:860px){ .venue-top{grid-template-columns:1fr 236px; gap:48px;} }
-  .venue h3{font-family:var(--display); font-size:clamp(30px,4.4vw,42px); line-height:1.02; color:var(--ivory);}
-  .venue .place{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-top:12px;}
-  .venue-copy{margin-top:20px; display:flex; flex-direction:column; gap:14px; color:rgba(242,238,230,.70); font-size:15px;}
-  .venue-copy b{color:var(--ivory); font-weight:400;}
-  .price{
-    border:1px solid var(--rule); padding:22px 24px; align-self:start;
-    background:var(--raise); text-align:left;
-  }
-  .price .amt{font-family:var(--display); font-size:34px; color:var(--gold-light); line-height:1; letter-spacing:.01em;}
-  .price .cur{font-size:11px; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; margin-top:9px;}
-  .price .per{margin-top:16px; padding-top:14px; border-top:1px solid var(--rule-soft); font-size:12.5px; color:var(--muted); line-height:1.5;}
-  .price .per b{color:var(--ivory); font-weight:400;}
-  .price.pending .amt{font-size:22px; color:var(--muted);}
+  /* ---------- venues ---------- */
+  .venue{border-top:1px solid var(--gold-line); padding:42px 0 8px;}
+  .venue-top{display:grid; grid-template-columns:1fr; gap:24px;}
+  @media(min-width:880px){ .venue-top{grid-template-columns:1fr 244px; gap:50px;} }
+  .venue h3{font-size:clamp(24px,3.6vw,34px); font-weight:700; text-transform:uppercase; letter-spacing:-.005em; line-height:1.1;}
+  .venue .place{font-size:10.5px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-top:12px;}
+  .venue-copy{margin-top:20px; display:flex; flex-direction:column; gap:15px; color:var(--soft); font-size:15px;}
+  .venue-copy b{color:var(--ivory); font-weight:600;}
+  .price{border:1px solid var(--gold-line); background:var(--wine-2); padding:24px; align-self:start;}
+  .price .amt{font-size:30px; font-weight:700; color:var(--gold); line-height:1.05; letter-spacing:-.01em;}
+  .price .cur{font-size:10px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:10px;}
+  .price .per{margin-top:16px; padding-top:14px; border-top:1px solid var(--hair); font-size:12.5px; color:var(--muted); line-height:1.6;}
+  .price .per b{color:var(--ivory); font-weight:600;}
+  .price.pending .amt{font-size:19px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
 
-  .incl{display:grid; grid-template-columns:1fr; gap:20px; margin-top:26px;}
-  @media(min-width:700px){ .incl{grid-template-columns:1fr 1fr; gap:32px;} }
-  .incl div h5{font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; margin:0 0 12px; font-weight:400;}
+  .incl{display:grid; grid-template-columns:1fr; gap:22px; margin-top:28px;}
+  @media(min-width:700px){ .incl{grid-template-columns:1fr 1fr; gap:34px;} }
+  .incl h5{font-size:10px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; margin:0 0 13px;}
   .incl .yes h5{color:var(--gold);}
   .incl .no h5{color:var(--muted);}
-  .incl ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px;}
-  .incl li{font-size:14px; color:rgba(242,238,230,.66); padding-left:16px; position:relative; line-height:1.5;}
-  .incl li::before{content:""; position:absolute; left:0; top:.62em; width:6px; height:1px; background:var(--gold);}
-  .incl .no li::before{background:rgba(255,255,255,.22);}
+  .incl ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .incl li{font-size:14px; color:var(--soft); padding-left:18px; position:relative; line-height:1.55;}
+  .incl li::before{content:"◆"; position:absolute; left:0; top:0; font-size:7px; color:var(--gold); line-height:2.4;}
+  .incl .no li{color:var(--muted);}
+  .incl .no li::before{color:var(--faint);}
 
-  /* ---------------- tabla ---------------- */
+  /* ---------- tablas ---------- */
   .scroll{overflow-x:auto; margin-top:30px;}
-  table{border-collapse:collapse; width:100%; min-width:600px; font-size:14px;}
-  th,td{text-align:left; padding:16px 18px; border-bottom:1px solid var(--rule-soft); vertical-align:top;}
+  table{border-collapse:collapse; width:100%; min-width:620px; font-size:14px;}
+  th,td{text-align:left; padding:17px 18px; border-bottom:1px solid var(--hair); vertical-align:top;}
   thead th{
-    font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold);
-    font-weight:400; border-bottom:1px solid var(--rule);
+    font-size:10px; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); border-bottom:1px solid var(--gold-line);
   }
-  td.n{font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ivory);}
-  td.venue-cell{color:var(--ivory); white-space:nowrap;}
+  td.n{font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ivory); font-weight:400;}
+  td.k{color:var(--ivory); font-weight:600; white-space:nowrap; text-transform:uppercase; font-size:13px; letter-spacing:.04em;}
+  td{color:var(--muted);}
+  td small{display:block; color:var(--faint); font-size:12px; margin-top:4px; text-transform:none; font-weight:300; letter-spacing:0;}
   tbody tr:last-child td{border-bottom:none;}
-  td small{display:block; color:var(--faint); font-size:12px; margin-top:3px;}
 
-  /* ---------------- recomendación ---------------- */
-  .reco{
-    margin-top:34px; border:1px solid var(--gold); background:linear-gradient(180deg, rgba(201,168,76,.07), rgba(201,168,76,.01));
-    padding:38px 34px;
-  }
-  .reco h3{font-family:var(--display); font-size:clamp(28px,4vw,38px); color:var(--gold-light); line-height:1.05;}
-  .reco .why{margin-top:22px; display:flex; flex-direction:column; gap:14px; color:rgba(242,238,230,.76); font-size:15.5px; max-width:64ch;}
-  .reco .why b{color:var(--gold-light); font-weight:400;}
-  .caveat{
-    margin-top:28px; padding-top:20px; border-top:1px solid var(--rule);
-    font-size:14px; color:var(--muted); max-width:66ch;
-  }
-  .caveat b{color:var(--ivory); font-weight:400;}
-
-  /* ---------------- pasos ---------------- */
-  .steps{margin-top:30px; display:grid; grid-template-columns:1fr; gap:1px; background:var(--rule-soft); border:1px solid var(--rule-soft);}
-  @media(min-width:760px){ .steps{grid-template-columns:repeat(3,1fr);} }
-  .steps > div{background:var(--deep); padding:26px 24px;}
-  .steps .n{font-family:var(--display); font-size:30px; color:var(--gold); line-height:1;}
-  .steps h4{font-size:15px; margin:14px 0 8px; color:var(--ivory);}
-  .steps p{font-size:13.5px; color:var(--muted); line-height:1.6;}
-
-
-  /* ---------------- presupuesto ---------------- */
-  .budget-note{margin-top:26px; font-size:13px; color:var(--faint); max-width:66ch; line-height:1.6;}
-  .totals{margin-top:34px; border:1px solid var(--rule); background:var(--raise);}
+  /* ---------- totales ---------- */
+  .totals{margin-top:36px; border:1px solid var(--gold-line);}
   .totals .line{
     display:flex; justify-content:space-between; align-items:baseline; gap:20px;
-    padding:16px 26px; border-bottom:1px solid var(--rule-soft);
+    padding:16px 26px; border-bottom:1px solid var(--hair); background:var(--wine-2);
   }
-  .totals .line span:first-child{font-size:14px; color:var(--muted);}
-  .totals .line span:last-child{font-size:14.5px; color:rgba(242,238,230,.86); font-variant-numeric:tabular-nums; text-align:right;}
+  .totals .line span:first-child{font-size:13.5px; color:var(--muted);}
+  .totals .line span:last-child{font-size:14.5px; color:var(--soft); font-variant-numeric:tabular-nums; text-align:right;}
   .totals .grand{
-    background:var(--black); border-bottom:none; padding:26px;
-    display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:16px;
+    background:var(--wine-ink); padding:28px 26px; display:flex; flex-wrap:wrap;
+    justify-content:space-between; align-items:baseline; gap:16px;
   }
-  .totals .grand .k{font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold);}
-  .totals .grand .v{font-family:var(--display); font-size:clamp(26px,4.4vw,40px); color:var(--gold-light); line-height:1; letter-spacing:.01em;}
+  .totals .grand .k{font-size:11px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--gold);}
+  .totals .grand .v{font-size:clamp(22px,3.8vw,34px); font-weight:700; color:var(--gold-soft); line-height:1; font-variant-numeric:tabular-nums;}
   .totals .perhead{
-    background:rgba(201,168,76,.06); border-bottom:none; padding:18px 26px;
-    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    background:rgba(217,178,95,.10); padding:18px 26px; display:flex; flex-wrap:wrap;
+    justify-content:space-between; align-items:baseline; gap:14px;
   }
-  .totals .perhead span:first-child{font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);}
-  .totals .perhead span:last-child{font-size:19px; color:var(--ivory); font-variant-numeric:tabular-nums;}
-  .levers{margin-top:34px; display:grid; grid-template-columns:1fr; gap:1px; background:var(--rule-soft); border:1px solid var(--rule-soft);}
-  @media(min-width:760px){ .levers{grid-template-columns:repeat(3,1fr);} }
-  .levers > div{background:var(--deep); padding:24px 22px;}
-  .levers h4{font-size:14.5px; color:var(--gold-light); margin-bottom:8px;}
-  .levers p{font-size:13.5px; color:var(--muted); line-height:1.6;}
+  .totals .perhead span:first-child{font-size:10.5px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);}
+  .totals .perhead span:last-child{font-size:18px; font-weight:600; color:var(--ivory); font-variant-numeric:tabular-nums;}
 
-  footer{margin-top:96px; padding-top:34px; border-top:1px solid var(--rule); text-align:center;}
-  footer .sig{font-family:var(--display); font-size:26px; color:var(--gold); letter-spacing:.14em;}
-  footer p{margin-top:14px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint);}
-  a{color:var(--gold-light); text-decoration:none; border-bottom:1px solid var(--rule);}
-  a:hover{border-bottom-color:var(--gold);}
+  /* ---------- grids de 3 ---------- */
+  .trio{display:grid; grid-template-columns:1fr; gap:1px; background:var(--hair); border:1px solid var(--hair); margin-top:34px;}
+  @media(min-width:760px){ .trio{grid-template-columns:repeat(3,1fr);} }
+  .trio > div{background:var(--wine); padding:28px 24px;}
+  .band.deep .trio > div{background:var(--wine-deep);}
+  .trio .num{font-size:12px; font-weight:700; letter-spacing:.24em; color:var(--gold);}
+  .trio h4{font-size:15px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin:14px 0 9px; color:var(--ivory);}
+  .trio p{font-size:13.5px; color:var(--muted); line-height:1.65;}
+
+  /* ---------- recomendación ---------- */
+  .reco{margin-top:34px; border:1px solid var(--gold); background:var(--wine-2); padding:40px 34px;}
+  .reco h3{font-size:clamp(20px,3.2vw,28px); font-weight:700; text-transform:uppercase; color:var(--gold); line-height:1.22; letter-spacing:-.005em;}
+  .reco .why{margin-top:24px; display:flex; flex-direction:column; gap:16px; color:var(--soft); font-size:15.5px; max-width:64ch;}
+  .reco .why b{color:var(--gold-soft); font-weight:600;}
+  .caveat{margin-top:30px; padding-top:22px; border-top:1px solid var(--gold-line); font-size:14px; color:var(--muted); max-width:66ch;}
+  .caveat b{color:var(--ivory); font-weight:600;}
+
+  footer{background:var(--wine-ink); text-align:center; padding:56px 28px;}
+  footer .sig{font-size:15px; font-weight:700; letter-spacing:.34em; text-transform:uppercase; color:var(--gold);}
+  footer p{margin-top:14px; font-size:10.5px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--faint);}
+  a{color:var(--gold-soft);}
   a:focus-visible{outline:1px solid var(--gold); outline-offset:3px;}
 </style>
 
-<div class="wrap">
-
 <header>
-  <div class="crest"></div>
-  <p class="label">Aura Productions para Academia MAV</p>
-  <h1>Círculo<span>Íntimo</span></h1>
-  <p class="hero-meta">
-    Una velada para <b>120 mujeres</b> del círculo interno de Valentina Ortiz<br>
-    <b>Jueves 15 de octubre de 2026</b> · Medellín · de 16:00 a 20:00
-  </p>
-  <div class="hero-rule"><div class="rule"></div><span class="label">Propuesta de locación</span><div class="rule"></div></div>
+  <div class="inner">
+    <p class="kicker">Aura Productions ◆ para Academia MAV</p>
+    <h1>Círculo <span>Íntimo</span></h1>
+    <p class="sub">Una velada privada para las 120 mujeres del círculo interno de Valentina Ortiz. Cuatro horas diseñadas alrededor de un solo momento.</p>
+    <div class="stamp">
+      <span>Jueves 15 de octubre 2026</span><i>◆</i><span>Medellín</span><i>◆</i><span>16:00 a 20:00</span>
+    </div>
+  </div>
 </header>
 
-<section>
-  <p class="label">La idea</p>
-  <h2>Cuatro horas que no se parezcan a un evento</h2>
-  <div class="lede">
-    <p>Valentina, tu círculo interno no necesita un salón: necesita un lugar donde 120 mujeres que ya se admiran entre sí puedan mirarse a los ojos sin ruido de fondo. Por eso esta propuesta no empieza por el espacio, empieza por la luz.</p>
-    <p>El 15 de octubre en Medellín <strong>el sol se pone a las 17:50</strong>. Eso significa que la hora más hermosa del día —de 17:05 a 17:50— cae exactamente en el centro de tu velada. No es un dato del clima: es el momento en que hablás vos, en que se toman la foto que va a quedar, en que la sala entiende por qué está ahí.</p>
-    <p>Todo lo demás —el salón, el catering, el sonido— se diseña alrededor de esos cuarenta y cinco minutos.</p>
-  </div>
-  <blockquote>El lugar no tiene que impresionar. Tiene que hacer que ellas se sientan elegidas.</blockquote>
-</section>
-
-<section>
-  <p class="label">El guion</p>
-  <h2>Las cuatro horas, minuto a minuto</h2>
-  <div class="guion">
-    <div class="beat">
-      <time>16:00</time>
-      <div>
-        <h4>Llegada de a una</h4>
-        <p>Sin fila, sin acreditación masiva. Cada invitada recibe su nombre escrito a mano y una copa antes de entrar. El ingreso ya es parte de la experiencia, no el trámite previo.</p>
-      </div>
-    </div>
-    <div class="beat">
-      <time>16:30</time>
-      <div>
-        <h4>Primer bloque · bajo techo</h4>
-        <p>Tu palabra de apertura en el salón cerrado, con las 120 sentadas de frente. Es el bloque de contenido, y va adentro por una razón concreta: octubre es el mes más lluvioso de Medellín y llueve de tarde.</p>
-      </div>
-    </div>
-    <div class="beat hero-beat">
-      <time>17:05</time>
-      <div>
-        <h4>Salida a la luz · el momento de la velada</h4>
-        <p>Se abren las puertas al jardín justo cuando entra la hora dorada. Acá va tu momento más personal y la foto de las 120 juntas. Cuarenta y cinco minutos de luz que no se pueden repetir ni fabricar: por eso el guion se ancla acá y no al revés.</p>
-      </div>
-    </div>
-    <div class="beat">
-      <time>17:50</time>
-      <div>
-        <h4>Brindis con el sol cayendo</h4>
-        <p>El cierre del bloque al aire libre coincide con la puesta del sol. Se encienden las luces de jardín y la velada cambia de temperatura sin que nadie tenga que anunciarlo.</p>
-      </div>
-    </div>
-    <div class="beat">
-      <time>18:15</time>
-      <div>
-        <h4>Mesa y conversación</h4>
-        <p>Estaciones o cena servida, música en vivo de fondo y las mesas armadas para que se hable de a seis, no de a veinte. Es la hora en la que el círculo se vuelve red.</p>
-      </div>
-    </div>
-    <div class="beat">
-      <time>19:30</time>
-      <div>
-        <h4>Cierre íntimo</h4>
-        <p>Un último momento con vos, corto, y algo que cada una se lleva puesto o en la mano. Nadie se va con un regalo: se va con una prueba de que estuvo adentro.</p>
-      </div>
-    </div>
-    <div class="beat">
-      <time>20:00</time>
-      <div>
-        <h4>Fin</h4>
-        <p>La velada termina a horario. Salir cuando todavía se quiere seguir es parte del diseño.</p>
-      </div>
+<div class="band">
+  <div class="inner pad">
+    <p class="eyebrow">La idea</p>
+    <h2>Cuatro horas que no se parezcan<br>a <em>un evento</em></h2>
+    <div class="lede">
+      <p>Valentina, tu círculo interno no necesita un salón: necesita un lugar donde 120 mujeres que ya se admiran entre sí puedan mirarse a los ojos sin ruido de fondo. Por eso esta propuesta no empieza por el espacio. Empieza por la luz.</p>
+      <p>El 15 de octubre en Medellín <b>el sol se pone a las 17:50</b>. Eso significa que la hora más hermosa del día —de 17:05 a 17:50— cae exactamente en el centro de tu velada. No es un dato del clima: es <span class="up">el momento en que hablás vos</span>, en que se toman la foto que va a quedar, en que la sala entiende por qué está ahí.</p>
+      <p>Todo lo demás —el salón, la mesa, el sonido— se diseña alrededor de esos cuarenta y cinco minutos.</p>
     </div>
   </div>
-  <p class="sun-note">Datos que ordenan el guion: atardecer del 15 de octubre en Medellín, 17:50. Octubre es el mes más lluvioso de la ciudad, con lluvia típicamente de tarde. Por eso el bloque de contenido va bajo techo y el momento al aire libre está agendado, no librado al azar.</p>
-</section>
+</div>
 
-<section>
-  <p class="label">Los escenarios</p>
-  <h2>Tres lugares posibles</h2>
+<div class="band ink">
+  <div class="inner pad center">
+    <div class="quote-rule"></div>
+    <p class="quote">El lugar no tiene que impresionar. Tiene que hacer que ellas se sientan elegidas.</p>
+  </div>
+</div>
 
-  <article class="venue">
-    <div class="venue-top">
-      <div>
-        <h3>Fábula</h3>
-        <p class="place">Casa de bodas y eventos · zona campestre de Medellín</p>
-        <div class="venue-copy">
-          <p>Salón principal cerrado que se abre a jardines y a una zona de ceremonia al aire libre, pensada para que el paso de adentro hacia la luz sea el gesto central de la noche. Capacidad de <b>200 invitadas</b>: las 120 entran holgadas, con lugar para tarima y pantalla.</p>
-          <p>Tiene <b>dos salas VIP privadas</b> reservadas para la anfitriona — tu camerino, tu equipo y tu momento de respirar antes de salir — y una cocina de ensamble que le permite trabajar a cualquier catering de nivel.</p>
-          <p>El evento se contrata por <b>8 horas</b>. Como la velada dura 4, quedan otras 4 para montaje: es la diferencia entre una producción cómoda y una corriendo.</p>
+<div class="band">
+  <div class="inner pad">
+    <p class="eyebrow">El guion</p>
+    <h2>Las cuatro horas, <em>minuto a minuto</em></h2>
+    <div class="guion">
+      <div class="beat">
+        <time>16:00</time>
+        <div>
+          <h4>Llegada de a una</h4>
+          <p>Sin fila y sin acreditación masiva. Cada invitada recibe su nombre escrito a mano y una copa antes de entrar. El ingreso ya es parte de la experiencia, no el trámite previo.</p>
         </div>
       </div>
-      <div class="price">
-        <div class="amt">$5.000.000</div>
-        <div class="cur">COP · tarifa lunes a jueves</div>
-        <div class="per">
-          <b>$41.667</b> por invitada<br>
-          El viernes cuesta $12.200.000 y el sábado $16.800.000. Elegir jueves ahorra <b>$11.800.000</b>.
+      <div class="beat">
+        <time>16:30</time>
+        <div>
+          <h4>Primer bloque, bajo techo</h4>
+          <p>Tu palabra de apertura en el salón cerrado, con las 120 sentadas de frente. Va adentro por una razón concreta: octubre es el mes más lluvioso de Medellín y llueve de tarde.</p>
+        </div>
+      </div>
+      <div class="beat key">
+        <time>17:05</time>
+        <div>
+          <h4>Salida a la luz ◆ el momento de la velada</h4>
+          <p>Se abren las puertas al jardín justo cuando entra la hora dorada. Acá va tu momento más personal y la foto de las 120 juntas. Cuarenta y cinco minutos de luz que no se pueden repetir ni fabricar: por eso el guion se ancla acá y no al revés.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <time>17:50</time>
+        <div>
+          <h4>Brindis con el sol cayendo</h4>
+          <p>El cierre del bloque al aire libre coincide con la puesta del sol. Se encienden las luces de jardín y la velada cambia de temperatura sin que nadie tenga que anunciarlo.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <time>18:15</time>
+        <div>
+          <h4>Mesa y conversación</h4>
+          <p>Estaciones o cena servida, música en vivo de fondo y las mesas armadas para que se hable de a seis, no de a veinte. Es la hora en la que el círculo se vuelve red.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <time>19:30</time>
+        <div>
+          <h4>Cierre íntimo</h4>
+          <p>Un último momento con vos, corto, y algo que cada una se lleva puesto o en la mano. Nadie se va con un regalo: se va con una prueba de que estuvo adentro.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <time>20:00</time>
+        <div>
+          <h4>Fin</h4>
+          <p>La velada termina a horario. Salir cuando todavía se quiere seguir es parte del diseño.</p>
         </div>
       </div>
     </div>
-    <div class="incl">
-      <div class="yes">
-        <h5>Incluye</h5>
-        <ul>
-          <li>200 sillas Cross negras</li>
-          <li>20 mesas rectangulares de madera — exactamente 6 lugares por mesa para las 120</li>
-          <li>Iluminación de salón y de jardines</li>
-          <li>Planta eléctrica de respaldo</li>
-          <li>Parqueadero para ~100 vehículos</li>
-          <li>Dos salas VIP para la anfitriona</li>
-        </ul>
-      </div>
-      <div class="no">
-        <h5>No incluye</h5>
-        <ul>
-          <li>Catering y bebidas</li>
-          <li>Sonido</li>
-          <li>Decoración</li>
-          <li>Carpas — a cotizar aparte, y en octubre son necesarias</li>
-          <li>Calentadores: $150.000 c/u</li>
-          <li>Hora adicional: $800.000</li>
-        </ul>
-      </div>
-    </div>
-  </article>
+    <p class="foot-note">Datos que ordenan el guion: atardecer del 15 de octubre en Medellín, 17:50. Octubre es el mes más lluvioso de la ciudad, con lluvia típicamente de tarde. Por eso el bloque de contenido va bajo techo y el momento al aire libre está agendado, no librado al azar.</p>
+  </div>
+</div>
 
-  <article class="venue">
-    <div class="venue-top">
+<div class="band deep">
+  <div class="inner pad">
+    <p class="eyebrow">Los escenarios</p>
+    <h2>Tres lugares <em>posibles</em></h2>
+
+    <article class="venue">
+      <div class="venue-top">
+        <div>
+          <h3>Fábula</h3>
+          <p class="place">Casa de bodas y eventos ◆ zona campestre de Medellín</p>
+          <div class="venue-copy">
+            <p>Salón principal cerrado que se abre a jardines y a una zona de ceremonia al aire libre, pensada para que el paso de adentro hacia la luz sea el gesto central de la noche. Capacidad de <b>200 invitadas</b>: las 120 entran holgadas, con lugar para tarima y pantalla.</p>
+            <p>Tiene <b>dos salas VIP privadas</b> reservadas para la anfitriona —tu camerino, tu equipo y tu momento de respirar antes de salir— y una cocina de ensamble que le permite trabajar a cualquier catering de nivel.</p>
+            <p>El evento se contrata por <b>8 horas</b>. Como la velada dura 4, quedan otras 4 para montaje: es la diferencia entre una producción cómoda y una corriendo.</p>
+          </div>
+        </div>
+        <div class="price">
+          <div class="amt">$5.000.000</div>
+          <div class="cur">COP ◆ tarifa lunes a jueves</div>
+          <div class="per"><b>$41.667</b> por invitada<br>El viernes cuesta $12.200.000 y el sábado $16.800.000. Elegir jueves ahorra <b>$11.800.000</b>.</div>
+        </div>
+      </div>
+      <div class="incl">
+        <div class="yes">
+          <h5>Incluye</h5>
+          <ul>
+            <li>200 sillas Cross negras</li>
+            <li>20 mesas rectangulares de madera: 6 lugares cada una, 120 exactos</li>
+            <li>Iluminación de salón y de jardines</li>
+            <li>Planta eléctrica de respaldo</li>
+            <li>Parqueadero para unos 100 vehículos</li>
+            <li>Dos salas VIP para la anfitriona</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h5>No incluye</h5>
+          <ul>
+            <li>Catering y bebidas</li>
+            <li>Sonido</li>
+            <li>Decoración</li>
+            <li>Carpas, que en octubre son necesarias</li>
+            <li>Calentadores: $150.000 cada uno</li>
+            <li>Hora adicional: $800.000</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="venue">
+      <div class="venue-top">
+        <div>
+          <h3>Montpellier</h3>
+          <p class="place">Casa campestre ◆ Loma del Escobero, Envigado</p>
+          <div class="venue-copy">
+            <p>Una casa de campo en la Loma del Escobero, a diez minutos del parque de Envigado, con salón dotado, zonas verdes amplias, jardines, kiosco y <b>vista abierta sobre la ciudad</b> — que es, según quienes la visitan, lo primero que se comenta al llegar.</p>
+            <p>Sus dos espacios trabajan hasta <b>150 personas cada uno</b>: el salón cubierto y la zona verde. Para 120 es una medida cómoda, y la combinación cubierto más jardín es justo la que pide el guion.</p>
+            <p>Es la opción más accesible de las tres y la más cercana a la ciudad. Falta confirmar por escrito qué entra en la tarifa: mobiliario, iluminación y horas de montaje.</p>
+          </div>
+        </div>
+        <div class="price">
+          <div class="amt">$3.000.000</div>
+          <div class="cur">COP ◆ tarifa cotizada</div>
+          <div class="per"><b>$25.000</b> por invitada<br>Dos millones menos que Fábula. La diferencia real depende de qué mobiliario haya que alquilar aparte.</div>
+        </div>
+      </div>
+      <div class="incl">
+        <div class="yes">
+          <h5>Tiene</h5>
+          <ul>
+            <li>Salón dotado y cubierto</li>
+            <li>Zonas verdes y jardines</li>
+            <li>Kiosco y zona BBQ</li>
+            <li>Vista abierta a la ciudad</li>
+            <li>Parqueaderos propios</li>
+            <li>A 10 minutos del parque de Envigado</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h5>A confirmar</h5>
+          <ul>
+            <li>Qué mobiliario incluye la tarifa</li>
+            <li>Cuántas horas cubre y desde qué hora se monta</li>
+            <li>Si el catering es propio o externo</li>
+            <li>Capacidad exacta del salón en formato sentado</li>
+            <li>Plan de lluvia por escrito</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="venue">
+      <div class="venue-top">
+        <div>
+          <h3>Centro de Eventos El Tesoro</h3>
+          <p class="place">Parque Comercial El Tesoro ◆ El Poblado</p>
+          <div class="venue-copy">
+            <p>Un centro de convenciones profesional dentro de El Tesoro: paneles acústicos divisorios, proyectores de 7.000 a 8.000 lúmenes, wifi de alta calidad y trece puntos de acceso. Su Hall 1 recibe <b>120 personas en auditorio</b>, y los salones mayores escalan de 340 a 500.</p>
+            <p>Es la opción donde <b>nada puede fallar</b>: cero riesgo de lluvia, parqueadero de centro comercial, hoteles y restaurantes a pie, y soporte técnico permanente. Para tus invitadas que llegan de afuera, la logística es la más simple de las tres.</p>
+            <p>Y es también la más honesta de evaluar: es un salón de congresos, no una locación con alma. Gana en seguridad operativa y pierde en la única cosa que pusiste por delante de todo.</p>
+          </div>
+        </div>
+        <div class="price pending">
+          <div class="amt">Tarifa pendiente</div>
+          <div class="cur">COP ◆ a solicitar</div>
+          <div class="per">Al pedirla conviene aclarar franja de tarde de 15:00 a 21:00, y preguntar por el Hall 1 y no por los salones grandes.</div>
+        </div>
+      </div>
+      <div class="incl">
+        <div class="yes">
+          <h5>Fortalezas</h5>
+          <ul>
+            <li>Totalmente cubierto y climatizado</li>
+            <li>Proyección y sonido de nivel congreso</li>
+            <li>Paneles acústicos divisorios</li>
+            <li>Parqueadero y accesos del centro comercial</li>
+            <li>Ubicación premium en El Poblado</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h5>Límites</h5>
+          <ul>
+            <li>Estética corporativa, no de velada</li>
+            <li>Sin jardín ni exterior propio: no hay hora dorada</li>
+            <li>Contexto de centro comercial: cuesta sostener la sensación de círculo cerrado</li>
+            <li>Precio aún sin confirmar</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Locación</th><th>Alquiler</th><th>Por invitada</th><th>Capacidad</th><th>Hora dorada</th><th>Riesgo de lluvia</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="k">Fábula</td><td class="n">$5.000.000<small>tarifa de jueves</small></td>
+            <td class="n">$41.667</td><td class="n">200<small>120 holgadas</small></td>
+            <td>Jardines y zona de ceremonia</td><td>Salón cubierto, carpa aparte</td>
+          </tr>
+          <tr>
+            <td class="k">Montpellier</td><td class="n">$3.000.000</td>
+            <td class="n">$25.000</td><td class="n">150 + 150<small>salón y zona verde</small></td>
+            <td>Zona verde con vista a la ciudad</td><td>Salón cubierto, carpa aparte</td>
+          </tr>
+          <tr>
+            <td class="k">El Tesoro</td><td class="n">Pendiente</td>
+            <td class="n">—</td><td class="n">120<small>Hall 1, auditorio</small></td>
+            <td>No tiene exterior</td><td>Nulo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="band">
+  <div class="inner pad">
+    <p class="eyebrow">Nuestra recomendación</p>
+    <h2>Fábula, y por <em>tres razones</em></h2>
+    <div class="reco">
+      <h3>La única que ya viene armada para esta velada</h3>
+      <div class="why">
+        <p><b>Primera: la fecha juega a favor.</b> El precio que te pasaron, $5.000.000, es exactamente la tarifa de lunes a jueves, y el 15 de octubre es jueves. El mismo lugar un sábado cuesta $16.800.000. La decisión de hacerlo un jueves ya ahorró casi doce millones antes de empezar.</p>
+        <p><b>Segunda: lo que incluye no hay que alquilarlo.</b> Doscientas sillas, veinte mesas de madera, iluminación de salón y de jardín, y planta eléctrica de respaldo. Las veinte mesas dan seis lugares cada una: ciento veinte exactos. No hace falta forzar nada para que la cuenta cierre.</p>
+        <p><b>Tercera: tiene las dos salas VIP.</b> Para vos eso no es un lujo, es operación: un lugar donde prepararte, donde recibir a las cuatro o cinco personas que necesitás ver a solas, y donde volver a respirar entre bloque y bloque. Ninguna de las otras dos lo ofrece.</p>
+        <p>Montpellier queda como la alternativa de menor inversión —dos millones menos, y muy linda— pero recién compite de igual a igual cuando confirmen por escrito qué mobiliario y cuántas horas entran. El Tesoro queda como red de seguridad: si algo falla, es el lugar donde no falla nada.</p>
+      </div>
+      <p class="caveat"><b>Lo único que hay que resolver antes de firmar:</b> ninguna de las tres tiene el exterior cubierto, y octubre es el mes más lluvioso de Medellín con lluvia de tarde. Cotizamos carpa transparente para el jardín de Fábula junto con el alquiler. No es un extra decorativo: es lo que garantiza que el momento de las 17:05 ocurra pase lo que pase. También queda por confirmar el tiempo exacto de traslado desde El Poblado, dato que pedimos en la misma llamada.</p>
+    </div>
+  </div>
+</div>
+
+<div class="band deep">
+  <div class="inner pad">
+    <p class="eyebrow">El presupuesto</p>
+    <h2>Qué cuesta la <em>velada completa</em></h2>
+    <div class="lede">
+      <p>Este es el número integral: no el alquiler del lugar, sino las 120 invitadas entrando a una velada terminada. Incluye locación, carpa, gastronomía, producción técnica, ambientación, fotografía y video, música, el detalle que cada una se lleva, el equipo en piso y nuestra dirección.</p>
+      <p>Va como rango y no como cifra cerrada por una razón honesta: <b>hoy solo las líneas de Fábula son precios de proveedor</b>. El resto son valores de mercado de Medellín, y se reemplazan por cotizaciones firmes en cuanto reserves la fecha. El rango bajo es una velada impecable; el alto es una velada sin ningún techo.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Rubro</th><th>Desde</th><th>Hasta</th><th>Peso</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Locación<small>alquiler, carpa transparente y calentadores</small></td><td class="n">$8.400.000</td><td class="n">$11.200.000</td><td class="n">15%</td></tr>
+          <tr><td class="k">Gastronomía<small>catering, coctelería de autor y staff de servicio</small></td><td class="n">$9.360.000</td><td class="n">$15.040.000</td><td class="n">20%</td></tr>
+          <tr><td class="k">Producción técnica<small>sonido, iluminación, proyección y tarima</small></td><td class="n">$6.500.000</td><td class="n">$13.000.000</td><td class="n">17%</td></tr>
+          <tr><td class="k">Ambientación<small>diseño floral, lounge y mantelería</small></td><td class="n">$4.500.000</td><td class="n">$10.000.000</td><td class="n">13%</td></tr>
+          <tr><td class="k">Contenido<small>fotografía y video con edición</small></td><td class="n">$5.000.000</td><td class="n">$10.000.000</td><td class="n">13%</td></tr>
+          <tr><td class="k">Experiencia<small>música en vivo, detalle para cada invitada y papelería</small></td><td class="n">$6.300.000</td><td class="n">$14.300.000</td><td class="n">19%</td></tr>
+          <tr><td class="k">Operación<small>transporte y logística de montaje</small></td><td class="n">$800.000</td><td class="n">$1.500.000</td><td class="n">2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals">
+      <div class="line"><span>Subtotal directo</span><span>$40.860.000 &nbsp;a&nbsp; $75.040.000</span></div>
+      <div class="line"><span>Producción y dirección ◆ Aura Productions (12%)</span><span>$4.903.200 &nbsp;a&nbsp; $9.004.800</span></div>
+      <div class="line"><span>Imprevistos (8%)</span><span>$3.268.800 &nbsp;a&nbsp; $6.003.200</span></div>
+      <div class="grand"><span class="k">Total de la velada</span><span class="v">$49.032.000 — $90.048.000</span></div>
+      <div class="perhead"><span>Por invitada</span><span>$408.600 a $750.400 COP</span></div>
+    </div>
+
+    <p class="foot-note">Valores en pesos colombianos, para 120 invitadas y cuatro horas de evento. Confirmado a precio de proveedor: alquiler de Fábula, calentadores y hora adicional. Todo lo demás son rangos de mercado de Medellín para eventos de 120 a 200 personas.</p>
+
+    <div class="trio">
       <div>
-        <h3>Montpellier</h3>
-        <p class="place">Casa campestre · Loma del Escobero, Envigado</p>
-        <div class="venue-copy">
-          <p>Una casa de campo en la Loma del Escobero, a diez minutos del parque de Envigado, con salón dotado, zonas verdes amplias, jardines, kiosco y <b>vista abierta sobre la ciudad</b> — que es, según quienes la visitan, lo primero que se comenta al llegar.</p>
-          <p>Sus dos espacios trabajan hasta <b>150 personas cada uno</b>: el salón cubierto y la zona verde. Para 120 es una medida cómoda, y la combinación cubierto + jardín es justo la que pide el guion.</p>
-          <p>Es la opción más accesible de las tres y la más cercana a la ciudad. Falta confirmar por escrito qué entra en la tarifa: mobiliario, iluminación y horas de montaje.</p>
-        </div>
+        <p class="num">PALANCA 01</p>
+        <h4>Catering</h4>
+        <p>Entre $45.000 y $70.000 por invitada. Es la palanca más grande y la que más se nota: mover diez mil pesos por persona cambia el total en $1.200.000.</p>
       </div>
-      <div class="price">
-        <div class="amt">$3.000.000</div>
-        <div class="cur">COP · tarifa cotizada</div>
-        <div class="per">
-          <b>$25.000</b> por invitada<br>
-          $2.000.000 menos que Fábula. La diferencia real depende de qué mobiliario haya que alquilar aparte.
-        </div>
-      </div>
-    </div>
-    <div class="incl">
-      <div class="yes">
-        <h5>Tiene</h5>
-        <ul>
-          <li>Salón dotado y cubierto</li>
-          <li>Zonas verdes y jardines</li>
-          <li>Kiosco y zona BBQ</li>
-          <li>Vista abierta a la ciudad</li>
-          <li>Parqueaderos propios</li>
-          <li>A 10 min del parque de Envigado</li>
-        </ul>
-      </div>
-      <div class="no">
-        <h5>A confirmar</h5>
-        <ul>
-          <li>Qué mobiliario incluye la tarifa</li>
-          <li>Cuántas horas cubre y desde qué hora se monta</li>
-          <li>Si el catering es propio o externo</li>
-          <li>Capacidad exacta del salón en formato sentado</li>
-          <li>Plan de lluvia por escrito</li>
-        </ul>
-      </div>
-    </div>
-  </article>
-
-  <article class="venue">
-    <div class="venue-top">
       <div>
-        <h3>Centro de Eventos El Tesoro</h3>
-        <p class="place">Parque Comercial El Tesoro · El Poblado</p>
-        <div class="venue-copy">
-          <p>Un centro de convenciones profesional dentro de El Tesoro: paneles acústicos divisorios, proyectores de 7.000 a 8.000 lúmenes, wifi de alta calidad y trece puntos de acceso. Su Hall 1 recibe <b>120 personas en auditorio</b>, y los salones mayores escalan de 340 a 500.</p>
-          <p>Es la opción donde <b>nada puede fallar</b>: cero riesgo de lluvia, parqueadero de centro comercial, hoteles y restaurantes a pie, y soporte técnico permanente. Para tus invitadas que llegan de afuera, la logística es la más simple de las tres.</p>
-          <p>Y es también la más honesta de evaluar: es un salón de congresos, no una locación con alma. Gana en seguridad operativa y pierde en la única cosa que pusiste por delante de todo.</p>
-        </div>
+        <p class="num">PALANCA 02</p>
+        <h4>El detalle que se llevan</h4>
+        <p>Entre $35.000 y $80.000 cada uno. Acá la decisión no es de plata sino de concepto: qué querés que quede en sus manos el viernes a la mañana.</p>
       </div>
-      <div class="price pending">
-        <div class="amt">Tarifa pendiente</div>
-        <div class="cur">COP · a solicitar</div>
-        <div class="per">
-          Al pedirla, conviene aclarar franja de tarde de 15:00 a 21:00 y preguntar por el Hall 1 y no por los salones grandes.
-        </div>
+      <div>
+        <p class="num">PALANCA 03</p>
+        <h4>Diseño floral</h4>
+        <p>Entre $3.000.000 y $7.000.000. Con carpa transparente y hora dorada, la flor puede ser más contenida: la luz ya está haciendo la mitad del trabajo.</p>
       </div>
     </div>
-    <div class="incl">
-      <div class="yes">
-        <h5>Fortalezas</h5>
-        <ul>
-          <li>Totalmente cubierto y climatizado</li>
-          <li>Proyección y sonido de nivel congreso</li>
-          <li>Paneles acústicos divisorios</li>
-          <li>Parqueadero y accesos del centro comercial</li>
-          <li>Ubicación premium en El Poblado</li>
-        </ul>
+  </div>
+</div>
+
+<div class="band">
+  <div class="inner pad">
+    <p class="eyebrow">Lo que sigue</p>
+    <h2>Tres pasos y <em>queda reservado</em></h2>
+    <div class="trio">
+      <div>
+        <p class="num">PASO 01</p>
+        <h4>Tu visto bueno</h4>
+        <p>Nos decís cuál de los tres te mueve más. Con eso pedimos hold sin cargo por 48 horas para el jueves 15.</p>
       </div>
-      <div class="no">
-        <h5>Límites</h5>
-        <ul>
-          <li>Estética corporativa, no de velada</li>
-          <li>Sin jardín ni exterior propio: no hay hora dorada</li>
-          <li>Contexto de centro comercial: cuesta sostener la sensación de círculo cerrado</li>
-          <li>Precio aún sin confirmar</li>
-        </ul>
+      <div>
+        <p class="num">PASO 02</p>
+        <h4>Visita a las 17:00</h4>
+        <p>Vamos a la hora exacta del momento clave, no al mediodía. Vas a ver la luz que va a tener tu velada, no otra.</p>
+      </div>
+      <div>
+        <p class="num">PASO 03</p>
+        <h4>Reserva y producción</h4>
+        <p>Anticipo, contrato con cláusula de lluvia y bloqueo inmediato de catering, sonido, iluminación y equipo de foto y video.</p>
       </div>
     </div>
-  </article>
-</section>
-
-<section>
-  <p class="label">La inversión</p>
-  <h2>Las tres, en números</h2>
-  <div class="scroll">
-    <table>
-      <thead>
-        <tr><th>Locación</th><th>Alquiler</th><th>Por invitada</th><th>Capacidad</th><th>Hora dorada</th><th>Riesgo de lluvia</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="venue-cell">Fábula</td>
-          <td class="n">$5.000.000<small>tarifa de jueves</small></td>
-          <td class="n">$41.667</td>
-          <td class="n">200<small>120 holgadas</small></td>
-          <td>Jardines y zona de ceremonia</td>
-          <td>Cubierto el salón · carpa aparte</td>
-        </tr>
-        <tr>
-          <td class="venue-cell">Montpellier</td>
-          <td class="n">$3.000.000</td>
-          <td class="n">$25.000</td>
-          <td class="n">150 + 150<small>salón y zona verde</small></td>
-          <td>Zona verde con vista a la ciudad</td>
-          <td>Cubierto el salón · carpa aparte</td>
-        </tr>
-        <tr>
-          <td class="venue-cell">El Tesoro</td>
-          <td class="n">Pendiente</td>
-          <td class="n">—</td>
-          <td class="n">120<small>Hall 1, auditorio</small></td>
-          <td>No tiene exterior</td>
-          <td>Nulo</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-</section>
-
-<section>
-  <p class="label">Nuestra recomendación</p>
-  <h2>Fábula, y por tres razones</h2>
-  <div class="reco">
-    <h3>La única que ya viene armada para esta velada</h3>
-    <div class="why">
-      <p><b>Primera: la fecha juega a favor.</b> El precio que te pasaron, $5.000.000, es exactamente la tarifa de lunes a jueves, y el 15 de octubre es jueves. El mismo lugar un sábado cuesta $16.800.000. La decisión de hacerlo un jueves ya ahorró casi doce millones antes de empezar.</p>
-      <p><b>Segunda: lo que incluye no hay que alquilarlo.</b> Doscientas sillas, veinte mesas de madera, iluminación de salón y de jardín, y planta eléctrica de respaldo. Las veinte mesas dan seis lugares cada una: ciento veinte exactos. No hace falta forzar nada para que la cuenta cierre.</p>
-      <p><b>Tercera: tiene las dos salas VIP.</b> Para vos eso no es un lujo, es operación: un lugar donde prepararte, donde recibir a las cuatro o cinco personas que necesitás ver a solas, y donde volver a respirar entre bloque y bloque. Ninguna de las otras dos lo ofrece.</p>
-      <p>Montpellier queda como la alternativa de menor inversión —dos millones menos, y muy linda— pero recién compite de igual a igual cuando confirmen por escrito qué mobiliario y cuántas horas entran. El Tesoro queda como red de seguridad: si algo falla, es el lugar donde no falla nada.</p>
-    </div>
-    <p class="caveat"><b>Lo único que hay que resolver antes de firmar:</b> ninguna de las tres tiene el exterior cubierto, y octubre es el mes más lluvioso de Medellín con lluvia de tarde. Cotizamos carpa transparente para el jardín de Fábula junto con el alquiler. No es un extra decorativo: es lo que garantiza que el momento de las 17:05 ocurra pase lo que pase. También queda por confirmar el tiempo exacto de traslado desde El Poblado, dato que pedimos en la misma llamada.</p>
-  </div>
-</section>
-
-<section>
-  <p class="label">El presupuesto</p>
-  <h2>Qué cuesta la velada completa</h2>
-  <div class="lede">
-    <p>Este es el número integral: no el alquiler del lugar, sino las 120 invitadas entrando a una velada terminada. Incluye locación, carpa, gastronomía, producción técnica, ambientación, fotografía y video, música, el detalle que cada una se lleva, el equipo en piso y nuestra dirección.</p>
-    <p>Va como rango y no como cifra cerrada por una razón honesta: <strong>hoy solo las líneas de Fábula son precios de proveedor</strong>. El resto son valores de mercado de Medellín, y se reemplazan por cotizaciones firmes en cuanto reserves la fecha. El rango bajo es una velada impecable; el alto es una velada sin ningún techo.</p>
-  </div>
-
-  <div class="scroll">
-    <table>
-      <thead>
-        <tr><th>Rubro</th><th>Desde</th><th>Hasta</th><th>Peso</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="venue-cell">Locación<small>alquiler, carpa transparente y calentadores</small></td><td class="n">$8.400.000</td><td class="n">$11.200.000</td><td class="n">15%</td></tr>
-        <tr><td class="venue-cell">Gastronomía<small>catering, coctelería de autor y staff de servicio</small></td><td class="n">$9.360.000</td><td class="n">$15.040.000</td><td class="n">20%</td></tr>
-        <tr><td class="venue-cell">Producción técnica<small>sonido, iluminación, proyección, tarima</small></td><td class="n">$6.500.000</td><td class="n">$13.000.000</td><td class="n">17%</td></tr>
-        <tr><td class="venue-cell">Ambientación<small>diseño floral, lounge y mantelería</small></td><td class="n">$4.500.000</td><td class="n">$10.000.000</td><td class="n">13%</td></tr>
-        <tr><td class="venue-cell">Contenido<small>fotografía y video con edición</small></td><td class="n">$5.000.000</td><td class="n">$10.000.000</td><td class="n">13%</td></tr>
-        <tr><td class="venue-cell">Experiencia<small>música en vivo, detalle para cada invitada, papelería</small></td><td class="n">$6.300.000</td><td class="n">$14.300.000</td><td class="n">19%</td></tr>
-        <tr><td class="venue-cell">Operación<small>transporte y logística de montaje</small></td><td class="n">$800.000</td><td class="n">$1.500.000</td><td class="n">2%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="totals">
-    <div class="line"><span>Subtotal directo</span><span>$40.860.000 &nbsp;a&nbsp; $75.040.000</span></div>
-    <div class="line"><span>Producción y dirección · Aura Productions (12%)</span><span>$4.903.200 &nbsp;a&nbsp; $9.004.800</span></div>
-    <div class="line"><span>Imprevistos (8%)</span><span>$3.268.800 &nbsp;a&nbsp; $6.003.200</span></div>
-    <div class="grand"><span class="k">Total de la velada</span><span class="v">$49.032.000 — $90.048.000</span></div>
-    <div class="perhead"><span>Por invitada</span><span>$408.600 &nbsp;a&nbsp; $750.400 COP</span></div>
-  </div>
-
-  <p class="budget-note">Valores en pesos colombianos, para 120 invitadas y cuatro horas de evento. Confirmado a precio de proveedor: alquiler de Fábula, calentadores y hora adicional. Todo lo demás son rangos de mercado de Medellín para eventos de 120 a 200 personas.</p>
-
-  <div class="levers">
-    <div>
-      <h4>Catering</h4>
-      <p>Entre $45.000 y $70.000 por invitada. Es la palanca más grande y la que más se nota: mover diez mil pesos por persona cambia el total en $1.200.000.</p>
-    </div>
-    <div>
-      <h4>El detalle que se llevan</h4>
-      <p>Entre $35.000 y $80.000 cada uno. Acá la decisión no es de plata sino de concepto: qué querés que quede en sus manos el viernes a la mañana.</p>
-    </div>
-    <div>
-      <h4>Diseño floral</h4>
-      <p>Entre $3.000.000 y $7.000.000. Con carpa transparente y hora dorada, la flor puede ser más contenida: la luz ya está haciendo la mitad del trabajo.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <p class="label">Lo que sigue</p>
-  <h2>Tres pasos y queda reservado</h2>
-  <div class="steps">
-    <div>
-      <div class="n">01</div>
-      <h4>Tu visto bueno</h4>
-      <p>Nos decís cuál de los tres te mueve más. Con eso pedimos hold sin cargo por 48 horas para el jueves 15.</p>
-    </div>
-    <div>
-      <div class="n">02</div>
-      <h4>Visita a las 17:00</h4>
-      <p>Vamos a la hora exacta del momento clave, no al mediodía. Vas a ver la luz que va a tener tu velada, no otra.</p>
-    </div>
-    <div>
-      <div class="n">03</div>
-      <h4>Reserva y producción</h4>
-      <p>Anticipo, contrato con cláusula de lluvia y bloqueo inmediato de catering, sonido, iluminación y equipo de foto y video.</p>
-    </div>
-  </div>
-</section>
+</div>
 
 <footer>
   <p class="sig">Aura Productions</p>
-  <p>Experiencias que transforman vidas · Propuesta Círculo Íntimo MAV · Medellín 2026</p>
+  <p>Experiencias que transforman vidas ◆ Círculo Íntimo MAV ◆ Medellín 2026</p>
 </footer>
-
-</div>
