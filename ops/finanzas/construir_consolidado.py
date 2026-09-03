@@ -4,6 +4,7 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter as L
 from openpyxl.worksheet.datavalidation import DataValidation
+from openpyxl.formatting.rule import FormulaRule
 
 HOY = datetime.date(2026, 9, 2)
 D = json.load(open('datos_origen.json'))
@@ -17,10 +18,11 @@ SUB   = Font(name=FUENTE, size=10, italic=True, color='595959')
 HDR   = Font(name=FUENTE, size=10, bold=True, color='FFFFFF')
 BOLD  = Font(name=FUENTE, size=10, bold=True)
 FH    = PatternFill('solid', fgColor='1F3864')
-FROJO = PatternFill('solid', fgColor='FFC7CE')
-FAMAR = PatternFill('solid', fgColor='FFEB9C')
-FVERD = PatternFill('solid', fgColor='C6EFCE')
-FGRIS = PatternFill('solid', fgColor='F2F2F2')
+FROJO = PatternFill('solid', fgColor='FADBD8')
+FAMAR = PatternFill('solid', fgColor='FCF3CF')
+FVERD = PatternFill('solid', fgColor='D5F5E3')
+FGRIS = PatternFill('solid', fgColor='EAECEE')
+ROJO_T, AMBAR_T, VERDE_T, GRIS_T = 'B03A2E', '7D6608', '196F3D', '566573'
 FAMAR_IN = PatternFill('solid', fgColor='FFFF00')
 THIN  = Side(style='thin', color='BFBFBF')
 BOX   = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
@@ -33,16 +35,34 @@ wb = openpyxl.Workbook()
 
 def hoja(nombre, titulo, subtitulo):
     ws = wb.create_sheet(nombre)
+    ws.sheet_view.showGridLines = False
     ws['A1'] = titulo; ws['A1'].font = TIT
     ws['A2'] = subtitulo; ws['A2'].font = SUB
     return ws
 
+def banner(ws, ncols):
+    """Convierte el titulo de A1 en una banda azul de ancho completo.
+
+    Se llama desde encabezados(), que es el unico lugar donde se conoce el
+    ancho real de la hoja."""
+    if ncols > 1:
+        ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=ncols)
+    c = ws.cell(1, 1)
+    c.font = Font(name=FUENTE, size=16, bold=True, color='FFFFFF')
+    c.alignment = Alignment(vertical='center', indent=1)
+    for j in range(1, ncols + 1):
+        ws.cell(1, j).fill = FH
+    ws.row_dimensions[1].height = 34
+    ws.row_dimensions[2].height = 18
+
 def encabezados(ws, fila, cols):
+    banner(ws, len(cols))
     for j, (txt, ancho) in enumerate(cols, 1):
         c = ws.cell(fila, j, txt); c.font = HDR; c.fill = FH
         c.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
         c.border = BOX
         ws.column_dimensions[L(j)].width = ancho
+    ws.row_dimensions[fila].height = 30
     ws.freeze_panes = ws.cell(fila + 1, 1)
 
 # ---------- orden canonico: bloque (categoria) y pais (itinerario) ----------
@@ -77,21 +97,24 @@ def banda_pais(ws, fila, pais, ncols, extra=''):
     """Escribe la banda de encabezado de un pais y devuelve la fila siguiente."""
     ws.merge_cells(start_row=fila, start_column=1, end_row=fila, end_column=ncols)
     c = ws.cell(fila, 1, f'{pais}   ·   evento {FECHA_EVENTO.get(pais, "sin fecha")}' + (f'   ·   {extra}' if extra else ''))
-    c.font = Font(name=FUENTE, size=11, bold=True, color='FFFFFF')
+    c.font = Font(name=FUENTE, size=12, bold=True, color='FFFFFF')
     c.fill = FPAIS
     c.alignment = Alignment(vertical='center', indent=1)
-    ws.row_dimensions[fila].height = 21
+    ws.row_dimensions[fila].height = 24
     for j in range(1, ncols + 1):
         ws.cell(fila, j).fill = FPAIS
     return fila + 1
 
 def banda_bloque(ws, fila, bloque, ncols):
     ws.merge_cells(start_row=fila, start_column=1, end_row=fila, end_column=ncols)
-    c = ws.cell(fila, 1, f'    {bloque}')
+    c = ws.cell(fila, 1, f'      {bloque.upper()}')
     c.font = Font(name=FUENTE, size=9, bold=True, color='1F3864')
+    c.alignment = Alignment(vertical='center')
     c.fill = FBLOQUE
     for j in range(1, ncols + 1):
         ws.cell(fila, j).fill = FBLOQUE
+        ws.cell(fila, j).border = Border(top=Side(style='thin', color='C9A84C'))
+    ws.row_dimensions[fila].height = 18
     return fila + 1
 
 MAPP = {'Colombia 1ra':'Colombia','Pendones':'Colombia','Republica D.':'Rep. Dominicana',
@@ -108,6 +131,7 @@ EV = {'Ecuador (25 Jul-26 Jul)':'Ecuador','Panama (09 ago-10 ago)':'Panamá',
 ws = hoja('LEEME', 'CUMBRE 2026 · Consolidado de gastos y pagos',
           'Unifica "Cronograma_Pagos_Cumbre.xlsx" y "INVERSIÓN GIRA CUMBRE 2026.xlsx" en una sola fuente de verdad.')
 ws.column_dimensions['A'].width = 30; ws.column_dimensions['B'].width = 112
+banner(ws, 2)
 filas = [
  ('Fecha de corte', 'Todo el análisis está calculado al 02/09/2026 (celda B2 de la hoja TABLERO). Cambiala y se recalcula todo.'),
  ('Fuente 1 · CRONOGRAMA', 'Cronograma_Pagos_Cumbre (1).xlsx — Google Drive id 1MbTsbcMKau4WA4V2-0PM7EtJv2w4XA5P. Aporta el calendario de cuotas y el histórico de pagos.'),
@@ -286,15 +310,29 @@ r = cerrar_pais(ws, r, inicio_pais, pais_actual); filas_subtotal_pais.append(r-1
 r += 1
 suma_sub = '+'.join(f'E{x}' for x in filas_subtotal_pais)
 suma_prog = '+'.join(f'F{x}' for x in filas_subtotal_pais)
+fin_detalle = r - 2      # ultima fila de detalle, antes del bloque de totales
 for etiqueta, formula, relleno in [
     ('TOTAL del calendario', f'={suma_sub}', FGRIS),
     ('Pagado',  f'=SUMIF($F$5:$F${r-2},"Pagado",$E$5:$E${r-2})', FVERD),
     ('Pendiente real', f'={suma_prog}', FAMAR),
     ('De eso, VENCIDO', f'=SUMIFS($E$5:$E${r-2},$F$5:$F${r-2},"Programado",$B$5:$B${r-2},"<"&TABLERO!$G$2)', FROJO)]:
-    ws.cell(r,3,etiqueta).font = BOLD
-    c = ws.cell(r,5,formula); c.font = BOLD; c.number_format = MON; c.fill = relleno; c.border = BOX
+    ws.cell(r,3,etiqueta).font = Font(name=FUENTE, size=11, bold=True)
+    c = ws.cell(r,5,formula)
+    c.font = Font(name=FUENTE, size=13, bold=True); c.number_format = MON0
+    for j in range(3, 6):
+        ws.cell(r,j).fill = relleno; ws.cell(r,j).border = BOX
+        ws.cell(r,j).alignment = Alignment(vertical='center', indent=1)
+    ws.row_dimensions[r].height = 24
     r += 1
 ws.auto_filter.ref = f'A4:{L(NC)}4'
+
+# Semaforo con color: el estado de cada cuota se lee de un vistazo.
+for texto, relleno, color in [('VENCIDO', 'FADBD8', ROJO_T), ('< 30 dias', 'FCF3CF', AMBAR_T),
+                              ('PAGADO', 'D5F5E3', VERDE_T), ('futuro', 'F2F4F4', GRIS_T)]:
+    ws.conditional_formatting.add(
+        f'H5:H{fin_detalle}',
+        FormulaRule(formula=[f'$H5="{texto}"'], fill=PatternFill(bgColor=relleno),
+                    font=Font(color=color, bold=True)))
 
 # ============================ 4. PAGOS REALIZADOS ============================
 ws = hoja('PAGOS REALIZADOS', 'Histórico de pagos ejecutados (marzo–julio 2026)',
