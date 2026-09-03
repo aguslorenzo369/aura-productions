@@ -21,6 +21,9 @@ Este corte es apto para feed abierto. No lleva:
 - nombres de las locaciones en negociación
 - capacidades, inclusiones y condiciones técnicas
 
+Tampoco lleva el correo de contacto de Aura: la card de cierre queda con
+la firma sola, para que el pie funcione publique quien publique.
+
 Tampoco lleva la fecha exacta: dice "Octubre 2026". Conviene publicar el
 día puntual recién cuando la locación esté reservada, para no anunciar
 una fecha que todavía puede moverse.
