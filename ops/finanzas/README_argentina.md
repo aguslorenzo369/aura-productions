@@ -102,11 +102,19 @@ traía Cumbre contra los proveedores argentinos conseguidos por Agustina.
 | Tarjetas (cheque) | 5.500 | 0,12 | 672 | 0,02 | 110 | 562 (84 %) |
 | Cinta colgante / lanyard | 1.000 | 1,25 | 1.248 | 1,00 | 1.005 | 243 (19 %) |
 | Credenciales 10 × 13 cm | 1.000 | 0,57 | 575 | 0,48 | 475 | 100 (17 %) |
-| **Total** | | | **16.261** | | **5.068** | **11.193 (69 %)** |
+| **Subtotal Argentina** | | | **16.261** | | **5.068** | **11.193 (69 %)** |
+| *Uruguay* | | | | | | |
+| Escarapelas / credenciales | 600 | 1,322 | 793 | 0,475 | 285 | 508 (64 %) |
+| Mapas de niveles de consciencia | 3.000 | 0,254 | 763 | 0,089 | 266 | 497 (65 %) |
+| Contratos (hojas A4) | 3.000 | 0,153 | 458 | 0,048 | 145 | 313 (68 %) |
+| Cheques (tarjetas) | 3.000 | 0,127 | 382 | 0,020 | 60 | 322 (84 %) |
+| **Subtotal Uruguay** | | | **2.396** | | **756** | **1.640 (68 %)** |
+| **Total Argentina + Uruguay** | | | **18.657** | | **5.824** | **12.833 (69 %)** |
 
-La gorra sola explica tres cuartos del ahorro. Las pulseras tyvek quedan fuera de los dos lados porque
-no hay precio comparable. Uruguay tiene su propia comparativa (US$2.396 contra US$755,77, ahorro
-US$1.640,23) que **no** entra en el costo de Argentina.
+La gorra sola explica tres cuartos del ahorro de Argentina. Quedan fuera de los dos lados las pulseras
+tyvek y los cordones con mosquetón de Uruguay, porque no hay precio comparable. Uruguay va con su propio
+subtotal: es la misma negociación con los mismos proveedores, pero **no** entra en el costo del evento
+de Argentina.
 
 **Esta canasta no reemplaza el costo del rubro.** Mide el ahorro por precio unitario sobre siete ítems y
 deja fuera los pañuelos y el bordado de gorras; además las cantidades del sitio no son exactamente las de

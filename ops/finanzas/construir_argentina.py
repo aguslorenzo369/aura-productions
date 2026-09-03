@@ -210,9 +210,9 @@ ITEMS = [
   USD_, 0.0, 0.0, 'Sin cotizar', 3000.0, 'Hoja Argentina del master'),
  ('Producción', 'Personal logístico', 'A definir', 'La hoja del master lo tiene en US$0',
   USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Hoja Argentina del master · valor en cero'),
- ('Producción', 'Intercoms', 'Proveedor Colombia',
-  'Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09',
-  USD_, 560.0, 0.0, 'Contratado', 0.0, 'Hoja PAGOS del master'),
+ ('Producción', 'Intercoms', 'Proveedor a confirmar',
+  'Ya comprados y pagados al 100%. El master los tenía en 2 cuotas al 24/08 y 23/09, sin abonar.',
+  USD_, 560.0, 0.0, 'Cerrado', 0.0, 'Confirmado por Agustina el 03/09'),
  # ---------------- EQUIPO ----------------
  ('Equipo', 'Vuelos del equipo', 'Sin cotizar',
   'No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master',
@@ -508,6 +508,7 @@ r += 1
 ws.cell(r, 1, 'LO QUE IBA A COSTAR CONTRA LO QUE COSTÓ').font = Font(name=F, size=12, bold=True, color='1F3864'); r += 1
 ws.cell(r, 1, 'Precios unitarios de merch.cmc2026.com al 06/07/2026, dólar $1.515. Compara el proveedor que traía Cumbre contra los proveedores argentinos que consiguió Agustina.').font = SUB; r += 1
 CMP = [
+ ('ARGENTINA', None, None, None, None, None),
  ('Remeras estampadas',            '100',   16.17, 1617.16,  9.31,  931.35),
  ('Gorras negras',                 '1.000',  9.90, 9900.99,  1.64, 1636.96),
  ('Cinta colgante / lanyard',      '1.000',  1.25, 1247.52,  1.00, 1004.95),
@@ -516,6 +517,12 @@ CMP = [
  ('Tarjetas 21,5 × 10 cm (cheque)','5.500',  0.12,  671.62,  0.02,  109.78),
  ('Bolsas de friselina, 2 colores','1.000',  1.14, 1141.91,  0.64,  644.55),
  ('Pulseras tyvek — fuera de la comparación', '5.500', 0.10, 544.55, None, None),
+ ('URUGUAY', None, None, None, None, None),
+ ('Mapas de niveles de consciencia','3.000', 0.254, 763.00, 0.089, 266.14),
+ ('Escarapelas / credenciales',     '600',   1.322, 793.00, 0.475, 285.03),
+ ('Contratos (hojas A4)',           '3.000', 0.153, 458.00, 0.048, 144.71),
+ ('Cheques (tarjetas)',             '3.000', 0.127, 382.00, 0.020,  59.88),
+ ('Cordones con mosquetón — fuera de la comparación', '600', 1.50, None, None, None),
 ]
 CC = [('Producto', 34), ('Cant.', 9), ('Unitario Cumbre', 13), ('Total Cumbre', 13),
       ('Unitario Agustina', 13), ('Total Agustina', 13), ('Ahorro', 13), ('Ahorro %', 10)]
@@ -524,7 +531,24 @@ for j, (t, an) in enumerate(CC, 1):
     c.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
 r += 1
 ini_c = r
+ini_pais, filas_pais, subtotales_pais = r, [], []
 for prod, cant, uc, tc, ua, ta in CMP:
+    if cant is None:                      # banda de pais
+        if filas_pais:
+            subtotales_pais.append((pais_actual, ini_pais, r - 1))
+            ws.cell(r, 1, f'Subtotal {pais_actual}').font = BOLD
+            for col, letra in ((4, 'D'), (6, 'F'), (7, 'G')):
+                c = ws.cell(r, col, f'=SUMIF($F${ini_pais}:$F${r-1},"<>",{letra}{ini_pais}:{letra}{r-1})')
+                c.font = BOLD; c.number_format = USD; c.fill = FGRIS; c.border = BOX
+            c = ws.cell(r, 8, f'=IFERROR(G{r}/D{r},"")'); c.font = BOLD; c.number_format = PCT
+            c.fill = FGRIS; c.border = BOX
+            for j in range(1, 9): ws.cell(r, j).border = BOX
+            r += 1
+            filas_pais = []
+        r = banda_bloque(ws, r, prod, 8)
+        pais_actual, ini_pais = prod.capitalize(), r
+        continue
+    filas_pais.append(r)
     ws.cell(r, 1, prod).font = BOLD if ua is not None else SUB
     ws.cell(r, 2, cant).font = NEGRO
     c = ws.cell(r, 3, uc); c.font = AZUL; c.number_format = USD
@@ -539,10 +563,23 @@ for prod, cant, uc, tc, ua, ta in CMP:
     for j in range(1, 9):
         ws.cell(r, j).border = BOX
     r += 1
-fin_c = r - 2   # la última fila (pulseras) queda fuera del total
-ws.cell(r, 1, 'TOTAL DE LA CANASTA COMPARADA').font = Font(name=F, size=11, bold=True)
+if filas_pais:
+    subtotales_pais.append((pais_actual, ini_pais, r - 1))
+    ws.cell(r, 1, f'Subtotal {pais_actual}').font = BOLD
+    for col, letra in ((4, 'D'), (6, 'F'), (7, 'G')):
+        c = ws.cell(r, col, f'=SUMIF($F${ini_pais}:$F${r-1},"<>",{letra}{ini_pais}:{letra}{r-1})')
+        c.font = BOLD; c.number_format = USD; c.fill = FGRIS; c.border = BOX
+    c = ws.cell(r, 8, f'=IFERROR(G{r}/D{r},"")'); c.font = BOLD; c.number_format = PCT
+    c.fill = FGRIS; c.border = BOX
+    for j in range(1, 9): ws.cell(r, j).border = BOX
+    r += 1
+fin_c = r - 1
+ws.cell(r, 1, 'TOTAL DE LA CANASTA — ARGENTINA + URUGUAY').font = Font(name=F, size=11, bold=True)
+suma_sub = {col: '+'.join(f'{letra}{fin}' for _, _, fin in
+            [(a, b, c2 + 1) for a, b, c2 in subtotales_pais]) for col, letra in
+            ((4, 'D'), (6, 'F'), (7, 'G'))}
 for col, letra in ((4, 'D'), (6, 'F'), (7, 'G')):
-    c = ws.cell(r, col, f'=SUM({letra}{ini_c}:{letra}{fin_c})')
+    c = ws.cell(r, col, '=' + '+'.join(f'{letra}{fin + 1}' for _, _, fin in subtotales_pais))
     c.font = Font(name=F, size=11, bold=True); c.number_format = USD; c.fill = FVERD; c.border = BOX
 c = ws.cell(r, 8, f'=G{r}/D{r}'); c.font = Font(name=F, size=11, bold=True); c.number_format = PCT; c.fill = FVERD; c.border = BOX
 r += 2
@@ -552,7 +589,9 @@ for t in [
  'OJO: esta canasta NO es el total del rubro merch. Los pañuelos (US$6.973) y el bordado de gorras (US$1.750) no entran en la comparación, y las cantidades',
  'del sitio no son exactamente las de las facturas finales (remeras 100 contra 250, gorras 1.000 contra 940). Sirve para medir el ahorro por precio unitario,',
  'no para reemplazar el costo del rubro, que sale de las nueve facturas de arriba.',
- 'Uruguay tiene su propia comparativa en el mismo sitio: US$2.396,00 contra US$755,77, con un ahorro de US$1.640,23. No entra en el costo de Argentina.',
+ 'Uruguay va con su propio subtotal: US$2.396,00 contra US$755,77, US$1.640,23 de ahorro. Es la misma negociación con los mismos proveedores, pero NO entra en el costo del evento de Argentina.',
+ 'Los cordones con mosquetón de Uruguay quedan fuera de la cuenta por la misma razón que las pulseras tyvek: no hay precio comparable del lado argentino.',
+ 'Sumando los dos países, la canasta pasa de US$18.657,12 a US$5.823,74: US$12.833,38 de ahorro, un 68,8%.',
 ]:
     ws.cell(r, 1, t).font = SUB
     r += 1
@@ -575,6 +614,7 @@ for t in [
 # ============================================================================
 PAGADO = [
  ('Sede',       'La Rural — anticipo del contrato', '27/04/2026', 43446.0, 'Hoja PAGOS del master'),
+ ('Producción', 'Intercoms — 100%',                 'ya comprados',  560.0, 'Confirmado por Agustina el 03/09'),
  ('Técnica',    'Grupo MET — factura INV-11',       '31/07/2026',  5000.0, 'Recibo de Mercury del 31/07'),
  ('Merch',      'Pañuelos — 50% (parte Argentina)', '24/06/2026',  3569.15, 'Master: 50% de US$10.982, imputado al 65%'),
  ('Merch',      'Gorras — 100%',                    '25/06/2026',  1825.0, 'Factura 2601009 de Textil Ryu'),
@@ -583,14 +623,12 @@ PAGADO = [
 ]
 CUOTAS = [
  ('Sede',       'La Rural — saldo, cuota 1 de 2', '24/08/2026', 15777.0, 'VENCIDA',   'Cronograma del master'),
- ('Producción', 'Intercoms — cuota 1 de 2',       '24/08/2026',   280.0, 'VENCIDA',   'Cronograma del master'),
  ('Merch',      'Remeras (250)',                  'ya facturado', 2780.64, 'SIN PAGAR', 'Factura 2601017 del 16/08 · NO figura en el master'),
  ('Merch',      'Bordado de gorras (940)',        'ya facturado', 1721.95, 'SIN PAGAR', 'Factura 2601016 del 10/08 · NO figura en el master'),
  ('Merch',      'Pañuelos — saldo (parte Argentina)', '13/09/2026', 3429.73, 'Programado', 'Factura 2601019 · 65% de 5.276,51 USDT'),
  ('Merch',      'Gráfica Argentina — saldo',      '13/09/2026',  1192.37, 'Programado', 'Master. La factura 2601014 viene por el total: a confirmar'),
  ('Merch',      'Lanyards — saldo',               '13/09/2026',   816.10, 'Programado', 'Master. La factura 2601018 viene por el total: a confirmar'),
  ('Sede',       'La Rural — saldo, cuota 2 de 2', '23/09/2026', 15777.0, 'Programado', 'Cronograma del master'),
- ('Producción', 'Intercoms — cuota 2 de 2',       '23/09/2026',   280.0, 'Programado', 'Cronograma del master'),
 ]
 
 ws = hoja('PAGOS', 'Cuánto se pagó, cuánto falta y cuándo',

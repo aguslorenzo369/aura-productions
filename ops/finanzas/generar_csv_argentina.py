@@ -47,7 +47,7 @@ f('Rubro', 'Proveedor', 'Detalle', 'Estado', 'Moneda', 'Monto sin IVA', 'IVA',
   'Total con IVA (moneda origen)', '% Argentina', 'Total USD',
   'Estimado del sheet (USD)', 'Diferencia', 'Fuente')
 
-orden = ['Sede', 'Técnica', 'Servicios', 'Merch', 'Catering', 'Producción', 'Equipo']
+orden = ['Sede', 'Infraestructura', 'Mobiliario', 'Técnica', 'Servicios', 'Merch', 'Catering', 'Producción', 'Equipo']
 gran_total = gran_est = 0.0
 for bloque in orden:
     grupo = [x for x in ITEMS if x[0] == bloque]

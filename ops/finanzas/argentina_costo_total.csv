@@ -7,12 +7,15 @@ Tipo de cambio usado (ARS por USD),1510.0,Dólar operativo de Agustina. Verifica
 Rubro,Proveedor,Detalle,Estado,Moneda,Monto sin IVA,IVA,Total con IVA (moneda origen),% Argentina,Total USD,Estimado del sheet (USD),Diferencia,Fuente
 SEDE
 Alquiler Pabellón Azul,La Rural (contrato CC-00957),Locación 2 días de evento + 1 día de montaje,Contratado,USD,75000.0,sin IVA,75000.0,100%,75000.0,70000.0,5000.0,Contrato CC-00957 · hoja PAGOS del master (US$43.446 abonados el 27/04)
-Infraestructura La Rural (armado de stands),La Rural — Jefatura de Infraestructura,"Armado del stand de staff (100 m²), el de producción (menos de 50 m²) y el mobiliario del camarín de speakers. Falta pedirles los espejos. Las sillas del público van en su propia línea.",Cerrado,USD,9270.0,sin IVA,9270.0,100%,9270.0,,9270.0,Definición de Agustina sobre el presupuesto de $66.494.708 del 17/08 · ver hoja AHORROS
+Subtotal Sede,,,,,,,,,75000.0,70000.0,5000.0
+INFRAESTRUCTURA
+Armado de stands,La Rural — Jefatura de Infraestructura,"Armado del stand de staff (100 m²), el de producción (menos de 50 m²) y el mobiliario del camarín de speakers. Falta pedirles los espejos. Las sillas del público van en su propia línea.",Cerrado,USD,9270.0,sin IVA,9270.0,100%,9270.0,,9270.0,Definición de Agustina sobre el presupuesto de $66.494.708 del 17/08 · ver hoja AHORROS
+Subtotal Infraestructura,,,,,,,,,9270.0,0.0,9270.0
+MOBILIARIO
 Sillas del público (5.500),FDL Eventos,"Presupuesto 026-2697, alquiler por 4 días: 1.000 sillas hotel caño gris tapizado negro ($7.000.000) + 4.500 sillas plásticas Munro reforzadas ($17.100.000) + flete ($1.700.000). NO incluye armado.",Cotizado,ARS,25800000.0,21%,31218000.0,100%,20674.17,16500.0,4174.17,Presupuesto FDL Eventos N.º 026-2697 del 07/08/2026 · pendiente de resolver facturación al exterior
 "Montaje, acomodación y desmontaje de sillas",En negociación,"Montaje previo, acomodación el sábado a la noche después de la dinámica y desmontaje el domingo.",En negociación,ARS,900000.0,sin IVA,900000.0,100%,596.03,,596.03,Negociación de Agustina · cerrar el número antes de firmar las sillas
 Replanteo de sillas (ingeniero),Sin cotizar,Replanteo del layout de sillas del pabellón. Confirmado que va aparte de la dirección técnica de La Rural.,Sin cotizar,USD,,,,100%,0.0,,0.0,Pendiente de pedir presupuesto
-Conectividad WiFi,La Rural — Servicios de Conectividad,"2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre",Cotizado,ARS,1466063.84,21%,1773937.25,100%,1174.79,800.0,374.79,"Mail conectividad@larural.com.ar 05/08/2026 · presupuesto N.º 2, base IPC junio (el del 16/06 era $1.438.728)"
-Subtotal Sede,,,,,,,,,106714.99,87300.0,19414.99
+Subtotal Mobiliario,,,,,,,,,21270.2,16500.0,4770.2
 TÉCNICA
 Producción técnica,Cerrado por Agustina,"Sonido, iluminación, video y LED. Cerrado en dólares.",Cerrado,USD,60000.0,sin IVA,60000.0,100%,60000.0,34000.0,26000.0,Negociación de Agustina · reemplaza la cotización vencida de Prina
 Entelado,Cerrado por Agustina,Entelado del pabellón. Negociado a la mitad de lo que estaba cotizado.,Cerrado,ARS,24500000.0,sin IVA,24500000.0,100%,16225.17,,16225.17,Negociación de Agustina · US$16.000 aprox. al dólar de referencia
@@ -20,13 +23,14 @@ Circuito cerrado (CCTV),Cerrado por Agustina,Circuito cerrado de cámaras para e
 Bonificado por el proveedor de técnica,Sin costo,"500 vallas y efectos especiales, sin cargo. Es lo que evita el gasto de vallado que estaba presupuestado.",Bonificado,USD,,,,100%,0.0,,0.0,Negociación de Agustina
 Subtotal Técnica,,,,,,,,,82434.17,34000.0,48434.17
 SERVICIOS
+Conectividad WiFi,La Rural — Servicios de Conectividad,"2 redes privadas de 30 Mbps (técnica + staff/acreditación), del 2 al 4 de octubre",Cotizado,ARS,1466063.84,21%,1773937.25,100%,1174.79,800.0,374.79,"Mail conectividad@larural.com.ar 05/08/2026 · presupuesto N.º 2, base IPC junio (el del 16/06 era $1.438.728)"
 Seguridad y vigilancia,Road Seguridad S.A.,"263 horas de vigilancia (armado, evento y desarme) + planos de evacuación $715.000 + supervisión general $795.000",Cotizado,ARS,7218928.96,21%,8734904.04,100%,5784.7,,5784.7,"Mail presupuestos@roadseguridad.com.ar 12/08/2026 (versión V3, lista para firmar)"
 Servicio médico,Vittal — Socorro Médico Privado,"1 UTIM TRI con dos médicos + enfermero/chofer, los tres días (2, 3 y 4 de octubre)",Cotizado,ARS,6366521.27,"10,5%",7035006.0,100%,4658.94,,4658.94,"Mail vtomas@vittal.com.ar 28/08/2026 · tarifas actualizadas, sin consultorio"
 Limpieza,Higia Eventos,"205,5 horas de limpieza: auditorio, baños y guardarropas, del 2 al 5 de octubre",Cotizado,ARS,3367440.91,21%,4074603.5,100%,2698.41,,2698.41,Mail higiaeventos 22/06/2026 (reenviado 29/06) · 50% de anticipo antes del armado
 Retiro de residuos,Gale Servicios,Roll off con disposición final incluida. Cotización base abril 2026.,Cotizado,ARS,1471608.62,21%,1780646.43,100%,1179.24,,1179.24,Mail higiaeventos 22/06/2026 (adjunto Gale) · se factura 100% por adelantado
 Baños químicos — ecobaños,Sin cotizar,"Decidido: ecobaños, no los químicos tradicionales. Más limpios, mejor a la vista y ecofriendly. Falta pedir presupuesto.",Sin cotizar,USD,,,,100%,0.0,,0.0,Decisión de Agustina · pendiente de cotizar
 Seguro de accidentes personales,Chanes Seguros,"Cobertura MIA (muerte, invalidez y asistencia médica) para 150 personas, exigida por La Rural",Cotizado,ARS,953151.93,sin IVA,953151.93,100%,631.23,400.0,231.23,"Mail nestor@chanesseguros.com.ar 13/07/2026 · premio único, cotizado para 15-19/07"
-Subtotal Servicios,,,,,,,,,14952.52,400.0,14552.52
+Subtotal Servicios,,,,,,,,,16127.32,1200.0,14927.32
 MERCH
 Pañuelos / pañoletas estampados (8.500),REMERASYESTAMPADOS,"Factura 2601012 del 20/06. Compra compartida Argentina + Uruguay: se imputa a Argentina el 65% (5.500 de 8.500 unidades, la misma proporcion que la grafica). El 50% ya esta abonado; el saldo se paga con la factura 2601019 por 5.276,51 USDT, de los cuales 3.429,73 son de Argentina.",Contratado,ARS,13387500.0,21%,16198875.0,65%,6973.03,,6973.03,Drive · Presupuesto Pañuelos - Arg y Uru · facturas 2601012 (20/06) y 2601019 (16/08)
 Remeras premium estampadas (250),REMERASYESTAMPADOS,"Factura 2601017 del 16/08, $14.110 por unidad. Sube de 230 a 250 unidades contra la factura original 2601011, al mismo precio unitario. SIN PAGAR: se debe el 100% (2.780,64 USDT).",Contratado,ARS,3527500.0,21%,4268275.0,100%,2826.67,,2826.67,Drive · Presupuestos camisetas + pañoletas · factura 2601017 (16/08)
@@ -51,7 +55,7 @@ DJ,A definir,Estimado del sheet,Sin cotizar,USD,,,,100%,500.0,500.0,0.0,Hoja Arg
 Escoltas (2),A definir,Estimado del sheet,Sin cotizar,USD,,,,100%,1000.0,1000.0,0.0,Hoja Argentina del master
 Master Mind Hit,A definir,Sala adicional,Sin cotizar,USD,,,,100%,3000.0,3000.0,0.0,Hoja Argentina del master
 Personal logístico,A definir,La hoja del master lo tiene en US$0,Sin cotizar,USD,,,,100%,0.0,,0.0,Hoja Argentina del master · valor en cero
-Intercoms,Proveedor Colombia,"Contrato US$560, sin abonar, 2 cuotas al 24/08 y 23/09",Contratado,USD,560.0,sin IVA,560.0,100%,560.0,,560.0,Hoja PAGOS del master
+Intercoms,Proveedor a confirmar,"Ya comprados y pagados al 100%. El master los tenía en 2 cuotas al 24/08 y 23/09, sin abonar.",Cerrado,USD,560.0,sin IVA,560.0,100%,560.0,,560.0,Confirmado por Agustina el 03/09
 Subtotal Producción,,,,,,,,,6260.0,6950.0,-690.0
 EQUIPO
 Vuelos del equipo,Sin cotizar,No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
@@ -70,8 +74,8 @@ Mastermind del martes,246,985.15,,Actividad aparte.
 Total de personas en el predio,6108,39.68,,Pagos + 100 de staff + 8 del equipo interno.
 
 ESTADO DE LOS RUBROS,,USD
-Cerrado,,106273.17
-Contratado,,92976.53
+Cerrado,,106833.17
+Contratado,,92416.53
 Cotizado,,36801.49
 Sin cotizar,,5700.0
 Alternativa,,1402.16
