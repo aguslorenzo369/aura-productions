@@ -571,6 +571,97 @@ for t in [
     r += 1
 
 # ============================================================================
+# 3ter. PAGOS — cuanto se pago, cuanto falta y cuando
+# ============================================================================
+PAGADO = [
+ ('Sede',       'La Rural — anticipo del contrato', '27/04/2026', 43446.0, 'Hoja PAGOS del master'),
+ ('Técnica',    'Grupo MET — factura INV-11',       '31/07/2026',  5000.0, 'Recibo de Mercury del 31/07'),
+ ('Merch',      'Pañuelos — 50% (parte Argentina)', '24/06/2026',  3569.15, 'Master: 50% de US$10.982, imputado al 65%'),
+ ('Merch',      'Gorras — 100%',                    '25/06/2026',  1825.0, 'Factura 2601009 de Textil Ryu'),
+ ('Merch',      'Lanyards — 50%',                   '25/06/2026',   849.0, 'Hoja PAGOS del master'),
+ ('Merch',      'Gráfica Argentina — anticipo',     '25/06/2026',   642.0, 'Master: total US$2.481, saldo US$1.839'),
+]
+CUOTAS = [
+ ('Sede',       'La Rural — saldo, cuota 1 de 2', '24/08/2026', 15777.0, 'VENCIDA',   'Cronograma del master'),
+ ('Producción', 'Intercoms — cuota 1 de 2',       '24/08/2026',   280.0, 'VENCIDA',   'Cronograma del master'),
+ ('Merch',      'Remeras (250)',                  'ya facturado', 2780.64, 'SIN PAGAR', 'Factura 2601017 del 16/08 · NO figura en el master'),
+ ('Merch',      'Bordado de gorras (940)',        'ya facturado', 1721.95, 'SIN PAGAR', 'Factura 2601016 del 10/08 · NO figura en el master'),
+ ('Merch',      'Pañuelos — saldo (parte Argentina)', '13/09/2026', 3429.73, 'Programado', 'Factura 2601019 · 65% de 5.276,51 USDT'),
+ ('Merch',      'Gráfica Argentina — saldo',      '13/09/2026',  1192.37, 'Programado', 'Master. La factura 2601014 viene por el total: a confirmar'),
+ ('Merch',      'Lanyards — saldo',               '13/09/2026',   816.10, 'Programado', 'Master. La factura 2601018 viene por el total: a confirmar'),
+ ('Sede',       'La Rural — saldo, cuota 2 de 2', '23/09/2026', 15777.0, 'Programado', 'Cronograma del master'),
+ ('Producción', 'Intercoms — cuota 2 de 2',       '23/09/2026',   280.0, 'Programado', 'Cronograma del master'),
+]
+
+ws = hoja('PAGOS', 'Cuánto se pagó, cuánto falta y cuándo',
+          'Sólo lo que está documentado. Lo que no tiene fecha acordada va abajo, en el resto.')
+COLS = [('Bloque', 14), ('Concepto', 42), ('Fecha', 15), ('USD', 14), ('Estado', 14), ('De dónde sale', 58)]
+NC = len(COLS)
+encabezados(ws, 4, COLS)
+r = 5
+r = banda(ws, r, 'YA PAGADO', NC)
+ini_p = r
+for bl, con, fe, mo, fu in PAGADO:
+    ws.cell(r, 1, bl).font = SUB
+    ws.cell(r, 2, con).font = NEGRO
+    ws.cell(r, 3, fe).font = AZUL
+    c = ws.cell(r, 4, mo); c.font = BOLD; c.number_format = USD
+    c = ws.cell(r, 5, 'Pagado'); c.font = NEGRO
+    ws.cell(r, 6, fu).font = SUB
+    for j in range(1, NC + 1): ws.cell(r, j).fill = FVERD; ws.cell(r, j).border = BOX
+    r += 1
+fila_pag = r
+ws.cell(r, 2, 'Pagado a hoy').font = BOLD
+c = ws.cell(r, 4, f'=SUM(D{ini_p}:D{r-1})'); c.font = BOLD; c.number_format = USD
+for j in range(1, NC + 1): ws.cell(r, j).fill = FGRIS; ws.cell(r, j).border = BOX
+r += 2
+
+r = banda(ws, r, 'FALTA PAGAR · CON FECHA', NC)
+ini_c = r
+for bl, con, fe, mo, st, fu in CUOTAS:
+    ws.cell(r, 1, bl).font = SUB
+    ws.cell(r, 2, con).font = NEGRO
+    ws.cell(r, 3, fe).font = AZUL
+    c = ws.cell(r, 4, mo); c.font = BOLD; c.number_format = USD
+    ws.cell(r, 5, st).font = BOLD
+    ws.cell(r, 6, fu).font = SUB
+    relleno = FROJO if st in ('VENCIDA', 'SIN PAGAR') else None
+    for j in range(1, NC + 1):
+        if relleno: ws.cell(r, j).fill = relleno
+        ws.cell(r, j).border = BOX
+    r += 1
+fila_cuo = r
+ws.cell(r, 2, 'Comprometido con fecha').font = BOLD
+c = ws.cell(r, 4, f'=SUM(D{ini_c}:D{r-1})'); c.font = BOLD; c.number_format = USD
+for j in range(1, NC + 1): ws.cell(r, j).fill = FGRIS; ws.cell(r, j).border = BOX
+r += 1
+ws.cell(r, 2, 'De eso, vencido o facturado sin pagar').font = SUB
+c = ws.cell(r, 4, f'=SUMIF(E{ini_c}:E{fila_cuo-1},"VENCIDA",D{ini_c}:D{fila_cuo-1})'
+                  f'+SUMIF(E{ini_c}:E{fila_cuo-1},"SIN PAGAR",D{ini_c}:D{fila_cuo-1})')
+c.font = BOLD; c.number_format = USD; c.fill = FROJO; c.border = BOX
+r += 2
+
+r = banda(ws, r, 'RESUMEN', NC)
+for etiqueta, formula, relleno in [
+    ('Costo total del evento', f"='COSTOS UNIFICADOS'!J{fila_total}", FGRIS),
+    ('Ya pagado',              f'=D{fila_pag}',                        FVERD),
+    ('Falta desembolsar',      f"='COSTOS UNIFICADOS'!J{fila_total}-D{fila_pag}", FAMAR),
+    ('   de eso, con fecha acordada', f'=D{fila_cuo}',                 None),
+    ('   de eso, todavía sin fecha',  f"='COSTOS UNIFICADOS'!J{fila_total}-D{fila_pag}-D{fila_cuo}", None)]:
+    ws.cell(r, 2, etiqueta).font = BOLD if not etiqueta.startswith('  ') else NEGRO
+    c = ws.cell(r, 4, formula); c.font = BOLD; c.number_format = USD0; c.border = BOX
+    if relleno: c.fill = relleno
+    r += 1
+r += 1
+for t in [
+ 'Las remeras y el bordado de gorras están facturados desde agosto y no figuran en el cronograma del master: son US$4.503 que hoy no están en ningún calendario.',
+ 'El resto sin fecha son los rubros cerrados y cotizados que todavía no tienen forma de pago acordada: técnica, entelado, CCTV, catering, sillas y los servicios del predio.',
+ 'Las facturas reemitidas de LEOTEX y Derqui vienen por el total aunque el master registra el 50% abonado. Acá se tomó la regla del 50%: si las facturas están bien, son US$2.008 más.',
+]:
+    ws.cell(r, 2, t).font = SUB
+    r += 1
+
+# ============================================================================
 # 4. DECISIONES ABIERTAS
 # ============================================================================
 ws = hoja('DECISIONES', 'Decisiones abiertas que mueven el número',
