@@ -1,6 +1,6 @@
 # Carta formal — Solicitud de cambio de sala
 
-**Evento:** Cumbre de los Millonarios Conscientes · **Sede:** Expo Center, Chile
+**Evento:** Cumbre de los Millonarios Conscientes · **Sede:** Espacio Riesco, Santiago de Chile · **Fecha:** 12 y 13 de septiembre de 2026
 
 > Versión en texto de `carta-cambio-de-sala.docx`.
 > Reemplazar todos los campos entre corchetes `[ ]` antes de enviar.
@@ -12,18 +12,18 @@ Producción de eventos y experiencias · hola@auraproductions.com.ar
 
 ---
 
-Santiago de Chile, [día] de [mes] de [año]
+Santiago de Chile, 4 de septiembre de 2026
 
-**Sr./Sra. [Nombre y apellido]**
-[Cargo]
-[Nombre del predio / Centro de Convenciones]
-[Dirección]
+Sres.
+**Departamento Comercial**
+**Espacio Riesco**
+Santiago de Chile
 
-**REF.: Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — Cumbre de los Millonarios Conscientes, [fecha del evento].**
+**REF.: Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — Cumbre de los Millonarios Conscientes, 12 y 13 de septiembre de 2026.**
 
 De nuestra mayor consideración:
 
-Por medio de la presente, y en representación de Aura Productions, productora responsable de la Cumbre de los Millonarios Conscientes, a realizarse el [fecha del evento] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).
+Por medio de la presente, y en representación de Aura Productions, productora responsable de la Cumbre de los Millonarios Conscientes, a realizarse los días 12 y 13 de septiembre de 2026 en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).
 
 Fundamentamos nuestro pedido en los siguientes puntos:
 
@@ -39,7 +39,7 @@ Fundamentamos nuestro pedido en los siguientes puntos:
 
 En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center en 2027. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.
 
-Quedamos a entera disposición para coordinar a la brevedad los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera.
+Dada la proximidad de la fecha, quedamos a entera disposición para resolver de manera inmediata los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera. Agradeceremos su confirmación a la mayor brevedad posible, a fin de dar aviso a nuestros proveedores y no afectar el cronograma de producción.
 
 Agradecemos desde ya la atención dispensada y confiamos en contar con una respuesta favorable, en el marco de la relación de trabajo a largo plazo que deseamos construir con ustedes.
 
@@ -55,15 +55,17 @@ hola@auraproductions.com.ar · [Teléfono]
 
 ## Campos a completar
 
+Solo queda el bloque de firma:
+
 | Campo | Dónde aparece |
 |---|---|
-| `[día] de [mes] de [año]` | Fecha de emisión (la ciudad ya dice Santiago de Chile) |
-| `[Nombre y apellido]`, `[Cargo]` (destinatario) | Bloque destinatario |
-| `[Nombre del predio / Centro de Convenciones]`, `[Dirección]` | Bloque destinatario — razón social del predio |
-| `[fecha del evento]` | Referencia y primer párrafo |
-| `[Nombre y apellido]`, `[Cargo]`, `[Teléfono]` (firmante) | Bloque de firma |
+| `[Nombre y apellido]` | Firma |
+| `[Cargo]` | Firma |
+| `[Teléfono]` | Firma |
 
-> Datos ya completados: nombre del evento (Cumbre de los Millonarios Conscientes), ciudad (Santiago de Chile), salas y metrajes, aforo confirmado (1.600), proyección 2027 (3.000–4.000).
+> Ya completados: destinatario (Departamento Comercial, Espacio Riesco), fecha de emisión (4 de septiembre de 2026), fechas del evento (12 y 13 de septiembre de 2026), salas y metrajes, aforo confirmado (1.600) y proyección 2027 (3.000–4.000).
+>
+> Si la carta se envía otro día, actualizar la fecha de emisión en `generar-carta.js`.
 
 ## Regenerar el .docx
 

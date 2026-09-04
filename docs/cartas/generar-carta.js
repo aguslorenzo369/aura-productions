@@ -20,7 +20,7 @@ const t = (text, opts = {}) => new TextRun({ text, font: FONT, size: 22, color: 
 const doc = new Document({
   creator: 'Aura Productions',
   title: 'Solicitud de cambio de sala — Cumbre de los Millonarios Conscientes',
-  description: 'Carta de solicitud de cambio de sala — Expo Center a Gran Salon — Cumbre de los Millonarios Conscientes, Chile',
+  description: 'Carta a Espacio Riesco solicitando el cambio de Sala Expo Center a Gran Salon — Cumbre de los Millonarios Conscientes, 12 y 13 de septiembre de 2026',
   numbering: {
     config: [{
       reference: 'args',
@@ -61,24 +61,24 @@ const doc = new Document({
       }),
 
       // ---------- Lugar y fecha ----------
-      p([t('Santiago de Chile, [día] de [mes] de [año]')], { alignment: AlignmentType.RIGHT, spacing: { after: 360 } }),
+      p([t('Santiago de Chile, 4 de septiembre de 2026')], { alignment: AlignmentType.RIGHT, spacing: { after: 360 } }),
 
       // ---------- Destinatario ----------
-      p([t('Sr./Sra. [Nombre y apellido]', { bold: true })], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
-      p([t('[Cargo]')], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
-      p([t('[Nombre del predio / Centro de Convenciones]')], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
-      p([t('[Dirección]')], { alignment: AlignmentType.LEFT, spacing: { after: 360 } }),
+      p([t('Sres.')], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
+      p([t('Departamento Comercial', { bold: true })], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
+      p([t('Espacio Riesco', { bold: true })], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
+      p([t('Santiago de Chile')], { alignment: AlignmentType.LEFT, spacing: { after: 360 } }),
 
       // ---------- Referencia ----------
       p([
         t('REF.: ', { bold: true, color: GOLD }),
-        t('Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — Cumbre de los Millonarios Conscientes, [fecha del evento].', { bold: true }),
+        t('Solicitud formal de cambio de sala — de Sala Expo Center (4.600 m²) a Gran Salón (1.600 m²) — Cumbre de los Millonarios Conscientes, 12 y 13 de septiembre de 2026.', { bold: true }),
       ], { alignment: AlignmentType.LEFT, spacing: { after: 320 } }),
 
       // ---------- Cuerpo ----------
       p([t('De nuestra mayor consideración:')], { alignment: AlignmentType.LEFT, spacing: { after: 240 } }),
 
-      p([t('Por medio de la presente, y en representación de Aura Productions, productora responsable de la Cumbre de los Millonarios Conscientes, a realizarse el [fecha del evento] en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).')]),
+      p([t('Por medio de la presente, y en representación de Aura Productions, productora responsable de la Cumbre de los Millonarios Conscientes, a realizarse los días 12 y 13 de septiembre de 2026 en sus instalaciones, nos dirigimos a ustedes con el objeto de solicitar formalmente el cambio de la sala oportunamente reservada, pasando de la Sala Expo Center (4.600 m²) al Gran Salón (1.600 m²).')]),
 
       p([t('Fundamentamos nuestro pedido en los siguientes puntos:')], { spacing: { after: 200 } }),
 
@@ -109,7 +109,7 @@ const doc = new Document({
 
       p([t('En otras palabras, no buscamos reducir nuestra presencia en el predio, sino ordenarla en el tiempo: la sala adecuada este año y el Expo Center en 2027. Para que ese crecimiento sea posible, necesitamos que esta edición sea rentable.')]),
 
-      p([t('Quedamos a entera disposición para coordinar a la brevedad los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera.')]),
+      p([t('Dada la proximidad de la fecha, quedamos a entera disposición para resolver de manera inmediata los aspectos contractuales, la eventual diferencia de tarifas y la readecuación del cronograma de montaje que el cambio requiera. Agradeceremos su confirmación a la mayor brevedad posible, a fin de dar aviso a nuestros proveedores y no afectar el cronograma de producción.')]),
 
       p([t('Agradecemos desde ya la atención dispensada y confiamos en contar con una respuesta favorable, en el marco de la relación de trabajo a largo plazo que deseamos construir con ustedes.')]),
 
