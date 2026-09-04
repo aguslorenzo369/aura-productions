@@ -222,7 +222,7 @@ filas = [
  ('IVA', 'Las cotizaciones argentinas casi todas vienen sin IVA. La columna IVA aplica la alícuota de cada una (21% general, 10,5% el servicio médico) para llegar al costo real.'),
  ('', ''),
  ('Advertencia 1 — vencimientos', 'La cotización de Prina (técnica, el ítem más caro en pesos) tenía validez de 10 días y venció en junio. VMG se reserva recotizar si el dólar salta más de 15%. La Rural ajusta el saldo por IPC. Los pesos de este libro son de la fecha de cada cotización, no de hoy.'),
- ('Advertencia 2 — huecos', 'Vuelos y alojamiento del equipo entran en cero: no hay cotización ni estimado. Tampoco están cotizados los ecobaños, la marquetería, el replanteo de sillas ni los cheques, escarapelas, diplomas, placas y manillas. El costo por persona es, por lo tanto, un piso.'),
+ ('Advertencia 2 — huecos', 'Esta hoja tiene sólo lo que cargó Agustina. Los ecobaños, la marquetería, el replanteo de sillas y los cheques/escarapelas/diplomas/placas/manillas están definidos pero todavía sin precio, así que entran en cero. El costo por persona es, por lo tanto, un piso.'),
  ('', ''),
  ('Merch', 'Todo el merch sale de la carpeta de Drive "Presupuestos merch": nueve facturas reales (2601009 a 2601019) que reemplazan el renglón único de US$8.689 que traía el master. Los proveedores son argentinos (Remerasyestampados, Textil Ryu, Leotex, Derqui), no colombianos como decía la hoja PAGOS. Ver la hoja MERCH.'),
  ('Merch — qué se pagó', 'Las gorras están pagadas al 100%. Pañuelos, lanyards y gráfica de Argentina tienen el 50% abonado. Las remeras y el bordado de las gorras no tienen nada pagado: se debe el 100%.'),
