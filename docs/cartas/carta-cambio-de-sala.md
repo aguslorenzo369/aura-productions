@@ -47,24 +47,21 @@ Sin otro particular, saludamos a ustedes muy atentamente.
 
 ---
 
-**[Nombre y apellido]**
-[Cargo] — Aura Productions
-hola@auraproductions.com.ar · [Teléfono]
+**Alejandra Millán**
+Directora de Logística — Aura Productions
+hola@auraproductions.com.ar · +57 305 816 1106
 
 ---
 
-## Campos a completar
+## Estado
 
-Solo queda el bloque de firma:
+Carta **completa**, lista para enviar. No quedan campos pendientes.
 
-| Campo | Dónde aparece |
-|---|---|
-| `[Nombre y apellido]` | Firma |
-| `[Cargo]` | Firma |
-| `[Teléfono]` | Firma |
+Datos cargados: destinatario (Departamento Comercial, Espacio Riesco, Santiago de Chile),
+fecha de emisión (4 de septiembre de 2026), fechas del evento (12 y 13 de septiembre de 2026),
+salas y metrajes, aforo confirmado (1.600), proyección 2027 (3.000–4.000) y firma
+(Alejandra Millán, Directora de Logística).
 
-> Ya completados: destinatario (Departamento Comercial, Espacio Riesco), fecha de emisión (4 de septiembre de 2026), fechas del evento (12 y 13 de septiembre de 2026), salas y metrajes, aforo confirmado (1.600) y proyección 2027 (3.000–4.000).
->
 > Si la carta se envía otro día, actualizar la fecha de emisión en `generar-carta.js`.
 
 ## Regenerar el .docx

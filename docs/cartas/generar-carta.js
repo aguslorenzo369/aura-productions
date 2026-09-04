@@ -121,10 +121,10 @@ const doc = new Document({
         spacing: { after: 60 },
         border: { top: { style: BorderStyle.SINGLE, size: 6, color: 'B0B0B0', space: 6 } },
         indent: { right: convertInchesToTwip(3.6) },
-        children: [t('[Nombre y apellido]', { bold: true })],
+        children: [t('Alejandra Millán', { bold: true })],
       }),
-      p([t('[Cargo] — Aura Productions')], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
-      p([t('hola@auraproductions.com.ar  ·  [Teléfono]', { color: '7A7A7A', size: 19 })], { alignment: AlignmentType.LEFT }),
+      p([t('Directora de Logística — Aura Productions')], { alignment: AlignmentType.LEFT, spacing: { after: 0 } }),
+      p([t('hola@auraproductions.com.ar  ·  +57 305 816 1106', { color: '7A7A7A', size: 19 })], { alignment: AlignmentType.LEFT }),
     ],
   }],
 });
