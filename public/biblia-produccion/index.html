@@ -126,7 +126,7 @@ svg text{font-family:var(--f-m);fill:var(--text)}
 .cat-h h3{font-family:var(--f-d);font-size:27px;font-weight:500}
 .cat-h .c{font-family:var(--f-m);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-left:auto}
 .cat-h p{margin:0;color:var(--text2);font-size:14.5px;max-width:52ch}
-.ficha{display:grid;grid-template-columns:242px 1fr;gap:30px;padding:30px 0 32px;border-bottom:1px solid var(--line)}
+.ficha{display:grid;grid-template-columns:300px 1fr;gap:36px;padding:30px 0 32px;border-bottom:1px solid var(--line)}
 .shot{margin:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--panel2);cursor:zoom-in;transition:border-color .15s}
 .shot:hover,.shot:focus-visible{border-color:var(--gold)}
 .shot img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--panel2)}
@@ -156,7 +156,7 @@ svg text{font-family:var(--f-m);fill:var(--text)}
 .f-body p b{color:var(--text);font-weight:500}
 .f-body p strong{color:var(--text);font-weight:700}
 .f-body p>i{font-style:normal;font-family:var(--f-m);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:3px}
-.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:0;margin:6px 0 0;border-top:1px solid var(--line);border-left:1px solid var(--line);background:var(--panel)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:0;margin:6px 0 0;border-top:1px solid var(--line);border-left:1px solid var(--line);background:var(--panel)}
 .specs div{padding:9px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .specs dt{font-family:var(--f-m);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 .specs dd{margin:3px 0 0;font-family:var(--f-m);font-size:12.5px;color:var(--text);line-height:1.45;font-variant-numeric:tabular-nums}
@@ -169,6 +169,26 @@ svg text{font-family:var(--f-m);fill:var(--text)}
 .warn>b{display:block;font-family:var(--f-m);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--brick);margin-bottom:5px}
 .warn li b{color:var(--text);font-weight:700}
 .warn ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:5px}
+
+
+/* ---------- índice visual por categoría ---------- */
+.cat-h{align-items:flex-end;padding-bottom:12px;border-bottom-width:2px}
+.cat-h h3{font-size:31px}
+.index{display:grid;grid-template-columns:repeat(auto-fill,minmax(134px,1fr));gap:10px;margin:22px 0 10px}
+.ix{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:2px;
+  padding:0;text-decoration:none;overflow:hidden;transition:background .12s,border-color .12s}
+.ix:hover,.ix:focus-visible{background:var(--panel2);border-color:var(--gold)}
+.ix .th{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--panel2)}
+.ix .gl{width:100%;aspect-ratio:4/3;display:grid;place-items:center;background:var(--panel2)}
+.ix .gl svg{width:38px;height:38px;color:var(--gold);opacity:.75}
+.ix b{display:block;padding:8px 9px 2px;font-size:12px;font-weight:500;line-height:1.3;color:var(--text)}
+.ix span{display:block;margin-top:auto;padding:3px 9px 9px;font-family:var(--f-m);font-size:9.5px;line-height:1.35;color:var(--muted)}
+.ix:hover b{color:var(--gold)}
+.ix.gap span{color:var(--amber)}
+.ix.gap span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--amber);margin-right:5px;vertical-align:1px}
+/* ---------- rail activo ---------- */
+.rail a.on{color:var(--gold);background:var(--panel2)}
 
 /* ---------- jerga / checklist ---------- */
 .gloss{columns:2 300px;column-gap:34px;border-top:1px solid var(--line)}
@@ -816,11 +836,20 @@ function shot(f){
 
 host.innerHTML=CATS.map(cat=>{
   const items=D.filter(f=>f.c===cat.id);
+  const key=f=>(f.n+' '+f.en+' '+f.j+' '+f.qn+' '+f.mk).toLowerCase().replace(/<[^>]+>/g,' ');
+  const fid=(f,i)=>`f-${cat.id}-${i}`;
   return `<section class="cat" id="${cat.id}">
     <div class="cat-h"><h3>${cat.t}</h3><span class="c">${items.length} fichas</span></div>
     <p style="color:var(--text2);font-size:15px;margin:14px 0 0;max-width:70ch">${cat.d}</p>
-    ${items.map(f=>`
-    <article class="ficha" data-k="${(f.n+' '+f.en+' '+f.j+' '+f.qn+' '+f.mk).toLowerCase().replace(/<[^>]+>/g,' ')}">
+    <div class="index">${items.map((f,i)=>{
+      const im=IMG[IMMAP[f.n]];
+      const gap=/no cotizado|confirmar|faltante/i.test(f.q+' '+f.qn);
+      return `<a class="ix${gap?' gap':''}" href="#${fid(f,i)}" data-k="${key(f)}">${
+        im?`<img class="th" src="${im.d}" alt="" loading="lazy">`
+          :`<span class="gl"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-${f.g}"></use></svg></span>`
+      }<b>${f.n}</b><span>${f.q}</span></a>`;}).join('')}</div>
+    ${items.map((f,i)=>`
+    <article class="ficha" id="${fid(f,i)}" data-k="${key(f)}">
       <div class="glyph">
         ${shot(f)}
         <div class="qrow"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-${f.g}"></use></svg><div class="qty">${f.q}<em>${f.qn}</em></div></div>
@@ -858,6 +887,16 @@ document.addEventListener('keydown',e=>{
     e.preventDefault(); document.activeElement.click();}
 });
 
+
+const railLinks=[...document.querySelectorAll('.rail a')];
+const targets=railLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(!e.isIntersecting) return;
+    railLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+  });
+},{rootMargin:'-15% 0px -75% 0px'});
+targets.forEach(t=>spy.observe(t));
+
 const q=document.getElementById('q'),empty=document.getElementById('empty');
 q.addEventListener('input',()=>{
   const v=q.value.trim().toLowerCase();
@@ -865,6 +904,9 @@ q.addEventListener('input',()=>{
   document.querySelectorAll('.ficha').forEach(el=>{
     const on=!v||el.dataset.k.includes(v);
     el.classList.toggle('hidden',!on); if(on)hits++;
+  });
+  document.querySelectorAll('.ix').forEach(el=>{
+    el.classList.toggle('hidden',!(!v||el.dataset.k.includes(v)));
   });
   document.querySelectorAll('.cat').forEach(sec=>{
     sec.classList.toggle('hidden',!sec.querySelector('.ficha:not(.hidden)'));
