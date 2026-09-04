@@ -49,37 +49,27 @@ CATERING
 Food trucks,Sin costo,No los paga la producción.,Bonificado,USD,,,,100%,0.0,,0.0,Confirmado por Agustina
 Subtotal Catering,,,,,,,,,14569.0,33820.0,-19251.0
 PRODUCCIÓN
-Unifilas,A definir,"Estimado del sheet, sin cotización",Sin cotizar,USD,,,,100%,1200.0,1200.0,0.0,Hoja Argentina del master
 Vallado (500 vallas),Bonificado por técnica,Las 500 vallas las regala el proveedor de técnica. Estaban presupuestadas en US$1.250.,Bonificado,USD,,,,100%,0.0,1250.0,-1250.0,Negociación de Agustina
-DJ,A definir,Estimado del sheet,Sin cotizar,USD,,,,100%,500.0,500.0,0.0,Hoja Argentina del master
-Escoltas (2),A definir,Estimado del sheet,Sin cotizar,USD,,,,100%,1000.0,1000.0,0.0,Hoja Argentina del master
-Master Mind Hit,A definir,Sala adicional,Sin cotizar,USD,,,,100%,3000.0,3000.0,0.0,Hoja Argentina del master
-Personal logístico,A definir,La hoja del master lo tiene en US$0,Sin cotizar,USD,,,,100%,0.0,,0.0,Hoja Argentina del master · valor en cero
 Intercoms,Proveedor a confirmar,"Ya comprados y pagados al 100%. El master los tenía en 2 cuotas al 24/08 y 23/09, sin abonar.",Cerrado,USD,560.0,sin IVA,560.0,100%,560.0,,560.0,Confirmado por Agustina el 03/09
-Subtotal Producción,,,,,,,,,6260.0,6950.0,-690.0
-EQUIPO
-Vuelos del equipo,Sin cotizar,No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
-Alojamiento del equipo,Sin cotizar,No hay cotización de hotel en Buenos Aires en el correo ni monto en la hoja del master,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
-Traslados internos y viáticos,Sin cotizar,Sin registro,Sin cotizar,USD,,,,100%,0.0,,0.0,No encontrado
-Subtotal Equipo,,,,,,,,,0.0,0.0,0.0
+Subtotal Producción,,,,,,,,,560.0,1250.0,-690.0
 
-COSTO TOTAL DEL EVENTO,,,,,,,,,242347.21,176159.0,66188.21
+COSTO TOTAL DEL EVENTO,,,,,,,,,236647.21,170459.0,66188.21
 
 COSTO POR PERSONA
 Base de cálculo,Personas,Costo por persona (USD),,Qué incluye
-Aforo general,5000,48.47,,Asistentes de entrada general.
-VIP,1000,242.35,,Asistentes VIP.
-Asistentes pagos (general + VIP),6000,40.39,,La base más útil para fijar el precio de la entrada.
-Mastermind del martes,246,985.15,,Actividad aparte.
-Total de personas en el predio,6108,39.68,,Pagos + 100 de staff + 8 del equipo interno.
+Aforo general,5000,47.33,,Asistentes de entrada general.
+VIP,1000,236.65,,Asistentes VIP.
+Asistentes pagos (general + VIP),6000,39.44,,La base más útil para fijar el precio de la entrada.
+Mastermind del martes,246,961.98,,Actividad aparte.
+Total de personas en el predio,6108,38.74,,Pagos + 100 de staff + 8 del equipo interno.
 
 ESTADO DE LOS RUBROS,,USD
 Cerrado,,106833.17
 Contratado,,92416.53
 Cotizado,,36801.49
-Sin cotizar,,5700.0
 Alternativa,,1402.16
 En negociación,,596.03
+Sin cotizar,,0.0
 Bonificado,,0.0
 Otro pais,,0.0
 Reemplazado,,0.0

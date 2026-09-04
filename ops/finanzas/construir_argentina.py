@@ -197,31 +197,12 @@ ITEMS = [
   USD_, 0.0, 0.0, 'Reemplazado', 8689.0,
   'Hoja Argentina del master · reemplazado por las facturas 2601009 a 2601019', 1.0),
  # ---------------- PRODUCCIÓN ----------------
- ('Producción', 'Unifilas', 'A definir', 'Estimado del sheet, sin cotización',
-  USD_, 0.0, 0.0, 'Sin cotizar', 1200.0, 'Hoja Argentina del master'),
  ('Producción', 'Vallado (500 vallas)', 'Bonificado por técnica',
   'Las 500 vallas las regala el proveedor de técnica. Estaban presupuestadas en US$1.250.',
   USD_, 0.0, 0.0, 'Bonificado', 1250.0, 'Negociación de Agustina'),
- ('Producción', 'DJ', 'A definir', 'Estimado del sheet',
-  USD_, 0.0, 0.0, 'Sin cotizar', 500.0, 'Hoja Argentina del master'),
- ('Producción', 'Escoltas (2)', 'A definir', 'Estimado del sheet',
-  USD_, 0.0, 0.0, 'Sin cotizar', 1000.0, 'Hoja Argentina del master'),
- ('Producción', 'Master Mind Hit', 'A definir', 'Sala adicional',
-  USD_, 0.0, 0.0, 'Sin cotizar', 3000.0, 'Hoja Argentina del master'),
- ('Producción', 'Personal logístico', 'A definir', 'La hoja del master lo tiene en US$0',
-  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'Hoja Argentina del master · valor en cero'),
  ('Producción', 'Intercoms', 'Proveedor a confirmar',
   'Ya comprados y pagados al 100%. El master los tenía en 2 cuotas al 24/08 y 23/09, sin abonar.',
   USD_, 560.0, 0.0, 'Cerrado', 0.0, 'Confirmado por Agustina el 03/09'),
- # ---------------- EQUIPO ----------------
- ('Equipo', 'Vuelos del equipo', 'Sin cotizar',
-  'No hay ninguna cotización de vuelos a Buenos Aires en el correo ni monto en la hoja del master',
-  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'No encontrado'),
- ('Equipo', 'Alojamiento del equipo', 'Sin cotizar',
-  'No hay cotización de hotel en Buenos Aires en el correo ni monto en la hoja del master',
-  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'No encontrado'),
- ('Equipo', 'Traslados internos y viáticos', 'Sin cotizar', 'Sin registro',
-  USD_, 0.0, 0.0, 'Sin cotizar', 0.0, 'No encontrado'),
 ]
 
 # ============================================================================

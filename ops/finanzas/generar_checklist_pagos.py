@@ -88,14 +88,6 @@ FILAS = [
  ('5 · RESTO DEL SALDO — sin fecha acordada', 'Servicios', 'Higia Eventos', 'Limpieza — saldo del 50%',
   1349.20, 'contra el evento', 'Transferencia', 'Malena Carrizo', 'malena.carrizo@higiaeventos.com', ''),
 
- ('6 · SIN COTIZAR — pedir presupuesto', 'Producción', 'A definir', 'Master Mind Hit (sala adicional)',
-  3000.00, 'pedir', '—', '—', '—', 'Estimado de la planilla, sin cotización.'),
- ('6 · SIN COTIZAR — pedir presupuesto', 'Producción', 'A definir', 'Unifilas',
-  1200.00, 'pedir', '—', '—', '—', 'Estimado de la planilla.'),
- ('6 · SIN COTIZAR — pedir presupuesto', 'Producción', 'A definir', 'Escoltas (2)',
-  1000.00, 'pedir', '—', '—', '—', 'Estimado de la planilla.'),
- ('6 · SIN COTIZAR — pedir presupuesto', 'Producción', 'A definir', 'DJ',
-  500.00, 'pedir', '—', '—', '—', 'Estimado de la planilla.'),
  ('6 · SIN COTIZAR — pedir presupuesto', 'Servicios', 'A definir', 'Ecobaños',
   0.00, 'pedir', '—', '—', '—', 'Decidido que van ecobaños. Sin cotizar: hoy entra en cero.'),
  ('6 · SIN COTIZAR — pedir presupuesto', 'Merch', 'A definir', 'Marquetería y enmarcado',
@@ -104,8 +96,6 @@ FILAS = [
   0.00, 'pedir', '—', '—', '—', 'Lo único del merch que las facturas no cubren.'),
  ('6 · SIN COTIZAR — pedir presupuesto', 'Mobiliario', 'A definir', 'Replanteo de sillas con ingeniero',
   0.00, 'pedir', '—', '—', '—', 'Va aparte de la dirección técnica de La Rural.'),
- ('6 · SIN COTIZAR — pedir presupuesto', 'Equipo', 'A definir', 'Vuelos, alojamiento y traslados del equipo (8 personas)',
-  0.00, 'pedir', '—', '—', '—', 'El hueco más grande: no hay cotización ni estimado.'),
 ]
 
 PAGADO = 55891.15
