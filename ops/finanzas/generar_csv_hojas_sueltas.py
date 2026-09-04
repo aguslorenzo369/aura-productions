@@ -88,7 +88,7 @@ NOTAS = {
     'Contratado': 'Sede, las nueve facturas de merch e intercoms.',
     'Cotizado': 'Sillas, WiFi, seguridad, servicio médico, limpieza, retiro de residuos y seguro.',
     'En negociación': 'Montaje, acomodación y desmontaje de las sillas.',
-    'Sin cotizar': 'Vuelos, alojamiento, ecobaños, marquetería, replanteo, unifilas, DJ, escoltas, Master Mind, personal logístico.',
+    'Sin cotizar': 'Ecobaños, marquetería, replanteo de sillas y cheques/escarapelas/diplomas. Definidos por Agustina, todavía sin precio.',
     'Alternativa': 'Cotización descartada de Blocko. NO suma al costo.',
     'Bonificado': 'Vallas, efectos especiales y food trucks: sin cargo.',
     'Otro pais': 'Gráfica de Uruguay. NO suma al costo de Argentina.',
