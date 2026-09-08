@@ -1,0 +1,830 @@
+<title>Cumbre Medellín</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;700&display=swap">
+
+<style>
+  :root{
+    --ink:#08080F;
+    --surface:#0D0D14;
+    --surface-2:#12121B;
+    --gold:#C9A84C;
+    --gold-light:#E8C97A;
+    --gold-dark:#A07830;
+    --text:#EFEBE1;
+    --muted:#928C7C;
+    --muted-dim:#6A6558;
+    --line:rgba(201,168,76,.22);
+    --line-soft:rgba(201,168,76,.10);
+    --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+    --sans:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --wrap:1120px;
+    --read:70ch;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:var(--gold);color:var(--ink)}
+  a{color:var(--gold-light);text-decoration:none;border-bottom:1px solid var(--line)}
+  a:hover{border-bottom-color:var(--gold)}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+  /* ---------- shell ---------- */
+  .wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:28px}
+  .read{max-width:var(--read)}
+
+  section.band{padding-block:76px;border-top:1px solid var(--line-soft)}
+  section.band:first-of-type{border-top:0}
+
+  .eyebrow{
+    font-family:var(--sans);font-size:10px;font-weight:500;
+    letter-spacing:.35em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:14px;margin-bottom:26px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
+  h2{font-size:clamp(29px,4.2vw,44px);line-height:1.12;letter-spacing:-.01em}
+  h3{font-size:22px;line-height:1.25}
+  h4{font-size:17px;line-height:1.3}
+  p{margin:0}
+  .lede{font-size:19px;line-height:1.6;color:#CFC9BC;font-weight:300}
+  .note{font-size:13px;line-height:1.6;color:var(--muted)}
+  .tiny{font-size:11.5px;letter-spacing:.06em;color:var(--muted-dim);line-height:1.55}
+  .stack{display:flex;flex-direction:column;gap:20px}
+  .stack-sm{display:flex;flex-direction:column;gap:10px}
+  .stack-lg{display:flex;flex-direction:column;gap:38px}
+  em{font-family:var(--serif);font-style:italic;color:var(--gold-light)}
+  strong{font-weight:500;color:#fff}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding-block:96px 84px;
+    background:
+      radial-gradient(120% 90% at 50% -10%, rgba(201,168,76,.14), transparent 62%),
+      linear-gradient(180deg,#0A0A12,var(--ink));
+  }
+  .ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:190px;display:block}
+  .hero .wrap{position:relative;z-index:1}
+  .brandline{
+    display:flex;align-items:center;gap:12px;
+    font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);font-weight:500;
+  }
+  .brandline b{color:var(--gold);font-weight:500}
+  .hero-title{
+    font-family:var(--serif);
+    font-size:clamp(62px,14vw,148px);
+    line-height:.92;letter-spacing:-.02em;
+    margin:26px 0 0;
+    background:linear-gradient(175deg,var(--gold-light) 8%,var(--gold) 48%,var(--gold-dark) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,26px);color:#D8D2C4;margin-top:14px}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:0;margin-top:44px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .hero-meta div{
+    flex:1 1 170px;padding:18px 22px 18px 0;
+    border-right:1px solid var(--line-soft);
+  }
+  .hero-meta div:last-child{border-right:0}
+  .hero-meta dt{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-dim);margin-bottom:7px}
+  .hero-meta dd{margin:0;font-size:16px;color:var(--text);font-weight:400}
+
+  /* ---------- generic grid ---------- */
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+  .panel{background:var(--surface);border:1px solid var(--line-soft);padding:26px 24px;display:flex;flex-direction:column;gap:12px}
+  .panel h4{color:var(--gold-light)}
+
+  /* ---------- days ---------- */
+  .day{display:grid;grid-template-columns:190px 1fr;gap:32px;padding-block:34px;border-top:1px solid var(--line-soft)}
+  .day:first-of-type{border-top:0;padding-top:6px}
+  @media(max-width:760px){.day{grid-template-columns:1fr;gap:16px}}
+  .day-key{display:flex;flex-direction:column;gap:6px}
+  .day-name{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+  .day-date{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .day-alt{font-size:11px;letter-spacing:.14em;color:var(--muted-dim);font-variant-numeric:tabular-nums}
+
+  .runsheet{display:flex;flex-direction:column;gap:0}
+  .slot{display:grid;grid-template-columns:104px 1fr;gap:18px;padding:11px 0;border-bottom:1px dotted rgba(201,168,76,.14)}
+  .slot:last-child{border-bottom:0}
+  .slot time{font-variant-numeric:tabular-nums;font-size:13px;color:var(--gold);letter-spacing:.04em;font-weight:400}
+  .slot .what{font-size:14.5px;color:var(--text)}
+  .slot .what span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  @media(max-width:480px){.slot{grid-template-columns:76px 1fr;gap:12px}}
+
+  /* ---------- tables ---------- */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line-soft);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:660px;font-size:13.5px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid rgba(201,168,76,.09);vertical-align:top}
+  thead th{
+    font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+    font-weight:500;background:var(--surface-2);border-bottom:1px solid var(--line);white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:0}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  th.num{text-align:right}
+  .venue-name{color:var(--text);font-weight:400;display:block}
+  .venue-name small{display:block;color:var(--muted-dim);font-size:11.5px;font-weight:300;letter-spacing:.03em;margin-top:3px}
+  tr.total td{background:var(--surface-2);color:#fff;font-weight:500;border-top:1px solid var(--line)}
+  tr.total td:first-child{color:var(--gold-light)}
+  .pick{color:var(--gold);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+
+  /* ---------- scenario cards ---------- */
+  .scenarios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  @media(max-width:820px){.scenarios{grid-template-columns:1fr}}
+  .scn{background:var(--surface);border:1px solid var(--line-soft);padding:28px 24px;display:flex;flex-direction:column;gap:14px;position:relative}
+  .scn.reco{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,168,76,.07),var(--surface) 55%)}
+  .scn .tag{position:absolute;top:-1px;right:20px;background:var(--gold);color:var(--ink);font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 10px;font-weight:700}
+  .scn-name{font-family:var(--serif);font-size:26px;color:var(--gold-light)}
+  .scn-pp{font-size:44px;font-family:var(--serif);color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+  .scn-pp small{font-size:13px;font-family:var(--sans);color:var(--muted);letter-spacing:.1em;display:block;margin-top:8px;font-weight:300}
+  .scn-total{font-size:13px;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:12px;font-variant-numeric:tabular-nums}
+  .scn ul{margin:0;padding-left:16px;color:var(--muted);font-size:13px;line-height:1.7;display:flex;flex-direction:column;gap:5px}
+  .scn ul li::marker{color:var(--gold-dark)}
+
+  /* ---------- summit chips ---------- */
+  .summits{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  @media(max-width:940px){.summits{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(max-width:560px){.summits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .summit{
+    border:1px solid var(--line-soft);background:var(--surface);
+    padding:16px 14px;display:flex;flex-direction:column;gap:5px;min-height:112px;
+  }
+  .summit b{font-family:var(--serif);font-size:16px;color:var(--gold-light);font-weight:400;line-height:1.2}
+  .summit .alt{font-size:11px;color:var(--gold);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .summit .loc{font-size:11px;color:var(--muted-dim);line-height:1.45;margin-top:auto}
+
+  /* ---------- name tent mock ---------- */
+  .tent{
+    border:1px solid var(--line);background:linear-gradient(180deg,var(--surface-2),var(--surface));
+    padding:30px 26px;display:flex;flex-direction:column;gap:10px;
+  }
+  .tent .t-top{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-dark)}
+  .tent .t-name{font-family:var(--serif);font-size:34px;color:#fff;line-height:1.05}
+  .tent .t-rule{height:1px;background:var(--line);margin-block:4px}
+  .tent .t-foot{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .tent.back{background:var(--surface)}
+  .tent.back .t-prompt{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--gold-light)}
+  .tent .t-lines{display:flex;flex-direction:column;gap:13px;margin-top:8px}
+  .tent .t-lines i{display:block;height:1px;background:rgba(201,168,76,.18)}
+
+  /* ---------- kit list ---------- */
+  .kititem{display:grid;grid-template-columns:1fr auto;gap:14px;padding:13px 0;border-bottom:1px dotted rgba(201,168,76,.14);align-items:baseline}
+  .kititem:last-child{border-bottom:0}
+  .kititem b{font-weight:400;color:var(--text);font-size:14.5px}
+  .kititem span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  .kititem .price{color:var(--gold);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ---------- timeline ---------- */
+  .tl{display:flex;flex-direction:column}
+  .tl-row{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:15px 0;border-top:1px solid var(--line-soft)}
+  .tl-row:first-child{border-top:0}
+  @media(max-width:600px){.tl-row{grid-template-columns:88px 1fr;gap:14px}}
+  .tl-when{display:flex;flex-direction:column;gap:3px}
+  .tl-when b{color:var(--gold);font-size:14px;font-weight:500;font-variant-numeric:tabular-nums}
+  .tl-when span{font-size:11px;color:var(--muted-dim);letter-spacing:.08em}
+  .tl-what{font-size:14px;color:var(--text)}
+  .tl-what span{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+  .crit{color:var(--gold-light);font-size:10px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line);padding:2px 7px;display:inline-block;margin-left:8px;vertical-align:middle}
+
+  /* ---------- decisions ---------- */
+  .dec{display:grid;grid-template-columns:34px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line-soft)}
+  .dec:first-child{border-top:0}
+  .dec-n{font-family:var(--serif);font-size:24px;color:var(--gold-dark);line-height:1}
+  .dec-q{font-size:15.5px;color:var(--text)}
+  .dec-q span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+
+  /* ---------- callout ---------- */
+  .callout{border-left:2px solid var(--gold);padding:4px 0 4px 22px;display:flex;flex-direction:column;gap:8px}
+  .callout .k{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+
+  footer.foot{padding-block:56px 72px;border-top:1px solid var(--line);background:var(--surface)}
+  .foot-grid{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:flex-end}
+  .foot-mark{font-family:var(--serif);font-size:26px;color:var(--gold);letter-spacing:.02em}
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<!-- ========================= HERO ========================= -->
+<header class="hero">
+  <svg class="ridge" viewBox="0 0 1440 190" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0,190 L0,138 L118,96 L212,131 L336,58 L432,104 L560,22 L676,86 L790,44 L918,112 L1036,66 L1160,120 L1272,84 L1370,126 L1440,102 L1440,190 Z" fill="#0A0A12"></path>
+    <path d="M0,190 L0,158 L118,124 L212,152 L336,96 L432,134 L560,66 L676,118 L790,84 L918,140 L1036,102 L1160,148 L1272,118 L1370,152 L1440,134 L1440,190 Z" fill="none" stroke="rgba(201,168,76,.28)" stroke-width="1"></path>
+  </svg>
+
+  <div class="wrap">
+    <div class="brandline"><b>Aura Productions</b> <span>·</span> <span>Propuesta de producción</span></div>
+    <h1 class="hero-title">CUMBRE</h1>
+    <p class="hero-sub">Mastermind del Círculo Interno · Javi Rodríguez</p>
+
+    <dl class="hero-meta">
+      <div><dt>Fechas</dt><dd>20 – 22 octubre 2026</dd></div>
+      <div><dt>Formato</dt><dd>2 días y medio</dd></div>
+      <div><dt>Miembros</dt><dd>70 confirmados</dd></div>
+      <div><dt>Sede</dt><dd>El Poblado, Medellín</dd></div>
+      <div><dt>Estado</dt><dd>Pendiente de aprobación</dd></div>
+    </dl>
+  </div>
+</header>
+
+<!-- ========================= EL ESTÁNDAR ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">El estándar</div>
+      <h2>Setenta personas que pagaron USD 30.000<br>para estar en esta sala.</h2>
+      <div class="read stack">
+        <p class="lede">Eso significa que nada en estos dos días y medio puede parecer improvisado. No porque haya que gastar más, sino porque el estándar de un Círculo Interno no se compra: se ejecuta.</p>
+        <p class="note">Un miembro del Círculo Interno no recuerda el presupuesto del evento. Recuerda si el café estaba caliente a las 4 de la tarde, si su nombre estaba bien escrito, si la sala tenía aire, si alguien lo esperaba en la puerta. La percepción de lujo se construye en la operación, no en la decoración — y ahí es donde protegemos el bolsillo del cliente sin bajar un milímetro el estándar.</p>
+      </div>
+    </div>
+
+    <div class="grid g4">
+      <div class="panel"><h4>Sin fricción</h4><p class="note">Cero filas, cero esperas, cero “¿dónde queda?”. Anfitrión en cada punto de transición.</p></div>
+      <div class="panel"><h4>Sin vacíos</h4><p class="note">El café nunca se acaba. La sala nunca queda a oscuras. El silencio nunca es incómodo.</p></div>
+      <div class="panel"><h4>Sin sorpresas malas</h4><p class="note">Plan B escrito para clima, energía, sonido y proveedor caído. Las únicas sorpresas son las que diseñamos.</p></div>
+      <div class="panel"><h4>Con memoria</h4><p class="note">Cada miembro se va con algo físico, algo escrito y algo grabado. El evento sigue existiendo después del evento.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CONCEPTO ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Concepto</div>
+      <h2>Medellín es una ciudad que se mide en altura.</h2>
+      <div class="read stack">
+        <p class="lede">El valle de Aburrá está a 1.495 metros. Todo lo que rodea la ciudad sube. Tomamos esa geografía como estructura narrativa de los tres movimientos del encuentro.</p>
+        <p class="note">No es una metáfora decorativa: define el ritmo de la agenda, el nombre de cada mesa, la curva de energía de cada jornada y el momento exacto donde va cada sorpresa. Un concepto sirve cuando toma decisiones de producción por vos.</p>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="panel">
+        <div class="tiny">Movimiento I · Lunes tarde</div>
+        <h4>BASE</h4>
+        <p class="note">Se arma el campamento. Nadie trabaja todavía. Se conocen, se miden, se relajan. Cóctel de bienvenida sin alcohol.</p>
+      </div>
+      <div class="panel">
+        <div class="tiny">Movimiento II · Martes</div>
+        <h4>ASCENSO</h4>
+        <p class="note">El día duro. Contenido denso, hot seats, trabajo real. El almuerzo sorpresa rompe la jornada justo cuando la energía cae.</p>
+      </div>
+      <div class="panel">
+        <div class="tiny">Movimiento III · Miércoles</div>
+        <h4>CUMBRE</h4>
+        <p class="note">Visión, compromisos a 12 meses y cierre. Cena de gala y fiesta consciente como descenso ritual, no como after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= AGENDA ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Arquitectura de los 2,5 días</div>
+      <h2>Guion operativo</h2>
+      <p class="lede read">Estructura propuesta. Los bloques de contenido los define Javi; lo que fijamos acá es el marco, las transiciones y dónde cae cada momento producido.</p>
+    </div>
+
+    <div class="stack">
+      <!-- DIA 0 -->
+      <div class="day">
+        <div class="day-key">
+          <div class="day-name">BASE</div>
+          <div class="day-date">Lunes 20 · tarde</div>
+          <div class="day-alt">1.495 m — piso del valle</div>
+        </div>
+        <div class="runsheet">
+          <div class="slot"><time>15:00</time><div class="what">Montaje completo terminado y sala congelada<span>Prueba de sonido, luces, proyección y streaming interno cerrada antes del primer invitado</span></div></div>
+          <div class="slot"><time>17:00</time><div class="what">Acreditación y entrega del kit<span>Dos estaciones · escarapela de cuero grabada · foto de perfil opcional</span></div></div>
+          <div class="slot"><time>18:00</time><div class="what">Cóctel de bienvenida sin alcohol<span>Mixología botánica colombiana · música en vivo de bajo volumen · dinámica de networking dirigida</span></div></div>
+          <div class="slot"><time>19:15</time><div class="what">Palabras de apertura de Javi — 12 minutos<span>Marca el tono. No es contenido, es encuadre.</span></div></div>
+          <div class="slot"><time>20:30</time><div class="what">Cierre. Noche libre.<span>Se entrega mapa curado de El Poblado para quien quiera seguir</span></div></div>
+        </div>
+      </div>
+
+      <!-- DIA 1 -->
+      <div class="day">
+        <div class="day-key">
+          <div class="day-name">ASCENSO</div>
+          <div class="day-date">Martes 21 · día completo</div>
+          <div class="day-alt">2.100 m — la subida</div>
+        </div>
+        <div class="runsheet">
+          <div class="slot"><time>07:30</time><div class="what">Estación de café de origen abierta<span>Barista en vivo. La sala huele a café antes de que entre nadie.</span></div></div>
+          <div class="slot"><time>08:30</time><div class="what">Bloque I · Contenido central</div></div>
+          <div class="slot"><time>10:30</time><div class="what">Pausa activa — 20 min<span>Coffee break permanente, no una fila de 70 personas por un termo</span></div></div>
+          <div class="slot"><time>10:50</time><div class="what">Bloque II · Hot seats por mesa</div></div>
+          <div class="slot"><time>13:00</time><div class="what">Almuerzo sorpresa colombiano <span class="crit" style="margin:6px 0 0">Sorpresa 1</span><span>La sala se abre a un montaje que no estaba ahí a las 12:59</span></div></div>
+          <div class="slot"><time>14:45</time><div class="what">Bloque III · Trabajo en mesas</div></div>
+          <div class="slot"><time>16:30</time><div class="what">Pausa dulce<span>Postres colombianos + café. El bajón de las 16:30 es real y se combate con azúcar y movimiento.</span></div></div>
+          <div class="slot"><time>16:50</time><div class="what">Bloque IV · Cierre de jornada y tarea</div></div>
+          <div class="slot"><time>18:30</time><div class="what">Cierre. Noche libre.</div></div>
+        </div>
+      </div>
+
+      <!-- DIA 2 -->
+      <div class="day">
+        <div class="day-key">
+          <div class="day-name">CUMBRE</div>
+          <div class="day-date">Miércoles 22 · día completo + noche</div>
+          <div class="day-alt">3.100 m — Padre Amaya</div>
+        </div>
+        <div class="runsheet">
+          <div class="slot"><time>08:30</time><div class="what">Bloque V · Visión a 12 meses</div></div>
+          <div class="slot"><time>10:30</time><div class="what">Pausa</div></div>
+          <div class="slot"><time>10:50</time><div class="what">Bloque VI · Compromisos públicos<span>Cada miembro escribe su cumbre a 12 meses en el reverso de su cartel de mesa</span></div></div>
+          <div class="slot"><time>13:00</time><div class="what">Almuerzo ejecutivo premium<span>Servido en sala contigua, montaje rápido, sin perder el hilo</span></div></div>
+          <div class="slot"><time>14:30</time><div class="what">Bloque VII · Cierre de contenido</div></div>
+          <div class="slot"><time>16:30</time><div class="what">Ceremonia de cierre y foto oficial del Círculo<span>Foto grupal producida, no improvisada. Es el activo de marketing del año.</span></div></div>
+          <div class="slot"><time>17:30</time><div class="what">Ventana de descanso — traslado a hotel<span>Shuttle privado. Se comunica dress code la noche anterior.</span></div></div>
+          <div class="slot"><time>19:30</time><div class="what">Cena de cierre en venue exclusivo</div></div>
+          <div class="slot"><time>22:00</time><div class="what">Fiesta consciente <span class="crit" style="margin:6px 0 0">Sorpresa 2</span><span>Apertura de círculo, cacao ceremonial, sound journey y pista. Sin alcohol, sin celulares en pista.</span></div></div>
+          <div class="slot"><time>01:15</time><div class="what">Descenso y cierre<span>Transporte de vuelta garantizado hasta el último invitado</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout read">
+      <div class="k">Punto a confirmar</div>
+      <p class="note">Cerraste el 21 y 22, pero el formato es de 2 días y medio. Esta propuesta ubica la media jornada la <strong>tarde del lunes 20</strong> (acreditación + cóctel de integración). Si el medio día va al 23 en la mañana, se reordena todo el guion y cambia el bloqueo de sala — necesito esa confirmación antes de pedir cotizaciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SEDE ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">La sede</div>
+      <h2>Cinco candidatos en El Poblado</h2>
+      <div class="read stack">
+        <p class="lede">Como el hotel es solo sede — no alojamos a los 70 — perdemos la palanca del bloque de habitaciones. El alquiler de salón se va a cobrar. La negociación se gana por el consumo de alimentos y bebidas, que en este evento es alto.</p>
+        <p class="note">Estrategia: entrar pidiendo <strong>salón en cortesía contra un mínimo garantizado de A&amp;B</strong>. Con 70 personas, dos almuerzos, coffee all-day y un cóctel, el consumo justifica pedirlo. Si no lo dan completo, apuntar a 50% de descuento sobre tarifa publicada.</p>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Candidato</th>
+            <th>Por qué está en la lista</th>
+            <th>Riesgo a verificar</th>
+            <th>Encaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="venue-name">Hotel Park 10<small>Cra 36B #11-12 · El Poblado</small></span></td>
+            <td>Boutique de lujo con foco declarado en eventos corporativos. Salones con luz natural y capacidad de 6 a 130 personas. Escala exacta para 70.</td>
+            <td>Altura de techo y ancho real del salón en montaje de mesas redondas. Pedir plano acotado.</td>
+            <td><span class="pick">Prioridad 1</span></td>
+          </tr>
+          <tr>
+            <td><span class="venue-name">Binn Hotel<small>El Poblado · cerca de Provenza</small></span></td>
+            <td>Producto nuevo, se está posicionando fuerte en corporativo de alto nivel. Cocina propia con menús gourmet personalizados. Ganas de cerrar negocio = mejor precio.</td>
+            <td>Confirmar capacidad real del salón principal para 70 en escuela o media luna.</td>
+            <td><span class="pick">Prioridad 2</span></td>
+          </tr>
+          <tr>
+            <td><span class="venue-name">Estelar Milla de Oro<small>Milla de Oro · El Poblado</small></span></td>
+            <td>Boutique de lujo en el corazón financiero. Salones equipados y dirección con prestigio: para un miembro que llega en taxi, “Milla de Oro” ya comunica.</td>
+            <td>Cadena grande = menos flexibilidad para producción externa. Preguntar por exclusividad de proveedores AV.</td>
+            <td>Sólido</td>
+          </tr>
+          <tr>
+            <td><span class="venue-name">Diez Hotel Categoría Colombia<small>Provenza · El Poblado</small></span></td>
+            <td>De los hoteles mejor armados de Medellín para eventos. A pie de Provenza: los miembros salen del salón y ya están en la zona.</td>
+            <td>Provenza es ruidosa y congestionada. Verificar aislamiento acústico y acceso vehicular.</td>
+            <td>Sólido</td>
+          </tr>
+          <tr>
+            <td><span class="venue-name">GHL Portón Medellín<small>Los Balsos · El Poblado</small></span></td>
+            <td>Tres salones modulables que se expanden hasta cinco; el Gran Balsos tiene 102 m² y capacidad para 90. Modularidad útil para sala principal + breakout.</td>
+            <td>102 m² para 70 personas queda justo con mesas. Sirve si se combinan módulos.</td>
+            <td>Alternativa</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny">Capacidades según información publicada por cada hotel a septiembre 2026. Requieren verificación con plano acotado y visita técnica antes de firmar.</p>
+
+    <div class="grid g3">
+      <div class="panel">
+        <h4>No negociable en la visita</h4>
+        <p class="note">Techo ≥ 3,2 m · sin columnas en el eje de visión · aire acondicionado independiente y regulable desde la sala · baños a menos de 40 m · montacargas o acceso de carga que no cruce el lobby.</p>
+      </div>
+      <div class="panel">
+        <h4>Fácil acceso, en concreto</h4>
+        <p class="note">Parqueadero propio con al menos 40 cupos · zona de descenso techada · llegada desde el aeropuerto JMC en menos de 50 min · dirección que un conductor encuentre sin llamar.</p>
+      </div>
+      <div class="panel">
+        <h4>Trampas de contrato</h4>
+        <p class="note">Descorche y exclusividad de AV · recargo por proveedor externo · horario límite de música · costo de montaje el día anterior · política de cancelación y fecha de corte del headcount.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= LA SALA ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">La sala</div>
+      <h2>Especificación técnica</h2>
+      <p class="lede read">Esto es lo que se le pide al hotel por escrito. Un pliego cerrado evita el 90% de las discusiones del día del evento.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h4>Montaje</h4>
+        <p class="note">Diez mesas redondas de 7 personas, media luna, todas mirando al escenario — nadie de espaldas. Área mínima útil 220 m². Pasillos de 1,2 m. Escenario bajo (20 cm) con dos accesos. Zona de mesas altas al fondo para quien necesite pararse.</p>
+      </div>
+      <div class="panel">
+        <h4>Audiovisual</h4>
+        <p class="note">Pantalla LED P2.6 de 5×3 m o proyección láser 10.000 lúmenes con pantalla de 5 m. Sonido line array para 70 con refuerzo trasero. Dos micrófonos de mano inalámbricos + una diadema para Javi + dos de repuesto cargados. Consola y técnico dedicado los dos días completos.</p>
+      </div>
+      <div class="panel">
+        <h4>Iluminación</h4>
+        <p class="note">Luz cálida regulable en sala (3.000 K) — no luz de oficina. Wash sobre escenario, recorte frontal para Javi. Capacidad de bajar sala al 30% para momentos de video sin dejar a la gente a oscuras para tomar notas.</p>
+      </div>
+      <div class="panel">
+        <h4>Confort y conectividad</h4>
+        <p class="note">Wi-Fi dedicado al evento con SSID propio y ancho de banda reservado. Tomas de corriente en cada mesa. Agua en botella de vidrio permanente. Temperatura 22–23 °C sostenida y medida.</p>
+      </div>
+    </div>
+
+    <div class="stack">
+      <h3>Coffee break permanente — cómo se hace bien</h3>
+      <div class="grid g3">
+        <div class="panel">
+          <h4>Estación abierta, no servicio por turnos</h4>
+          <p class="note">La instrucción al hotel es <em>open station</em> de 07:30 a 18:30, repuesta en continuo. No dos coffee breaks de 20 minutos. Es la diferencia entre un evento corporativo y un evento de Círculo Interno.</p>
+        </div>
+        <div class="panel">
+          <h4>Barista en vivo</h4>
+          <p class="note">Café de origen antioqueño con barista. Espresso, filtrado y frío. Costo marginal, impacto altísimo — es el detalle del que la gente habla.</p>
+        </div>
+        <div class="panel">
+          <h4>Rotación por franja</h4>
+          <p class="note">Mañana: fruta, pan de queso, cold brew. Media mañana: salado ligero. Tarde: dulce colombiano y té. Nunca el mismo plato dos veces en dos días.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CARTELES ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Carteles y nombres</div>
+      <h2>Diez cumbres colombianas, una por mesa</h2>
+      <div class="read stack">
+        <p class="lede">Setenta personas, diez mesas de siete. Cada mesa lleva el nombre de una cumbre real de Colombia — ocho de ellas antioqueñas — con su altura grabada.</p>
+        <p class="note">Funciona en tres niveles: es señalética (la gente encuentra su lugar), es identidad (“somos la mesa Cerro Tusa”) y es rotación (al cambiar de mesa cada bloque, se fuerza el networking sin que parezca dinámica de capacitación). Y ancla el evento en Colombia sin caer en el cliché del sombrero vueltiao.</p>
+      </div>
+    </div>
+
+    <div class="summits">
+      <div class="summit"><b>Cerro Tusa</b><span class="alt">1.730 m</span><span class="loc">Venecia, Antioquia · la pirámide natural más grande del mundo</span></div>
+      <div class="summit"><b>Padre Amaya</b><span class="alt">3.100 m</span><span class="loc">Medellín · el punto más alto de la ciudad</span></div>
+      <div class="summit"><b>Peñón de Guatapé</b><span class="alt">2.135 m</span><span class="loc">Guatapé, Antioquia</span></div>
+      <div class="summit"><b>Cerro Quitasol</b><span class="alt">2.880 m</span><span class="loc">Bello, Antioquia · guardián del norte del valle</span></div>
+      <div class="summit"><b>Alto de San Miguel</b><span class="alt">2.600 m</span><span class="loc">Caldas, Antioquia · nacimiento del río Medellín</span></div>
+      <div class="summit"><b>Farallones del Citará</b><span class="alt">3.900 m</span><span class="loc">Suroeste antioqueño</span></div>
+      <div class="summit"><b>Nudo de Paramillo</b><span class="alt">3.960 m</span><span class="loc">Norte de Antioquia · donde la cordillera se abre en tres</span></div>
+      <div class="summit"><b>Cerro Bravo</b><span class="alt">4.000 m</span><span class="loc">Cordillera Central</span></div>
+      <div class="summit"><b>Alto de Ventanas</b><span class="alt">2.700 m</span><span class="loc">Yarumal, Antioquia</span></div>
+      <div class="summit"><b>Cristóbal Colón</b><span class="alt">5.730 m</span><span class="loc">Sierra Nevada · el techo de Colombia</span></div>
+    </div>
+
+    <div class="stack">
+      <h3>El cartel individual: dos caras, dos funciones</h3>
+      <div class="grid g2">
+        <div class="tent">
+          <div class="t-top">Círculo Interno · Cumbre 2026</div>
+          <div class="t-name">Nombre del<br>miembro</div>
+          <div class="t-rule"></div>
+          <div class="t-foot">Mesa Cerro Tusa · 1.730 m</div>
+        </div>
+        <div class="tent back">
+          <div class="t-top">Reverso — se escribe el miércoles</div>
+          <p class="t-prompt">Mi cumbre a 12 meses:</p>
+          <div class="t-lines"><i></i><i></i><i></i></div>
+          <div class="t-rule"></div>
+          <div class="t-foot">Se lo lleva. Se lo llevamos si lo deja.</div>
+        </div>
+      </div>
+      <div class="grid g3">
+        <div class="panel"><h4>Materialidad</h4><p class="note">Cartulina algodón 600 g con hot stamping dorado sobre negro, o acrílico negro con vinilo espejo dorado en base de madera. El papel de mejor gramaje cuesta centavos y se siente en la mano.</p></div>
+        <div class="panel"><h4>Producción</h4><p class="note">70 unidades + 8 de repuesto sin nombre y un rotulador dorado en la mesa de producción para el inevitable invitado de último momento o nombre mal escrito.</p></div>
+        <div class="panel"><h4>Señalética de zona</h4><p class="note">Mismo sistema para: Acreditación · Estación de café · La Cumbre (sala principal) · Campamento Base (lounge) · Mirador (terraza / zona de fumadores).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= KIT ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Kit empresarial</div>
+      <h2>Colombiano, útil y con historia</h2>
+      <div class="read stack">
+        <p class="lede">Regla de composición: nada genérico con logo estampado. Un miembro que factura millones no necesita otra libreta con termo. Necesita algo que use, algo que se coma y algo que pueda contar.</p>
+        <p class="note">La estructura es <strong>1 objeto de uso diario + 1 producto colombiano de clase mundial + 1 pieza propia de la mastermind</strong>. Todo dentro de un contenedor que sirva después.</p>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h4>Composición propuesta — nivel Signature</h4>
+        <div style="display:flex;flex-direction:column">
+          <div class="kititem"><div><b>Portafolio o weekender de cuero colombiano</b><span>Vélez u otro taller antioqueño · grabado en seco con el sello del Círculo, sin logo impreso</span></div><div class="price">≈ 180.000</div></div>
+          <div class="kititem"><div><b>Café de origen de Antioquia</b><span>Pergamino o Café Velvet · lote único, molienda a pedido, etiqueta del evento</span></div><div class="price">≈ 55.000</div></div>
+          <div class="kititem"><div><b>Chocolate fino de aroma</b><span>Cacao Hunters · cacao colombiano premiado internacionalmente. Se come y se recuerda.</span></div><div class="price">≈ 45.000</div></div>
+          <div class="kititem"><div><b>Amenity botánico colombiano</b><span>Loto del Sur · el objeto que termina en el baño de la casa y sigue comunicando</span></div><div class="price">≈ 50.000</div></div>
+          <div class="kititem"><div><b>Cuaderno de trabajo de la Cumbre</b><span>Pieza propia, encuadernada, con la estructura de los tres movimientos y las hojas de trabajo de cada bloque</span></div><div class="price">≈ 85.000</div></div>
+          <div class="kititem"><div><b>Escarapela de cuero grabada</b><span>Reemplaza la escarapela plástica. Nadie tira una escarapela de cuero con su nombre.</span></div><div class="price">≈ 35.000</div></div>
+          <div class="kititem"><div><b>Empaque, armado y etiquetado</b><span>Caja rígida negra con cinta, tarjeta manuscrita, armado por lote</span></div><div class="price">≈ 30.000</div></div>
+        </div>
+        <p class="tiny" style="border-top:1px solid var(--line);padding-top:12px">Total aproximado COP 480.000 por kit · USD 120 · 70 unidades = USD 8.400. Rangos de mercado sujetos a cotización.</p>
+      </div>
+
+      <div class="stack">
+        <div class="panel">
+          <h4>Los tres niveles</h4>
+          <p class="note"><strong>Esencial — COP 340.000:</strong> se baja el cuero a un portadocumentos y se sostienen café, chocolate y cuaderno.<br><br><strong>Signature — COP 480.000:</strong> la composición de arriba. Es el punto donde el kit deja de parecer merch y empieza a parecer regalo.<br><br><strong>Icónico — COP 760.000:</strong> se suma pieza de autor colombiano (joyería o cerámica de diseñador) y el weekender completo.</p>
+        </div>
+        <div class="panel">
+          <h4>Camino de proveedores</h4>
+          <p class="note">Dos vías en paralelo: <strong>directo con marca</strong> (Vélez, Pergamino, Cacao Hunters, Loto del Sur tienen canal corporativo y mejor margen) y <strong>vía integrador</strong> (Markmelo, Servipromo, Proinco, Promo Pop) que arma, marca y entrega todo consolidado.<br><br>Recomendación: directo con las marcas ancla, integrador solo para el armado y la papelería. Ahorra entre 15% y 25% frente a comprar todo por catálogo promocional.</p>
+        </div>
+        <div class="panel">
+          <h4>Alerta de calendario</h4>
+          <p class="note">Los talleres de marcación en Medellín piden <strong>3 a 5 días hábiles desde aprobación del arte</strong>, pero el cuero personalizado y la producción de 70 piezas idénticas necesitan 3 a 4 semanas. Con 43 días al evento, el arte del kit tiene que estar aprobado en la primera semana.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= EXPERIENCIAS ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Las tres experiencias</div>
+      <h2>Dónde se juega el recuerdo</h2>
+      <p class="lede read">El contenido lo pone Javi. Estos tres momentos los ponemos nosotros, y son los que se cuentan cuando alguien pregunta “¿cómo estuvo Medellín?”.</p>
+    </div>
+
+    <!-- Coctel -->
+    <div class="stack">
+      <h3>Cóctel de bienvenida sin alcohol · lunes 20</h3>
+      <div class="grid g2">
+        <div class="stack-sm read">
+          <p class="note">Sin alcohol no significa jugo con soda. Significa una carta de mixología botánica con producto colombiano, servida por bartender, en cristalería de verdad. Cinco firmas, cada una con el nombre de un lugar de Antioquia, presentadas en carta impresa.</p>
+          <p class="note">La dinámica de integración va acá y es dirigida: cada persona recibe con su copa una tarjeta con el nombre de otro miembro de una mesa distinta y una pregunta específica. Nadie queda parado solo. En un grupo donde todos son alfa, la integración se diseña o no pasa.</p>
+        </div>
+        <div class="panel">
+          <h4>Carta de autor</h4>
+          <div style="display:flex;flex-direction:column">
+            <div class="kititem"><div><b>Aburrá</b><span>Lulo, hierbabuena, agua de coco, tónica</span></div></div>
+            <div class="kititem"><div><b>Guatapé</b><span>Corozo, romero, limón, soda artesanal</span></div></div>
+            <div class="kititem"><div><b>Arví</b><span>Feijoa, cardamomo, té verde frío</span></div></div>
+            <div class="kititem"><div><b>Antioquia</b><span>Panela ahumada, maracuyá, jengibre, tomillo</span></div></div>
+            <div class="kititem"><div><b>Nube</b><span>Gulupa, albahaca, cítricos, espuma de coco</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Almuerzo -->
+    <div class="stack">
+      <h3>Almuerzo sorpresa colombiano · martes 21</h3>
+      <div class="grid g3">
+        <div class="panel">
+          <h4>La mecánica de la sorpresa</h4>
+          <p class="note">A las 12:59 la sala anexa está cerrada. A las 13:00 se abre y aparece un montaje completo que no estaba ahí. Ese contraste es la sorpresa — no el menú. El montaje se arma durante el bloque de la mañana a puerta cerrada.</p>
+        </div>
+        <div class="panel">
+          <h4>Formato: mesa larga</h4>
+          <p class="note">Una sola mesa larga de 70 puestos con mantel de fique, cerámica artesanal y flores de la plaza Minorista. Comer todos en la misma mesa, una vez, hace algo que diez mesas redondas no hacen.</p>
+        </div>
+        <div class="panel">
+          <h4>Cocina paisa elevada</h4>
+          <p class="note">Bandeja paisa deconstruida en formato degustación, sancocho antioqueño servido de fogón, arepas de chócolo hechas al momento, frutas exóticas (mangostino, granadilla, pitahaya), mazamorra con panela y natilla de cierre.</p>
+        </div>
+      </div>
+      <p class="note read">Ambientación: cuarteto de cuerdas andinas colombianas — tiple, bandola y guitarra — en volumen de conversación. Nada de papayera ni de disfraz. La elegancia paisa existe y no lleva sombrero.</p>
+    </div>
+
+    <!-- Cena + fiesta -->
+    <div class="stack">
+      <h3>Cena de cierre y fiesta consciente · miércoles 22</h3>
+      <div class="grid g2">
+        <div class="panel">
+          <h4>Venue de la cena — tres caminos</h4>
+          <p class="note"><strong>Museo El Castillo</strong> (Loma de los Balsos, El Poblado): castillo con jardines franceses. Es la imagen más fuerte que se puede conseguir en Medellín. Verificar restricción horaria y de ruido — probablemente obliga a mover la fiesta.<br><br><strong>Restaurante de autor con salón privado</strong> (El Cielo, Oci.Mde, Carmen, Herbario): máximo nivel gastronómico, mínimo riesgo operativo, pero menos control del espacio.<br><br><strong>Venue de gran formato con vista</strong> (tipo Redman, Los Balsos): capacidad amplia, parqueadero propio, terraza con vista al valle y música en vivo. Permite cena y fiesta en la misma sede, que es la opción operativamente más limpia.</p>
+        </div>
+        <div class="panel">
+          <h4>La fiesta consciente — estructura</h4>
+          <div style="display:flex;flex-direction:column">
+            <div class="kititem"><div><b>22:00 · Apertura de círculo</b><span>Cacao ceremonial, 15 minutos. Marca que esto no es un after.</span></div></div>
+            <div class="kititem"><div><b>22:20 · Sound journey</b><span>Downtempo y percusión en vivo. Cuerpo antes que cabeza.</span></div></div>
+            <div class="kititem"><div><b>23:00 · Organic house</b><span>Sube la pista sin romper el clima</span></div></div>
+            <div class="kititem"><div><b>00:15 · Afro house — pico</b><span>El único momento de intensidad alta de los tres días</span></div></div>
+            <div class="kititem"><div><b>01:00 · Descenso</b><span>Ambient y cierre. La gente se va serena, no reventada.</span></div></div>
+          </div>
+          <p class="tiny" style="border-top:1px solid var(--line);padding-top:12px">Barra de elixires botánicos, kombucha y cacao. Luz cálida y velas, cero luz estroboscópica. Pista sin celulares, señalizada. Medellín tiene comunidad consolidada de ecstatic dance y ceremonia de cacao — hay DJs y facilitadores locales con experiencia real en este formato.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PRESUPUESTO ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Inversión</div>
+      <h2>Tres escenarios</h2>
+      <p class="lede read">Mismo evento, misma estructura, tres niveles de acabado. Todos incluyen imprevistos del 8% y honorarios de producción del 15%. No incluyen honorarios de Javi, vuelos ni alojamiento de los miembros.</p>
+    </div>
+
+    <div class="scenarios">
+      <div class="scn">
+        <div class="scn-name">Esencial</div>
+        <div class="scn-pp">527<small>USD por persona</small></div>
+        <div class="scn-total">Total USD 36.887<br>COP 147.549.600</div>
+        <ul>
+          <li>Sede 5★ con salón adecuado</li>
+          <li>Coffee break all-day</li>
+          <li>Kit COP 340.000</li>
+          <li>Cena en salón privado de restaurante</li>
+          <li>Fiesta con DJ y sonido estándar</li>
+        </ul>
+      </div>
+      <div class="scn reco">
+        <div class="tag">Recomendado</div>
+        <div class="scn-name">Signature</div>
+        <div class="scn-pp">774<small>USD por persona</small></div>
+        <div class="scn-total">Total USD 54.198<br>COP 216.791.100</div>
+        <ul>
+          <li>Sede luxury + barista en vivo</li>
+          <li>Kit COP 480.000 con marcas ancla</li>
+          <li>Almuerzo sorpresa con montaje completo</li>
+          <li>Cena en venue exclusivo</li>
+          <li>Fiesta consciente producida entera</li>
+          <li>Foto y video con reel de cierre</li>
+        </ul>
+      </div>
+      <div class="scn">
+        <div class="scn-name">Icónico</div>
+        <div class="scn-pp">1.171<small>USD por persona</small></div>
+        <div class="scn-total">Total USD 81.941<br>COP 327.763.800</div>
+        <ul>
+          <li>Venue patrimonial para la cena</li>
+          <li>Kit COP 760.000 con pieza de autor</li>
+          <li>Chef reconocido y menú firmado</li>
+          <li>Escenografía y LED de gran formato</li>
+          <li>Producción de show de cierre</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Rubro</th>
+            <th class="num">Esencial</th>
+            <th class="num">Signature</th>
+            <th class="num">Icónico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Alquiler sala principal · 2 días completos</td><td class="num">8.000.000</td><td class="num">12.000.000</td><td class="num">18.000.000</td></tr>
+          <tr><td>Coffee break estación abierta · 2 días</td><td class="num">8.400.000</td><td class="num">11.200.000</td><td class="num">14.700.000</td></tr>
+          <tr><td>Cóctel de bienvenida sin alcohol</td><td class="num">7.700.000</td><td class="num">10.850.000</td><td class="num">15.750.000</td></tr>
+          <tr><td>Almuerzo sorpresa colombiano</td><td class="num">7.350.000</td><td class="num">9.800.000</td><td class="num">13.650.000</td></tr>
+          <tr><td>Almuerzo ejecutivo premium</td><td class="num">5.950.000</td><td class="num">7.700.000</td><td class="num">10.500.000</td></tr>
+          <tr><td>Cena de cierre</td><td class="num">16.100.000</td><td class="num">22.400.000</td><td class="num">33.600.000</td></tr>
+          <tr><td>Fiesta consciente</td><td class="num">11.000.000</td><td class="num">18.000.000</td><td class="num">28.000.000</td></tr>
+          <tr><td>Kit empresarial premium</td><td class="num">23.800.000</td><td class="num">33.600.000</td><td class="num">53.200.000</td></tr>
+          <tr><td>Producción AV de sala</td><td class="num">9.000.000</td><td class="num">14.000.000</td><td class="num">22.000.000</td></tr>
+          <tr><td>Escenografía, branding y carteles</td><td class="num">6.000.000</td><td class="num">10.000.000</td><td class="num">16.000.000</td></tr>
+          <tr><td>Fotografía, video y edición</td><td class="num">7.000.000</td><td class="num">12.000.000</td><td class="num">19.000.000</td></tr>
+          <tr><td>Staff de producción y anfitriones</td><td class="num">6.000.000</td><td class="num">9.000.000</td><td class="num">13.000.000</td></tr>
+          <tr><td>Traslados internos</td><td class="num">2.500.000</td><td class="num">4.000.000</td><td class="num">6.500.000</td></tr>
+          <tr><td>Imprevistos 8%</td><td class="num">9.504.000</td><td class="num">13.964.000</td><td class="num">21.112.000</td></tr>
+          <tr><td>Honorarios de producción 15%</td><td class="num">19.245.600</td><td class="num">28.277.100</td><td class="num">42.751.800</td></tr>
+          <tr class="total"><td>Total COP</td><td class="num">147.549.600</td><td class="num">216.791.100</td><td class="num">327.763.800</td></tr>
+          <tr class="total"><td>Total USD</td><td class="num">36.887</td><td class="num">54.198</td><td class="num">81.941</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny">Cifras en pesos colombianos. Conversión a TRM de trabajo COP 4.000 = USD 1; se ajusta contra TRM real a la firma. Estimaciones de mercado del segmento luxury en Medellín — no son cotizaciones. Cada rubro debe confirmarse por escrito con el proveedor antes de comprometer el presupuesto.</p>
+
+    <div class="grid g3">
+      <div class="panel">
+        <h4>Dónde se ahorra sin que se note</h4>
+        <p class="note">Salón en cortesía contra mínimo de A&amp;B · almuerzo del día 2 en el hotel en vez de salir · video con un solo equipo y más días de edición · flores de temporada de la Minorista en vez de importadas.</p>
+      </div>
+      <div class="panel">
+        <h4>Dónde no se ahorra nunca</h4>
+        <p class="note">Sonido y micrófonos · aire acondicionado · el café · el kit · la foto grupal oficial · el transporte de regreso de la fiesta. Un micrófono que falla arruina dos días de trabajo.</p>
+      </div>
+      <div class="panel">
+        <h4>Flujo de pagos sugerido</h4>
+        <p class="note">50% a la firma para bloquear sede y kit · 30% a T-15 días · 20% contra entrega. El kit y la sede son los dos únicos que exigen anticipo alto: sin eso, con 43 días, no hay disponibilidad garantizada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CRONOGRAMA ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Camino crítico</div>
+      <h2>Quedan 43 días</h2>
+      <p class="lede read">Este es el punto más delicado de todo el proyecto. Con menos de siete semanas, la sede y el kit son los dos cuellos de botella: si esas dos decisiones se demoran una semana, el evento pierde opciones y sube de precio.</p>
+    </div>
+
+    <div class="tl">
+      <div class="tl-row"><div class="tl-when"><b>8 – 12 sep</b><span>Semana 1</span></div><div class="tl-what">Aprobación de escenario y visita técnica a los 5 hoteles <span class="crit">Crítico</span><span>Solicitud de cotización en paralelo a los cinco el mismo día. Plano acotado y fotos de la sala vacía.</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>15 sep</b><span>T-37</span></div><div class="tl-what">Firma de sede y anticipo <span class="crit">Crítico</span><span>Bloqueo de las tres fechas incluyendo montaje del lunes por la mañana</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>15 – 19 sep</b><span>Semana 2</span></div><div class="tl-what">Aprobación del arte del kit y orden de compra <span class="crit">Crítico</span><span>El cuero personalizado necesita 3 a 4 semanas. Es la fecha límite real, no una sugerida.</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>22 – 26 sep</b><span>Semana 3</span></div><div class="tl-what">Cierre de venue de cena, DJ y facilitador de la fiesta<span>Degustación de menú con el hotel y con el venue de cierre</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>29 sep – 3 oct</b><span>Semana 4</span></div><div class="tl-what">Cierre de AV, foto/video, transporte y staff<span>Arte de carteles, señalética y cuaderno de trabajo a imprenta</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>6 – 10 oct</b><span>Semana 5</span></div><div class="tl-what">Producción física y comunicación a los miembros<span>Envío de agenda, dress code, mapa y logística. Confirmación de asistencia y restricciones alimentarias.</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>13 oct</b><span>T-8</span></div><div class="tl-what">Corte de headcount definitivo <span class="crit">Crítico</span><span>Última fecha para ajustar garantías con el hotel sin penalidad</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>13 – 17 oct</b><span>Semana 6</span></div><div class="tl-what">Recepción y armado de kits · ensayo técnico<span>Los 70 kits armados y contados antes del 17. Nunca el día anterior.</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>19 – 20 oct</b><span>T-2 / T-1</span></div><div class="tl-what">Montaje, prueba general y briefing de staff<span>Sala congelada el lunes 20 a las 15:00</span></div></div>
+      <div class="tl-row"><div class="tl-when"><b>20 – 22 oct</b><span>Evento</span></div><div class="tl-what">Cumbre</div></div>
+    </div>
+
+    <div class="grid g3">
+      <div class="panel"><h4>Riesgo 1 · Disponibilidad de sede</h4><p class="note">Octubre es temporada corporativa alta en Medellín. Mitigación: cotizar a los cinco en paralelo hoy mismo y tener dos contratos listos para firmar.</p></div>
+      <div class="panel"><h4>Riesgo 2 · Producción del kit</h4><p class="note">Es el rubro con el plazo más largo y el que más se subestima. Mitigación: aprobar arte en semana 2 y tener proveedor alterno preseleccionado para las piezas de cuero.</p></div>
+      <div class="panel"><h4>Riesgo 3 · Ruido y horario en la fiesta</h4><p class="note">Medellín tiene restricciones de ruido y horario según zona. Mitigación: verificar permiso y hora límite <em>antes</em> de firmar el venue, no después.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= DECISIONES ========================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Para avanzar</div>
+      <h2>Seis decisiones que necesito esta semana</h2>
+      <p class="lede read">Todo lo demás lo resuelve producción. Estas seis son del cliente y bloquean el resto del cronograma.</p>
+    </div>
+
+    <div class="stack-sm">
+      <div class="dec"><div class="dec-n">1</div><div class="dec-q">¿La media jornada es el lunes 20 por la tarde o el jueves 23 por la mañana?<span>Cambia el guion completo, el bloqueo de sala y el momento del cóctel de bienvenida.</span></div></div>
+      <div class="dec"><div class="dec-n">2</div><div class="dec-q">¿Escenario Esencial, Signature o Icónico?<span>Sin esto no puedo pedir cotizaciones con un brief cerrado y las cifras se vuelven imposibles de comparar.</span></div></div>
+      <div class="dec"><div class="dec-n">3</div><div class="dec-q">¿Cena de cierre y fiesta en la misma sede o en dos lugares?<span>Un solo lugar es operativamente más limpio y más barato. Dos lugares dan más impacto y exigen traslado de 70 personas de noche.</span></div></div>
+      <div class="dec"><div class="dec-n">4</div><div class="dec-q">¿El evento se llama Cumbre o mantiene la nomenclatura del Círculo Interno?<span>De esto dependen carteles, cuaderno, señalética y kit. Es lo primero que va a imprenta.</span></div></div>
+      <div class="dec"><div class="dec-n">5</div><div class="dec-q">¿Tenemos manual de marca de Javi y el listado de los 70 con nombre exacto y restricciones alimentarias?<span>Los nombres van grabados. Un nombre mal escrito en un evento de USD 30.000 es un problema real.</span></div></div>
+      <div class="dec"><div class="dec-n">6</div><div class="dec-q">¿Se graba contenido para redes durante los dos días?<span>Cambia el plan de luces, la ubicación de cámaras, el staff y el presupuesto de video.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="stack-sm">
+        <div class="foot-mark">Aura Productions</div>
+        <p class="tiny">Propuesta de producción · Cumbre · Mastermind del Círculo Interno<br>Medellín, 20 – 22 de octubre de 2026 · 70 miembros</p>
+      </div>
+      <p class="tiny" style="max-width:38ch">Documento de trabajo interno. Cifras estimadas del mercado de Medellín, sujetas a cotización formal. Versión 1 · 8 de septiembre de 2026.</p>
+    </div>
+  </div>
+</footer>
