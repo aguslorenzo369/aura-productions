@@ -32,12 +32,11 @@ if logo:
     wm     = '<div class="watermark"><img class="logo-wm" src="%s" alt=""></div>' % uri
     print("Logo oficial:", logo.name)
 else:
-    cover = ('<div class="wordmark">CUMBRE</div>\n'
-             '    <div class="tagline">DE LOS MILLONARIOS CONSCIENTES</div>')
+    cover = '<div class="logo-space"></div>'
     header = ('<div class="txt"><div class="t1">CUMBRE</div>'
               '<div class="t2">DE LOS MILLONARIOS CONSCIENTES</div></div>')
     wm = ""
-    print("Sin logo oficial en assets/ — versión tipográfica (sin monograma).")
+    print("Sin logo oficial en assets/ — la tapa queda con el espacio libre para colocarlo a mano.")
     print("   Para el logo real: guardalo en assets/logo-cumbre.svg (o .png) y volvé a correr este script.")
 
 html = (DIR / "menu.html").read_text(encoding="utf-8")

@@ -20,10 +20,12 @@ assets/logo-cumbre.jpg
 
 - **Si el archivo está** → se inserta tal cual en la portada, en el encabezado de las
   páginas 2 y 3 y como marca de agua. Se embebe en el PDF, no queda referenciado.
-- **Si no está** → el documento sale con el nombre CUMBRE en tipografía, sin monograma.
+- **Si no está** → la tapa queda con la mitad superior libre (sin texto ni marca) para
+  colocar el logo a mano en Canva, Illustrator o similar. El bloque de abajo
+  (menú de la noche · RosaNegra · dirección) queda anclado al pie.
 
-> No hay ningún logo dibujado a mano en el proyecto: o va el archivo oficial, o va sólo
-> el nombre en tipografía. Nunca una imitación.
+> No hay ningún logo dibujado a mano en el proyecto: o va el archivo oficial, o va el
+> espacio libre. Nunca una imitación.
 
 Poné el archivo y corré:
 
