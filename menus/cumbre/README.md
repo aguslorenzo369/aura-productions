@@ -23,5 +23,11 @@ Editá `menu.html` (todo el contenido y el diseño están ahí) y volvé a corre
 - `assets/logo-cumbre.svg` — monograma Cumbre vectorizado
 - `build.sh` — render a PDF con Chromium headless
 
-> El monograma está reconstruido en vector y el wordmark **CUMBRE** usa Michroma como sustituto.
-> Si se reemplaza `assets/logo-cumbre.svg` por el logo original (SVG/PNG en alta), el PDF queda 100% oficial.
+> ⚠️ El monograma es una **reconstrucción vectorial provisoria** (el archivo original del logo no está en el repo).
+> Reemplazá `assets/logo-cumbre.svg` / agregá el PNG oficial y volvé a correr `build.sh` para que quede el logo real.
+
+
+## Dirección
+
+RosaNegra Polanco — Av. Pdte. Masaryk 298, Polanco IV Secc, Miguel Hidalgo, 11550 CDMX.
+El PDF lleva el link a Google Maps en la portada y en el pie de las páginas 2 y 3.
