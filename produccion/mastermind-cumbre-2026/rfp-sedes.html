@@ -1,0 +1,605 @@
+<title>Pliego de Sedes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500&family=Space+Grotesk:wght@300;400;500;700&display=swap">
+
+<style>
+  :root{
+    --ink:#08080F;
+    --surface:#0D0D14;
+    --surface-2:#12121B;
+    --gold:#C9A84C;
+    --gold-light:#E8C97A;
+    --gold-dark:#A07830;
+    --text:#EFEBE1;
+    --muted:#928C7C;
+    --muted-dim:#6A6558;
+    --line:rgba(201,168,76,.22);
+    --line-soft:rgba(201,168,76,.10);
+    --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+    --sans:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{background:var(--ink);color:var(--text);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:var(--ink)}
+  a{color:var(--gold-light);text-decoration:none;border-bottom:1px solid var(--line)}
+  a:hover{border-bottom-color:var(--gold)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+  .wrap{width:100%;max-width:1080px;margin-inline:auto;padding-inline:26px}
+  .read{max-width:68ch}
+  section.band{padding-block:64px;border-top:1px solid var(--line-soft)}
+
+  .eyebrow{font-size:10px;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
+  h2{font-size:clamp(26px,3.6vw,38px);line-height:1.14}
+  h3{font-size:21px}
+  h4{font-size:16px;color:var(--gold-light)}
+  p{margin:0}
+  .lede{font-size:18px;color:#CFC9BC}
+  .note{font-size:13px;line-height:1.62;color:var(--muted)}
+  .tiny{font-size:11.5px;letter-spacing:.05em;color:var(--muted-dim);line-height:1.55}
+  .stack{display:flex;flex-direction:column;gap:20px}
+  .stack-sm{display:flex;flex-direction:column;gap:10px}
+  .stack-lg{display:flex;flex-direction:column;gap:36px}
+  strong{font-weight:500;color:#fff}
+  em{font-family:var(--serif);font-style:italic;color:var(--gold-light)}
+
+  /* header */
+  header.top{padding-block:60px 46px;background:linear-gradient(180deg,#0A0A12,var(--ink))}
+  .brandline{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .brandline b{color:var(--gold);font-weight:500}
+  .doc-title{font-family:var(--serif);font-size:clamp(38px,7vw,68px);line-height:1;color:var(--gold-light);margin:18px 0 0;letter-spacing:-.01em}
+  .doc-sub{font-family:var(--serif);font-style:italic;font-size:19px;color:#D8D2C4;margin-top:12px}
+  .keyfacts{display:flex;flex-wrap:wrap;margin-top:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .keyfacts div{flex:1 1 160px;padding:16px 20px 16px 0;border-right:1px solid var(--line-soft)}
+  .keyfacts div:last-child{border-right:0}
+  .keyfacts dt{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-dim);margin-bottom:6px}
+  .keyfacts dd{margin:0;font-size:15px}
+  .keyfacts dd.hot{color:var(--gold)}
+
+  /* grids */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media(max-width:880px){.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+  .panel{background:var(--surface);border:1px solid var(--line-soft);padding:24px 22px;display:flex;flex-direction:column;gap:11px}
+
+  /* hotel cards */
+  .hotels{display:flex;flex-direction:column;gap:14px}
+  .hotel{
+    background:var(--surface);border:1px solid var(--line-soft);
+    display:grid;grid-template-columns:46px 1fr 250px;gap:0;
+  }
+  .hotel.p1{border-color:var(--line)}
+  @media(max-width:840px){.hotel{grid-template-columns:38px 1fr}.hotel .h-contact{grid-column:1/-1;border-left:0;border-top:1px solid var(--line-soft)}}
+  .h-rank{
+    background:var(--surface-2);display:flex;align-items:flex-start;justify-content:center;
+    padding-top:24px;font-family:var(--serif);font-size:19px;color:var(--gold-dark);
+    border-right:1px solid var(--line-soft);
+  }
+  .hotel.p1 .h-rank{color:var(--gold)}
+  .h-body{padding:24px 24px 22px;display:flex;flex-direction:column;gap:12px}
+  .h-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+  .h-name{font-family:var(--serif);font-size:23px;color:#fff;line-height:1.15}
+  .h-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--line);color:var(--gold)}
+  .hotel.p1 .h-tag{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700}
+  .h-fact{font-size:13.5px;color:var(--muted)}
+  .h-fact b{color:var(--text);font-weight:400}
+  .h-ask{border-left:2px solid var(--gold-dark);padding-left:14px;display:flex;flex-direction:column;gap:4px}
+  .h-ask .k{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  .h-ask p{font-size:13px;color:var(--muted);line-height:1.6}
+  .h-contact{border-left:1px solid var(--line-soft);padding:24px 22px;display:flex;flex-direction:column;gap:9px;background:rgba(255,255,255,.012)}
+  .h-row{display:flex;flex-direction:column;gap:2px}
+  .h-row dt{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-dim)}
+  .h-row dd{margin:0;font-size:13px;word-break:break-word}
+  .h-row dd a{border-bottom-color:var(--line-soft)}
+
+  /* copy block */
+  .copyblock{border:1px solid var(--line);background:var(--surface)}
+  .cb-bar{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    padding:13px 18px;background:var(--surface-2);border-bottom:1px solid var(--line);
+  }
+  .cb-label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+  button.copy{
+    font-family:var(--sans);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+    background:transparent;color:var(--gold-light);border:1px solid var(--line);
+    padding:7px 15px;cursor:pointer;transition:background .15s,color .15s;
+  }
+  button.copy:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  button.copy[data-done="1"]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .cb-body{padding:22px 20px;overflow-x:auto}
+  .cb-body pre{
+    margin:0;font-family:var(--mono);font-size:12.5px;line-height:1.75;
+    color:#D6D1C5;white-space:pre-wrap;word-break:break-word;
+  }
+
+  /* checklist */
+  .check{display:flex;flex-direction:column}
+  .check div{display:grid;grid-template-columns:20px 1fr;gap:12px;padding:10px 0;border-bottom:1px dotted rgba(201,168,76,.14);font-size:14px}
+  .check div:last-child{border-bottom:0}
+  .check i{width:11px;height:11px;border:1px solid var(--gold-dark);display:block;margin-top:5px}
+  .check span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+
+  /* matrix */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line-soft);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:720px;font-size:13px}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid rgba(201,168,76,.09);vertical-align:top}
+  thead th{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  tbody tr:last-child td{border-bottom:0}
+  td.blank{color:var(--muted-dim)}
+  th:first-child,td:first-child{color:var(--text)}
+
+  /* process */
+  .proc{display:flex;flex-direction:column}
+  .proc-row{display:grid;grid-template-columns:132px 1fr;gap:20px;padding:14px 0;border-top:1px solid var(--line-soft)}
+  .proc-row:first-child{border-top:0}
+  @media(max-width:560px){.proc-row{grid-template-columns:100px 1fr;gap:14px}}
+  .proc-when b{color:var(--gold);font-size:13.5px;font-weight:500;display:block}
+  .proc-when span{font-size:11px;color:var(--muted-dim);letter-spacing:.06em}
+  .proc-what{font-size:14px}
+  .proc-what span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+
+  footer.foot{padding-block:48px 64px;border-top:1px solid var(--line);background:var(--surface)}
+  .foot-mark{font-family:var(--serif);font-size:24px;color:var(--gold)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brandline"><b>Aura Productions</b> · Cumbre · Mastermind del Círculo Interno</div>
+    <h1 class="doc-title">Pliego de Sedes</h1>
+    <p class="doc-sub">Solicitud de cotización a cinco hoteles de El Poblado</p>
+    <dl class="keyfacts">
+      <div><dt>Evento</dt><dd>20 – 22 oct 2026</dd></div>
+      <div><dt>Participantes</dt><dd>70</dd></div>
+      <div><dt>Se envía</dt><dd class="hot">Hoy · mar 8 sep</dd></div>
+      <div><dt>Respuestas</dt><dd class="hot">vie 11 sep</dd></div>
+      <div><dt>Firma</dt><dd>mié 16 sep</dd></div>
+    </dl>
+  </div>
+</header>
+
+<section class="band">
+  <div class="wrap stack">
+    <div class="eyebrow">Cómo se usa</div>
+    <div class="grid g3">
+      <div class="panel"><h4>1 · Enviar a los cinco hoy</h4><p class="note">El mismo correo, el mismo día, con el mismo pliego. Si se envían escalonados, las respuestas no se pueden comparar y perdés poder de negociación.</p></div>
+      <div class="panel"><h4>2 · Exigir el formato de respuesta</h4><p class="note">El punto del pliego es que los cinco contesten lo mismo en el mismo orden. Un hotel que manda un PDF genérico no cotizó: contestale pidiendo los ocho puntos.</p></div>
+      <div class="panel"><h4>3 · Visitar antes de firmar</h4><p class="note">Ninguna sede se firma sin pisarla. Las fotos de los hoteles son de eventos montados con luz de fotógrafo. Vas con el checklist de abajo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESTINATARIOS ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Los cinco destinatarios</div>
+      <h2>A quién le escribís y qué le preguntás a cada uno</h2>
+      <p class="lede read">Cada hotel tiene un riesgo distinto. El pliego es idéntico para los cinco, pero a cada uno hay que agregarle una línea propia — es la pregunta que revela si la sede sirve de verdad.</p>
+    </div>
+
+    <div class="hotels">
+
+      <!-- PARK 10 -->
+      <article class="hotel p1">
+        <div class="h-rank">1</div>
+        <div class="h-body">
+          <div class="h-head">
+            <div class="h-name">Hotel Park 10</div>
+            <span class="h-tag">Prioridad</span>
+          </div>
+          <p class="h-fact"><b>Salones de 6 a 130 personas con luz natural</b> · boutique de lujo con foco declarado en corporativo · Library y Board Room · barrio Lalinde, zona tranquila de El Poblado.</p>
+          <div class="h-ask">
+            <div class="k">Pregunta propia</div>
+            <p>Qué salón específico proponen para 70 en mesas redondas de 7 — el rango “6 a 130” no dice nada. Pedir plano acotado del salón concreto y confirmar área útil ≥ 220 m².</p>
+          </div>
+        </div>
+        <dl class="h-contact">
+          <div class="h-row"><dt>Eventos</dt><dd><a href="mailto:eventos.park10@dgroupe.com.co">eventos.park10@dgroupe.com.co</a><br>+57 314 769 42 87</dd></div>
+          <div class="h-row"><dt>Comercial</dt><dd><a href="mailto:comercial.park10@dgroupe.com.co">comercial.park10@dgroupe.com.co</a><br>+57 300 240 88 24</dd></div>
+          <div class="h-row"><dt>Dirección</dt><dd>Cra 36B #11-12, El Poblado</dd></div>
+          <div class="h-row"><dt>Web</dt><dd><a href="https://park10hotel.com/" target="_blank" rel="noopener">park10hotel.com</a> · <a href="https://park10hotel.com/contacto/" target="_blank" rel="noopener">contacto</a></dd></div>
+        </dl>
+      </article>
+
+      <!-- BINN -->
+      <article class="hotel p1">
+        <div class="h-rank">2</div>
+        <div class="h-body">
+          <div class="h-head">
+            <div class="h-name">Binn Hotel</div>
+            <span class="h-tag">Prioridad</span>
+          </div>
+          <p class="h-fact"><b>Salón modular en el piso 15 con vista al valle de Aburrá, hasta 130 en auditorio</b> · boutique de lujo, 78 habitaciones, rooftop bar y spa · producto nuevo peleando por posicionarse en corporativo, que es donde está el mejor precio.</p>
+          <div class="h-ask">
+            <div class="k">Pregunta propia</div>
+            <p>Dos cosas. Capacidad real en <em>mesas redondas de 7</em>, no en auditorio — la diferencia es enorme y 130 en auditorio pueden ser 60 en redondas. Y cuántos ascensores llegan al piso 15: mover 70 personas en una pausa de 20 minutos es el riesgo operativo real de esta sede.</p>
+          </div>
+        </div>
+        <dl class="h-contact">
+          <div class="h-row"><dt>Contacto</dt><dd><a href="mailto:reservas@binnhotel.com">reservas@binnhotel.com</a><br>+57 323 476 1812</dd></div>
+          <div class="h-row"><dt>Dirección</dt><dd>Cra 25 #10-51, Trv. Superior, El Poblado</dd></div>
+          <div class="h-row"><dt>Web</dt><dd><a href="https://binnhotel.com/" target="_blank" rel="noopener">binnhotel.com</a> · <a href="https://binnhotel.com/luxury-corporate-events-medellin/" target="_blank" rel="noopener">eventos</a> · <a href="https://binnhotel.com/contact-us/" target="_blank" rel="noopener">contacto</a></dd></div>
+        </dl>
+      </article>
+
+      <!-- ESTELAR -->
+      <article class="hotel">
+        <div class="h-rank">3</div>
+        <div class="h-body">
+          <div class="h-head">
+            <div class="h-name">Estelar Milla de Oro</div>
+            <span class="h-tag">Sólido</span>
+          </div>
+          <p class="h-fact"><b>3 salas, 245 personas de capacidad total, hasta 200 en auditorio</b> · 168 habitaciones · montajes en imperio, U, espina de pescado, banquete y cóctel · dirección con prestigio: “Milla de Oro” ya comunica antes de que el invitado entre.</p>
+          <div class="h-ask">
+            <div class="k">Pregunta propia</div>
+            <p>Exclusividad de proveedores. Es cadena grande: si obligan a usar su AV y su catering sin permitir proveedor externo, el presupuesto se dispara y perdemos control de la producción. Preguntarlo antes de la visita, no después.</p>
+          </div>
+        </div>
+        <dl class="h-contact">
+          <div class="h-row"><dt>Teléfono</dt><dd>+57 604 369 6300</dd></div>
+          <div class="h-row"><dt>Dirección</dt><dd>Calle 3 Sur #43A-64, El Poblado</dd></div>
+          <div class="h-row"><dt>Web</dt><dd><a href="https://www.estelarmilladeoro.com/en/" target="_blank" rel="noopener">estelarmilladeoro.com</a> · <a href="https://www.estelarmilladeoro.com/en/events/" target="_blank" rel="noopener">eventos</a> · <a href="https://www.hotelesestelar.com/medellin-salones-estelar-milla-de-oro/" target="_blank" rel="noopener">salones</a></dd></div>
+        </dl>
+      </article>
+
+      <!-- DIEZ -->
+      <article class="hotel">
+        <div class="h-rank">4</div>
+        <div class="h-body">
+          <div class="h-head">
+            <div class="h-name">Diez Hotel Categoría Colombia</div>
+            <span class="h-tag">Sólido</span>
+          </div>
+          <p class="h-fact"><b>6 salones, capacidad hasta 180 personas, condiciones termoacústicas declaradas</b> · concepto colombiano por piso con artesanía local — encaja solo con el concepto del evento · spa en el último piso · a pasos de Provenza y Parque Lleras.</p>
+          <div class="h-ask">
+            <div class="k">Pregunta propia</div>
+            <p>Aislamiento acústico y acceso vehicular. Estar frente a Provenza es una ventaja social y un problema operativo: ruido exterior durante las sesiones y congestión para que lleguen 70 personas. Pedir que la visita técnica sea en horario pico.</p>
+          </div>
+        </div>
+        <dl class="h-contact">
+          <div class="h-row"><dt>Teléfono</dt><dd>+57 604 448 10 34</dd></div>
+          <div class="h-row"><dt>Dirección</dt><dd>Cl 10A #34-11, El Poblado</dd></div>
+          <div class="h-row"><dt>Web</dt><dd><a href="https://www.diezhotel.com/en" target="_blank" rel="noopener">diezhotel.com</a> · <a href="https://www.diezhotel.com/en/meetings-and-events" target="_blank" rel="noopener">eventos</a></dd></div>
+        </dl>
+      </article>
+
+      <!-- GHL -->
+      <article class="hotel">
+        <div class="h-rank">5</div>
+        <div class="h-body">
+          <div class="h-head">
+            <div class="h-name">GHL Portón Medellín</div>
+            <span class="h-tag">Alternativa</span>
+          </div>
+          <p class="h-fact"><b>3 salones en primer y segundo nivel, modulables hasta 5, máximo 120 personas</b> · Salón Portón de 102 m² para 120 · luz natural · parqueadero cubierto sin costo, que en El Poblado no es poca cosa.</p>
+          <div class="h-ask">
+            <div class="k">Pregunta propia</div>
+            <p>Los 102 m² del Salón Portón no alcanzan para 70 en mesas redondas — esa cifra de 120 personas es en auditorio. Preguntar directamente qué combinación de módulos da 220 m² útiles y si al unirlos quedan columnas o divisiones en el eje de visión.</p>
+          </div>
+        </div>
+        <dl class="h-contact">
+          <div class="h-row"><dt>Dirección</dt><dd>Cra 43A #9 Sur-51</dd></div>
+          <div class="h-row"><dt>Web</dt><dd><a href="https://www.hotelportonmedellin.com/eventos" target="_blank" rel="noopener">hotelportonmedellin.com/eventos</a> · <a href="https://www.hotelportonmedellin.com/contacto" target="_blank" rel="noopener">contacto</a></dd></div>
+          <div class="h-row"><dt>Cadena</dt><dd><a href="https://www.ghlhoteles.com/en/hotels/colombia/medellin/ghl-porton-medellin/" target="_blank" rel="noopener">ghlhoteles.com</a></dd></div>
+          <div class="h-row"><dt>Nota</dt><dd class="tiny">No publican email de eventos. Escribir por el formulario y llamar el mismo día.</dd></div>
+        </dl>
+      </article>
+
+    </div>
+    <p class="tiny">Contactos y capacidades según información publicada por cada hotel a septiembre de 2026. Verificar el nombre de la persona de eventos por teléfono antes de enviar — un correo dirigido a alguien con nombre se responde el doble de rápido.</p>
+  </div>
+</section>
+
+<!-- ================= EL CORREO ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Pieza 1</div>
+      <h2>El correo</h2>
+      <p class="lede read">Listo para enviar. Reemplazá lo que está entre corchetes y agregá al final la pregunta propia de cada hotel.</p>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar">
+        <span class="cb-label">Asunto</span>
+        <button class="copy" data-copy="asunto" type="button">Copiar asunto</button>
+      </div>
+      <div class="cb-body">
+        <pre id="asunto">Solicitud de cotización — Mastermind privada 70 pax · 20, 21 y 22 de octubre de 2026</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar">
+        <span class="cb-label">Cuerpo del correo</span>
+        <button class="copy" data-copy="cuerpo" type="button">Copiar correo</button>
+      </div>
+      <div class="cb-body">
+<pre id="cuerpo">Buen día, [nombre]:
+
+Le escribo desde Aura Productions. Estamos produciendo una mastermind privada de
+alto nivel para 70 participantes en Medellín y [HOTEL] está en nuestra lista corta
+de sedes.
+
+Le comparto el requerimiento completo para que puedan cotizar. Estamos consultando
+a cinco hoteles de El Poblado con el mismo pliego y agradezco su respuesta a más
+tardar el viernes 11 de septiembre, ya que la decisión de sede se toma la semana
+del 14.
+
+EL EVENTO
+
+· Formato: mastermind privada, sesión de trabajo cerrada. No es un evento social.
+· Participantes: 70. Headcount definitivo el 13 de octubre.
+· Fechas:
+    - Martes 20 de octubre, media jornada desde las 15:00
+    - Miércoles 21 de octubre, jornada completa
+    - Jueves 22 de octubre, jornada completa
+· Montaje: requerimos acceso al salón desde el lunes 19 a las 18:00.
+· No requerimos bloqueo de habitaciones, aunque agradezco una tarifa corporativa
+  referencial por si algunos participantes deciden hospedarse por su cuenta.
+
+LO QUE NECESITAMOS COTIZADO
+
+1. Salón principal en exclusiva los tres días.
+   Montaje: 10 mesas redondas de 7 personas en media luna, todas orientadas al
+   escenario. Área útil mínima 220 m². Altura libre mínima 3,2 m. Sin columnas en
+   el eje de visión. Escenario bajo con dos accesos.
+
+2. Coffee break en estación abierta permanente, miércoles y jueves de 07:30 a
+   18:30, repuesta en continuo. No es servicio por turnos ni dos pausas de 20
+   minutos: la estación permanece montada y surtida toda la jornada. Indicar si
+   ofrecen barista en vivo con café de origen y su costo.
+
+3. Cóctel de bienvenida SIN ALCOHOL, martes 20 de 18:00 a 20:30, 70 personas.
+   Pasabocas y carta de mixología sin alcohol. Preferimos un espacio distinto al
+   salón principal (terraza, lounge o rooftop si disponen).
+
+4. Almuerzo miércoles 21, 70 personas, en espacio anexo al salón principal.
+   Montaje de mesa larga única. Menú de cocina colombiana.
+
+5. Almuerzo jueves 22, 70 personas, menú ejecutivo premium.
+
+6. Audiovisual. Indicar qué está incluido en el alquiler y qué se cobra aparte:
+   proyección o pantalla, sonido, micrófonos inalámbricos y técnico en sala.
+   Confirmar si permiten proveedor externo de AV y si aplica algún recargo.
+
+7. Conectividad. Wi-Fi dedicado al evento con SSID propio y ancho de banda
+   reservado, independiente de la red de huéspedes.
+
+8. Parqueadero. Cupos disponibles para el evento y tarifa.
+
+CÓMO NECESITAMOS LA RESPUESTA
+
+Para poder comparar las cinco propuestas, le agradezco responder en este mismo
+orden:
+
+1. Plano acotado del salón propuesto, con medidas, columnas, puertas y tableros
+   eléctricos.
+2. Fotografías del salón vacío y sin montar.
+3. Tarifa de alquiler del salón por día, y si aplica cortesía o descuento contra
+   un consumo mínimo garantizado de alimentos y bebidas.
+4. Menús con precio por persona para cada uno de los servicios solicitados.
+5. Impuestos discriminados: IVA, impuesto al consumo y propina sugerida.
+6. Restricciones aplicables: horario límite de música, política de descorche,
+   exclusividad de proveedores y costo del montaje del día anterior.
+7. Política de cancelación y fecha de corte de headcount sin penalidad.
+8. Vigencia de la cotización.
+
+NUESTRA PREFERENCIA
+
+Buscamos una propuesta con el salón en cortesía contra un mínimo garantizado de
+alimentos y bebidas. Con dos almuerzos, coffee break permanente de dos jornadas
+completas y un cóctel para 70 personas, creemos que el consumo lo justifica.
+
+VISITA TÉCNICA
+
+Quisiéramos agendar visita el lunes 14 o martes 15 de septiembre. Por favor
+indíqueme su disponibilidad.
+
+Quedo atento.
+
+[Nombre]
+Aura Productions
+[Teléfono] · [Email]</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEGUIMIENTO ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Pieza 2</div>
+      <h2>El recordatorio del jueves</h2>
+      <p class="lede read">De cinco hoteles van a contestar tres a tiempo. Este mensaje corto por WhatsApp el jueves 10 al mediodía recupera a los otros dos — y la mención de que hay competencia es deliberada.</p>
+    </div>
+    <div class="copyblock">
+      <div class="cb-bar">
+        <span class="cb-label">WhatsApp · jueves 10, mediodía</span>
+        <button class="copy" data-copy="seguimiento" type="button">Copiar mensaje</button>
+      </div>
+      <div class="cb-body">
+<pre id="seguimiento">Buen día [nombre]. Le escribo de Aura Productions — le enviamos el martes la
+solicitud de cotización para nuestra mastermind del 20 al 22 de octubre, 70
+personas.
+
+Cerramos la recepción de propuestas mañana viernes al final del día y estamos
+agendando las visitas técnicas para el lunes y martes. ¿Alcanzan a enviarnos su
+propuesta?
+
+Si le sirve, puedo pasarle el requerimiento por este medio.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISITA ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Pieza 3</div>
+      <h2>Checklist de la visita técnica</h2>
+      <p class="lede read">Lo que se mide en el lugar y no se pregunta por correo, porque por correo siempre dicen que sí.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h4>Se mide con cinta</h4>
+        <div class="check">
+          <div><i></i><div>Altura libre real al punto más bajo<span>Vigas, ductos y luminarias, no la altura del centro</span></div></div>
+          <div><i></i><div>Área útil descontando barras y accesos<span>El hotel cotiza el área bruta del plano</span></div></div>
+          <div><i></i><div>Ancho de la puerta de acceso de carga<span>Por ahí entra la pantalla y la estructura</span></div></div>
+          <div><i></i><div>Distancia del salón al baño más cercano<span>Más de 40 m rompe las pausas de 20 minutos</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>Se prueba en el momento</h4>
+        <div class="check">
+          <div><i></i><div>Que el aire acondicionado se regule desde la sala<span>Si lo controla mantenimiento por teléfono, es un problema los dos días</span></div></div>
+          <div><i></i><div>Ruido exterior con la puerta cerrada<span>Pedir visita en horario pico, no un domingo a las 10</span></div></div>
+          <div><i></i><div>Señal de celular y velocidad real del Wi-Fi<span>Correr un test de velocidad parado en el fondo del salón</span></div></div>
+          <div><i></i><div>Iluminación bajada al 30%<span>Verificar que se pueda leer y tomar notas en penumbra</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>Se camina</h4>
+        <div class="check">
+          <div><i></i><div>Recorrido desde el parqueadero hasta la silla<span>Es la primera impresión de un miembro que pagó USD 30.000</span></div></div>
+          <div><i></i><div>Ruta de servicio del catering<span>Que no cruce por delante de los invitados</span></div></div>
+          <div><i></i><div>Dónde va la estación de café sin generar fila<span>Idealmente dos puntos, no uno</span></div></div>
+          <div><i></i><div>Zona de acreditación y de espera<span>70 personas llegando a la vez el martes a las 17:00</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>Se pregunta cara a cara</h4>
+        <div class="check">
+          <div><i></i><div>Qué otro evento hay en el hotel esos días<span>Un evento ruidoso al lado arruina la mastermind</span></div></div>
+          <div><i></i><div>Quién es el capitán de servicio asignado<span>Pedir nombre y que esté los tres días</span></div></div>
+          <div><i></i><div>Hasta qué hora se puede tener música<span>Define si la fiesta puede ser acá o hay que moverla</span></div></div>
+          <div><i></i><div>Qué pasa si sube el headcount a 75<span>La respuesta revela cuánta holgura real tiene el salón</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MATRIZ ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Pieza 4</div>
+      <h2>Matriz de comparación</h2>
+      <p class="lede read">Se llena a medida que entran las respuestas. La decisión no se toma por precio total sino por precio contra las cuatro filas que no se negocian: área útil, altura, aire regulable y AV externo permitido.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Park 10</th>
+            <th>Binn</th>
+            <th>Estelar</th>
+            <th>Diez</th>
+            <th>GHL Portón</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Salón propuesto</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Área útil m²</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Altura libre m</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Cap. en redondas de 7</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Alquiler salón · 3 días</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Cortesía contra mínimo A&amp;B</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Coffee all-day · pp/día</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Cóctel sin alcohol · pp</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Almuerzo colombiano · pp</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Almuerzo ejecutivo · pp</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>AV incluido / aparte</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>¿Permite AV externo?</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Aire regulable desde sala</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Hora límite de música</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Cupos de parqueadero</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Corte de headcount</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          <tr><td>Total con impuestos</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESO ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Calendario del proceso</div>
+      <h2>De hoy a la firma: ocho días</h2>
+    </div>
+    <div class="proc">
+      <div class="proc-row"><div class="proc-when"><b>Mar 8 sep</b><span>Hoy</span></div><div class="proc-what">Llamar a los cinco para pedir el nombre de eventos, y enviar el correo<span>La llamada antes del correo duplica la tasa de respuesta</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Jue 10 sep</b><span>T-1</span></div><div class="proc-what">Recordatorio por WhatsApp a quien no haya contestado</div></div>
+      <div class="proc-row"><div class="proc-when"><b>Vie 11 sep</b><span>Cierre</span></div><div class="proc-what">Cierre de recepción de propuestas y carga de la matriz<span>Descartar a quien no mandó plano acotado — no es un descuido, es cómo van a trabajar los tres días</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Lun 14 – mar 15 sep</b><span>Visitas</span></div><div class="proc-what">Visita técnica a los tres finalistas con el checklist<span>Ir con cinta métrica y con el celular para el test de Wi-Fi</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Mar 15 sep</b><span>Negociación</span></div><div class="proc-what">Segunda ronda con los dos mejores<span>Acá se pide la cortesía del salón, con la propuesta del competidor sobre la mesa</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Mié 16 sep</b><span>Firma</span></div><div class="proc-what">Firma de contrato y anticipo · T-34 del evento<span>Bloqueo de las tres fechas más el montaje del lunes 19</span></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="panel"><h4>La palanca que tenemos</h4><p class="note">No alojamos a los 70, así que no hay bloque de habitaciones para negociar. Lo que sí hay es un consumo de alimentos y bebidas alto y concentrado: dos almuerzos, dos días de coffee permanente y un cóctel para 70. Ese es el argumento — y funciona mejor si los cinco saben que hay cinco.</p></div>
+      <div class="panel"><h4>La palanca que no tenemos</h4><p class="note">El tiempo. A 34 días de la firma no podemos amagar con irnos y volver la semana siguiente. Por eso el proceso se comprime en ocho días: la velocidad es lo que reemplaza al poder de negociación que da la anticipación.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap stack-sm">
+    <div class="foot-mark">Aura Productions</div>
+    <p class="tiny">Pliego de sedes · Cumbre · Mastermind del Círculo Interno<br>Medellín, 20 – 22 de octubre de 2026 · 70 participantes · Versión 1, 8 de septiembre de 2026</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll("button.copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var el = document.getElementById(btn.getAttribute("data-copy"));
+      if(!el) return;
+      var text = el.textContent;
+      var done = function(){
+        var original = btn.textContent;
+        btn.textContent = "Copiado";
+        btn.setAttribute("data-done","1");
+        setTimeout(function(){ btn.textContent = original; btn.removeAttribute("data-done"); }, 1800);
+      };
+      var fallback = function(){
+        try{
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly","");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          done();
+        }catch(e){
+          btn.textContent = "Seleccioná y copiá";
+          setTimeout(function(){ btn.textContent = "Copiar"; }, 2400);
+        }
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+      }else{
+        fallback();
+      }
+    });
+  });
+</script>
