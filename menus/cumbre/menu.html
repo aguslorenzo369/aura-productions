@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cumbre de los Millonarios Conscientes — Menú RosaNegra CDMX</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root{
+    --black:#000000;
+    --ink:#07070a;
+    --gold:#C9A44F;
+    --gold-light:#E3C77E;
+    --white:#ffffff;
+    --muted:rgba(255,255,255,.62);
+    --hair:rgba(201,164,79,.34);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  @page{ size:A4 portrait; margin:0; }
+  html,body{background:var(--black);}
+  body{
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    font-family:'Poppins',sans-serif; color:var(--white);
+  }
+  .page{
+    position:relative; width:210mm; height:297mm; overflow:hidden;
+    background:var(--black); page-break-after:always; break-after:page;
+  }
+  .page:last-child{page-break-after:auto;break-after:auto}
+  .page::before{ /* halo sutil */
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(120% 78% at 50% 6%, rgba(201,164,79,.10) 0%, rgba(201,164,79,.03) 34%, rgba(0,0,0,0) 68%);
+  }
+  .frame{
+    position:absolute; inset:11mm; border:.4pt solid var(--hair);
+  }
+  .inner{position:relative; height:100%; display:flex; flex-direction:column;}
+
+  /* ---------- PORTADA ---------- */
+  .cover{ padding:26mm 24mm 30mm; align-items:center; text-align:center; justify-content:center; }
+  .mark{ width:33mm; display:block; }
+  .wordmark{
+    font-family:'Michroma',sans-serif; font-size:27pt; letter-spacing:.055em;
+    margin-top:9mm; line-height:1;
+  }
+  .tagline{
+    font-weight:700; font-size:7.6pt; letter-spacing:.30em;
+    margin-top:4.5mm; color:var(--white);
+  }
+  .rule{ width:38mm; height:.6pt; background:var(--gold); opacity:.75; margin:13mm auto 0; }
+  .eyebrow{
+    font-family:'Cinzel',serif; font-size:13pt; letter-spacing:.30em; color:var(--gold-light);
+    margin-top:12mm;
+  }
+  .venue{ margin-top:16mm; }
+  .venue .name{
+    font-weight:400; font-size:29pt; letter-spacing:.10em; line-height:1;
+  }
+  .venue .name sup{font-size:.34em; vertical-align:.95em; letter-spacing:0}
+  .venue .brush{
+    width:64mm; height:.7pt; background:var(--white); opacity:.85; margin:5mm auto 0;
+  }
+  .venue .kind{
+    margin-top:4.5mm; font-weight:400; font-size:8.4pt; letter-spacing:.42em; color:var(--white);
+  }
+  .venue .by{
+    margin-top:8mm; font-weight:300; font-size:8.4pt; letter-spacing:.20em; color:var(--muted);
+  }
+  .city{
+    position:absolute; left:0; right:0; bottom:20mm;
+    font-family:'Cinzel',serif; font-size:11pt;
+    letter-spacing:.34em; color:var(--gold-light);
+  }
+  .city small{
+    display:block; margin-top:4mm; font-family:'Poppins',sans-serif; font-weight:300;
+    font-size:7.2pt; letter-spacing:.26em; color:var(--muted);
+  }
+
+  /* ---------- MENÚ ---------- */
+  .menu{ padding:16mm 17mm 16mm; }
+  .topbar{
+    display:flex; align-items:center; gap:5mm;
+    padding-bottom:5mm; border-bottom:.4pt solid var(--hair);
+  }
+  .topbar svg{ width:8mm; }
+  .topbar .txt{ line-height:1.35 }
+  .topbar .t1{ font-family:'Michroma',sans-serif; font-size:9pt; letter-spacing:.05em; }
+  .topbar .t2{ font-weight:600; font-size:5.6pt; letter-spacing:.26em; color:var(--muted); margin-top:1.2mm;}
+  .topbar .right{
+    margin-left:auto; text-align:right; font-weight:300; font-size:7.4pt;
+    letter-spacing:.22em; color:var(--muted);
+  }
+
+  h1{
+    font-family:'Cinzel',serif; font-weight:400; font-size:38pt;
+    letter-spacing:.10em; color:var(--gold-light); margin:13mm 0 11mm;
+  }
+  .cols{ display:flex; gap:13mm; align-items:stretch; flex:1 1 auto; min-height:0; }
+  .col{display:flex; flex-direction:column;}
+  .col{ flex:1 1 0; min-width:0; }
+
+  h2{
+    font-family:'Cinzel',serif; font-weight:400; font-size:17.5pt;
+    letter-spacing:.10em; color:var(--gold); line-height:1.1;
+  }
+  .note{
+    font-style:italic; font-weight:300; font-size:9.6pt;
+    color:var(--muted); margin-top:1.5mm;
+  }
+  .items{ margin-top:7.5mm; }
+  .item{ margin-bottom:8.6mm; }
+  .item .n{
+    font-weight:700; font-size:11.6pt; letter-spacing:.012em; line-height:1.25;
+  }
+  .item .d{
+    font-weight:300; font-size:10.1pt; line-height:1.5;
+    color:rgba(255,255,255,.80); margin-top:1.2mm;
+  }
+  .block + .block{ margin-top:14mm; }
+
+  .watermark{ margin-top:auto; padding-top:14mm; text-align:center; }
+  .watermark svg{ width:34mm; opacity:.075; }
+  .barpage .item{ margin-bottom:11.4mm; }
+  h1 .bar{ color:var(--gold); opacity:.55; font-weight:300; }
+  .foot{
+    margin-top:auto; padding-top:6mm; border-top:.4pt solid var(--hair);
+    display:flex; align-items:baseline;
+    font-weight:300; font-size:7.2pt; letter-spacing:.22em; color:var(--muted);
+  }
+  .foot .r{ margin-left:auto; }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1 · PORTADA ============ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="inner cover">
+
+    <svg class="mark" viewBox="-175 268 350 304" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#ffffff">
+        <rect x="-165" y="338" width="120" height="18"/>
+        <rect x="-130" y="338" width="50"  height="190"/>
+        <rect x="-165" y="510" width="120" height="18"/>
+        <rect x="45"   y="338" width="120" height="18"/>
+        <rect x="80"   y="338" width="50"  height="190"/>
+        <rect x="45"   y="510" width="120" height="18"/>
+        <path d="M -49 400 L 0 330 L 49 400 L 0 530 Z"/>
+      </g>
+      <path d="M 0 278 L 58 420 L 0 562 L -58 420 Z" stroke="#ffffff" stroke-width="5" fill="none"/>
+    </svg>
+
+    <div class="wordmark">CUMBRE</div>
+    <div class="tagline">DE LOS MILLONARIOS CONSCIENTES</div>
+
+    <div class="rule"></div>
+    <div class="eyebrow">MENÚ DE LA NOCHE</div>
+
+    <div class="venue">
+      <div class="name">ROSANEGRA<sup>&reg;</sup></div>
+      <div class="brush"></div>
+      <div class="kind">LATIN AMERICAN CUISINE</div>
+      <div class="by">BY GRUPO ROSANEGRA</div>
+    </div>
+
+    <div class="city">
+      CIUDAD DE MÉXICO
+      <small>CENA PRIVADA · CUMBRE DE LOS MILLONARIOS CONSCIENTES</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PÁGINA 2 · MENÚ 01 ============ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="inner menu">
+
+    <div class="topbar">
+      <svg viewBox="-175 268 350 304" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#ffffff">
+          <rect x="-165" y="338" width="120" height="18"/>
+          <rect x="-130" y="338" width="50"  height="190"/>
+          <rect x="-165" y="510" width="120" height="18"/>
+          <rect x="45"   y="338" width="120" height="18"/>
+          <rect x="80"   y="338" width="50"  height="190"/>
+          <rect x="45"   y="510" width="120" height="18"/>
+          <path d="M -49 400 L 0 330 L 49 400 L 0 530 Z"/>
+        </g>
+        <path d="M 0 278 L 58 420 L 0 562 L -58 420 Z" stroke="#ffffff" stroke-width="5" fill="none"/>
+      </svg>
+      <div class="txt">
+        <div class="t1">CUMBRE</div>
+        <div class="t2">DE LOS MILLONARIOS CONSCIENTES</div>
+      </div>
+      <div class="right">ROSANEGRA · CDMX</div>
+    </div>
+
+    <h1>MENÚ 01</h1>
+
+    <div class="cols">
+      <div class="col">
+
+        <div class="block">
+          <h2>PRIMER TIEMPO</h2>
+          <div class="note">a elegir</div>
+          <div class="items">
+            <div class="item">
+              <div class="n">EMPANADA DE CARNE</div>
+              <div class="d">Carne picante · chimichurri</div>
+            </div>
+            <div class="item">
+              <div class="n">CEVICHE PERUANO</div>
+              <div class="d">Choclo · leche de tigre · camote · cancha · chile serrano</div>
+            </div>
+            <div class="item">
+              <div class="n">ENSALADA CAESAR</div>
+              <div class="d">Anchoas · queso Grana Padano · crutones</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2>SEGUNDO TIEMPO</h2>
+          <div class="note">a elegir</div>
+          <div class="items">
+            <div class="item">
+              <div class="n">PESCA DEL DÍA A LA TALLA</div>
+              <div class="d">Alioli a la talla · ají amarillo · salsa criolla · limón verde · 300 g</div>
+            </div>
+            <div class="item">
+              <div class="n">RISOTTO CON FILETE</div>
+              <div class="d">Parmesano · filete de res rebanado · chile fresno · salsa criolla · aceite de trufa negra · 150 g</div>
+            </div>
+            <div class="item">
+              <div class="n">POLLO AL LIMÓN Y HABANERO</div>
+              <div class="d">Hinojo a la parrilla · salsa de limón con habanero · orégano · 500 g</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+
+        <div class="block">
+          <h2>POSTRE</h2>
+          <div class="note">Family Style</div>
+          <div class="items">
+            <div class="item">
+              <div class="n">TULUMINATI</div>
+              <div class="d">Helado de pistache casero · pistaches tostados · aceite Mánamu · sal negra · 200 g</div>
+            </div>
+            <div class="item">
+              <div class="n">HELADO</div>
+              <div class="d">Vainilla · chocolate o dulce de leche · 150 g</div>
+            </div>
+            <div class="item">
+              <div class="n">CHURRO GIGANTE</div>
+              <div class="d">Helado de dulce de leche y vainilla · caramelo · chocolate y salsa de vainilla · 250 g</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="watermark">
+          <svg viewBox="-175 268 350 304" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#ffffff">
+              <rect x="-165" y="338" width="120" height="18"/>
+              <rect x="-130" y="338" width="50"  height="190"/>
+              <rect x="-165" y="510" width="120" height="18"/>
+              <rect x="45"   y="338" width="120" height="18"/>
+              <rect x="80"   y="338" width="50"  height="190"/>
+              <rect x="45"   y="510" width="120" height="18"/>
+              <path d="M -49 400 L 0 330 L 49 400 L 0 530 Z"/>
+            </g>
+            <path d="M 0 278 L 58 420 L 0 562 L -58 420 Z" stroke="#ffffff" stroke-width="5" fill="none"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>CUMBRE DE LOS MILLONARIOS CONSCIENTES</span>
+      <span class="r">ROSANEGRA · CIUDAD DE MÉXICO</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PÁGINA 3 · OPEN BAR SILVER ============ -->
+<section class="page barpage">
+  <div class="frame"></div>
+  <div class="inner menu">
+
+    <div class="topbar">
+      <svg viewBox="-175 268 350 304" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#ffffff">
+          <rect x="-165" y="338" width="120" height="18"/>
+          <rect x="-130" y="338" width="50"  height="190"/>
+          <rect x="-165" y="510" width="120" height="18"/>
+          <rect x="45"   y="338" width="120" height="18"/>
+          <rect x="80"   y="338" width="50"  height="190"/>
+          <rect x="45"   y="510" width="120" height="18"/>
+          <path d="M -49 400 L 0 330 L 49 400 L 0 530 Z"/>
+        </g>
+        <path d="M 0 278 L 58 420 L 0 562 L -58 420 Z" stroke="#ffffff" stroke-width="5" fill="none"/>
+      </svg>
+      <div class="txt">
+        <div class="t1">CUMBRE</div>
+        <div class="t2">DE LOS MILLONARIOS CONSCIENTES</div>
+      </div>
+      <div class="right">ROSANEGRA &middot; CDMX</div>
+    </div>
+
+    <h1>SILVER <span class="bar">|</span> OPEN BAR</h1>
+
+    <div class="cols">
+      <div class="col">
+        <div class="block">
+          <h2>DESTILADOS</h2>
+          <div class="note">servicio ilimitado</div>
+          <div class="items">
+            <div class="item">
+              <div class="n">RON</div>
+              <div class="d">Bacardí Blanco &middot; Bacardí Añejo</div>
+            </div>
+            <div class="item">
+              <div class="n">VODKA</div>
+              <div class="d">Absolut Azul</div>
+            </div>
+            <div class="item">
+              <div class="n">WHISKY</div>
+              <div class="d">Johnnie Walker Etiqueta Roja &middot; Jack Daniel’s</div>
+            </div>
+            <div class="item">
+              <div class="n">TEQUILA</div>
+              <div class="d">Tradicional Plata &middot; Tradicional Reposado</div>
+            </div>
+            <div class="item">
+              <div class="n">MEZCAL</div>
+              <div class="d">Señorío Joven</div>
+            </div>
+            <div class="item">
+              <div class="n">GINEBRA</div>
+              <div class="d">Beefeater London Dry</div>
+            </div>
+            <div class="item">
+              <div class="n">BRANDY</div>
+              <div class="d">Torres 10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="block">
+          <h2>CERVEZAS Y MÁS</h2>
+          <div class="note">servicio ilimitado</div>
+          <div class="items">
+            <div class="item">
+              <div class="n">VINO</div>
+              <div class="d">Vino espumoso</div>
+            </div>
+            <div class="item">
+              <div class="n">CERVEZAS</div>
+              <div class="d">Corona &middot; Pacífico &middot; Victoria</div>
+            </div>
+            <div class="item">
+              <div class="n">CÓCTELES</div>
+              <div class="d">Margarita &middot; Mojito &middot; Mezcalita &middot; Piña Colada &middot; Paloma</div>
+            </div>
+            <div class="item">
+              <div class="n">OTROS</div>
+              <div class="d">Jugos &middot; refrescos &middot; agua natural Hethe &middot; agua mineral Hethe &middot; café americano &middot; café espresso &middot; tés (Refresh Mint, Pure Fruit, Almond Dreams, Apricot &amp; Almond)</div>
+            </div>
+          </div>
+        </div>
+        <div class="watermark">
+          <svg viewBox="-175 268 350 304" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#ffffff">
+              <rect x="-165" y="338" width="120" height="18"/>
+              <rect x="-130" y="338" width="50"  height="190"/>
+              <rect x="-165" y="510" width="120" height="18"/>
+              <rect x="45"   y="338" width="120" height="18"/>
+              <rect x="80"   y="338" width="50"  height="190"/>
+              <rect x="45"   y="510" width="120" height="18"/>
+              <path d="M -49 400 L 0 330 L 49 400 L 0 530 Z"/>
+            </g>
+            <path d="M 0 278 L 58 420 L 0 562 L -58 420 Z" stroke="#ffffff" stroke-width="5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>CUMBRE DE LOS MILLONARIOS CONSCIENTES</span>
+      <span class="r">ROSANEGRA &middot; CIUDAD DE MÉXICO</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
