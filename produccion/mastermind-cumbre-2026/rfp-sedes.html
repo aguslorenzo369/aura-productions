@@ -126,6 +126,22 @@
   .check i{width:11px;height:11px;border:1px solid var(--gold-dark);display:block;margin-top:5px}
   .check span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
 
+
+  /* checklist de contacto */
+  .ck{display:flex;flex-direction:column;gap:0;border:1px solid var(--line-soft);background:var(--surface)}
+  .ck-row{display:grid;grid-template-columns:26px 1.15fr 1.5fr 96px;gap:16px;padding:15px 18px;border-top:1px solid var(--line-soft);align-items:start}
+  .ck-row:first-child{border-top:0}
+  .ck-row.head{background:var(--surface-2);border-top:0;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding-block:11px}
+  @media(max-width:800px){.ck-row{grid-template-columns:24px 1fr;gap:8px}.ck-row .ck-c,.ck-row .ck-s{grid-column:2}.ck-row.head{display:none}}
+  .ck-box{width:13px;height:13px;border:1px solid var(--gold-dark);display:block;margin-top:4px}
+  .ck-n{font-family:var(--serif);font-size:16px;color:var(--text);line-height:1.25}
+  .ck-n small{display:block;color:var(--muted-dim);font-size:11px;letter-spacing:.04em;margin-top:3px;font-family:var(--sans)}
+  .ck-c{font-size:12.5px;color:var(--muted);line-height:1.65;word-break:break-word}
+  .ck-c a{border-bottom-color:var(--line-soft)}
+  .ck-c b{color:var(--text);font-weight:400}
+  .ck-s{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding-top:3px}
+  .ck-s.warn{color:var(--gold-dark)}
+
   /* matrix */
   .tablewrap{overflow-x:auto;border:1px solid var(--line-soft);background:var(--surface)}
   table{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
@@ -158,9 +174,9 @@
     <dl class="keyfacts">
       <div><dt>Evento</dt><dd>20 – 22 oct 2026</dd></div>
       <div><dt>Participantes</dt><dd>70</dd></div>
-      <div><dt>Se envía</dt><dd class="hot">Hoy · jue 10 sep</dd></div>
-      <div><dt>Respuestas</dt><dd class="hot">mar 15 sep</dd></div>
-      <div><dt>Firma</dt><dd>vie 18 sep</dd></div>
+      <div><dt>Se envía</dt><dd class="hot">Hoy · vie 11 sep</dd></div>
+      <div><dt>Respuestas</dt><dd class="hot">mié 16 sep</dd></div>
+      <div><dt>Firma</dt><dd>lun 21 sep</dd></div>
     </dl>
   </div>
 </header>
@@ -169,7 +185,7 @@
   <div class="wrap stack">
     <div class="eyebrow">Cómo se usa</div>
     <div class="grid g3">
-      <div class="panel"><h4>1 · Tres por la sala, cuatro por la cena</h4><p class="note">El correo va a las siete el mismo día. A The Charlee, Wake y Park 10 se les pide la sede: sala, cóctel, hidratación y almuerzo del miércoles. A Elcielo, Marquee, 23 y Binn se les pide la cena de cierre del jueves. El cuerpo del correo es el mismo; cambia la línea propia del final.</p></div>
+      <div class="panel"><h4>1 · Cinco por la sala, cuatro por la cena</h4><p class="note">El correo va a las nueve el mismo día. A Wake, The Charlee, Park 10, York y Landmark se les pide la sede: sala, cóctel, hidratación y almuerzo del miércoles. A Elcielo, Marquee, 23 y Binn, la cena de cierre del jueves. El cuerpo del correo es el mismo; cambia la línea propia del final.</p></div>
       <div class="panel"><h4>2 · Exigir el formato de respuesta</h4><p class="note">El punto del pliego es que las siete contesten lo mismo en el mismo orden, para poder comparar precio por servicio entre casas de nivel equivalente. Un hotel que manda un PDF genérico no cotizó: contestale pidiendo los ocho puntos.</p></div>
       <div class="panel"><h4>3 · Visitar antes de firmar</h4><p class="note">Ninguna sede se firma sin pisarla. Las fotos de los hoteles son de eventos montados con luz de fotógrafo. Vas con el checklist de abajo.</p></div>
     </div>
@@ -371,6 +387,131 @@
   </div>
 </section>
 
+<!-- ================= CHECKLIST ================= -->
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="stack">
+      <div class="eyebrow">Checklist de contacto</div>
+      <h2>Nueve casas, hoy</h2>
+      <div class="read stack">
+        <p class="lede">Cinco por la sede y cuatro por la cena de cierre. Las nueve el mismo día: si se escalonan, las respuestas no se pueden comparar y se pierde la presión competitiva.</p>
+        <p class="note">Cuatro no publican correo de eventos. En esos casos el orden se invierte: primero WhatsApp o llamada para pedir el correo directo de la persona de eventos, y recién después el correo. Un correo dirigido a alguien con nombre se contesta el doble de rápido que uno a <em>info@</em>, y con 39 días al evento no sobra ninguno.</p>
+      </div>
+    </div>
+
+    <div class="stack">
+      <h3>Por la sede — sala, cóctel, hidratación y almuerzo del miércoles</h3>
+      <div class="ck">
+        <div class="ck-row head"><div></div><div>Casa</div><div>Canal y contacto</div><div>Prioridad</div></div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">Wake Medellín<small>Design Hotels™ · Marriott · Provenza</small></div>
+          <div class="ck-c"><b>No publica correo de eventos.</b><br>WhatsApp <b>+57 314 464 9488</b> → pedir correo de eventos<br>Segunda vía: ventas de grupos de Marriott, la propiedad está en su sistema<br><a href="https://wake.com.co/medellin/es/meeting-events/" target="_blank" rel="noopener">wake.com.co/eventos</a></div>
+          <div class="ck-s">Primero</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">The Charlee<small>Parque Lleras · Cl 9A #37-16</small></div>
+          <div class="ck-c"><a href="mailto:info@thecharlee.com">info@thecharlee.com</a><br>PBX <b>+57 604 444 4968</b><br>Llamar antes para pedir el correo directo de eventos</div>
+          <div class="ck-s">Primero</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">Hotel Park 10<small>Barrio Lalinde · Cra 36B #11-12</small></div>
+          <div class="ck-c"><a href="mailto:eventos.park10@dgroupe.com.co">eventos.park10@dgroupe.com.co</a> · +57 314 769 4287<br><a href="mailto:comercial.park10@dgroupe.com.co">comercial.park10@dgroupe.com.co</a> · +57 300 240 8824<br><b>Correo de eventos directo: mandar ya, sin llamada previa.</b></div>
+          <div class="ck-s">Primero</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">York Luxury Suites<small>by Preferred · Cl 17 Sur con Cra 43A</small></div>
+          <div class="ck-c">Afiliado a Preferred Hotels &amp; Resorts. Declara banquetes hasta 100 personas y la terraza Ze View en el piso 23.<br><b>No publica correo de eventos:</b> formulario web y llamada.<br><a href="https://www.yorkluxurysuites.com/es/eventos" target="_blank" rel="noopener">yorkluxurysuites.com/eventos</a></div>
+          <div class="ck-s warn">Ampliar red</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">Landmark Hotel<small>Cl 14 #43D-85 · El Poblado</small></div>
+          <div class="ck-c">Piscina en rooftop, tres restaurantes y Cierto Rooftop.<br><b>No publica correo de eventos:</b> llamar a recepción y pedir comercial.<br><a href="https://landmarkmedellin.com/" target="_blank" rel="noopener">landmarkmedellin.com</a></div>
+          <div class="ck-s warn">Ampliar red</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <h3>Por la cena de cierre — jueves 22</h3>
+      <div class="ck">
+        <div class="ck-row head"><div></div><div>Casa</div><div>Canal y contacto</div><div>Prioridad</div></div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">Elcielo Hotel<small>MICHELIN Key · Cl 7D #43C-36</small></div>
+          <div class="ck-c"><a href="mailto:comercial@elcielohotel.com">comercial@elcielohotel.com</a><br><b>+57 604 448 2396</b> · Ventas <b>+57 304 336 1355</b><br><b>Correo comercial directo: mandar ya.</b></div>
+          <div class="ck-s">Primero</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">Marquee<small>Guía MICHELIN · Cra 38 #9A-13</small></div>
+          <div class="ck-c"><a href="mailto:reception@marqueemedellin.com">reception@marqueemedellin.com</a><br><b>+57 324 296 5314</b><br>Es correo de recepción: llamar y pedir que lo dirijan a eventos</div>
+          <div class="ck-s">Primero</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">23 Hotel<small>Guía MICHELIN · Cra 34 #5G-62, Provenza</small></div>
+          <div class="ck-c"><b>No publica el correo en claro.</b><br>WhatsApp <b>+57 304 654 2596</b> → pedir correo de eventos<br>Teléfono <b>+57 604 475 8240</b> · <a href="https://23hotel.co/events/" target="_blank" rel="noopener">formulario de eventos</a></div>
+          <div class="ck-s">Primero</div>
+        </div>
+
+        <div class="ck-row">
+          <div><i class="ck-box"></i></div>
+          <div class="ck-n">Binn Hotel<small>Cra 25 #10-51 · ya contactado</small></div>
+          <div class="ck-c"><a href="mailto:reservas@binnhotel.com">reservas@binnhotel.com</a> · <a href="mailto:guestservice@binnhotel.com">guestservice@binnhotel.com</a><br>Eventos <b>+57 604 322 0289</b> · WhatsApp <b>+57 323 476 1812</b><br><b>Ya hay formulario enviado: retomar por correo.</b></div>
+          <div class="ck-s">Seguimiento</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <h3>El guion de la llamada previa</h3>
+      <p class="note read">Dura cuarenta segundos y es lo que convierte un correo a <em>info@</em> en un correo con nombre. Para las cinco casas que no publican correo de eventos, esta llamada es el paso uno.</p>
+      <div class="copyblock">
+        <div class="cb-bar">
+          <span class="cb-label">Llamada · pedir el correo directo</span>
+          <button class="copy" data-copy="guion" type="button">Copiar</button>
+        </div>
+        <div class="cb-body">
+<pre id="guion">Buen día. Le habla [nombre], de Aura Productions.
+
+Estamos produciendo un encuentro privado de 70 empresarios en Medellín, del 20 al
+22 de octubre, y estamos evaluando sedes en El Poblado. Quiero enviarles el
+requerimiento completo hoy mismo.
+
+¿Me puede dar el nombre y el correo directo de la persona que maneja eventos
+corporativos? Prefiero escribirle directamente y no que se pierda en una bandeja
+general.
+
+[anotar nombre y correo]
+
+Perfecto, muchas gracias. Se lo envío en los próximos minutos. Necesitamos
+respuesta antes del miércoles 16 porque las visitas las estamos agendando para el
+jueves y el viernes.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="panel"><h4>Qué se anota de cada llamada</h4><p class="note">Nombre y cargo de quien maneja eventos, su correo directo, su celular, y si el salón está libre las tres fechas. Si ya dicen que no hay disponibilidad, esa casa sale de la lista en el minuto uno y no se gasta más tiempo.</p></div>
+      <div class="panel"><h4>El filtro de las 24 horas</h4><p class="note">Quien no responde en un día hábil a un pedido de 70 personas no va a responder bien durante el evento. Con 39 días no hay margen para perseguir a nadie: se insiste una vez el lunes y se cierra la lista el miércoles.</p></div>
+      <div class="panel"><h4>Lo primero que se mira al llegar la respuesta</h4><p class="note">Las fotos de la sala vacía. Antes que el precio, antes que los metros. Si la sala no gusta en foto, no va a gustar en la visita, y no vale la pena agendar nada.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= EL CORREO ================= -->
 <section class="band">
   <div class="wrap stack-lg">
@@ -528,9 +669,9 @@ como paquete integral.
 
 PLAZOS
 
-Necesito su respuesta a más tardar el martes 15 de septiembre. Las visitas las
-estamos agendando para el miércoles 16 y el jueves 17, y la decisión se toma el
-viernes 18.
+Necesito su respuesta a más tardar el miércoles 16 de septiembre. Las visitas las
+estamos agendando para el jueves 17 y el viernes 18, y la decisión se toma el
+lunes 21.
 
 Quedo atento, y con gusto le amplío cualquier punto por teléfono.
 
@@ -646,7 +787,7 @@ del jueves 22: ¿ambos espacios se combinan en exclusiva para 70 sentados?</pre>
     <div class="stack">
       <div class="eyebrow">Pieza 2</div>
       <h2>El recordatorio del lunes</h2>
-      <p class="lede read">De siete casas van a contestar cuatro a tiempo. Este mensaje corto por WhatsApp el lunes 14 al mediodía recupera a las demás — y la mención de que hay competencia y de que las visitas ya están agendadas es deliberada.</p>
+      <p class="lede read">De nueve casas van a contestar cinco a tiempo. Este mensaje corto por WhatsApp el lunes 14 al mediodía recupera a las demás — y la mención de que las visitas ya están agendadas es deliberada.</p>
     </div>
     <div class="copyblock">
       <div class="cb-bar">
@@ -654,12 +795,12 @@ del jueves 22: ¿ambos espacios se combinan en exclusiva para 70 sentados?</pre>
         <button class="copy" data-copy="seguimiento" type="button">Copiar mensaje</button>
       </div>
       <div class="cb-body">
-<pre id="seguimiento">Buen día [nombre]. Le escribo de Aura Productions — el jueves le envié el
-requerimiento de nuestra mastermind del 20 al 22 de octubre, 70 personas, para
-evaluar [ESTABLECIMIENTO] como sede.
+<pre id="seguimiento">Buen día [nombre]. Le escribo de Aura Productions — el viernes le envié el
+requerimiento de nuestro encuentro del 20 al 22 de octubre, 70 personas, para
+evaluar [ESTABLECIMIENTO].
 
-Cerramos la recepción de propuestas mañana martes y estamos agendando las visitas
-para el miércoles y el jueves. ¿Alcanzan a enviarme la suya?
+Cerramos la recepción de propuestas el miércoles y estamos agendando las visitas
+para el jueves y el viernes. ¿Alcanzan a enviarme la suya?
 
 Si le sirve para adelantar, con las fotografías de los espacios vacíos ya puedo
 avanzar mientras arman el resto.</pre>
@@ -765,19 +906,19 @@ avanzar mientras arman el resto.</pre>
   <div class="wrap stack-lg">
     <div class="stack">
       <div class="eyebrow">Calendario del proceso</div>
-      <h2>De hoy a la firma: ocho días</h2>
+      <h2>De hoy a la firma: diez días</h2>
     </div>
     <div class="proc">
-      <div class="proc-row"><div class="proc-when"><b>Jue 10 sep</b><span>Hoy</span></div><div class="proc-what">Llamar a las siete para pedir el nombre de eventos, y enviar el correo<span>La llamada antes del correo duplica la tasa de respuesta</span></div></div>
-      <div class="proc-row"><div class="proc-when"><b>Lun 14 sep</b><span>T-1</span></div><div class="proc-what">Recordatorio por WhatsApp a quien no haya contestado</div></div>
-      <div class="proc-row"><div class="proc-when"><b>Mar 15 sep</b><span>Cierre</span></div><div class="proc-what">Cierre de recepción y carga de la matriz<span>Descartar a quien no mandó fotos de la sala vacía — no es un descuido, es cómo van a trabajar los tres días</span></div></div>
-      <div class="proc-row"><div class="proc-when"><b>Mié 16 – jue 17 sep</b><span>Visitas</span></div><div class="proc-what">Visita técnica a los finalistas con el checklist<span>Ir con cinta métrica y con el celular para el test de wifi</span></div></div>
-      <div class="proc-row"><div class="proc-when"><b>Jue 17 sep</b><span>Negociación</span></div><div class="proc-what">Segunda ronda con los dos mejores<span>Acá se pide la cortesía de los espacios, con la propuesta del competidor sobre la mesa</span></div></div>
-      <div class="proc-row"><div class="proc-when"><b>Vie 18 sep</b><span>Firma</span></div><div class="proc-what">Firma de contrato y anticipo · T-32 del evento<span>Bloqueo de las tres fechas, con acceso de montaje el martes 20 desde las 13:00</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Vie 11 sep</b><span>Hoy</span></div><div class="proc-what">Llamar a las nueve, pedir el correo directo de eventos y enviar el correo<span>Cinco no publican correo de eventos: ahí la llamada es el paso uno, no el dos</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Lun 14 sep</b><span>Insistencia</span></div><div class="proc-what">Recordatorio por WhatsApp a quien no haya contestado<span>Una sola vez. Quien no responde en un día hábil tampoco va a responder durante el evento.</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Mié 16 sep</b><span>Cierre</span></div><div class="proc-what">Cierre de recepción y carga de la matriz<span>Descartar a quien no mandó fotos de la sala vacía</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Jue 17 – vie 18 sep</b><span>Visitas</span></div><div class="proc-what">Visita técnica a los finalistas con el checklist<span>Ir con cinta métrica y con el celular para el test de wifi</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Vie 18 sep</b><span>Negociación</span></div><div class="proc-what">Segunda ronda con los dos mejores<span>Acá se pide la sala en cortesía, con la propuesta del competidor sobre la mesa</span></div></div>
+      <div class="proc-row"><div class="proc-when"><b>Lun 21 sep</b><span>Firma</span></div><div class="proc-what">Firma de contrato y anticipo · T-29 del evento<span>Bloqueo de las tres fechas, con acceso de montaje el martes 20 desde las 13:00</span></div></div>
     </div>
     <div class="grid g2">
       <div class="panel"><h4>La palanca que tenemos</h4><p class="note">No alojamos a los 70, así que no hay bloque de habitaciones para negociar. Lo que sí hay es un consumo de alimentos y bebidas alto y concentrado: dos almuerzos, dos días de coffee permanente y un cóctel para 70. Ese es el argumento — y funciona mejor si cada uno sabe que hay otros compitiendo.</p></div>
-      <div class="panel"><h4>La palanca que no tenemos</h4><p class="note">El tiempo. A 32 días del evento no podemos amagar con irnos y volver la semana siguiente. Por eso el proceso se comprime en ocho días: la velocidad es lo que reemplaza al poder de negociación que da la anticipación.</p></div>
+      <div class="panel"><h4>La palanca que no tenemos</h4><p class="note">El tiempo. A 29 días del evento no podemos amagar con irnos y volver la semana siguiente. Por eso el proceso se comprime en ocho días: la velocidad es lo que reemplaza al poder de negociación que da la anticipación.</p></div>
     </div>
   </div>
 </section>
