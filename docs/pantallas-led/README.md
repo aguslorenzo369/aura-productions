@@ -3,6 +3,10 @@
 Paquete de producción para el contenido de la pantalla del evento.
 Imágenes en ChatGPT, video en DaVinci Resolve.
 
+**Marca del evento:** Cumbre de los Millonarios Conscientes. Blanco sobre negro,
+monocromo. **Productora:** Aura Productions, que aparece solo en la placa de
+créditos y es la única pieza con dorado.
+
 ## Ficha técnica
 
 | | |
@@ -44,27 +48,45 @@ ChatGPT  ──►  imágenes 1536×1024  ──►  DaVinci Resolve  ──► 
 
 El reparto de tareas importa:
 
-- **ChatGPT hace los fondos.** Texturas, atmósfera, luz, partículas.
-- **Resolve hace todo lo que tiene que leerse.** Texto, logo, números, nombres.
+- **ChatGPT hace los fondos.** Texturas, atmósfera, luz, niebla.
+- **Resolve hace todo lo que tiene que leerse.** Texto, logos, números, nombres.
 
 Nunca al revés. El texto generado por IA sale mal escrito y a baja resolución,
 y en una pantalla de 336 px de alto cualquier pérdida de nitidez se nota.
 
+## Antes de nada: poner los logos
+
+El generador de plantillas busca cada logo dentro de `public/images/`:
+
+| Marca | Archivo que espera | Estado |
+|---|---|---|
+| Cumbre | `public/images/cumbre-logo.png` | **falta, hay que agregarlo** |
+| Aura | `public/images/logo.png` | ya está |
+
+El de la Cumbre tiene que ser **PNG con fondo transparente y al menos 1500 px de
+alto**. Un JPG con fondo negro no sirve: en la pantalla se va a ver el borde del
+recuadro contra el fondo del video.
+
+Mientras el archivo no esté, las placas se generan igual, pero con un recuadro
+punteado que dice "FALTA EL LOGO" en el lugar y el tamaño exactos. Sirve para
+seguir maquetando, no para renderizar.
+
 ## Paso 1 — Imágenes en ChatGPT
 
 Los prompts están en **[`prompts-chatgpt.md`](prompts-chatgpt.md)**: diez escenas
-listas para copiar y pegar, con el bloque de estilo de marca ya incluido.
+listas para copiar y pegar, más la placa de productora, con los bloques de estilo
+de cada marca ya incluidos.
 
 Lo esencial: ChatGPT Plus genera como máximo 1536 × 1024. No existe forma de
 pedirle la banda de 3863 × 336 directamente. Se genera en horizontal y el
-recorte se hace en Resolve, así que los prompts le piden que ponga lo
-importante en la franja media del cuadro.
+recorte se hace en Resolve, así que los prompts le piden que ponga lo importante
+en la franja media del cuadro.
 
-Adjuntale `plantillas/guia-recorte-chatgpt_1536x1024.png` junto con el prompt.
-Es la imagen que le muestra qué parte del cuadro sobrevive al recorte.
+Adjuntale `plantillas/cumbre_guia-recorte-chatgpt_1536x1024.png` junto con el
+prompt. Es la imagen que le muestra qué parte del cuadro sobrevive al recorte.
 
 Guardá todo en una carpeta sola, con nombres numerados:
-`~/AuraLED/imagenes/01-ambiente.png`, `02-apertura-panel1.png`, y así.
+`~/CumbreLED/imagenes/01-ambiente.png`, `02-apertura-panel1.png`, y así.
 
 ## Paso 2 — Montaje en DaVinci Resolve
 
@@ -106,7 +128,7 @@ En el Inspector del clip, con la imagen de 1536 × 1024 seleccionada:
 | Mosaico, panel 4 de 4 | 1,917 | 1449 | 0 |
 
 El fondo único es una ampliación de 2,5×, así que solo usalo con imágenes
-suaves: humo, bokeh, degradados. Con detalle fino se ve pastoso. El mosaico,
+suaves: niebla, bokeh, degradados. Con detalle fino se ve pastoso. El mosaico,
 en cambio, reduce la escala y queda nítido.
 
 Position Y en 0 toma la franja central de la imagen. Movelo si el motivo quedó
@@ -118,52 +140,65 @@ color. Un desenfoque de 20–30 px sobre el borde alcanza.
 
 ### Las plantillas
 
-En `plantillas/` están estos archivos, ya a 3864 × 336:
+En `plantillas/` está esto, con el nombre de la marca como prefijo:
 
 | Archivo | Para qué |
 |---|---|
-| `guia-encuadre_3864x336.png` | Capa de guía: área segura, tercios, costuras del mosaico, alturas de texto. **Apagala antes de renderizar.** |
-| `base-degradado_3864x336.png` | Placa de fondo neutra, por si una imagen de ChatGPT no convence |
-| `vineta-bordes_3864x336.png` | Viñeta para poner encima de la imagen, en modo Multiply. Apaga los bordes y concentra la atención en el centro |
-| `placa-fenix-centrado_3864x336.png` | El fénix centrado, con transparencia y resplandor |
-| `placa-fenix-izquierda_3864x336.png` | El fénix contra el margen izquierdo, dejando la banda libre para el texto |
-| `guia-recorte-chatgpt_1536x1024.png` | Para adjuntar a los prompts |
+| `<marca>_guia-encuadre_3864x336.png` | Capa de guía: área segura, tercios, costuras del mosaico, alturas de texto. **Apagala antes de renderizar.** |
+| `<marca>_base-degradado_3864x336.png` | Placa de fondo neutra, por si una imagen de ChatGPT no convence |
+| `<marca>_placa-simbolo-centrado_3864x336.png` | El símbolo centrado, con transparencia |
+| `<marca>_placa-lockup-izquierda_3864x336.png` | El símbolo contra el margen izquierdo, dejando la banda libre para el texto |
+| `<marca>_guia-recorte-chatgpt_1536x1024.png` | Para adjuntar a los prompts |
+| `comun_vineta-bordes_3864x336.png` | Viñeta para poner encima de la imagen, en modo Multiply. Apaga los bordes y concentra la atención en el centro |
 
-Las placas del fénix traen **solo la marca, sin el texto del logotipo**. A 336 px
-de alto, la palabra "PRODUCTIONS" del logo original mediría unos 6 px: ilegible.
-El nombre va como texto vivo en Resolve, al lado del fénix.
+Las placas traen **solo el símbolo, sin el texto del logotipo**. Los dos logos
+apilan símbolo arriba y nombre abajo: a 336 px de alto, la bajada "DE LOS
+MILLONARIOS CONSCIENTES" mediría unos 8 px y el "PRODUCTIONS" de Aura unos 6.
+Ilegibles. El texto va como texto vivo en Resolve, al lado del símbolo, y por eso
+existe la placa de lockup izquierda.
 
 Se regeneran con:
 
 ```bash
 pip install Pillow
-python3 docs/pantallas-led/plantillas/generar_plantillas.py
+python3 docs/pantallas-led/plantillas/generar_plantillas.py cumbre
+python3 docs/pantallas-led/plantillas/generar_plantillas.py todas
 ```
 
-Los parámetros (colores, márgenes, alturas de texto) están arriba del archivo.
+El diccionario `MARCAS`, arriba del script, tiene el color de acento, el fondo y
+la ruta del logo de cada marca. Si la Cumbre tiene un color de acento en su
+manual, cambialo ahí y se propaga a todas las plantillas.
 
 ### Texto y tipografías
 
-Las fuentes de la marca son **Space Grotesk** para el cuerpo y **Playfair Display**
-para los títulos y citas. Instalalas en el sistema antes de abrir Resolve, si no
-el Text+ no las va a ofrecer.
+La tipografía de la Cumbre es la del logotipo: una geométrica ancha, de
+mayúsculas cuadradas. **Pedile el archivo al diseñador que armó el logo** antes
+de maquetar. Si la elegís de memoria vas a maquetar todo el evento con una que
+no es.
 
-Colores de marca, de `tailwind.config.js`:
+Para Aura: **Space Grotesk** en el cuerpo, **Playfair Display** en títulos.
+Instalá las fuentes en el sistema antes de abrir Resolve, si no el Text+ no las
+va a ofrecer.
 
-| | |
-|---|---|
-| Oro | `#C9A84C` |
-| Oro claro | `#E8C97A` |
-| Negro | `#000000` |
-| Negro profundo | `#08080F` |
+| Marca | Color | |
+|---|---|---|
+| Cumbre | Blanco | `#EBEBEB` |
+| Cumbre | Negro | `#000000` |
+| Aura | Oro | `#C9A84C` |
+| Aura | Oro claro | `#E8C97A` |
+| Aura | Negro profundo | `#08080F` |
+
+El blanco de la Cumbre es `#EBEBEB` y no `#FFFFFF` a propósito. Ver la sección
+que sigue.
 
 ## Reglas de diseño para LED
 
 Una pantalla LED no perdona lo que un monitor sí:
 
-- **Nada de blanco puro.** El LED a máximo brillo encandila a la platea y quema
-  el detalle. Mantené los picos en 90 % como mucho. En Resolve: un nodo de color
-  al final con el Gain bajado.
+- **Nada de blanco puro.** Es la regla que más choca con una marca blanco sobre
+  negro, y la que más importa. El LED a 255 encandila a la platea y quema todo
+  el detalle del logo. Usá `#EBEBEB` y poné un nodo de color al final de la línea
+  de tiempo con el Gain bajado hasta que el pico quede en 92 %.
 - **Nada de líneas de 1 px horizontales.** Titilan. Mínimo 3 px, y si igual
   titila, un desenfoque de 1–2 px lo soluciona.
 - **Movimiento lento.** En una banda de 11,5:1 el desplazamiento horizontal
@@ -202,16 +237,19 @@ lugar de MP4: menos artefactos en las zonas oscuras.
 
 **Data levels**: preguntá al técnico si el procesador espera Video (16–235) o
 Full (0–255). Si le entregás el rango equivocado, los negros se van a ver grises
-o se van a empastar. Es el error más común de todo este proceso.
+o se van a empastar. Es el error más común de todo este proceso, y en una marca
+monocroma sobre negro es el que más se nota.
 
 ## Checklist de entrega
 
+- [ ] Logo de la Cumbre en `public/images/cumbre-logo.png`, PNG con transparencia
+- [ ] Tipografía de la Cumbre conseguida e instalada
 - [ ] Resolución confirmada con el técnico de la pantalla
 - [ ] Cuadros por segundo confirmados
 - [ ] Data levels confirmados
 - [ ] Capa de guía apagada en la línea de tiempo
 - [ ] Loop verificado: primer cuadro igual al último
-- [ ] Sin blancos por encima del 90 %
+- [ ] Sin blancos por encima del 92 %
 - [ ] Texto por encima de los mínimos de altura
 - [ ] Archivo probado en la pantalla real, en el montaje, antes del evento
 - [ ] Dos pendrives con el archivo, más una copia en la nube
@@ -225,15 +263,12 @@ mientras resolvés cualquier otra cosa.
 ```
 docs/pantallas-led/
 ├── README.md                       ← esto
-├── prompts-chatgpt.md              ← los 10 prompts, listos para copiar
+├── prompts-chatgpt.md              ← los prompts, listos para copiar
 ├── plantillas/
-│   ├── generar_plantillas.py       ← regenera los PNG de abajo
-│   ├── guia-encuadre_3864x336.png
-│   ├── base-degradado_3864x336.png
-│   ├── vineta-bordes_3864x336.png
-│   ├── placa-fenix-centrado_3864x336.png
-│   ├── placa-fenix-izquierda_3864x336.png
-│   └── guia-recorte-chatgpt_1536x1024.png
+│   ├── generar_plantillas.py       ← regenera los PNG, una marca o todas
+│   ├── comun_vineta-bordes_3864x336.png
+│   ├── cumbre_*.png                ← 5 plantillas
+│   └── aura_*.png                  ← 5 plantillas
 └── resolve/
     └── armar_pantalla_led.py       ← automatiza el armado del proyecto
 ```

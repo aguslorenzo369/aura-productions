@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Arma en DaVinci Resolve el proyecto de la pantalla LED de Aura Productions.
+Arma en DaVinci Resolve el proyecto de la pantalla LED del evento.
 
 Qué hace:
   1. Crea (o abre) el proyecto con la línea de tiempo en 3864 x 336.
@@ -33,9 +33,9 @@ import sys
 
 # ------------------------------------------------------------------ ajustes
 
-CARPETA_IMAGENES = os.path.expanduser("~/AuraLED/imagenes")
+CARPETA_IMAGENES = os.path.expanduser("~/CumbreLED/imagenes")
 
-NOMBRE_PROYECTO = "AURA LED 3864x336"
+NOMBRE_PROYECTO = "CUMBRE LED 3864x336"
 ANCHO, ALTO = 3864, 336        # ancho par: los codecs de video lo exigen
 FPS = "30"                     # confirmalo con el técnico de la pantalla
 SEGUNDOS_POR_IMAGEN = 8
