@@ -1,0 +1,64 @@
+{
+	Tools = ordered() {
+		Transform1 = Transform {
+			NameSet = true,
+			Inputs = {
+				Size = Input { Value = 2.013, },
+				Center = Input { Value = { 0.5, 0.5 }, },
+				FilterMethod = Input { Value = 5, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 0, 0 } },
+		},
+		FastNoise1 = FastNoise {
+			NameSet = true,
+			Inputs = {
+				Width = Input { Value = 3864, },
+				Height = Input { Value = 336, },
+				UseFrameFormatSettings = Input { Value = 0, },
+				Detail = Input { Value = 3, },
+				Contrast = Input { Value = 1, },
+				Brightness = Input { Value = 0, },
+				XScale = Input { Value = 10, },
+				SeetheRate = Input { Value = 0.02, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 0, 99 } },
+		},
+		Displace1 = Displace {
+			NameSet = true,
+			Inputs = {
+				Input = Input { SourceOp = "Transform1", Source = "Output", },
+				Foreground = Input { SourceOp = "FastNoise1", Source = "Output", },
+				XOffset = Input { Value = 0.5, },
+				YOffset = Input { Value = 0.5, },
+				XRefraction = Input { Value = 0.012, },
+				YRefraction = Input { Value = 0.006, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 0 } },
+		},
+		Transform2 = Transform {
+			NameSet = true,
+			Inputs = {
+				Input = Input { SourceOp = "Displace1", Source = "Output", },
+				Center = Input {
+					Value = { 0.5, 0.5 },
+					Expression = "Point(0.5 + time/comp.RenderEnd*0.02, 0.5)",
+				},
+				Size = Input {
+					Value = 1,
+					Expression = "1 + time/comp.RenderEnd*0.03",
+				},
+				FilterMethod = Input { Value = 5, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 0 } },
+		},
+		BrightnessContrast1 = BrightnessContrast {
+			NameSet = true,
+			Inputs = {
+				Input = Input { SourceOp = "Transform2", Source = "Output", },
+				Gain = Input { Value = 0.92, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 0 } },
+		},
+	},
+	ActiveTool = "BrightnessContrast1"
+}

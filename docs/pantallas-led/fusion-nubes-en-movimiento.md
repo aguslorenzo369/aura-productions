@@ -3,15 +3,19 @@
 Cómo convertir la placa fija de nubes en un loop con movimiento, para la banda
 de 3864 × 336.
 
-## DaVinci no lleva prompt
+## Qué es "el prompt" acá
 
-Resolve no es una herramienta generativa: no hay dónde escribir un prompt. El
-movimiento se arma con nodos en la página Fusion. Esta receta es lo que
-reemplaza al prompt.
+Resolve no es una herramienta generativa: no hay ningún campo donde describir
+lo que querés y esperar a que lo genere.
 
-Si lo que querés es que una IA anime la foto directamente, eso es otra
+Lo más cercano, y funciona muy bien, es que **Fusion acepta un árbol de nodos
+pegado como texto**. Copiás un bloque, apretás `Ctrl+V` en el editor de nodos y
+el efecto queda armado. Ese bloque está en este repositorio y la sección que
+sigue explica cómo usarlo.
+
+Si lo que buscás es que una IA anime la foto directamente, eso es otra
 categoría de herramienta (imagen a video: Runway, Kling, Sora, Higgsfield).
-Al final del documento está el prompt para ese camino.
+Al final del documento está el prompt para ese camino, con sus limitaciones.
 
 ## Antes de empezar: dos problemas con la placa actual
 
@@ -45,6 +49,71 @@ Necesitás las dos piezas por separado:
 - El logo como **PNG con transparencia**
 
 Si solo tenés la imagen compuesta, hay un parche al final del documento.
+
+## El atajo: pegar el árbol ya armado
+
+Fusion acepta un árbol de nodos pegado como texto. No hace falta crear nada a
+mano.
+
+El archivo es **[`resolve/nubes-en-movimiento.setting`](resolve/nubes-en-movimiento.setting)**.
+
+1. Antes que nada, poné la línea de tiempo en **3864 × 336**. La composición de
+   Fusion hereda ese tamaño, así que si la línea de tiempo está en 1920 × 1080
+   todo va a salir mal.
+2. Poné la imagen en la línea de tiempo, seleccionala y entrá a la página
+   **Fusion**.
+3. Abrí el archivo `.setting` en cualquier editor de texto y copiá **todo** el
+   contenido.
+4. En el editor de nodos de Fusion, hacé clic en una zona vacía y `Ctrl+V`.
+
+Aparecen los cinco nodos ya conectados entre sí. Falta enchufarlos a los dos
+que ya estaban:
+
+- `MediaIn1` → entrada de `Transform1`
+- salida de `BrightnessContrast1` → `MediaOut1`
+
+Eso es todo. Con eso ya ves las nubes moverse en la ventana de reproducción.
+
+### No lo pude probar
+
+No tengo Resolve en esta sesión, así que el bloque está escrito a partir del
+formato de composición de Fusion, sin verificarlo contra el programa.
+
+Si Fusion ignora alguno de los valores, no rompe nada: crea el nodo con el valor
+por omisión. Estos tres son los que conviene mirar en el Inspector después de
+pegar, porque son los que hacen el efecto:
+
+| Nodo | Campo | Valor |
+|---|---|---|
+| FastNoise1 | Scale | `10` |
+| FastNoise1 | Seethe Rate | `0.02` |
+| Displace1 | X Refraction | `0.012` |
+
+Y revisá que en `Displace1` la imagen entre por **Background** y el `FastNoise1`
+por **Foreground**. Si están al revés no se ve ningún error, simplemente no
+pasa nada.
+
+### Lo que trae armado
+
+| Nodo | Qué hace |
+|---|---|
+| `Transform1` | Amplía la placa 2,013× para cubrir los 3864 px de ancho |
+| `FastNoise1` | Genera el ruido Perlin que impulsa el movimiento. No se ve |
+| `Displace1` | Deforma las nubes siguiendo ese ruido |
+| `Transform2` | Deriva lenta a la derecha y acercamiento del 3 %, por expresión |
+| `BrightnessContrast1` | Baja la ganancia a 0,92 para el límite de brillo del LED |
+
+La deriva y el acercamiento van por **expresión**, no por fotogramas clave:
+se reparten solos a lo largo del clip, dure lo que dure. Si alargás el clip,
+el movimiento se estira con él y no hay que volver a tocar nada.
+
+`Transform1 Size` está en `2.013`, que es `3864 ÷ 1920`. Si tu placa mide otro
+ancho, rehacé esa división y cambiá el valor.
+
+## Armarlo a mano
+
+Si preferís entender cada pieza, o si el pegado no funciona, esto es lo mismo
+paso a paso.
 
 ## El árbol de nodos
 
