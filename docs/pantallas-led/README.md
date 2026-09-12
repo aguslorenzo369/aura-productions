@@ -138,6 +138,12 @@ Las costuras del mosaico se disimulan poniendo cada panel en su propia pista de
 video, con un poco de superposición y una máscara de bordes suaves en el nodo de
 color. Un desenfoque de 20–30 px sobre el borde alcanza.
 
+### Si el video ya está hecho
+
+**[`adaptar-video-existente.md`](adaptar-video-existente.md)**: llevar un video
+que ya existe a 3864 × 336 y componerle el logo. Cuatro pasos en la página Edit,
+más un script que los hace solos.
+
 ### Darle movimiento a una imagen fija
 
 **[`fusion-nubes-en-movimiento.md`](fusion-nubes-en-movimiento.md)** tiene el
@@ -272,6 +278,7 @@ mientras resolvés cualquier otra cosa.
 docs/pantallas-led/
 ├── README.md                       ← esto
 ├── prompts-chatgpt.md              ← los prompts, listos para copiar
+├── adaptar-video-existente.md      ← llevar un video ya hecho a la banda
 ├── fusion-nubes-en-movimiento.md   ← animar una placa fija en Fusion
 ├── plantillas/
 │   ├── generar_plantillas.py       ← regenera los PNG, una marca o todas
@@ -279,5 +286,7 @@ docs/pantallas-led/
 │   ├── cumbre_*.png                ← 5 plantillas
 │   └── aura_*.png                  ← 5 plantillas
 └── resolve/
-    └── armar_pantalla_led.py       ← automatiza el armado del proyecto
+    ├── armar_pantalla_led.py       ← arma el proyecto desde imágenes
+    ├── adaptar_video_a_pantalla.py ← adapta un video y le pone el logo
+    └── nubes-en-movimiento.setting ← árbol de nodos de Fusion, para pegar
 ```
