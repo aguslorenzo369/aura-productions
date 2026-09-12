@@ -138,6 +138,14 @@ Las costuras del mosaico se disimulan poniendo cada panel en su propia pista de
 video, con un poco de superposición y una máscara de bordes suaves en el nodo de
 color. Un desenfoque de 20–30 px sobre el borde alcanza.
 
+### Darle movimiento a una imagen fija
+
+**[`fusion-nubes-en-movimiento.md`](fusion-nubes-en-movimiento.md)** tiene el
+árbol de nodos completo para animar una placa de nubes: deformación con ruido
+Perlin, deriva lenta, cómo cerrar el loop y cómo mantener el logo quieto y
+nítido mientras el fondo se mueve. La misma receta sirve para niebla, humo y
+cualquier textura suave.
+
 ### Las plantillas
 
 En `plantillas/` está esto, con el nombre de la marca como prefijo:
@@ -264,6 +272,7 @@ mientras resolvés cualquier otra cosa.
 docs/pantallas-led/
 ├── README.md                       ← esto
 ├── prompts-chatgpt.md              ← los prompts, listos para copiar
+├── fusion-nubes-en-movimiento.md   ← animar una placa fija en Fusion
 ├── plantillas/
 │   ├── generar_plantillas.py       ← regenera los PNG, una marca o todas
 │   ├── comun_vineta-bordes_3864x336.png
